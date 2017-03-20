@@ -1,0 +1,3 @@
+rootProject.name = 'Runner_SNA'
+
+include ':app'

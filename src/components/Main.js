@@ -1,12 +1,43 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
+import { Card, CardSection, Button } from './common';
 
 class Main extends Component {
+	
+	onDeparture() {
+    console.log('onDeparture');
+    Actions.main();
+    Actions.departure();
+  }
+
+  onArrival() {
+  	console.log('onArrival');
+  	Actions.main();
+  	Actions.arrival();
+  }
+
+  onCheckIn() {
+  	console.log('onCheckIn');
+  	Actions.checkIn();
+  }
+	
+
 	render() {
 		return (
-			<View>
-				<Text> MAIN SCREEN </Text>
-			</View>
+			<Card>
+				<CardSection>
+					<Button onPress={this.onDeparture.bind(this)}>Departure</Button>
+				</CardSection>
+				<CardSection>
+					<Button onPress={this.onArrival.bind(this)}>Arrival</Button>
+				</CardSection>
+				<CardSection>
+					<Button onPress={this.onCheckIn.bind(this)}>Check-In</Button>
+				</CardSection>
+				
+			</Card>
 		);
 	}
 }

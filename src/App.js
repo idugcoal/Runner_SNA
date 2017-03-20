@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import firebase from 'firebase'
 import { config } from '../config';
+import LoginForm from './components/LoginForm';
 
 class App extends Component {
 
@@ -10,7 +11,7 @@ class App extends Component {
 
 		return (
 			<View>
-				<Text>App</Text>
+				<LoginForm />
 			</View>
 		);
 

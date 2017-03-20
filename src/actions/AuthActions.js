@@ -23,6 +23,7 @@ export const passwordChanged = (text) => {
 };
 
 export const loginUser = ({ email, password }) => {
+  console.log('in loginUser')
   return (dispatch) => {
     dispatch({ type: LOGIN_USER });
 

@@ -3,9 +3,6 @@ import { Scene, Router, Actions } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
 import Main from './components/Main';
 import SelectWheelchairDeparture from './components/SelectWheelchairDeparture';
-import SelectWheelchairArrival from './components/SelectWheelchairArrival';
-import SelectWheelchairCheckIn from './components/SelectWheelchairCheckIn';
-import SelectWheelchair from './components/SelectWheelchair';
 
 const RouterComponent = () => {
 	return (
@@ -15,9 +12,9 @@ const RouterComponent = () => {
 			</Scene>
 			<Scene key="home">
 				<Scene key="main" component={Main} title="Select Task" initial />
-				<Scene key="departure" component={SelectWheelchairDeparture} title="Departure" />
-				<Scene key="arrival" component={SelectWheelchairArrival} title="Arrival" />	
-				<Scene key="checkIn" component={SelectWheelchairCheckIn} title="Check-In" />					
+				<Scene key="departure" component={SelectWheelchair} title="Departure" />
+				<Scene key="arrival" component={SelectWheelchair} title="Arrival" />	
+				<Scene key="checkIn" component={SelectWheelchair} title="Check-In" />					
 			</Scene>
 		</Router>
 	);

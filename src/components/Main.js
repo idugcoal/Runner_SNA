@@ -7,19 +7,16 @@ import { Card, CardSection, Button } from './common';
 class Main extends Component {
 	
 	onDeparture() {
-    console.log('onDeparture');
-    Actions.main();
+    // Actions.main();
     Actions.departure();
   }
 
   onArrival() {
-  	console.log('onArrival');
-  	Actions.main();
+  	// Actions.main();
   	Actions.arrival();
   }
 
   onCheckIn() {
-  	console.log('onCheckIn');
   	Actions.checkIn();
   }
 	

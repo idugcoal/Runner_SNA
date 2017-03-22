@@ -7,10 +7,10 @@ import SelectWheelchair from './components/SelectWheelchair';
 const RouterComponent = () => {
 	return (
 		<Router sceneStyle={{ paddingTop: 50 }}>
-			<Scene key="auth" initial>
+			<Scene key="auth" >
 				<Scene key="login" component={LoginForm} title="Please Log In" />
 			</Scene>
-			<Scene key="home">
+			<Scene key="home" initial>
 				<Scene key="main" component={Main} title="Select Task" initial />
 				<Scene key="departure" component={SelectWheelchair} title="Departure - Select Wheelchair" />
 				<Scene key="arrival" component={SelectWheelchair} title="Arrival - Select Wheelchair" />	

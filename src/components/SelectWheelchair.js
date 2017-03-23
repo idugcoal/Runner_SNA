@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 // import { connect } from 'react-redux';
 import WheelchairButton from './common/WheelchairButton';
 import Style from './Style';
+import { Actions } from 'react-native-router-flux';
 
 // class SelectWheelchair extends Component {
 
@@ -14,7 +15,7 @@ import Style from './Style';
 
 //   renderButtons() {
 //     return (
-//       <View style={Style.buttons}>
+//       <View style={Style.content}>
 //         <View style={Style.row}>
 //           <Button onPress={() => this.onButtonPress(1)}>1</Button>
 //           <Button onPress={() => this.onButtonPress(2)}>2</Button>
@@ -171,7 +172,7 @@ class SelectWheelchair extends Component {
   }
 
   onButtonPress(value) {
-
+    Actions.scanBoardingPass();
   }
 
   renderButtons() {
@@ -180,7 +181,7 @@ class SelectWheelchair extends Component {
         return <WheelchairButton
                   value={buttonValue}
                   onPress={this.onButtonPress.bind(this, buttonValue)}
-                  key={'butt-' + columnIndex}
+                  key={'button-' + columnIndex}
                 />
       });
       return <View style={Style.row} key={'row-' + index}>{inputRow}</View>
@@ -191,7 +192,7 @@ class SelectWheelchair extends Component {
   render() {
     return(
       <View style={Style.container}>
-        <View style={Style.buttons}>
+        <View style={Style.content}>
           {this.renderButtons()}
         </View>
         <View style={Style.footer}>

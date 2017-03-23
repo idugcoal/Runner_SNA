@@ -1,5 +1,5 @@
 const Style = {
-  buttons: {
+  content: {
     flex: 8
   },
   footer: {

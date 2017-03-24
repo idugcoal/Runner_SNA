@@ -6,15 +6,16 @@ import SelectWheelchair from './components/SelectWheelchair';
 import ScanBoardingPass from './components/ScanBoardingPass';
 import AlternateBoardingPassInput from './components/AlternateBoardingPassInput';
 import InputGateNumber from './components/InputGateNumber';
+import SelectStartingPoint from './components/SelectStartingPoint';
 
 const RouterComponent = () => {
 	return (
 		<Router sceneStyle={{ paddingTop: 50 }}>
-			<Scene key="auth" >
+			<Scene key="auth" initial>
 				<Scene key="login" component={LoginForm} title="Please Log In" />
 			</Scene>
-			<Scene key="home" initial>
-				<Scene key="main" component={Main} title="Select Task" initial />
+			<Scene key="home" >
+				<Scene key="main" component={Main} title="Select Task"  />
 				<Scene key="departure" component={SelectWheelchair} title="Departure - Select Wheelchair" />
 					<Scene
 						onRight={() => Actions.alternateBoardingPassInput()}
@@ -25,7 +26,16 @@ const RouterComponent = () => {
 						/>
 					<Scene key="alternateBoardingPassInput" component={AlternateBoardingPassInput} title="Boarding Pass Input" />
 					<Scene key="inputGateNumber" component={InputGateNumber} title="Input Gate Number" />
-				<Scene key="arrival" component={SelectWheelchair} title="Arrival - Select Wheelchair" />	
+					<Scene key="selectStartingPoint" component={SelectStartingPoint} input="Select Starting Point" />
+
+				<Scene key="arrival" component={SelectWheelchair} title="Arrival - Select Wheelchair" />
+					<Scene
+						onRight={() => Actions.alternateBoardingPassInput()}
+						rightTitle="Keyboard" 
+						key="scanBoardingPass" 
+						component={ScanBoardingPass} 
+						title="Scan Boarding Pass" 
+						/>	
 				<Scene key="checkIn" component={SelectWheelchair} title="Check-In" />					
 			</Scene>
 		</Router>

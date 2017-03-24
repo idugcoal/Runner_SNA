@@ -16,12 +16,20 @@ class InputGateNumber extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { gate: '' };
+    this.state = { 
+    	wheelchairNumber: this.props.wheelchairNumber,
+    	boardingPass: this.props.boardingPass,
+    	gateNumber: '' 
+    };
   }
 
-  onButtonPress(value) {
-    this.setState({ gate: value });
-    Actions.scanBoardingPass();
+  onButtonPress(gateNumber) {
+    Actions.selectStartingPoint({
+    	wheelchairNumber: this.state.wheelchairNumber,
+    	boardingPass: this.state.boardingPass,
+    	gateNumber: gateNumber
+    })
+    // this.setState({ gateNumber: gateNumber });
   }
 
   renderButtons() {
@@ -45,7 +53,8 @@ class InputGateNumber extends Component {
           {this.renderButtons()}
         </View>
         <View style={Style.footer}>
-          <Text>Gate #: {this.state.gate}</Text>
+        	<Text>Wheelchair #: {this.state.wheelchairNumber}</Text>
+        	<Text>Boarding Pass Info: {this.state.boardingPass}</Text>
         </View>
       </View>
     );

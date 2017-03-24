@@ -170,12 +170,11 @@ class SelectWheelchair extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { wheelchair: '' };
+    this.state = { wheelchairNumber: '' };
   }
 
-  onButtonPress(value) {
-    this.setState({ wheelchair: value });
-    Actions.scanBoardingPass();
+  onButtonPress(wheelchairNumber) {
+    Actions.scanBoardingPass({ wheelchairNumber });
   }
 
   renderButtons() {
@@ -199,7 +198,6 @@ class SelectWheelchair extends Component {
           {this.renderButtons()}
         </View>
         <View style={Style.footer}>
-          <Text>Wheelchair #: {this.state.wheelchair}</Text>
         </View>
       </View>
     );

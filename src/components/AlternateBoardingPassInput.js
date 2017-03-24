@@ -35,7 +35,7 @@ class AlternateBoardingPassInput extends Component {
           />
        </CardSection>
         <View style={{ flexDirection: 'column', height: 70}}>
-        	<Text style={{ fontSize: 18, paddingLeft: 20 }}>Airline</Text>
+        	<Text style={{ fontSize: 18, paddingLeft: 25 }}>Airline</Text>
         	<Picker
         		style={{flex: 1}}
         		selectedValue={this.props.airline}
@@ -51,7 +51,7 @@ class AlternateBoardingPassInput extends Component {
         	</Picker>
         </View>
         <CardSection>
-        	<Button onPress={() =>Actions.inputGateNumber}>Next</Button>
+        	<Button onPress={() => Actions.inputGateNumber()}>Next</Button>
         </CardSection>
 				</View>
 				<View style={Style.footer}>

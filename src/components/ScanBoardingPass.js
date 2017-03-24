@@ -9,13 +9,15 @@ class ScanBoardingPass extends Component {
 	constructor(props) {
 		
 		super(props);
-		this.state = { boardingPass: '' };
+		this.state = {
+			boardingPass: '', 
+			wheelchairNumber: this.props.wheelchairNumber
+		};
 	} 
 
 	onReadSuccess(boardingPassData) {
 
-		this.setState({ boardingPass: boardingPassData.data });
-		Actions.inputGateNumber();
+		Actions.inputGateNumber({ wheelchairNumber: this.props.wheelchairNumber, boardingPass: boardingPassData.data });
 	}
 
 	render() {
@@ -29,7 +31,7 @@ class ScanBoardingPass extends Component {
 					/>
 				</View>
 				<View style={Style.footer}>
-					<Text>{this.state.boardingPass}</Text>
+					<Text>Wheelchair #: {this.state.wheelchairNumber}</Text>
 				</View>
 			</View>
 		);

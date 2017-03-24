@@ -9,17 +9,30 @@ import Camera from 'react-native-camera';
 import Style from './Style';
 
 class ScanBoardingPass extends Component {
+	
+	constructor(props) {
+		
+		super(props);
+		this.state = { boardingPass: '' };
+	} 
+
+	onReadSuccess(boardingPassData) {
+
+		this.setState({ boardingPass: boardingPassData.data });
+	}
+
 	render() {
 		return(
 			<View style={Style.container}>
 				<View style={Style.content}>
-					<Camera
+					<Camera 
 						style={{ flex: 1}}
 						barCodeTypes={[ 'pdf417' ]}
-						onBarCodeRead={(e) => console.log(e)}
+						onBarCodeRead={this.onReadSuccess.bind(this)}
 					/>
 				</View>
 				<View style={Style.footer}>
+					<Text>{this.state.boardingPass}</Text>
 				</View>
 			</View>
 		);
@@ -27,3 +40,5 @@ class ScanBoardingPass extends Component {
 }
 
 export default ScanBoardingPass;
+
+// onBarCodeRead={(e) => this.onReadSuccess.bind(this, e)}

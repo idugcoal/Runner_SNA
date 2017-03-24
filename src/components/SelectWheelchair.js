@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 // import { connect } from 'react-redux';
-import WheelchairButton from './common/WheelchairButton';
+import NumberButton from './common/NumberButton';
 import Style from './Style';
 import { Actions } from 'react-native-router-flux';
 
@@ -169,16 +169,19 @@ class SelectWheelchair extends Component {
 
   constructor(props) {
     super(props);
+
+    this.state = { wheelchair: '' };
   }
 
   onButtonPress(value) {
+    this.setState({ wheelchair: value });
     Actions.scanBoardingPass();
   }
 
   renderButtons() {
     let views = wheelchairs.map((row, index) => {
       let inputRow = row.map((buttonValue, columnIndex) => {
-        return <WheelchairButton
+        return <NumberButton
                   value={buttonValue}
                   onPress={this.onButtonPress.bind(this, buttonValue)}
                   key={'button-' + columnIndex}
@@ -196,6 +199,7 @@ class SelectWheelchair extends Component {
           {this.renderButtons()}
         </View>
         <View style={Style.footer}>
+          <Text>Wheelchair #: {this.state.wheelchair}</Text>
         </View>
       </View>
     );

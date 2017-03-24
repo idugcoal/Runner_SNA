@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import {
-	Dimensions,
-	Text,
-	TouchableHighlight,
-	View
-} from 'react-native';
+import { Text, View } from 'react-native';
 import Camera from 'react-native-camera';
 import Style from './Style';
+import { Actions } from 'react-native-router-flux';
 
 class ScanBoardingPass extends Component {
 	
@@ -19,6 +15,7 @@ class ScanBoardingPass extends Component {
 	onReadSuccess(boardingPassData) {
 
 		this.setState({ boardingPass: boardingPassData.data });
+		Actions.inputGateNumber();
 	}
 
 	render() {
@@ -40,5 +37,3 @@ class ScanBoardingPass extends Component {
 }
 
 export default ScanBoardingPass;
-
-// onBarCodeRead={(e) => this.onReadSuccess.bind(this, e)}

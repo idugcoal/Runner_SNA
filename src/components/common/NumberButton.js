@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
-class WheelchairButton extends Component {
+class NumberButton extends Component {
   render() {
     return(
       <TouchableOpacity onPress={this.props.onPress} style={styles.buttonStyle}>
@@ -33,13 +33,13 @@ const styles = {
   }
 };
 
-export default WheelchairButton;
+export default NumberButton;
 
 
 
 
 
-// const WheelchairButton = ({ onPress, children }) => {
+// const NumberButton = ({ onPress, children }) => {
 //   const { buttonStyle, textStyle } = styles;
 
 //   return (
@@ -52,5 +52,5 @@ export default WheelchairButton;
 // };
 
 
-// export { WheelchairButton };
+// export { NumberButton };
 

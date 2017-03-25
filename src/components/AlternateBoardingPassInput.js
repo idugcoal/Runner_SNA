@@ -97,7 +97,8 @@ class AlternateBoardingPassInput extends Component {
         </CardSection>
 				</View>
 				<View style={Style.footer}>
-					<Text></Text>
+					<Text>Wheelchair #: {this.state.wheelchairNumber}</Text>
+					
 				</View>
 			</View>
 		);

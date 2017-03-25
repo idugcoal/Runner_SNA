@@ -203,5 +203,13 @@ class SelectWheelchair extends Component {
     );
   }
 };
+// const mapStateToProps = ({ customer }) => {
+//   const { wheelchairNumber } = customer;
 
+//   return { wheelchairNumber };
+// };
+
+// export default connect(mapStateToProps, {
+//   wheelchairNumber
+// })(SelectWheelchair);
 export default SelectWheelchair;

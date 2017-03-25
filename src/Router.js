@@ -17,17 +17,12 @@ const RouterComponent = () => {
 			<Scene key="home" >
 				<Scene key="main" component={Main} title="Select Task"  />
 				<Scene key="departure" component={SelectWheelchair} title="Departure - Select Wheelchair" />
-					<Scene
-						onRight={() => Actions.alternateBoardingPassInput()}
-						rightTitle="Keyboard" 
-						key="scanBoardingPass" 
-						component={ScanBoardingPass} 
-						title="Scan Boarding Pass" 
-						/>
+					<Scene key="scanBoardingPass"	component={ScanBoardingPass} title="Scan Boarding Pass" />
 					<Scene key="alternateBoardingPassInput" component={AlternateBoardingPassInput} title="Boarding Pass Input" />
 					<Scene key="inputGateNumber" component={InputGateNumber} title="Input Gate Number" />
 					<Scene key="selectStartingPoint" component={SelectStartingPoint} input="Starting Point" />
 
+					
 				<Scene key="arrival" component={SelectWheelchair} title="Arrival - Select Wheelchair" />
 					<Scene
 						onRight={() => Actions.alternateBoardingPassInput()}

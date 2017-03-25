@@ -17,7 +17,9 @@ class ScanBoardingPass extends Component {
 
 	onReadSuccess(boardingPassData) {
 
-		Actions.inputGateNumber({ wheelchairNumber: this.props.wheelchairNumber, boardingPass: boardingPassData.data });
+		//PARSE BOARDING PASS DATA
+
+		Actions.inputGateNumber({ wheelchairNumber: this.props.wheelchairNumber, boardingPass: boardingPassData.data, type: 'reset'});
 	}
 
 	render() {

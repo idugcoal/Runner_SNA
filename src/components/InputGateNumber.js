@@ -19,6 +19,10 @@ class InputGateNumber extends Component {
     this.state = { 
     	wheelchairNumber: this.props.wheelchairNumber,
     	boardingPass: this.props.boardingPass,
+    	firstName: this.props.firstName,
+    	lastName: this.props.lastName,
+    	airline: this.props.airline,
+    	flightNumber: this.props.flightNumber,
     	gateNumber: '' 
     };
   }
@@ -55,6 +59,9 @@ class InputGateNumber extends Component {
         <View style={Style.footer}>
         	<Text>Wheelchair #: {this.state.wheelchairNumber}</Text>
         	<Text>Boarding Pass Info: {this.state.boardingPass}</Text>
+        	<Text>Name: {this.state.firstName + ' ' + this.state.lastName}</Text>
+        	<Text>Airline: {this.state.airline}</Text>
+        	<Text>Flight #: {this.state.flightNumber}</Text>
         </View>
       </View>
     );

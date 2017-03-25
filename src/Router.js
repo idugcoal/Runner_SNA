@@ -26,7 +26,7 @@ const RouterComponent = () => {
 						/>
 					<Scene key="alternateBoardingPassInput" component={AlternateBoardingPassInput} title="Boarding Pass Input" />
 					<Scene key="inputGateNumber" component={InputGateNumber} title="Input Gate Number" />
-					<Scene key="selectStartingPoint" component={SelectStartingPoint} input="Select Starting Point" />
+					<Scene key="selectStartingPoint" component={SelectStartingPoint} input="Starting Point" />
 
 				<Scene key="arrival" component={SelectWheelchair} title="Arrival - Select Wheelchair" />
 					<Scene

@@ -6,6 +6,38 @@ import Style from './Style';
 
 class AlternateBoardingPassInput extends Component {
 
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			firstName: '',
+			lastName: '',
+			airline: '',
+			flightNumber: '',
+			wheelchairNumber: this.props.wheelchairNumber
+		};
+	}
+
+	onFirstNameChange(firstName) {
+		this.setState({ firstName });
+		console.log('inFirstNameChange');
+	}
+
+	onLastNameChange(lastName) {
+		this.setState({ lastName });
+		console.log('inFirstLastChange');
+	}
+
+	onFlightNumberChange(flightNumber) {
+		this.setState({ flightNumber });
+		console.log('inFlightNumberChange');
+	}
+
+	onAirlineChange(airline) {
+		this.setState({ airline });
+		console.log('inairlineChange');
+	}
+
 	render() {
 		return(
 			<View style={Style.container}>
@@ -14,32 +46,32 @@ class AlternateBoardingPassInput extends Component {
           <Input
             label="First Name"
             placeholder="First Name"
-            // onChangeText={this.onFirstNameChange.bind(this)}
-            // value={this.props.firstName}
+            onChangeText={this.onFirstNameChange.bind(this)}
+            value={this.state.firstName}
           />
         </CardSection>
         <CardSection>
           <Input
             label="Last Name"
             placeholder="Last Name"
-            // onChangeText={this.onLastNameChange.bind(this)}
-            // value={this.props.lastName}
+            onChangeText={this.onLastNameChange.bind(this)}
+            value={this.state.lastName}
           />
        	</CardSection>
        	<CardSection>
           <Input
             label="Flight Number"
             placeholder="Flight Number"
-            // onChangeText={this.onFlightNumberChange.bind(this)}
-            // value={this.props.flightNumber}
+            onChangeText={this.onFlightNumberChange.bind(this)}
+            value={this.state.flightNumber}
           />
        </CardSection>
         <View style={{ flexDirection: 'column', height: 70}}>
         	<Text style={{ fontSize: 18, paddingLeft: 25 }}>Airline</Text>
         	<Picker
         		style={{flex: 1}}
-        		selectedValue={this.props.airline}
-        		onValueChange={value => console.log(value)}
+        		selectedValue={this.state.airline}
+        		onValueChange={this.onAirlineChange.bind(this)}
         	>
         		<Picker.Item label="Alaska" value="Alaska" />
         		<Picker.Item label="American" value="American" />
@@ -51,7 +83,17 @@ class AlternateBoardingPassInput extends Component {
         	</Picker>
         </View>
         <CardSection>
-        	<Button onPress={() => Actions.inputGateNumber()}>Next</Button>
+        	<Button 
+        		onPress={() => Actions.inputGateNumber({ 
+        			wheelchairNumber: this.state.wheelchairNumber,
+        			firstName: this.state.firstName,
+        			lastName: this.state.lastName,
+        			flightNumber: this.state.flightNumber,
+        			airline: this.state.airline,
+        			type: 'reset' 
+        		})}>
+        		Next
+        	</Button>
         </CardSection>
 				</View>
 				<View style={Style.footer}>

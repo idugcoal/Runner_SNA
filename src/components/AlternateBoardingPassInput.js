@@ -10,32 +10,29 @@ class AlternateBoardingPassInput extends Component {
 		super(props);
 
 		this.state = {
-			firstName: '',
-			lastName: '',
-			airline: '',
-			flightNumber: '',
-			wheelchairNumber: this.props.wheelchairNumber
+            runType: this.props.runType,
+			wheelchairNumber: this.props.wheelchairNumber,
+            firstName: '',
+            lastName: '',
+            airline: '',
+            flightNumber: '',
 		};
 	}
 
 	onFirstNameChange(firstName) {
 		this.setState({ firstName });
-		console.log('inFirstNameChange');
 	}
 
 	onLastNameChange(lastName) {
 		this.setState({ lastName });
-		console.log('inFirstLastChange');
 	}
 
 	onFlightNumberChange(flightNumber) {
 		this.setState({ flightNumber });
-		console.log('inFlightNumberChange');
 	}
 
 	onAirlineChange(airline) {
 		this.setState({ airline });
-		console.log('inairlineChange');
 	}
 
 	render() {
@@ -84,7 +81,8 @@ class AlternateBoardingPassInput extends Component {
         </View>
         <CardSection>
         	<Button 
-        		onPress={() => Actions.inputGateNumber({ 
+        		onPress={() => Actions.inputGateNumber({
+                    runType: this.state.runType, 
         			wheelchairNumber: this.state.wheelchairNumber,
         			firstName: this.state.firstName,
         			lastName: this.state.lastName,

@@ -11,8 +11,13 @@ class ScanBoardingPass extends Component {
 		
 		super(props);
 		this.state = {
-			boardingPass: '', 
-			wheelchairNumber: this.props.wheelchairNumber
+			runType: this.props.runType,
+			wheelchairNumber: this.props.wheelchairNumber,
+			boardingPass: '',
+			firstName: '',
+			lastName: '',
+			airline: '',
+			flightNumber: ''
 		};
 	} 
 
@@ -20,11 +25,22 @@ class ScanBoardingPass extends Component {
 
 		//PARSE BOARDING PASS DATA
 
-		Actions.inputGateNumber({ wheelchairNumber: this.props.wheelchairNumber, boardingPass: boardingPassData.data, type: 'reset'});
+		Actions.inputGateNumber({ 
+			runType: this.state.runType,
+			wheelchairNumber: this.state.wheelchairNumber,
+			firstName: this.state.firstName,
+			lastName: this.state.lastName,
+			airline: this.state.airline,
+			flightNumber: this.state.flightNumber,
+			boardingPass: boardingPassData.data, 
+			type: 'reset'});
 	}
 
 	onReadFail() {
-		Actions.alternateBoardingPassInput({ wheelchairNumber: this.props.wheelchairNumber});
+		Actions.alternateBoardingPassInput({ 
+			runType: this.state.runType,
+			wheelchairNumber: this.state.wheelchairNumber
+		});
 	}
 
 	render() {

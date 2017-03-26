@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
-import { Button, ImageButton } from './common';
+import { Button, CardSection,ImageButton } from './common';
 import Style from './Style';
-import { cnbc, cnn, latapenade, octravelmart, starbucks, zovs } from '../../assets';
+import { cnbc, cnn, latapenade, octravelmart, starbucks, zovs, phone, restroom } from '../../assets';
 import { Actions } from 'react-native-router-flux';
 
 
@@ -28,6 +28,7 @@ class SelectStopsNonSterile extends Component {
 			<View style={Style.container}>
 				<View style={Style.content}>
 					<View style={Style.row}>
+						
 						<ImageButton 
 							source={cnbc} 
 							onPress={this.onButtonPress.bind(this)}
@@ -57,6 +58,17 @@ class SelectStopsNonSterile extends Component {
 						/>
 						<ImageButton 
 							source={zovs} 
+							onPress={this.onButtonPress.bind(this)}
+						/>
+						
+					</View>
+						<View style={Style.row}>
+							<ImageButton 
+							source={phone} 
+							onPress={this.onButtonPress.bind(this)}
+						/>
+						<ImageButton 
+							source={restroom} 
 							onPress={this.onButtonPress.bind(this)}
 						/>
 						

@@ -11,14 +11,30 @@ class SelectStartingPoint extends Component {
 		super(props);
 
 		this.state = {
+			runType: this.props.runType,
 			wheelchairNumber: this.props.wheelchairNumber,
 			boardingPass: this.props.boardingPass,
-			gateNumber: this.props.gateNumber
+			firstName: this.props.firstName,
+			lastName: this.props.lastName,
+			airline: this.props.airline,
+			flightNumber: this.props.flightNumber,
+			gateNumber: this.props.gateNumber,
+			startLocation: ''
 		}
 	}
 
-	onButtonPress() {
-		Actions.selectStopsNonSterile();
+	onButtonPress(startLocation) {
+		Actions.selectStopsNonSterile({
+			runType: this.state.runType,
+    	wheelchairNumber: this.state.wheelchairNumber,
+    	boardingPass: this.state.boardingPass,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      airline: this.state.airline,
+      flightNumber: this.state.flightNumber,
+    	gateNumber: this.state.gateNumber,
+    	startLocation: startLocation
+    });
 	}
 
 	render() {
@@ -26,9 +42,18 @@ class SelectStartingPoint extends Component {
 			<View style={Style.container}>
 				<View style={Style.content}>
 					<View style={Style.row}>
-						<Button onPress={this.onButtonPress.bind(this)}>A Curb</Button>
-						<Button>B Curb</Button>
-						<Button>C Curb</Button>
+						<Button 
+							onPress={this.onButtonPress.bind(this, 'aCurb')}>
+								A Curb
+						</Button>
+						<Button 
+							onPress={this.onButtonPress.bind(this, 'bCurb')}>
+								B Curb
+						</Button>
+						<Button 
+							onPress={this.onButtonPress.bind(this, 'cCurb')}>
+								C Curb
+						</Button>
 					</View>
 					<View style={Style.row}>
 						<Button>Alaska</Button>

@@ -8,12 +8,12 @@ class Main extends Component {
 	
 	onDeparture() {
     // Actions.main();
-    Actions.departure();
+    Actions.selectWheelchair({runType: 'departure'});
   }
 
   onArrival() {
   	// Actions.main();
-  	Actions.arrival();
+  	Actions.arrival({runType: 'arrival'});
   }
 
   onCheckIn() {

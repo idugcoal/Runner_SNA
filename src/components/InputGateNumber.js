@@ -17,6 +17,7 @@ class InputGateNumber extends Component {
     super(props);
 
     this.state = { 
+      runType: this.props.runType,
     	wheelchairNumber: this.props.wheelchairNumber,
     	boardingPass: this.props.boardingPass,
     	firstName: this.props.firstName,
@@ -29,8 +30,13 @@ class InputGateNumber extends Component {
 
   onButtonPress(gateNumber) {
     Actions.selectStartingPoint({
+      runType: this.state.runType,
     	wheelchairNumber: this.state.wheelchairNumber,
     	boardingPass: this.state.boardingPass,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      airline: this.state.airline,
+      flightNumber: this.state.flightNumber,
     	gateNumber: gateNumber
     })
     // this.setState({ gateNumber: gateNumber });

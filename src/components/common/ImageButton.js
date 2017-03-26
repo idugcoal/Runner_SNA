@@ -19,7 +19,8 @@ const style = {
   imageButton: {
     flex: 1,
     height: 100,
-    width: 200,
+    width: 300,
+    // backgroundColor: 'blue'
   }
 };
 

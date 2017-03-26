@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Button } from './common';
+import { Actions } from 'react-native-router-flux'
+
 import Style from './Style';
 
 class SelectStartingPoint extends Component {
@@ -15,12 +17,16 @@ class SelectStartingPoint extends Component {
 		}
 	}
 
+	onButtonPress() {
+		Actions.selectStopsNonSterile();
+	}
+
 	render() {
 		return (
 			<View style={Style.container}>
 				<View style={Style.content}>
 					<View style={Style.row}>
-						<Button>A Curb</Button>
+						<Button onPress={this.onButtonPress.bind(this)}>A Curb</Button>
 						<Button>B Curb</Button>
 						<Button>C Curb</Button>
 					</View>

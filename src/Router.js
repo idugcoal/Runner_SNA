@@ -7,20 +7,22 @@ import ScanBoardingPass from './components/ScanBoardingPass';
 import AlternateBoardingPassInput from './components/AlternateBoardingPassInput';
 import InputGateNumber from './components/InputGateNumber';
 import SelectStartingPoint from './components/SelectStartingPoint';
+import SelectStopsNonSterile from './components/SelectStopsNonSterile';
 
 const RouterComponent = () => {
 	return (
 		<Router sceneStyle={{ paddingTop: 50 }}>
-			<Scene key="auth" initial>
+			<Scene key="auth" >
 				<Scene key="login" component={LoginForm} title="Please Log In" />
 			</Scene>
-			<Scene key="home" >
+			<Scene key="home" initial>
 				<Scene key="main" component={Main} title="Select Task"  />
 				<Scene key="departure" component={SelectWheelchair} title="Departure - Select Wheelchair" />
 					<Scene key="scanBoardingPass"	component={ScanBoardingPass} title="Scan Boarding Pass" />
 					<Scene key="alternateBoardingPassInput" component={AlternateBoardingPassInput} title="Boarding Pass Input" />
 					<Scene key="inputGateNumber" component={InputGateNumber} title="Input Gate Number" />
 					<Scene key="selectStartingPoint" component={SelectStartingPoint} input="Starting Point" />
+					<Scene key="selectStopsNonSterile" component={SelectStopsNonSterile} input="Select Stops" />
 
 					
 				<Scene key="arrival" component={SelectWheelchair} title="Arrival - Select Wheelchair" />

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
+import { selectWheelchair } from '../actions';
 import NumberButton from './common/NumberButton';
 import Style from './Style';
 import { Actions } from 'react-native-router-flux';
@@ -22,17 +24,13 @@ class SelectWheelchair extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { 
-      runType: this.props.runType,
-      wheelchairNumber: '' 
-    };
   }
 
   onButtonPress(wheelchairNumber) {
-    Actions.scanBoardingPass({ 
-      runType: this.state.runType,
-      wheelchairNumber 
-    });
+
+    const { wheelchairNumber } = this.props;
+
+    this.props.selectWheelchair({ wheelchairNumber });
   }
 
   renderButtons() {
@@ -62,4 +60,10 @@ class SelectWheelchair extends Component {
   }
 };
 
-export default SelectWheelchair;
+const mapStateToProps = ({ departure }) => {
+  const { wheelchairNumber } = depaurture;
+
+  return { wheelchairNumber };
+};
+
+export default connect(mapStateToProps, {wheelchairNumber})(SelectWheelchair);

@@ -70,7 +70,9 @@ class SelectStartingPoint extends Component {
 				<View style={Style.footer}>
 					<Text>Wheelchair #: {this.state.wheelchairNumber}</Text>
         	<Text>Boarding Pass Info: {this.state.boardingPass}</Text>
-          <Text>Destination Gate #: {this.state.gateNumber}</Text>
+        	<Text>Name: {this.state.firstName + ' ' + this.state.lastName}</Text>
+        	<Text>Airline: {this.state.airline}</Text>
+        	<Text>Flight #: {this.state.flightNumber}</Text>
         </View>
 			</View>
 		);

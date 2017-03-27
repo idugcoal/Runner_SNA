@@ -25,7 +25,7 @@ class ScanBoardingPass extends Component {
 
 		//PARSE BOARDING PASS DATA
 
-		Actions.inputGateNumber({ 
+		Actions.selectGate({ 
 			runType: this.state.runType,
 			wheelchairNumber: this.state.wheelchairNumber,
 			firstName: this.state.firstName,

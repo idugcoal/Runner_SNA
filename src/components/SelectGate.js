@@ -11,7 +11,7 @@ const gates = [
   [11, 12, 13, 14, 15]
 ];
 
-class InputGateNumber extends Component {
+class SelectGate extends Component {
 
   constructor(props) {
     super(props);
@@ -74,4 +74,4 @@ class InputGateNumber extends Component {
   }
 };
 
-export default InputGateNumber;
+export default SelectGate;

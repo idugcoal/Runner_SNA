@@ -5,9 +5,10 @@ import Main from './components/Main';
 import SelectWheelchair from './components/SelectWheelchair';
 import ScanBoardingPass from './components/ScanBoardingPass';
 import AlternateBoardingPassInput from './components/AlternateBoardingPassInput';
-import InputGateNumber from './components/InputGateNumber';
+import SelectGate from './components/SelectGate';
 import SelectStartingPoint from './components/SelectStartingPoint';
 import SelectStopsNonSterile from './components/SelectStopsNonSterile';
+import TSA from './components/TSA';
 
 // const RouterComponent = () => {
 // 	return (
@@ -20,7 +21,7 @@ import SelectStopsNonSterile from './components/SelectStopsNonSterile';
 // 				<Scene key="departure" component={SelectWheelchair} title="Departure - Select Wheelchair" />
 // 					<Scene key="scanBoardingPass"	component={ScanBoardingPass} title="Scan Boarding Pass" />
 // 					<Scene key="alternateBoardingPassInput" component={AlternateBoardingPassInput} title="Boarding Pass Input" />
-// 					<Scene key="inputGateNumber" component={InputGateNumber} title="Input Gate Number" />
+// 					<Scene key="selectGate" component={SelectGate} title="Input Gate Number" />
 // 					<Scene key="selectStartingPoint" component={SelectStartingPoint} input="Starting Point" />
 // 					<Scene key="selectStopsNonSterile" component={SelectStopsNonSterile} input="Select Stops" />
 
@@ -50,10 +51,10 @@ const RouterComponent = () => {
 				<Scene key="selectWheelchair" component={SelectWheelchair} title={"Departure - Select Wheelchair"}/>
 				<Scene key="scanBoardingPass" component={ScanBoardingPass} title={"Scan Boarding Pass"} />
 				<Scene key="alternateBoardingPassInput" component={AlternateBoardingPassInput} title={"Enter Customer Info"} />
-				<Scene key="inputGateNumber" component={InputGateNumber} title={"Select Gate Number"} />
+				<Scene key="selectGate" component={SelectGate} title={"Select Gate Number"} />
 				<Scene key="selectStartingPoint" component={SelectStartingPoint} title={"Select Staring Point"} />
 				<Scene key="selectStopsNonSterile" component={SelectStopsNonSterile} title={"Select Stops"} />
-		
+				<Scene key="tsa" component={TSA} title="TSA" />
 			</Scene>
 		</Router>
 	);

@@ -81,7 +81,7 @@ class AlternateBoardingPassInput extends Component {
         </View>
         <CardSection>
         	<Button 
-        		onPress={() => Actions.inputGateNumber({
+        		onPress={() => Actions.selectGate({
                     runType: this.state.runType, 
         			wheelchairNumber: this.state.wheelchairNumber,
         			firstName: this.state.firstName,

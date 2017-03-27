@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
-import { Button, CardSection,ImageButton } from './common';
+import { Button, CardSection, ImageButton } from './common';
 import Style from './Style';
 import { cnbc, cnn, latapenade, octravelmart, starbucks, zovs, phone, restroom } from '../../assets';
 import { Actions } from 'react-native-router-flux';
@@ -19,9 +19,8 @@ class SelectStopsNonSterile extends Component {
 	}
 
 	onButtonPress() {
-		Actions.main();
+		Actions.tsa();
 	}
-
 
 	render() {
 		return (
@@ -73,11 +72,18 @@ class SelectStopsNonSterile extends Component {
 						/>
 						
 					</View>
+					<View style={Style.row}>
+						<Button onPress={this.onButtonPress.bind(this)}>
+							TSA Start
+						</Button>
+					</View>
 				</View>
 				<View style={Style.footer}>
 					<Text>Wheelchair #: {this.state.wheelchairNumber}</Text>
         	<Text>Boarding Pass Info: {this.state.boardingPass}</Text>
-          <Text>Destination Gate #: {this.state.gateNumber}</Text>
+        	<Text>Name: {this.state.firstName + ' ' + this.state.lastName}</Text>
+        	<Text>Airline: {this.state.airline}</Text>
+        	<Text>Flight #: {this.state.flightNumber}</Text>
         </View>
 			</View>
 		);

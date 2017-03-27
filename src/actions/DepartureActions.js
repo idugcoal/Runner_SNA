@@ -8,7 +8,8 @@ import {
 	LAST_NAME_CHANGED,
 	AIRLINE_CHANGED,
 	FLIGHT_NUMBER_CHANGED,
-	SELECT_GATE_NUMBER
+	SELECT_GATE_NUMBER,
+	TSA_END
 } from './types';
 
 export const selectWheelchair = ({ wheelchairNumber }) => {
@@ -74,5 +75,13 @@ export const selectGateNumber = (text) => {
 			payload: text
 		});
 	};
-	
+};
+
+export const addCommentsTSA = (text) => {
+	return(dispatch) => {
+		dispatch({
+			type: TSA_END,
+			payload: text
+		});
+	};
 };

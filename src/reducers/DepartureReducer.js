@@ -42,9 +42,9 @@ export default (state = INITIAL_STATE, action) => {
     case SELECT_WHEELCHAIR:
       return { ...state, wheelchairNumber: action.payload };
     case SCAN_BOARDING_PASS:
-      return { ...state, boardingPass: action.payload };
+      return { ...state, firstName: action.payload };
     case ALTERNATE_BOARDING_PASS_INPUT:
-    	return { ...state, boardingPass: action.payload };
+    	return { ...state, firstName: action.payload };
     case FIRST_NAME_CHANGED:
       return { ...state, firstName: action.payload };
     case LAST_NAME_CHANGED:

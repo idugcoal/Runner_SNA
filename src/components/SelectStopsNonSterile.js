@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
+import { connect } from 'react-redux'
 import { Button, CardSection, ImageButton } from './common';
+import Footer from './Footer';
 import Style from './Style';
 import { cnbc, cnn, latapenade, octravelmart, starbucks, zovs, phone, restroom } from '../../assets';
 import { Actions } from 'react-native-router-flux';
@@ -10,15 +12,10 @@ class SelectStopsNonSterile extends Component {
 
 	constructor(props) {
 		super(props);
-
-		this.state = {
-			wheelchairNumber: this.props.wheelchairNumber,
-			boardingPass: this.props.boardingPass,
-			gateNumber: this.props.gateNumber
-		}
 	}
 
 	onButtonPress() {
+		console.log('this.props in SelectStopsNonSterile:', this.props)
 		Actions.tsa();
 	}
 
@@ -72,19 +69,13 @@ class SelectStopsNonSterile extends Component {
 						/>
 						
 					</View>
-					<View style={Style.row}>
+					<CardSection>
 						<Button onPress={this.onButtonPress.bind(this)}>
 							TSA Start
 						</Button>
-					</View>
+					</CardSection>
 				</View>
-				<View style={Style.footer}>
-					<Text>Wheelchair #: {this.state.wheelchairNumber}</Text>
-        	<Text>Boarding Pass Info: {this.state.boardingPass}</Text>
-        	<Text>Name: {this.state.firstName + ' ' + this.state.lastName}</Text>
-        	<Text>Airline: {this.state.airline}</Text>
-        	<Text>Flight #: {this.state.flightNumber}</Text>
-        </View>
+				<Footer />
 			</View>
 		);
 	}
@@ -92,4 +83,10 @@ class SelectStopsNonSterile extends Component {
 
 }
 
-export default SelectStopsNonSterile;
+const mapStateToProps = ({ departure }) => {
+  const { wheelchairNumber, flightNumber, airline, firstName, lastName } = departure;
+
+  return { wheelchairNumber, flightNumber, airline, firstName, lastName };
+};
+
+export default connect(mapStateToProps, { })(SelectStopsNonSterile);

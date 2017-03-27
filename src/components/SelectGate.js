@@ -17,14 +17,10 @@ class SelectGate extends Component {
 
   constructor(props) {
     super(props);
-
   }
 
   onButtonPress(gateNumber) {
-    // Actions.selectStartingPoint();
-    // this.setState({ gateNumber: gateNumber });
     const { destinationGate } = this.props;
-    console.log('hello')
     this.props.selectGateNumber(gateNumber)
   }
 

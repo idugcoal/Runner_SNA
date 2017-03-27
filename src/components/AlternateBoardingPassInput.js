@@ -58,7 +58,7 @@ class AlternateBoardingPassInput extends Component {
             value={this.props.flightNumber}
           />
        </CardSection>
-        <View style={{ flexDirection: 'column', height: 70}}>
+        <View style={{ flexDirection: 'column', height: 100}}>
         	<Text style={{ fontSize: 18, paddingLeft: 25 }}>Airline</Text>
         	<Picker
         		style={{flex: 1}}

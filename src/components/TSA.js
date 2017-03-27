@@ -21,9 +21,11 @@ class TSA extends Component {
 		        multiline = {true}
 		        numberOfLines = {10}
 		      />
-		      <Button onPress={this.onButtonPress.bind(this)}>
-		      	Submit Comment
-		      </Button>
+		      <CardSection>
+			      <Button onPress={this.onButtonPress.bind(this)}>
+			      	Submit Comment
+			      </Button>
+			    </CardSection>
 		    </View>
 		    <Footer />
       </View>

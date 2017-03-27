@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { Button, CardSection, ImageButton } from './common';
+import Footer from './Footer';
 import Style from './Style';
 import { Actions } from 'react-native-router-flux';
 
@@ -24,8 +25,7 @@ class TSA extends Component {
 		      	Submit Comment
 		      </Button>
 		    </View>
-		    <View style={Style.footer}>
-		    </View>
+		    <Footer />
       </View>
 		);
 	}

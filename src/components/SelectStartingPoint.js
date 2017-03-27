@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Button } from './common';
 import { Actions } from 'react-native-router-flux'
+import Footer from './Footer';
 
 import Style from './Style';
 
@@ -10,31 +11,10 @@ class SelectStartingPoint extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			runType: this.props.runType,
-			wheelchairNumber: this.props.wheelchairNumber,
-			boardingPass: this.props.boardingPass,
-			firstName: this.props.firstName,
-			lastName: this.props.lastName,
-			airline: this.props.airline,
-			flightNumber: this.props.flightNumber,
-			gateNumber: this.props.gateNumber,
-			startLocation: ''
-		}
 	}
 
 	onButtonPress(startLocation) {
-		Actions.selectStopsNonSterile({
-			runType: this.state.runType,
-    	wheelchairNumber: this.state.wheelchairNumber,
-    	boardingPass: this.state.boardingPass,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      airline: this.state.airline,
-      flightNumber: this.state.flightNumber,
-    	gateNumber: this.state.gateNumber,
-    	startLocation: startLocation
-    });
+		Actions.selectStopsNonSterile();
 	}
 
 	render() {
@@ -68,11 +48,7 @@ class SelectStartingPoint extends Component {
 					</View>
 				</View>
 				<View style={Style.footer}>
-					<Text>Wheelchair #: {this.state.wheelchairNumber}</Text>
-        	<Text>Boarding Pass Info: {this.state.boardingPass}</Text>
-        	<Text>Name: {this.state.firstName + ' ' + this.state.lastName}</Text>
-        	<Text>Airline: {this.state.airline}</Text>
-        	<Text>Flight #: {this.state.flightNumber}</Text>
+				<Footer />
         </View>
 			</View>
 		);

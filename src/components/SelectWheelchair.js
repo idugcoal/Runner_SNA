@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { selectWheelchair } from '../actions';
 import NumberButton from './common/NumberButton';
+import Footer from './Footer';
 import Style from './Style';
 import { Actions } from 'react-native-router-flux';
 
@@ -27,7 +28,6 @@ class SelectWheelchair extends Component {
   }
 
   onButtonPress(buttonValue) {
-
 
     const { wheelchairNumber } = this.props;
 
@@ -54,8 +54,7 @@ class SelectWheelchair extends Component {
         <View style={Style.content}>
           {this.renderButtons()}
         </View>
-        <View style={Style.footer}>
-        </View>
+        <Footer />
       </View>
     );
   }

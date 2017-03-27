@@ -26,11 +26,12 @@ class SelectWheelchair extends Component {
 
   }
 
-  onButtonPress(wheelchairNumber) {
+  onButtonPress(buttonValue) {
+
 
     const { wheelchairNumber } = this.props;
 
-    this.props.selectWheelchair({ wheelchairNumber });
+    this.props.selectWheelchair({ wheelchairNumber: buttonValue });
   }
 
   renderButtons() {
@@ -61,9 +62,9 @@ class SelectWheelchair extends Component {
 };
 
 const mapStateToProps = ({ departure }) => {
-  const { wheelchairNumber } = depaurture;
+  const { wheelchairNumber } = departure;
 
   return { wheelchairNumber };
 };
 
-export default connect(mapStateToProps, {wheelchairNumber})(SelectWheelchair);
+export default connect(mapStateToProps, { selectWheelchair })(SelectWheelchair);

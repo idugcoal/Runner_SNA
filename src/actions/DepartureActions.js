@@ -7,7 +7,8 @@ import {
   FIRST_NAME_CHANGED,
 	LAST_NAME_CHANGED,
 	AIRLINE_CHANGED,
-	FLIGHT_NUMBER_CHANGED
+	FLIGHT_NUMBER_CHANGED,
+	SELECT_GATE_NUMBER
 } from './types';
 
 export const selectWheelchair = ({ wheelchairNumber }) => {
@@ -58,4 +59,18 @@ export const flightNumberChanged = (text) => {
     type: FLIGHT_NUMBER_CHANGED,
     payload: text
   };
+};
+export const selectGateNumber = (text) => {
+	
+	Actions.selectStartingPoint();
+	
+	return(dispatch) => {
+		dispatch({
+			type: SELECT_GATE_NUMBER,
+			payload: text
+		});
+	};
+
+	
+	
 };

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
+import { selectGateNumber } from '../actions';
 import NumberButton from './common/NumberButton';
 import Footer from './Footer';
 import Style from './Style';
@@ -20,8 +21,11 @@ class SelectGate extends Component {
   }
 
   onButtonPress(gateNumber) {
-    Actions.selectStartingPoint();
+    // Actions.selectStartingPoint();
     // this.setState({ gateNumber: gateNumber });
+    const { destinationGate } = this.props;
+    console.log('hello')
+    this.props.selectGateNumber(gateNumber)
   }
 
   renderButtons() {
@@ -52,4 +56,14 @@ class SelectGate extends Component {
   }
 };
 
-export default SelectGate;
+
+const mapStateToProps = ({ departure }) => {
+  const { destinationGate } = departure;
+
+
+  return { destinationGate };
+};
+
+export default connect(mapStateToProps, {
+  selectGateNumber
+})(SelectGate);

@@ -79,7 +79,7 @@ export const selectGateNumber = (text) => {
 
 export const addCommentsTSA = (text) => {
 	
-	Actions.selectStopsSterile();
+	Actions.selectStopsSterile({ type: 'reset' });
 
 	return(dispatch) => {
 		dispatch({

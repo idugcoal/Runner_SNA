@@ -9,6 +9,7 @@ import SelectGate from './components/SelectGate';
 import SelectStartingPoint from './components/SelectStartingPoint';
 import SelectStopsNonSterile from './components/SelectStopsNonSterile';
 import TSA from './components/TSA';
+import SelectStopsSterile from './components/SelectStopsSterile';
 
 // const RouterComponent = () => {
 // 	return (
@@ -53,8 +54,9 @@ const RouterComponent = () => {
 				<Scene key="alternateBoardingPassInput" component={AlternateBoardingPassInput} title={"Enter Customer Info"} />
 				<Scene key="selectGate" component={SelectGate} title={"Select Gate Number"} />
 				<Scene key="selectStartingPoint" component={SelectStartingPoint} title={"Select Staring Point"} />
-				<Scene key="selectStopsNonSterile" component={SelectStopsNonSterile} title={"Select Stops"} />
+				<Scene key="selectStopsNonSterile" component={SelectStopsNonSterile} title={"Select Stops | Non-Sterile"} />
 				<Scene key="tsa" component={TSA} title="TSA" />
+				<Scene key="selectStopsSterile" component={SelectStopsSterile} title={"Select Stops | Sterile "} />
 			</Scene>
 		</Router>
 	);

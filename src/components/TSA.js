@@ -45,7 +45,6 @@ class TSA extends Component {
 	}
 }
 
-// export default TSA;
 const mapStateToProps = ({ departure }) => {
   const { commentsTSA } = departure;
 

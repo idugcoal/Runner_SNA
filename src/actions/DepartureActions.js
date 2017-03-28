@@ -78,6 +78,9 @@ export const selectGateNumber = (text) => {
 };
 
 export const addCommentsTSA = (text) => {
+	
+	Actions.selectStopsSterile();
+
 	return(dispatch) => {
 		dispatch({
 			type: TSA_END,

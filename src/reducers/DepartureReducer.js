@@ -9,7 +9,7 @@ FLIGHT_NUMBER_CHANGED,
 SELECT_GATE_NUMBER,
 SELECT_STARTING_POINT,
 SELECT_STOP,
-TSA_START,
+// TSA_START,
 TSA_END,
 } from '../actions/types';
 
@@ -59,8 +59,8 @@ export default (state = INITIAL_STATE, action) => {
     	return { ...state, locationFirstContactButton: action.payload.locationFirstContactButton, locationFirstContactGPS: action.payload.locationFirstContactGPS, timeStart: action.payload.timeStart };
     case SELECT_STOP:
       return { ...state, error: 'Login Failed. Please Try Again.', password: '', loading: false };
-    case TSA_START:
-      return { ...state, error: 'Login Failed. Please Try Again.', password: '', loading: false };
+    // case TSA_START:
+    //   return { ...state, error: 'Login Failed. Please Try Again.', password: '', loading: false };
     case TSA_END:
       return { ...state, commentsTSA: action.payload };
     default:

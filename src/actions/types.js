@@ -16,7 +16,7 @@ export const FLIGHT_NUMBER_CHANGED = 'flight_number_changed';
 export const SELECT_GATE_NUMBER = 'select_gate_number';
 export const SELECT_STARTING_POINT = 'select_starting_point';
 export const SELECT_STOP = 'select_stop';
-export const TSA_START = 'tsa_start';
+// export const TSA_START = 'tsa_start';
 export const TSA_END = 'tsa_end';
 
 

@@ -11,6 +11,7 @@ SELECT_STARTING_POINT,
 SELECT_STOP,
 // TSA_START,
 TSA_END,
+SET_FINAL_GATE_NUMBER,
 } from '../actions/types';
 
 const INITIAL_STATE = {

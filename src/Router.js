@@ -10,6 +10,7 @@ import SelectStartingPoint from './components/SelectStartingPoint';
 import SelectStopsNonSterile from './components/SelectStopsNonSterile';
 import TSA from './components/TSA';
 import SelectStopsSterile from './components/SelectStopsSterile';
+import GateArrival from './components/GateArrival';
 
 // const RouterComponent = () => {
 // 	return (
@@ -57,6 +58,7 @@ const RouterComponent = () => {
 				<Scene key="selectStopsNonSterile" component={SelectStopsNonSterile} title={"Select Stops | Non-Sterile"} />
 				<Scene key="tsa" component={TSA} title="TSA" />
 				<Scene key="selectStopsSterile" component={SelectStopsSterile} title={"Select Stops | Sterile "} />
+				<Scene key="gateArrival" component={GateArrival} title={"Gate Arrival"} />
 			</Scene>
 		</Router>
 	);

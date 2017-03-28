@@ -11,7 +11,6 @@ import {
  } from '../../assets';
 import { Actions } from 'react-native-router-flux';
 
-
 class SelectStopsSterile extends Component {
 
 	constructor(props) {
@@ -56,7 +55,7 @@ class SelectStopsSterile extends Component {
 							<ImageButton source={rubystogo} />
 						</View>
 						<CardSection>
-						<Button onPress={this.onButtonPress.bind(this)}>
+						<Button onPress={() => Actions.gateArrival()}>
 							Gate Arrival
 						</Button>
 					</CardSection>
@@ -92,7 +91,7 @@ class SelectStopsSterile extends Component {
 							<ImageButton source={zovs} />
 						</View>
 						<CardSection>
-							<Button onPress={this.onButtonPress.bind(this)}>
+							<Button onPress={() => Actions.gateArrival()}>
 								Gate Arrival
 							</Button>
 						</CardSection>
@@ -119,7 +118,7 @@ class SelectStopsSterile extends Component {
 							<ImageButton source={ducks} />
 						</View>
 						<CardSection>
-							<Button onPress={this.onButtonPress.bind(this)}>
+							<Button onPress={() => Actions.gateArrival()}>
 								Gate Arrival
 							</Button>
 						</CardSection>

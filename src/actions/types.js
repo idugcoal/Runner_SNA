@@ -18,5 +18,6 @@ export const SELECT_STARTING_POINT = 'select_starting_point';
 export const SELECT_STOP = 'select_stop';
 // export const TSA_START = 'tsa_start';
 export const TSA_END = 'tsa_end';
+export const SET_FINAL_GATE_NUMBER='set_final_gate_number';
 
 

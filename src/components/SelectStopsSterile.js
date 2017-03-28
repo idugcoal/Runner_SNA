@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, Image, Modal } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
+import Modal from 'react-native-simple-modal';
 import { Button, CardSection, ImageButton, TerminalA, TerminalB, TerminalC } from './common';
 import Footer from './Footer';
 import Style from './Style';
@@ -19,7 +20,7 @@ class SelectStopsSterile extends Component {
 
 		this.state = {
 			terminal: 'a',
-			showModal: false
+			open: false
 		}
 	}
 
@@ -28,6 +29,15 @@ class SelectStopsSterile extends Component {
 		
 	}
 
+	onGateSuccess() {
+		this.setState({open: false})
+		Actions.closing();
+	}
+
+	onGateFail() {
+		this.setState({open: false})
+		Actions.selectGate();
+	}
 
 	renderButtons() {
 		switch(this.state.terminal) {
@@ -106,10 +116,30 @@ class SelectStopsSterile extends Component {
 							 />
 						</View>
 						<CardSection>
-						<Button onPress={() => this.setState({ 'showModal': true })}>
+						<Button onPress={() => this.setState({ open: true })}>
 							Gate Arrival
 						</Button>
 					</CardSection>
+						<Modal
+			        offset={this.state.offset}
+			        open={this.state.open}
+			        modalDidOpen={() => console.log('modal did open')}
+			        modalDidClose={() => this.setState({open: false})}
+			        style={{alignItems: 'center'}}>
+			        <View>
+			          <Text style={{fontSize: 20, marginBottom: 10}}>Are you at Gate #{this.props.destinationGate}?</Text>
+			          <CardSection>
+									<View style={Style.row}>
+										<Button onPress={ this.onGateSuccess.bind(this) }>
+											Yes
+										</Button>
+										<Button onPress={ this.onGateFail.bind(this) }>
+											No
+										</Button>
+									</View>
+								</CardSection>
+			        </View>
+			      </Modal>
 				</View>
 				);
 
@@ -206,10 +236,30 @@ class SelectStopsSterile extends Component {
 							/>
 						</View>
 						<CardSection>
-							<Button onPress={() => this.setState({ 'showModal': true })}>
+							<Button onPress={() => this.setState({ open: true })}>
 								Gate Arrival
 							</Button>
 						</CardSection>
+						<Modal
+			        offset={this.state.offset}
+			        open={this.state.open}
+			        modalDidOpen={() => console.log('modal did open')}
+			        modalDidClose={() => this.setState({open: false})}
+			        style={{alignItems: 'center'}}>
+			        <View>
+			          <Text style={{fontSize: 20, marginBottom: 10}}>Are you at Gate #{this.props.destinationGate}?</Text>
+			          <CardSection>
+									<View style={Style.row}>
+										<Button onPress={ this.onGateSuccess.bind(this) }>
+											Yes
+										</Button>
+										<Button onPress={ this.onGateFail.bind(this) }>
+											No
+										</Button>
+									</View>
+								</CardSection>
+			        </View>
+			      </Modal>
 					</View>
 
 				);
@@ -266,10 +316,30 @@ class SelectStopsSterile extends Component {
 							/>
 						</View>
 						<CardSection>
-							<Button onPress={() => this.setState({ 'showModal': true })}>
+							<Button onPress={() => this.setState({ open: true })}>
 								Gate Arrival
 							</Button>
 						</CardSection>
+						<Modal
+			        offset={this.state.offset}
+			        open={this.state.open}
+			        modalDidOpen={() => console.log('modal did open')}
+			        modalDidClose={() => this.setState({open: false})}
+			        style={{alignItems: 'center'}}>
+			        <View>
+			          <Text style={{fontSize: 20, marginBottom: 10}}>Are you at Gate #{this.props.destinationGate}?</Text>
+			          <CardSection>
+									<View style={Style.row}>
+										<Button onPress={ this.onGateSuccess.bind(this) }>
+											Yes
+										</Button>
+										<Button onPress={ this.onGateFail.bind(this) }>
+											No
+										</Button>
+									</View>
+								</CardSection>
+			        </View>
+			      </Modal>
 					</View>
 
 					);
@@ -286,6 +356,39 @@ class SelectStopsSterile extends Component {
 			</View>
 		);
 	}
+
+	// render() {
+ //    return (
+ //    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      
+ //      <Modal
+ //        offset={this.state.offset}
+ //        open={this.state.open}
+ //        modalDidOpen={() => console.log('modal did open')}
+ //        modalDidClose={() => this.setState({open: false})}
+ //        style={{alignItems: 'center'}}>
+ //        <View>
+ //          <Text style={{fontSize: 20, marginBottom: 10}}>Are you at Gate #{this.props.destinationGate}?</Text>
+ //          <CardSection>
+	// 					<View style={Style.row}>
+	// 						<Button onPress={() => console.log('yes') }>
+	// 							Yes
+	// 						</Button>
+	// 						<Button onPress={() => console.log('no') }>
+	// 							No
+	// 						</Button>
+	// 					</View>
+	// 				</CardSection>
+	// 				<TouchableOpacity
+ //            style={{margin: 5}}
+ //            onPress={() => this.setState({open: false})}>
+ //            <Text>Close modal</Text>
+ //          </TouchableOpacity>
+ //        </View>
+ //      </Modal>
+ //    </View>
+ //    );
+ //  }
 
 
 }

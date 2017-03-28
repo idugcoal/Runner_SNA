@@ -32,11 +32,13 @@ class SelectStopsSterile extends Component {
 			case 'a':
 				return (
 					<View style={Style.content}>
-						<View style={Style.row}>
-							<Button onPress={() => this.setState({terminal: 'a'})}>Terminal A</Button>
-							<Button onPress={() => this.setState({terminal: 'b'})}>Terminal B</Button>
-							<Button onPress={() => this.setState({terminal: 'c'})}>Terminal C</Button>
-						</View>
+						<CardSection>
+							<View style={Style.row}>
+								<Button onPress={() => this.setState({terminal: 'a'})}>Terminal A</Button>
+								<Button onPress={() => this.setState({terminal: 'b'})}>Terminal B</Button>
+								<Button onPress={() => this.setState({terminal: 'c'})}>Terminal C</Button>
+							</View>
+						</CardSection>
 						<View style={Style.row}>
 							<ImageButton source={hudsonnews} />
 							<ImageButton source={hudsonnewsdiscoveroc} />
@@ -64,11 +66,13 @@ class SelectStopsSterile extends Component {
 			case 'b':
 				return (
 					<View style={Style.content}>
-					<View style={Style.row}>
-						<Button onPress={() => this.setState({terminal: 'a'})}>Terminal A</Button>
-						<Button onPress={() => this.setState({terminal: 'b'})}>Terminal B</Button>
-						<Button onPress={() => this.setState({terminal: 'c'})}>Terminal C</Button>
-					</View>
+					<CardSection>
+						<View style={Style.row}>
+							<Button onPress={() => this.setState({terminal: 'a'})}>Terminal A</Button>
+							<Button onPress={() => this.setState({terminal: 'b'})}>Terminal B</Button>
+							<Button onPress={() => this.setState({terminal: 'c'})}>Terminal C</Button>
+						</View>
+					</CardSection>
 						<View style={Style.row}>
 							<ImageButton source={brookstone} />
 							<ImageButton source={xpresspa} />
@@ -101,11 +105,13 @@ class SelectStopsSterile extends Component {
 			case 'c': 
 				return (
 					<View style={Style.content}>
+					<CardSection>
 						<View style={Style.row}>
 							<Button onPress={() => this.setState({terminal: 'a'})}>Terminal A</Button>
 							<Button onPress={() => this.setState({terminal: 'b'})}>Terminal B</Button>
 							<Button onPress={() => this.setState({terminal: 'c'})}>Terminal C</Button>
 						</View>
+					</CardSection>
 						<View style={Style.row}>
 							<ImageButton source={cnn} />
 							<ImageButton source={cnbc} />

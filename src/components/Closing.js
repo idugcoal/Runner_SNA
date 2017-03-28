@@ -20,7 +20,7 @@ class Closing extends Component {
 			<View style={Style.container}>
 				<View style={Style.content}>
 					<CardSection>
-						<Text> Run completed. Tap below to begin next task.</Text>
+						<Text>Run completed. Tap below to begin next task.</Text>
 					</CardSection>
 					<CardSection>
 						<Button onPress={() => Actions.main({ type: 'reset' }) }>

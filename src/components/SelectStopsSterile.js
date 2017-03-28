@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Modal } from 'react-native';
 import { connect } from 'react-redux'
-import { Button, CardSection, ImageButton } from './common';
+import { Button, CardSection, ImageButton, TerminalA, TerminalB, TerminalC } from './common';
 import Footer from './Footer';
 import Style from './Style';
 import { 
@@ -17,21 +17,50 @@ class SelectStopsSterile extends Component {
 		super(props);
 
 		this.state = {
-			terminal: 'a'
+			terminal: 'a',
+			showModal: false
 		}
 	}
 
-	onButtonPress() {
-		console.log('this.props in SelectStopsSterile:', this.props)
+	onButtonPress(stopLocation) {
+		console.log('this.props in SelectStopsSterile:', stopLocation);
 		
 	}
 
+	renderModal() {
+		if(this.state.showModal) {
+			return(
+				<Modal
+					animationType={'slide'}
+				>
+					<View style={Style.container}>
+				<View style={Style.content}>
+					<CardSection>
+						<Text> Are you at gate {this.props.destinationGate} ?	</Text>
+					</CardSection>
+					<CardSection>
+						<View style={Style.row}>
+							<Button onPress={() => this.setState({ showModal: false }) }>
+								Yes
+							</Button>
+							<Button onPress={() => this.setState({ gateChanged: 'yes' })}>
+								No
+							</Button>
+						</View>
+					</CardSection>
+		    </View>
+      </View>
+				</Modal>
+			);
+		}
+	};
+
 	renderButtons() {
-		console.log(this.state.terminal, 'yo')
 		switch(this.state.terminal) {
 			case 'a':
 				return (
 					<View style={Style.content}>
+						{this.renderModal()}
 						<CardSection>
 							<View style={Style.row}>
 								<Button onPress={() => this.setState({terminal: 'a'})}>Terminal A</Button>
@@ -40,34 +69,77 @@ class SelectStopsSterile extends Component {
 							</View>
 						</CardSection>
 						<View style={Style.row}>
-							<ImageButton source={hudsonnews} />
-							<ImageButton source={hudsonnewsdiscoveroc} />
-							<ImageButton source={ocmarket} />
-							<ImageButton source={ripcurl} />
+							<ImageButton 
+								source={hudsonnews} 
+								onPress={this.onButtonPress.bind(this, 'hudsonNews')}
+							/>
+							<ImageButton 
+								source={hudsonnewsdiscoveroc} 
+								onPress={this.onButtonPress.bind(this, 'hudsonNewsDiscoverOc')}
+							/>
+							<ImageButton 
+								source={ocmarket} 
+								onPress={this.onButtonPress.bind(this, 'ocMarket')}
+							/>
+							<ImageButton 
+								source={ripcurl} 
+								onPress={this.onButtonPress.bind(this, 'ripCurl')}
+							/>
 						</View>
 						<View style={Style.row}>
-							<ImageButton source={sunglasshut} />
-							<ImageButton source={cpk} />
-							<ImageButton source={mcdonalds} />
-							<ImageButton source={starbucks} />
+							<ImageButton 
+								source={sunglasshut} 
+								onPress={this.onButtonPress.bind(this, 'sunglassHut')}
+							/>
+							<ImageButton 
+								source={cpk} 
+								onPress={this.onButtonPress.bind(this, 'cpk')}
+							/>
+							<ImageButton 
+								source={mcdonalds} 
+								onPress={this.onButtonPress.bind(this, 'mcDonalds')}
+							/>
+							<ImageButton 
+								source={starbucks} 
+								onPress={this.onButtonPress.bind(this, 'starbucks')}
+							/>
 						</View>
 						<View style={Style.row}>
-							<ImageButton source={farmersmarket} />
-							<ImageButton source={rubys} />
-							<ImageButton source={rubystogo} />
-							<ImageButton source={americanairlinesadmiralsclub} />
+							<ImageButton 
+								source={farmersmarket} 
+								onPress={this.onButtonPress.bind(this, 'farmersMarket')}
+							/>
+							<ImageButton 
+								source={rubys} 
+								onPress={this.onButtonPress.bind(this, 'rubys')}
+							/>
+							<ImageButton 
+								source={rubystogo} 
+								onPress={this.onButtonPress.bind(this, 'rubysToGo')}
+							/>
+							<ImageButton 
+								source={americanairlinesadmiralsclub} 
+								onPress={this.onButtonPress.bind(this, 'americanAirlinesAdmiralsClub')}
+							/>
 						</View>
 						<View style={Style.row}>
-							<ImageButton source={phone} />
-							<ImageButton source={restroom} />
+							<ImageButton 
+								source={phone} 
+								onPress={this.onButtonPress.bind(this, 'phone')}
+							/>
+							<ImageButton 
+								source={restroom}
+								onPress={this.onButtonPress.bind(this, 'restroom')}
+							 />
 						</View>
 						<CardSection>
-						<Button onPress={() => Actions.gateArrival()}>
+						<Button onPress={() => this.setState({ 'showModal': true })}>
 							Gate Arrival
 						</Button>
 					</CardSection>
 				</View>
 				);
+
 			case 'b':
 				return (
 					<View style={Style.content}>
@@ -79,35 +151,89 @@ class SelectStopsSterile extends Component {
 						</View>
 					</CardSection>
 						<View style={Style.row}>
-							<ImageButton source={brookstone} />
-							<ImageButton source={xpresspa} />
-							<ImageButton source={southcoastnews} />
-							<ImageButton source={beachfrontnews} />
+							<ImageButton 
+								source={brookstone} 
+								onPress={this.onButtonPress.bind(this, 'brookstone')}
+							/>
+							<ImageButton 
+								source={xpresspa} 
+								onPress={this.onButtonPress.bind(this, 'xpresspa')}
+							/>
+							<ImageButton 
+								source={southcoastnews} 
+								onPress={this.onButtonPress.bind(this, 'southCoastNews')}
+							/>
+							<ImageButton 
+								source={beachfrontnews} 
+								onPress={this.onButtonPress.bind(this, 'beachFrontNews')}
+							/>
 						</View>
 						<View style={Style.row}>
-							<ImageButton source={inmotion} />
-							<ImageButton source={vinovolo} />
-							<ImageButton source={hobie} />
-							<ImageButton source={mcdonalds} />
+							<ImageButton 
+								source={inmotion} 
+								onPress={this.onButtonPress.bind(this, 'inMotion')}
+							/>
+							<ImageButton 
+								source={vinovolo} 
+								onPress={this.onButtonPress.bind(this, 'vinoVolo')}
+							/>
+							<ImageButton 
+								source={hobie} 
+								onPress={this.onButtonPress.bind(this, 'hobie')}
+							/>
+							<ImageButton 
+								source={mcdonalds} 
+								onPress={this.onButtonPress.bind(this, 'mcDonalds')}
+							/>
 						</View>
 						<View style={Style.row}>
-							<ImageButton source={starbucks} />
-							<ImageButton source={javis} />
-							<ImageButton source={jerrysdogs} />
-							<ImageButton source={pinkberry} />
+							<ImageButton 
+								source={starbucks} 
+								onPress={this.onButtonPress.bind(this, 'starbucks')}
+							/>
+							<ImageButton 
+								source={javis} 
+								onPress={this.onButtonPress.bind(this, 'javis')}
+							/>
+							<ImageButton 
+								source={jerrysdogs} 
+								onPress={this.onButtonPress.bind(this, 'jerrysDogs')}
+							/>
+							<ImageButton 
+								source={pinkberry} 
+								onPress={this.onButtonPress.bind(this, 'pinkberry')}
+							/>
 						</View>
 						<View style={Style.row}>
-							<ImageButton source={peiwei} />
-							<ImageButton source={subway} />
-							<ImageButton source={unitedairlinesunitedclub} />
-							<ImageButton source={zovs} />
+							<ImageButton 
+								source={peiwei} 
+								onPress={this.onButtonPress.bind(this, 'peiWei')}
+							/>
+							<ImageButton 
+								source={subway} 
+								onPress={this.onButtonPress.bind(this, 'subway')}
+							/>
+							<ImageButton 
+								source={unitedairlinesunitedclub} 
+								onPress={this.onButtonPress.bind(this, 'unitedAirlinesUnitedClub')}
+							/>
+							<ImageButton 
+								source={zovs} 
+								onPress={this.onButtonPress.bind(this, 'zovs')}
+							/>
 						</View>
 						<View style={Style.row}>
-							<ImageButton source={phone} />
-							<ImageButton source={restroom} />
+							<ImageButton 
+								source={phone} 
+								onPress={this.onButtonPress.bind(this, 'phone')}
+							/>
+							<ImageButton 
+								source={restroom} 
+								onPress={this.onButtonPress.bind(this, 'restroom')}
+							/>
 						</View>
 						<CardSection>
-							<Button onPress={() => Actions.gateArrival()}>
+							<Button onPress={() => this.setState({ 'showModal': true })}>
 								Gate Arrival
 							</Button>
 						</CardSection>
@@ -125,22 +251,49 @@ class SelectStopsSterile extends Component {
 						</View>
 					</CardSection>
 						<View style={Style.row}>
-							<ImageButton source={cnn} />
-							<ImageButton source={cnbc} />
-							<ImageButton source={belgiumbeerbar} />
-							<ImageButton source={carlsjr} />
+							<ImageButton 
+								source={cnn} 
+								onPress={this.onButtonPress.bind(this, 'cnn')}
+							/>
+							<ImageButton 
+								source={cnbc} 
+								onPress={this.onButtonPress.bind(this, 'cnbc')}
+							/>
+							<ImageButton 
+								source={belgiumbeerbar} 
+								onPress={this.onButtonPress.bind(this, 'belgiumBeerBar')}
+							/>
+							<ImageButton 
+								source={carlsjr} 
+								onPress={this.onButtonPress.bind(this, 'carlsJr')}
+							/>
 						</View>
 						<View style={Style.row}>
-							<ImageButton source={starbucks} />
-							<ImageButton source={ciao} />
-							<ImageButton source={ducks} />
+							<ImageButton 
+								source={starbucks} 
+								onPress={this.onButtonPress.bind(this, 'starbucks')}
+							/>
+							<ImageButton 
+								source={ciao} 
+								onPress={this.onButtonPress.bind(this, 'ciao')}
+							/>
+							<ImageButton 
+								source={ducks} 
+								onPress={this.onButtonPress.bind(this, 'ducks')}
+							/>
 						</View>
 						<View style={Style.row}>
-							<ImageButton source={phone} />
-							<ImageButton source={restroom} />
+							<ImageButton 
+								source={phone} 
+								onPress={this.onButtonPress.bind(this, 'phone')}
+							/>
+							<ImageButton 
+								source={restroom} 
+								onPress={this.onButtonPress.bind(this, 'restroom')}
+							/>
 						</View>
 						<CardSection>
-							<Button onPress={() => Actions.gateArrival()}>
+							<Button onPress={() => this.setState({ 'showModal': true })}>
 								Gate Arrival
 							</Button>
 						</CardSection>
@@ -165,9 +318,9 @@ class SelectStopsSterile extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { wheelchairNumber, flightNumber, airline, firstName, lastName } = departure;
+  const { wheelchairNumber, flightNumber, airline, firstName, lastName, destinationGate } = departure;
 
-  return { wheelchairNumber, flightNumber, airline, firstName, lastName };
+  return { wheelchairNumber, flightNumber, airline, firstName, lastName, destinationGate };
 };
 
 export default connect(mapStateToProps, { })(SelectStopsSterile);

@@ -33,6 +33,7 @@ const INITIAL_STATE = {
   },
   timeTSAStart: '',
   timeTSAEnd: '',
+  numStops: 0,
   stops: {},
   timeEnd: '',
   commentsTSA: '',

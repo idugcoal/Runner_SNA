@@ -5,3 +5,6 @@ export * from './Header';
 export * from './Input';
 export * from './Spinner';
 export * from './ImageButton';
+export * from './TerminalA';
+export * from './TerminalB';
+export * from './TerminalC';

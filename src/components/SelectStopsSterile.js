@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
-import Modal from 'react-native-simple-modal';
+import Modal from 'react-native-simple-modal'
 import { Button, CardSection, ImageButton, TerminalA, TerminalB, TerminalC } from './common';
 import Footer from './Footer';
 import Style from './Style';
-import GateArrivalModal from './GateArrivalModal';
 import { 
 	hudsonnews, hudsonnewsdiscoveroc, ocmarket, ripcurl, sunglasshut, cpk, mcdonalds, starbucks, farmersmarket, rubys, rubystogo, americanairlinesadmiralsclub,
 	brookstone, xpresspa, southcoastnews, beachfrontnews, inmotion, vinovolo, hobie, javis, jerrysdogs, pinkberry, peiwei, unitedairlinesunitedclub, subway, zovs,
@@ -38,6 +37,7 @@ class SelectStopsSterile extends Component {
 		this.setState({open: false})
 		Actions.selectGate();
 	}
+
 
 	renderButtons() {
 		switch(this.state.terminal) {
@@ -120,7 +120,7 @@ class SelectStopsSterile extends Component {
 							Gate Arrival
 						</Button>
 					</CardSection>
-						<Modal
+					<Modal
 			        offset={this.state.offset}
 			        open={this.state.open}
 			        modalDidOpen={() => console.log('modal did open')}
@@ -356,39 +356,6 @@ class SelectStopsSterile extends Component {
 			</View>
 		);
 	}
-
-	// render() {
- //    return (
- //    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      
- //      <Modal
- //        offset={this.state.offset}
- //        open={this.state.open}
- //        modalDidOpen={() => console.log('modal did open')}
- //        modalDidClose={() => this.setState({open: false})}
- //        style={{alignItems: 'center'}}>
- //        <View>
- //          <Text style={{fontSize: 20, marginBottom: 10}}>Are you at Gate #{this.props.destinationGate}?</Text>
- //          <CardSection>
-	// 					<View style={Style.row}>
-	// 						<Button onPress={() => console.log('yes') }>
-	// 							Yes
-	// 						</Button>
-	// 						<Button onPress={() => console.log('no') }>
-	// 							No
-	// 						</Button>
-	// 					</View>
-	// 				</CardSection>
-	// 				<TouchableOpacity
- //            style={{margin: 5}}
- //            onPress={() => this.setState({open: false})}>
- //            <Text>Close modal</Text>
- //          </TouchableOpacity>
- //        </View>
- //      </Modal>
- //    </View>
- //    );
- //  }
 
 
 }

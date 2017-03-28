@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { connect } from 'react-redux';
-import { setFinalGateNumber } from '../actions';
+import {  } from '../actions';
 import { Button, CardSection, ImageButton, NumberButton } from './common';
 import Footer from './Footer';
 import Style from './Style';
 import { Actions } from 'react-native-router-flux';
 
 
-class GateArrival extends Component {
+class Closing extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {
-			gateChanged: '',
-			showButtons: ''
-		}
+	
 	}
 
 	render() {
@@ -23,21 +20,16 @@ class GateArrival extends Component {
 			<View style={Style.container}>
 				<View style={Style.content}>
 					<CardSection>
-						<Text> Are you at gate {this.props.destinationGate} ?	</Text>
+						<Text> Run completed. Tap below to begin next task.</Text>
 					</CardSection>
 					<CardSection>
-						<View style={Style.row}>
-							<Button onPress={() => Actions.closing() }>
-								Yes
-							</Button>
-							<Button onPress={() => this.setState({ gateChanged: 'yes' })}>
-								No
-							</Button>
-						</View>
+						<Button onPress={() => Actions.main({ type: 'reset' }) }>
+							New Task
+						</Button>
 					</CardSection>
-		    </View>
-		    <Footer />
-      </View>
+				</View>
+		   	<Footer />
+		   </View>
 		);
 	}
 }
@@ -49,5 +41,5 @@ const mapStateToProps = ({ departure }) => {
 };
 
 export default connect(mapStateToProps, {
-	setFinalGateNumber
-})(GateArrival);
+	
+})(Closing);

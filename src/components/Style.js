@@ -5,6 +5,7 @@ const Style = {
   footer: {
     flex: 2,
     backgroundColor: '#fff',
+    borderTopWidth: 1
   },
   container: {
     flex: 1,

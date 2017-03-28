@@ -5,8 +5,8 @@ import { Button, CardSection, ImageButton } from './common';
 import Footer from './Footer';
 import Style from './Style';
 import { 
-	hudsonnews, hudsonnewsdiscoveroc, ocmarket, ripcurl, sunglasshut, cpk, mcdonalds, starbucks, farmersmarket, rubys, rubystogo,
-	brookstone, xpresspa, southcoastnews, beachfrontnews, inmotion, vinovolo, hobie, javis, jerrysdogs, pinkberry, peiwei, subway, zovs,
+	hudsonnews, hudsonnewsdiscoveroc, ocmarket, ripcurl, sunglasshut, cpk, mcdonalds, starbucks, farmersmarket, rubys, rubystogo, americanairlinesadmiralsclub,
+	brookstone, xpresspa, southcoastnews, beachfrontnews, inmotion, vinovolo, hobie, javis, jerrysdogs, pinkberry, peiwei, unitedairlinesunitedclub, subway, zovs,
 	cnn, cnbc, belgiumbeerbar, carlsjr, ciao, ducks, restroom, phone
  } from '../../assets';
 import { Actions } from 'react-native-router-flux';
@@ -55,6 +55,11 @@ class SelectStopsSterile extends Component {
 							<ImageButton source={farmersmarket} />
 							<ImageButton source={rubys} />
 							<ImageButton source={rubystogo} />
+							<ImageButton source={americanairlinesadmiralsclub} />
+						</View>
+						<View style={Style.row}>
+							<ImageButton source={phone} />
+							<ImageButton source={restroom} />
 						</View>
 						<CardSection>
 						<Button onPress={() => Actions.gateArrival()}>
@@ -78,21 +83,28 @@ class SelectStopsSterile extends Component {
 							<ImageButton source={xpresspa} />
 							<ImageButton source={southcoastnews} />
 							<ImageButton source={beachfrontnews} />
-							<ImageButton source={inmotion} />
 						</View>
 						<View style={Style.row}>
+							<ImageButton source={inmotion} />
 							<ImageButton source={vinovolo} />
 							<ImageButton source={hobie} />
 							<ImageButton source={mcdonalds} />
-							<ImageButton source={starbucks} />
-							<ImageButton source={javis} />
 						</View>
 						<View style={Style.row}>
+							<ImageButton source={starbucks} />
+							<ImageButton source={javis} />
 							<ImageButton source={jerrysdogs} />
 							<ImageButton source={pinkberry} />
+						</View>
+						<View style={Style.row}>
 							<ImageButton source={peiwei} />
 							<ImageButton source={subway} />
+							<ImageButton source={unitedairlinesunitedclub} />
 							<ImageButton source={zovs} />
+						</View>
+						<View style={Style.row}>
+							<ImageButton source={phone} />
+							<ImageButton source={restroom} />
 						</View>
 						<CardSection>
 							<Button onPress={() => Actions.gateArrival()}>
@@ -122,6 +134,10 @@ class SelectStopsSterile extends Component {
 							<ImageButton source={starbucks} />
 							<ImageButton source={ciao} />
 							<ImageButton source={ducks} />
+						</View>
+						<View style={Style.row}>
+							<ImageButton source={phone} />
+							<ImageButton source={restroom} />
 						</View>
 						<CardSection>
 							<Button onPress={() => Actions.gateArrival()}>

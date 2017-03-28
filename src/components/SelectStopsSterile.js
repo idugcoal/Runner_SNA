@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Button, CardSection, ImageButton, TerminalA, TerminalB, TerminalC } from './common';
 import Footer from './Footer';
 import Style from './Style';
+import GateArrivalModal from './GateArrivalModal';
 import { 
 	hudsonnews, hudsonnewsdiscoveroc, ocmarket, ripcurl, sunglasshut, cpk, mcdonalds, starbucks, farmersmarket, rubys, rubystogo, americanairlinesadmiralsclub,
 	brookstone, xpresspa, southcoastnews, beachfrontnews, inmotion, vinovolo, hobie, javis, jerrysdogs, pinkberry, peiwei, unitedairlinesunitedclub, subway, zovs,
@@ -27,40 +28,12 @@ class SelectStopsSterile extends Component {
 		
 	}
 
-	renderModal() {
-		if(this.state.showModal) {
-			return(
-				<Modal
-					animationType={'slide'}
-				>
-					<View style={Style.container}>
-				<View style={Style.content}>
-					<CardSection>
-						<Text> Are you at gate {this.props.destinationGate} ?	</Text>
-					</CardSection>
-					<CardSection>
-						<View style={Style.row}>
-							<Button onPress={() => this.setState({ showModal: false }) }>
-								Yes
-							</Button>
-							<Button onPress={() => this.setState({ gateChanged: 'yes' })}>
-								No
-							</Button>
-						</View>
-					</CardSection>
-		    </View>
-      </View>
-				</Modal>
-			);
-		}
-	};
 
 	renderButtons() {
 		switch(this.state.terminal) {
 			case 'a':
 				return (
 					<View style={Style.content}>
-						{this.renderModal()}
 						<CardSection>
 							<View style={Style.row}>
 								<Button onPress={() => this.setState({terminal: 'a'})}>Terminal A</Button>

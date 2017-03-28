@@ -12,6 +12,7 @@ SELECT_STOP,
 // TSA_START,
 TSA_END,
 SET_FINAL_GATE_NUMBER,
+ADD_STOP
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -62,6 +63,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, error: 'Login Failed. Please Try Again.', password: '', loading: false };
     case TSA_END:
       return { ...state, commentsTSA: action.payload };
+    case ADD_STOP:
+      return { ...state, stops: action.payload };
     default:
       return state;
   }

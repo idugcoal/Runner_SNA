@@ -10,7 +10,8 @@ import {
 	FLIGHT_NUMBER_CHANGED,
 	SELECT_GATE_NUMBER,
 	TSA_END,
-	SET_FINAL_GATE_NUMBER
+	SET_FINAL_GATE_NUMBER,
+	ADD_STOP
 } from './types';
 
 export const selectWheelchair = ({ wheelchairNumber }) => {
@@ -94,6 +95,15 @@ export const setFinalGateNumber = (text) => {
 	return(dispatch) => {
 		dispatch({
 			type:SET_FINAL_GATE_NUMBER,
+			payload: text
+		})
+	}
+}
+
+export const addStop = (text) => {
+	return(dispatch) => {
+		dispatch({
+			type: ADD_STOP,
 			payload: text
 		})
 	}

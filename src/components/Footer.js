@@ -10,6 +10,8 @@ class Footer extends Component {
 	}
 
 	render() {
+
+    // console.log('in footer', this.props.currentGPS.coords)
 		return(
 			<View style={Style.footer}>
         	<Text>Wheelchair #: {this.props.wheelchairNumber}</Text>
@@ -17,7 +19,7 @@ class Footer extends Component {
         	<Text>Airline: {this.props.airline}</Text>
         	<Text>Flight #: {this.props.flightNumber}</Text>
         	<Text>Destination Gate #: {this.props.destinationGate}</Text>
-        	<Text>Current GPS: {this.props.currentGPS.timestamp}</Text>
+        	<Text>Current GPS: {this.props.currentGPS.coords.latitude + ' ' + this.props.currentGPS.coords.longitude}</Text>
        </View>
 		);
 	}

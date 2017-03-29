@@ -94,6 +94,9 @@ export const addCommentsTSA = (text) => {
 };
 
 export const setFinalGateNumber = (text) => {
+	
+	Actions.closing();
+
 	return(dispatch) => {
 		dispatch({
 			type:SET_FINAL_GATE_NUMBER,
@@ -131,7 +134,7 @@ export const addStop = (text) => {
 
 export const updateCurrentPosition = (position) => {
 	
-	console.log('in action creator', position);
+	// console.log('in action creator', position);
 	
 	return(dispatch) => {
 			dispatch({

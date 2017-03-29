@@ -8,9 +8,9 @@ import { Card, CardSection, Button } from './common';
 class Main extends Component {
 	
 	onDeparture() {
-    // navigator.geolocation.getCurrentPosition((position) => {
-    // 	this.props.updateCurrentPosition(position);
-    // });
+    navigator.geolocation.getCurrentPosition((position) => {
+    	this.props.updateCurrentPosition(position);
+    });
 
     navigator.geolocation.watchPosition((position) => {
     	// alert(position.coords.latitude)

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { selectGateNumber } from '../actions';
+import { selectGateNumber, setFinalGateNumber } from '../actions';
 import NumberButton from './common/NumberButton';
 import Footer from './Footer';
 import Style from './Style';
@@ -17,11 +17,20 @@ class SelectGate extends Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      final: this.props.final
+    }
   }
 
   onButtonPress(gateNumber) {
+    console.log(this.state.final);
     const { destinationGate } = this.props;
-    this.props.selectGateNumber(gateNumber)
+    if(this.state.final) {
+      this.props.setFinalGateNumber(gateNumber);
+    } else {
+      this.props.selectGateNumber(gateNumber);
+    }
   }
 
   renderButtons() {
@@ -56,10 +65,9 @@ class SelectGate extends Component {
 const mapStateToProps = ({ departure }) => {
   const { destinationGate } = departure;
 
-
   return { destinationGate };
 };
 
 export default connect(mapStateToProps, {
-  selectGateNumber
+  selectGateNumber, setFinalGateNumber
 })(SelectGate);

@@ -26,12 +26,17 @@ const INITIAL_STATE = {
   finalGate: '',
   employeeLogin: '',
   deviceID: '',
-  currentGPS: {},
+  currentGPS: {
+    coords: {},
+    timestamp: '',
+    mocked: ''
+  },
   timeStart: '',
   locationFirstContactButton: '',
   locationFirstContactGPS: {
-    latitude: '',
-    longitude: ''
+    coords: {},
+    timestamp: '',
+    mocked: ''
   },
   timeTSAStart: '',
   timeTSAEnd: '',

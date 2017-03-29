@@ -35,7 +35,7 @@ class SelectStopsSterile extends Component {
 
 	onGateFail() {
 		this.setState({open: false})
-		Actions.selectGate();
+		Actions.selectGate({final: true});
 	}
 
 	renderButtons() {

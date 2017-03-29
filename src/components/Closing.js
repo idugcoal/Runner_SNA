@@ -28,7 +28,6 @@ class Closing extends Component {
 						</Button>
 					</CardSection>
 				</View>
-		   	<Footer />
 		   </View>
 		);
 	}

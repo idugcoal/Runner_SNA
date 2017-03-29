@@ -9,7 +9,7 @@ FLIGHT_NUMBER_CHANGED,
 SELECT_GATE_NUMBER,
 ADD_STARTING_POINT,
 SELECT_STOP,
-// TSA_START,
+TSA_START,
 TSA_END,
 SET_FINAL_GATE_NUMBER,
 ADD_STOP, 
@@ -27,16 +27,18 @@ const INITIAL_STATE = {
   employeeLogin: '',
   deviceID: '',
   currentGPS: {
-    coords: {},
-    timestamp: '',
-    mocked: ''
+    latitude: '',
+    longitude: '',
+    timestamp: ''
   },
   timeStart: '',
-  locationFirstContactButton: '',
-  locationFirstContactGPS: {
-    coords: {},
-    timestamp: '',
-    mocked: ''
+  locationFirstContact: {
+    buttonValue: '',
+    gps: {
+      latitude: '',
+      longitude: '',
+      timestamp: ''
+    } 
   },
   timeTSAStart: '',
   timeTSAEnd: '',
@@ -66,11 +68,13 @@ export default (state = INITIAL_STATE, action) => {
     case SELECT_GATE_NUMBER:
     	return { ...state, destinationGate: action.payload }
     case ADD_STARTING_POINT:
-    	return { ...state, locationFirstContactButton: action.payload.locationFirstContactButton, locationFirstContactGPS: action.payload.locationFirstContactGPS, timeStart: action.payload.timeStart };
+    	return { ...state, locationFirstContact: action.payload };
     case SELECT_STOP:
       return { ...state, error: 'Login Failed. Please Try Again.', password: '', loading: false };
+    case TSA_START:
+      return { ...state, timeTSAStart: action.payload };
     case TSA_END:
-      return { ...state, commentsTSA: action.payload };
+      return { ...state, commentsTSA: action.payload.commentsTSA, timeTSAEnd: action.payload.timeTSAEnd };
     case ADD_STOP:
       return { ...state, stops: action.payload };
     case UPDATE_CURRENT_POSITION:

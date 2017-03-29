@@ -12,7 +12,6 @@ class Closing extends Component {
 
 	constructor(props) {
 		super(props);
-	
 	}
 
 	render() {

@@ -30,7 +30,7 @@ class SelectStopsSterile extends Component {
 
 	onGateSuccess() {
 		this.setState({open: false})
-		Actions.closing();
+		Actions.closing({reset: true});
 	}
 
 	onGateFail() {

@@ -10,6 +10,7 @@ import {
 	FLIGHT_NUMBER_CHANGED,
 	ADD_STARTING_POINT,
 	SELECT_GATE_NUMBER,
+	TSA_START,
 	TSA_END,
 	SET_FINAL_GATE_NUMBER,
 	ADD_STOP,
@@ -19,7 +20,6 @@ import {
 export const selectWheelchair = ({ wheelchairNumber }) => {
   
   Actions.scanBoardingPass();
-
   return(dispatch) => {
   	dispatch({
 	    type: SELECT_WHEELCHAIR,
@@ -31,7 +31,6 @@ export const selectWheelchair = ({ wheelchairNumber }) => {
 export const scanBoardingPass = ({ firstName, lastName, airline, flightNumber }) => {
 
 	Actions.selectGate({ type: 'reset' });
-
 	return(dispatch) => {
 		dispatch({
 			type: SCAN_BOARDING_PASS,
@@ -72,7 +71,6 @@ export const flightNumberChanged = (text) => {
 export const selectGateNumber = (text) => {
 	
 	Actions.selectStartingPoint();
-	
 	return(dispatch) => {
 		dispatch({
 			type: SELECT_GATE_NUMBER,
@@ -81,8 +79,30 @@ export const selectGateNumber = (text) => {
 	};
 };
 
+export const startTSA = () => {
+
+	const timeTSAStart = Date.now();
+	Actions.tsa();
+
+	return(dispatch) => {
+		dispatch({
+			type: TSA_START,
+			payload: timeTSAStart
+		})
+	}
+
+}
+
 export const addCommentsTSA = (text) => {
 	
+	const timeTSAEnd = Date.now();
+	const commentsTSA = text;
+
+	payload = {
+		timeTSAEnd: timeTSAEnd,
+		commentsTSA: commentsTSA
+	}
+
 	Actions.selectStopsSterile({ type: 'reset' });
 
 	return(dispatch) => {
@@ -95,8 +115,7 @@ export const addCommentsTSA = (text) => {
 
 export const setFinalGateNumber = (text) => {
 	
-	Actions.closing();
-
+	Actions.closing({reset: true});
 	return(dispatch) => {
 		dispatch({
 			type:SET_FINAL_GATE_NUMBER,
@@ -105,16 +124,22 @@ export const setFinalGateNumber = (text) => {
 	}
 }
 
-export const addStartingPoint = (buttonLocation, { coords, timestamp }) => {
+export const addStartingPoint = (buttonLocation, position) => {
+	
+	const { coords, timestamp } = position;
 	const { latitude, longitude } = coords;
+	const gps = {
+		latitude: latitude,
+		longitude: longitude,
+		timestamp: timestamp,
+	}
+
 	const payload = {
-		locationFirstContactButton: buttonLocation,
-		timeStart: timestamp,
-		locationFirstContactGPS: {
-			latitude: latitude,
-			longitude: longitude
-		}
-	};
+		gps: gps,
+		buttonValue: buttonLocation
+	}
+
+	Actions.selectStopsNonSterile();
 	return(dispatch) => {
 		dispatch({ 
 			type: ADD_STARTING_POINT,
@@ -134,12 +159,20 @@ export const addStop = (text) => {
 
 export const updateCurrentPosition = (position) => {
 	
-	// console.log('in action creator', position);
-	
+	const { coords, timestamp } = position;
+	const { latitude, longitude } = coords;
+	const payload = {
+		latitude: latitude,
+		longitude: longitude,
+		timestamp: timestamp
+	}
+
+	console.log('in action creator', payload);
+
 	return(dispatch) => {
 			dispatch({
 				type: UPDATE_CURRENT_POSITION,
-				payload: position
+				payload: payload
 			})
 		}
 }

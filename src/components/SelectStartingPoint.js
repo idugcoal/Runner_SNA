@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
 import { Button } from './common';
-import { Actions } from 'react-native-router-flux'
 import { addStartingPoint } from '../actions';
 import Footer from './Footer';
-
 import Style from './Style';
 
 class SelectStartingPoint extends Component {
@@ -14,11 +13,9 @@ class SelectStartingPoint extends Component {
 	}
 
 	onButtonPress(startLocation) {
-
-		const locationFirstContactButton = startLocation;
-		const locationFirstContactGPS = navigator.geolocation.getCurrentPosition((position) => console.log(position));
-
-		Actions.selectStopsNonSterile();
+		const locationFirstContactGPS = navigator.geolocation.getCurrentPosition((position) => {
+			this.props.addStartingPoint(startLocation, position);
+		});
 	}
 
 	render() {
@@ -48,8 +45,14 @@ class SelectStartingPoint extends Component {
 			</View>
 		);
 	}
-
-
 }
 
-export default SelectStartingPoint;
+const mapStateToProps = ({ departure }) => {
+  const { wheelchairNumber } = departure;
+
+  return { wheelchairNumber };
+};
+
+export default connect(mapStateToProps, { 
+	addStartingPoint
+})(SelectStartingPoint);

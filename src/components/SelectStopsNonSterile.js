@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import { connect } from 'react-redux'
-import { addStop } from '../actions';
+import { addStop, startTSA } from '../actions';
 import { Button, CardSection, ImageButton } from './common';
 import Footer from './Footer';
 import Style from './Style';
 import { cnbc, cnn, latapenade, octravelmart, starbucks, zovs, phone, restroom } from '../../assets';
-import { Actions } from 'react-native-router-flux';
-
 
 class SelectStopsNonSterile extends Component {
 
@@ -71,7 +69,7 @@ class SelectStopsNonSterile extends Component {
 						
 					</View>
 					<CardSection>
-						<Button onPress={() => Actions.tsa()}>
+						<Button onPress={() => this.props.startTSA()}>
 							TSA Start
 						</Button>
 					</CardSection>
@@ -91,5 +89,5 @@ const mapStateToProps = ({ departure }) => {
 };
 
 export default connect(mapStateToProps, { 
-	addStop
+	addStop, startTSA
 })(SelectStopsNonSterile);

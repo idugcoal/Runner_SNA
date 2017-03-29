@@ -5,7 +5,6 @@ import { selectGateNumber, setFinalGateNumber } from '../actions';
 import NumberButton from './common/NumberButton';
 import Footer from './Footer';
 import Style from './Style';
-import { Actions } from 'react-native-router-flux';
 
 const gates = [
   [1, 2, 3, 4, 5],
@@ -29,6 +28,7 @@ class SelectGate extends Component {
     if(this.state.final) {
       this.props.setFinalGateNumber(gateNumber);
     } else {
+      console.log('here', gateNumber)
       this.props.selectGateNumber(gateNumber);
     }
   }

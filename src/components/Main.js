@@ -27,7 +27,6 @@ class Main extends Component {
   onCheckIn() {
   	Actions.checkIn();
   }
-	
 
 	render() {
 		return (

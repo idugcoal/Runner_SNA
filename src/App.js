@@ -17,7 +17,11 @@ class App extends Component {
 
 	render() {
 		
-		const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));		
+		const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+		// const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));		
+		const store = createStore(reducers, {}, composeEnhancers(applyMiddleware(ReduxThunk)));
+
 		return (
 			<Provider store={store}>
 				<Router />

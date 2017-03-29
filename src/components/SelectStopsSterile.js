@@ -38,7 +38,6 @@ class SelectStopsSterile extends Component {
 		Actions.selectGate();
 	}
 
-
 	renderButtons() {
 		switch(this.state.terminal) {
 			case 'a':
@@ -356,8 +355,6 @@ class SelectStopsSterile extends Component {
 			</View>
 		);
 	}
-
-
 }
 
 const mapStateToProps = ({ departure }) => {

@@ -7,12 +7,13 @@ LAST_NAME_CHANGED,
 AIRLINE_CHANGED,
 FLIGHT_NUMBER_CHANGED,
 SELECT_GATE_NUMBER,
-SELECT_STARTING_POINT,
+ADD_STARTING_POINT,
 SELECT_STOP,
 // TSA_START,
 TSA_END,
 SET_FINAL_GATE_NUMBER,
-ADD_STOP
+ADD_STOP, 
+UPDATE_CURRENT_POSITION
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -25,6 +26,7 @@ const INITIAL_STATE = {
   finalGate: '',
   employeeLogin: '',
   deviceID: '',
+  currentGPS: {},
   timeStart: '',
   locationFirstContactButton: '',
   locationFirstContactGPS: {
@@ -58,7 +60,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, flightNumber: action.payload };
     case SELECT_GATE_NUMBER:
     	return { ...state, destinationGate: action.payload }
-    case SELECT_STARTING_POINT:
+    case ADD_STARTING_POINT:
     	return { ...state, locationFirstContactButton: action.payload.locationFirstContactButton, locationFirstContactGPS: action.payload.locationFirstContactGPS, timeStart: action.payload.timeStart };
     case SELECT_STOP:
       return { ...state, error: 'Login Failed. Please Try Again.', password: '', loading: false };
@@ -66,6 +68,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, commentsTSA: action.payload };
     case ADD_STOP:
       return { ...state, stops: action.payload };
+    case UPDATE_CURRENT_POSITION:
+      return { ...state, currentGPS: action.payload }
     default:
       return state;
   }

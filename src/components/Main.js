@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import { updateCurrentPosition } from '../actions';
 import { Card, CardSection, Button } from './common';
 
 class Main extends Component {
 	
 	onDeparture() {
     // Actions.main();
+    const position = navigator.geolocation.getCurrentPosition((position) => {
+    	this.props.updateCurrentPosition(position);
+    });
+
     Actions.selectWheelchair({runType: 'departure'});
   }
 
@@ -39,4 +44,14 @@ class Main extends Component {
 	}
 }
 
-export default Main;
+// export default Main;
+
+const mapStateToProps = ({ departure }) => {
+  const { currentGPS } = departure;
+
+  return { currentGPS };
+};
+
+export default connect(mapStateToProps, { 
+	updateCurrentPosition
+})(Main);

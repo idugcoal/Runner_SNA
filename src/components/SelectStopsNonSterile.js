@@ -17,6 +17,7 @@ class SelectStopsNonSterile extends Component {
 
 	onButtonPress(stopLocation) {
 		console.log('e in SelectStopsNonSterile:', stopLocation)
+		// this.props.addStop(stopLocation);
 	}
 
 	render() {

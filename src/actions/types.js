@@ -14,11 +14,13 @@ export const LAST_NAME_CHANGED = 'last_name_changed';
 export const AIRLINE_CHANGED = 'airline_changed';
 export const FLIGHT_NUMBER_CHANGED = 'flight_number_changed';
 export const SELECT_GATE_NUMBER = 'select_gate_number';
-export const SELECT_STARTING_POINT = 'select_starting_point';
+// export const SELECT_STARTING_POINT = 'select_starting_point';
 export const SELECT_STOP = 'select_stop';
 // export const TSA_START = 'tsa_start';
 export const TSA_END = 'tsa_end';
 export const SET_FINAL_GATE_NUMBER='set_final_gate_number';
 export const ADD_STOP = 'add_stop';
+export const ADD_STARTING_POINT = 'add_starting_point';
+export const UPDATE_CURRENT_POSITION = "update_current_position";
 
 

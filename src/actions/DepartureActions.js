@@ -8,10 +8,12 @@ import {
 	LAST_NAME_CHANGED,
 	AIRLINE_CHANGED,
 	FLIGHT_NUMBER_CHANGED,
+	ADD_STARTING_POINT,
 	SELECT_GATE_NUMBER,
 	TSA_END,
 	SET_FINAL_GATE_NUMBER,
-	ADD_STOP
+	ADD_STOP,
+	UPDATE_CURRENT_POSITION
 } from './types';
 
 export const selectWheelchair = ({ wheelchairNumber }) => {
@@ -100,6 +102,24 @@ export const setFinalGateNumber = (text) => {
 	}
 }
 
+export const addStartingPoint = (buttonLocation, { coords, timestamp }) => {
+	const { latitude, longitude } = coords;
+	const payload = {
+		locationFirstContactButton: buttonLocation,
+		timeStart: timestamp,
+		locationFirstContactGPS: {
+			latitude: latitude,
+			longitude: longitude
+		}
+	};
+	return(dispatch) => {
+		dispatch({ 
+			type: ADD_STARTING_POINT,
+			payload: payload
+		});
+	}
+}
+
 export const addStop = (text) => {
 	return(dispatch) => {
 		dispatch({
@@ -107,4 +127,14 @@ export const addStop = (text) => {
 			payload: text
 		})
 	}
+}
+
+export const updateCurrentPosition = ({ coords }) => {
+	return(dispatch) => {
+		dispatch({
+			type: UPDATE_CURRENT_POSITION,
+			payload: coords
+		})
+	}
+ 
 }

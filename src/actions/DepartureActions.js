@@ -129,12 +129,13 @@ export const addStop = (text) => {
 	}
 }
 
-export const updateCurrentPosition = ({ coords }) => {
+export const updateCurrentPosition = (position) => {
+	console.log('in action creator', position);
 	return(dispatch) => {
-		dispatch({
-			type: UPDATE_CURRENT_POSITION,
-			payload: coords
-		})
-	}
- 
+			dispatch({
+				type: UPDATE_CURRENT_POSITION,
+				payload: position
+			})
+		}
 }
+ 

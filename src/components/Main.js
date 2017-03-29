@@ -9,7 +9,7 @@ class Main extends Component {
 	
 	onDeparture() {
     // Actions.main();
-    const position = navigator.geolocation.getCurrentPosition((position) => {
+    navigator.geolocation.getCurrentPosition((position) => {
     	this.props.updateCurrentPosition(position);
     });
 

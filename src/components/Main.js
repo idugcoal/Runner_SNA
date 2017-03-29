@@ -8,8 +8,12 @@ import { Card, CardSection, Button } from './common';
 class Main extends Component {
 	
 	onDeparture() {
-    // Actions.main();
-    navigator.geolocation.getCurrentPosition((position) => {
+    // navigator.geolocation.getCurrentPosition((position) => {
+    // 	this.props.updateCurrentPosition(position);
+    // });
+
+    navigator.geolocation.watchPosition((position) => {
+    	// alert(position.coords.latitude)
     	this.props.updateCurrentPosition(position);
     });
 
@@ -17,7 +21,6 @@ class Main extends Component {
   }
 
   onArrival() {
-  	// Actions.main();
   	Actions.arrival({runType: 'arrival'});
   }
 
@@ -43,8 +46,6 @@ class Main extends Component {
 		);
 	}
 }
-
-// export default Main;
 
 const mapStateToProps = ({ departure }) => {
   const { currentGPS } = departure;

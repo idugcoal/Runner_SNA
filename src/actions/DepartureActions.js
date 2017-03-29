@@ -131,7 +131,7 @@ export const addStop = (text) => {
 
 export const updateCurrentPosition = (position) => {
 	
-	// console.log('in action creator', position);
+	console.log('in action creator', position);
 	
 	return(dispatch) => {
 			dispatch({

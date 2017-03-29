@@ -17,7 +17,7 @@ class Footer extends Component {
         	<Text>Airline: {this.props.airline}</Text>
         	<Text>Flight #: {this.props.flightNumber}</Text>
         	<Text>Destination Gate #: {this.props.destinationGate}</Text>
-        	<Text>Current GPS: {this.props.currentGPS.latitude + ' ' + this.props.currentGPS.longitude}</Text>
+        	<Text>Current GPS: {this.props.currentGPS.timestamp}</Text>
        </View>
 		);
 	}

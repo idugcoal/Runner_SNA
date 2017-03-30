@@ -13,7 +13,9 @@ TSA_START,
 TSA_END,
 SET_FINAL_GATE_NUMBER,
 ADD_STOP, 
-UPDATE_CURRENT_POSITION
+UPDATE_CURRENT_POSITION,
+SET_TIME_START,
+SET_TIME_END
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -66,7 +68,7 @@ export default (state = INITIAL_STATE, action) => {
     case FLIGHT_NUMBER_CHANGED:
       return { ...state, flightNumber: action.payload };
     case SELECT_GATE_NUMBER:
-    	return { ...state, destinationGate: action.payload }
+    	return { ...state, destinationGate: action.payload };
     case ADD_STARTING_POINT:
     	return { ...state, locationFirstContact: action.payload };
     case SELECT_STOP:
@@ -78,7 +80,13 @@ export default (state = INITIAL_STATE, action) => {
     case ADD_STOP:
       return { ...state, stops: action.payload };
     case UPDATE_CURRENT_POSITION:
-      return { ...state, currentGPS: action.payload }
+      return { ...state, currentGPS: action.payload };
+    case SET_FINAL_GATE_NUMBER: 
+      return { ...state, finalGate: action.payload };
+    case SET_TIME_START:
+      return { ...state, timeStart: action.payload };
+    case SET_TIME_END:
+      return { ...state, timeEnd: action.payload };
     default:
       return state;
   }

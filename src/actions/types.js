@@ -22,5 +22,7 @@ export const SET_FINAL_GATE_NUMBER='set_final_gate_number';
 export const ADD_STOP = 'add_stop';
 export const ADD_STARTING_POINT = 'add_starting_point';
 export const UPDATE_CURRENT_POSITION = 'update_current_position';
+export const SET_TIME_START = 'set_time_start';
+export const SET_TIME_END = 'set_time_end';
 
 

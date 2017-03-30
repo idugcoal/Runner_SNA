@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { connect } from 'react-redux'
-import { scanBoardingPass, firstNameChanged, lastNameChanged, airlineChanged, flightNumberChanged, alternateBoardingPassInput } from '../actions';
+import { scanBoardingPass, firstNameChanged, lastNameChanged, airlineChanged, flightNumberChanged, alternateBoardingPassInput, setTimeStart } from '../actions';
 import Camera from 'react-native-camera';
 import { Actions } from 'react-native-router-flux';
 import { Button, CardSection } from './common'
@@ -12,6 +12,7 @@ class ScanBoardingPass extends Component {
 	
 	constructor(props) {
 		super(props);
+		this.props.setTimeStart();
 	} 
 
 	parseBoardingPass(boardingPassData) {
@@ -55,5 +56,5 @@ const mapStateToProps = ({ departure }) => {
 };
 
 export default connect(mapStateToProps, {
-  scanBoardingPass, alternateBoardingPassInput
+  scanBoardingPass, alternateBoardingPassInput, setTimeStart
 })(ScanBoardingPass);

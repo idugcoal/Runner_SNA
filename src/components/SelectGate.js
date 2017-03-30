@@ -23,12 +23,10 @@ class SelectGate extends Component {
   }
 
   onButtonPress(gateNumber) {
-    console.log(this.state.final);
     const { destinationGate } = this.props;
     if(this.state.final) {
       this.props.setFinalGateNumber(gateNumber);
     } else {
-      console.log('here', gateNumber)
       this.props.selectGateNumber(gateNumber);
     }
   }

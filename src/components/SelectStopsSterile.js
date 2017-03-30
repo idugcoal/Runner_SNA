@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
 import Modal from 'react-native-simple-modal'
+import { setTimeEnd } from '../actions';
 import { Button, CardSection, ImageButton, TerminalA, TerminalB, TerminalC } from './common';
 import Footer from './Footer';
 import Style from './Style';
@@ -26,6 +27,11 @@ class SelectStopsSterile extends Component {
 	onButtonPress(stopLocation) {
 		console.log('this.props in SelectStopsSterile:', stopLocation);
 		
+	}
+
+	onGateArrival() {
+		this.setState({ open: true });
+		this.props.setTimeEnd();
 	}
 
 	onGateSuccess() {
@@ -115,7 +121,7 @@ class SelectStopsSterile extends Component {
 							 />
 						</View>
 						<CardSection>
-						<Button onPress={() => this.setState({ open: true })}>
+						<Button onPress={this.onGateArrival.bind(this)}>
 							Gate Arrival
 						</Button>
 					</CardSection>
@@ -235,7 +241,7 @@ class SelectStopsSterile extends Component {
 							/>
 						</View>
 						<CardSection>
-							<Button onPress={() => this.setState({ open: true })}>
+							<Button onPress={this.onGateArrival.bind(this)}>
 								Gate Arrival
 							</Button>
 						</CardSection>
@@ -315,7 +321,7 @@ class SelectStopsSterile extends Component {
 							/>
 						</View>
 						<CardSection>
-							<Button onPress={() => this.setState({ open: true })}>
+							<Button onPress={this.onGateArrival.bind(this)}>
 								Gate Arrival
 							</Button>
 						</CardSection>
@@ -363,4 +369,4 @@ const mapStateToProps = ({ departure }) => {
   return { wheelchairNumber, flightNumber, airline, firstName, lastName, destinationGate };
 };
 
-export default connect(mapStateToProps, { })(SelectStopsSterile);
+export default connect(mapStateToProps, { setTimeEnd })(SelectStopsSterile);

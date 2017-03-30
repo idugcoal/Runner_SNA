@@ -14,7 +14,9 @@ import {
 	TSA_END,
 	SET_FINAL_GATE_NUMBER,
 	ADD_STOP,
-	UPDATE_CURRENT_POSITION
+	UPDATE_CURRENT_POSITION,
+	SET_TIME_START,
+	SET_TIME_END
 } from './types';
 
 export const selectWheelchair = ({ wheelchairNumber }) => {
@@ -108,7 +110,7 @@ export const addCommentsTSA = (text) => {
 	return(dispatch) => {
 		dispatch({
 			type: TSA_END,
-			payload: text
+			payload: payload
 		});
 	};
 };
@@ -116,6 +118,7 @@ export const addCommentsTSA = (text) => {
 export const setFinalGateNumber = (text) => {
 	
 	Actions.closing({reset: true});
+	console.log(text)
 	return(dispatch) => {
 		dispatch({
 			type:SET_FINAL_GATE_NUMBER,
@@ -175,5 +178,23 @@ export const updateCurrentPosition = (position) => {
 				payload: payload
 			})
 		}
+}
+export const setTimeStart = () => {
+	return(dispatch) => {
+		dispatch({
+			type: SET_TIME_START,
+			payload: Date.now()
+		});
+	};
+}
+
+export const setTimeEnd = () => {
+	
+	return(dispatch) => {
+		dispatch({
+			type: SET_TIME_END,
+			payload: Date.now()
+		})
+	}	
 }
  

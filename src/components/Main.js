@@ -7,16 +7,17 @@ import { Card, CardSection, Button } from './common';
 
 class Main extends Component {
 	
-	onDeparture() {
+	componentWillMount() {
     navigator.geolocation.getCurrentPosition((position) => {
     	this.props.updateCurrentPosition(position);
     });
 
     navigator.geolocation.watchPosition((position) => {
-    	// alert(position.coords.latitude)
     	this.props.updateCurrentPosition(position);
     });
+	}
 
+	onDeparture() {
     Actions.selectWheelchair({runType: 'departure'});
   }
 
@@ -40,7 +41,6 @@ class Main extends Component {
 				<CardSection>
 					<Button onPress={this.onCheckIn.bind(this)}>Check-In</Button>
 				</CardSection>
-				
 			</Card>
 		);
 	}
@@ -52,6 +52,4 @@ const mapStateToProps = ({ departure }) => {
   return { currentGPS };
 };
 
-export default connect(mapStateToProps, { 
-	updateCurrentPosition
-})(Main);
+export default connect(mapStateToProps, { updateCurrentPosition })(Main);

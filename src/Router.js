@@ -46,10 +46,10 @@ import Closing from './components/Closing';
 const RouterComponent = () => {
 	return (
 		<Router sceneStyle={{ paddingTop: 50 }}>
-			<Scene key="auth" >
+			<Scene key="auth" initial >
 				<Scene key="login" component={LoginForm} title={"Please Log In"}/>
 			</Scene>
-			<Scene key="home" initial>
+			<Scene key="home" >
 				<Scene key="main" component={Main} title={"Select Task"} />
 				<Scene key="selectWheelchair" component={SelectWheelchair} title={"Departure - Select Wheelchair"}/>
 				<Scene key="scanBoardingPass" component={ScanBoardingPass} title={"Scan Boarding Pass"} />

@@ -7,15 +7,15 @@ import { Card, CardSection, Button } from './common';
 
 class Main extends Component {
 	
-	componentWillMount() {
-    navigator.geolocation.getCurrentPosition((position) => {
-    	this.props.updateCurrentPosition(position);
-    });
+	// componentWillMount() {
+ //    navigator.geolocation.getCurrentPosition((position) => {
+ //    	this.props.updateCurrentPosition(position);
+ //    });
 
-    navigator.geolocation.watchPosition((position) => {
-    	this.props.updateCurrentPosition(position);
-    });
-	}
+ //    navigator.geolocation.watchPosition((position) => {
+ //    	this.props.updateCurrentPosition(position);
+ //    });
+	// }
 
 	onDeparture() {
     Actions.selectWheelchair({runType: 'departure'});

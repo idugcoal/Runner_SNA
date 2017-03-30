@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged, loginUser } from '../actions';
+import { emailChanged, passwordChanged, loginUser, updateCurrentPosition } from '../actions';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 
 class LoginForm extends Component {
-	onEmailChange(text) {
+	constructor(props) {
+    super(props);
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.props.updateCurrentPosition(position);
+    });
+
+    navigator.geolocation.watchPosition((position) => {
+      this.props.updateCurrentPosition(position);
+    });
+  }
+
+  onEmailChange(text) {
     this.props.emailChanged(text);
   }
 
@@ -78,5 +90,5 @@ const mapStateToProps = ({ auth }) => {
 };
 
 export default connect(mapStateToProps, {
-  emailChanged, passwordChanged, loginUser
+  emailChanged, passwordChanged, loginUser, updateCurrentPosition
 })(LoginForm);

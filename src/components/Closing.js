@@ -12,20 +12,29 @@ class Closing extends Component {
 
 	constructor(props) {
 		super(props);
+		this.state = {
+			text: ''
+		}
 	}
 
 	render() {
 		return(
 			<View style={Style.container}>
 				<View style={Style.content}>
-					<CardSection>
-						<Text>Run completed. Tap below to begin next task.</Text>
-					</CardSection>
-					<CardSection>
-						<Button onPress={() => Actions.main({ type: 'reset' }) }>
-							New Task
-						</Button>
-					</CardSection>
+					<TextInput
+		        {...this.props} // Inherit any props passed to it; e.g., multiline, numberOfLines below
+		        editable = {true}
+		        multiline = {true}
+		        numberOfLines = {10}
+		        value={this.state.text}
+		        onChangeText={(text) => this.setState({text})}
+		        placeholder={'Add comment...'}
+		      />
+		      <CardSection>
+			      <Button onPress={() => Actions.main({ type: 'reset' }) }>
+			      	Submit Comment and Begin New Task
+			      </Button>
+			    </CardSection>
 				</View>
 		   </View>
 		);

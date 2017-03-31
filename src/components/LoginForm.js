@@ -7,14 +7,6 @@ import { Card, CardSection, Input, Button, Spinner } from './common';
 class LoginForm extends Component {
 	constructor(props) {
     super(props);
-
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.props.updateCurrentPosition(position);
-    });
-
-    navigator.geolocation.watchPosition((position) => {
-      this.props.updateCurrentPosition(position);
-    });
   }
 
   onEmailChange(text) {

@@ -30,13 +30,13 @@ export const selectWheelchair = ({ wheelchairNumber }) => {
   };
 };
 
-export const scanBoardingPass = ({ firstName, lastName, airline, flightNumber }) => {
+export const scanBoardingPass = (boardingPass) => {
 
 	Actions.selectGate({ type: 'reset' });
 	return(dispatch) => {
 		dispatch({
 			type: SCAN_BOARDING_PASS,
-			payload: firstName
+			payload: boardingPass
 		})
 	};
 };

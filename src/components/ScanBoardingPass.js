@@ -20,14 +20,16 @@ class ScanBoardingPass extends Component {
 	}
 
 	onReadSuccess(boardingPassString) {
+		
+		const slash = boardingPassString.data.indexOf('/');
+
 		const boardingPass = {
-			firstName: 'John',
-			lastName: 'Smith',
-			airline: 'Delta',
-			flightNumber: '6Y4Z38'
+			firstName: boardingPassString.data.substring(slash + 1, 21).trim(),
+			lastName: boardingPassString.data.substring(2, slash),
+			airline: boardingPassString.data.substring(36, 38),
+			flightNumber: boardingPassString.data.substring(36, 43)
 		}
-		this.props.scanBoardingPass({ firstName: boardingPass.firstName })
-		console.log(boardingPassString);
+		this.props.scanBoardingPass(boardingPass)
 	}
 
 	render() {

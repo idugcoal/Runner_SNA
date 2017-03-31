@@ -31,3 +31,11 @@ class App extends Component {
 }
 
 export default App;
+
+// navigator.geolocation.getCurrentPosition((position) => {
+//   this.props.updateCurrentPosition(position);
+// });
+
+// navigator.geolocation.watchPosition((position) => {
+//   this.props.updateCurrentPosition(position);
+// });

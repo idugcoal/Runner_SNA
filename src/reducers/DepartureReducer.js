@@ -56,7 +56,7 @@ export default (state = INITIAL_STATE, action) => {
     case SELECT_WHEELCHAIR:
       return { ...state, wheelchairNumber: action.payload };
     case SCAN_BOARDING_PASS:
-      return { ...state, firstName: action.payload };
+      return { ...state, firstName: action.payload.firstName, lastName: action.payload.lastName, airline: action.payload.airline, flightNumber: action.payload.flightNumber };
     case ALTERNATE_BOARDING_PASS_INPUT:
     	return { ...state, firstName: action.payload };
     case FIRST_NAME_CHANGED:

@@ -18,7 +18,7 @@ class Main extends Component {
 	}
 
 	onDeparture() {
-    Actions.selectWheelchair({runType: 'departure'});
+    Actions.selectStartingPoint({runType: 'departure'});
   }
 
   onArrival() {

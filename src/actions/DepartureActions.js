@@ -72,7 +72,7 @@ export const flightNumberChanged = (text) => {
 };
 export const selectGateNumber = (text) => {
 	
-	Actions.selectStartingPoint();
+	Actions.selectStopsNonSterile();
 	return(dispatch) => {
 		dispatch({
 			type: SELECT_GATE_NUMBER,
@@ -142,7 +142,7 @@ export const addStartingPoint = (buttonLocation, position) => {
 		buttonValue: buttonLocation
 	}
 
-	Actions.selectStopsNonSterile();
+	Actions.selectWheelchair();
 	return(dispatch) => {
 		dispatch({ 
 			type: ADD_STARTING_POINT,

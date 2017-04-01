@@ -46,16 +46,16 @@ import Closing from './components/Closing';
 const RouterComponent = () => {
 	return (
 		<Router sceneStyle={{ paddingTop: 50 }}>
-			<Scene key="auth" >
+			<Scene key="auth" initial>
 				<Scene key="login" component={LoginForm} title={"Please Log In"}/>
 			</Scene>
-			<Scene key="home" initial>
+			<Scene key="home" >
 				<Scene key="main" component={Main} title={"Select Task"} />
+				<Scene key="selectStartingPoint" component={SelectStartingPoint} title={"Select Staring Point"} />
 				<Scene key="selectWheelchair" component={SelectWheelchair} title={"Departure - Select Wheelchair"}/>
 				<Scene key="scanBoardingPass" component={ScanBoardingPass} title={"Scan Boarding Pass"} />
 				<Scene key="alternateBoardingPassInput" component={AlternateBoardingPassInput} title={"Enter Customer Info"} />
 				<Scene key="selectGate" component={SelectGate} title={"Select Gate Number"} />
-				<Scene key="selectStartingPoint" component={SelectStartingPoint} title={"Select Staring Point"} />
 				<Scene key="selectStopsNonSterile" component={SelectStopsNonSterile} title={"Select Stops | Non-Sterile"} />
 				<Scene key="tsa" component={TSA} title="TSA" />
 				<Scene key="selectStopsSterile" component={SelectStopsSterile} title={"Select Stops | Sterile "} />

@@ -6,7 +6,6 @@ import {
   SELECT_WHEELCHAIR_2,
   SCAN_BOARDING_PASS_1,
   SCAN_BOARDING_PASS_2,
-  ALTERNATE_BOARDING_PASS_INPUT,
   PASSENGER_1_FIRST_NAME_CHANGED,
 	PASSENGER_1_LAST_NAME_CHANGED,
 	PASSENGER_2_FIRST_NAME_CHANGED,
@@ -43,12 +42,10 @@ export const addStartingPoint = (buttonLocation, position) => {
 		longitude: longitude,
 		timestamp: timestamp,
 	}
-
 	const payload = {
 		gps: gps,
 		buttonValue: buttonLocation
 	}
-
 	Actions.selectNumberOfWheelchairs();
 	return(dispatch) => {
 		dispatch({ 
@@ -62,7 +59,6 @@ export const selectWheelchair = (wheelchairNumber, passenger1Wheelchair) => {
 
   //if there's one passenger, set wheelchair1 to wheelchairNumber, route to scan boarding pass
   Actions.scanBoardingPass({title: "Scan Boarding Pass"});
- 
   //if there are two passengers, 
   //if wheelchair1 is empty, set wheelchair1 to wheelchairNumber, route to select wheelchair
   if(passenger1Wheelchair === '') {
@@ -117,10 +113,6 @@ export const scanBoardingPass = (boardingPassData, numPassengers, passenger1Firs
 	}
 };
 
-export const alternateBoardingPassInput = () => {
-	Actions.alternateBoardingPassInput();
-}
-
 export const passenger1FirstNameChanged = (text) => {
   return {
     type: PASSENGER_1_FIRST_NAME_CHANGED,
@@ -134,6 +126,7 @@ export const passenger1LastNameChanged = (text) => {
     payload: text
   };
 };
+
 export const passenger2FirstNameChanged = (text) => {
   return {
     type: PASSENGER_2_FIRST_NAME_CHANGED,
@@ -147,18 +140,21 @@ export const passenger2LastNameChanged = (text) => {
     payload: text
   };
 };
+
 export const airlineChanged = (text) => {
   return {
     type: AIRLINE_CHANGED,
     payload: text
   };
 };
+
 export const flightNumberChanged = (text) => {
   return {
     type: FLIGHT_NUMBER_CHANGED,
     payload: text
   };
 };
+
 export const selectGateNumber = (text) => {
 	
 	Actions.selectStopsNonSterile();
@@ -215,8 +211,6 @@ export const setFinalGateNumber = (text) => {
 		})
 	}
 }
-
-
 
 export const addStop = (text) => {
 	return(dispatch) => {

@@ -11,7 +11,6 @@ export const SELECT_WHEELCHAIR_2 = 'select_wheelchair_2';
 export const SET_NUMBER_OF_PASSENGERS = 'set_number_of_passengers';
 export const SCAN_BOARDING_PASS_1 = 'scan_boarding_pass_1';
 export const SCAN_BOARDING_PASS_2 = 'scan_boarding_pass_2';
-export const ALTERNATE_BOARDING_PASS_INPUT = 'alternate_boaring_pass_input';
 export const PASSENGER_1_FIRST_NAME_CHANGED = 'passenger_1_first_name_changed';
 export const PASSENGER_1_LAST_NAME_CHANGED = 'passenger_1_last_name_changed';
 export const PASSENGER_2_FIRST_NAME_CHANGED = 'passenger_2_first_name_changed';

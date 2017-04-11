@@ -3,7 +3,6 @@ import { Text, View, Picker } from 'react-native';
 import { connect } from 'react-redux'
 import { scanBoardingPass, passenger1FirstNameChanged, passenger1LastNameChanged, passenger2FirstNameChanged, passenger2LastNameChanged, airlineChanged, flightNumberChanged } from '../actions';
 import Footer from './Footer';
-
 import { CardSection, Input, Button } from './common'
 import { Actions } from 'react-native-router-flux';
 import Style from './Style';
@@ -38,13 +37,39 @@ class AlternateBoardingPassInput extends Component {
 		this.props.airlineChanged(text);
 	}
 
+  renderSecondPassengerInput() {
+    
+    if(this.props.numPassengers === 2) {
+      return [
+        <CardSection>
+            <Input
+              label="First Name"
+              placeholder="Passenger 2 First Name"
+              onChangeText={this.p2FirstNameChanged.bind(this)}
+              value={this.props.passenger2FirstName}
+            />
+          </CardSection>,
+          <CardSection>
+            <Input
+              label="Last Name"
+              placeholder="Passenger 2 Last Name"
+              onChangeText={this.p2LastNameChanged.bind(this)}
+              value={this.props.passenger2LastName}
+            />
+          </CardSection>
+      ];
+    } else {
+      return <View></View>;
+    }
+  }
+
 	render() {
 		return(
 			<View style={Style.container}>
 				<View style={Style.content}>
 				<CardSection>
           <Input
-            label="Passenger 1 First Name"
+            label="First Name"
             placeholder="Passenger 1 First Name"
             onChangeText={this.p1FirstNameChanged.bind(this)}
             value={this.props.passenger1FirstName}
@@ -52,28 +77,13 @@ class AlternateBoardingPassInput extends Component {
         </CardSection>
         <CardSection>
           <Input
-            label="Passenger 1 Last Name"
+            label="Last Name"
             placeholder="Passenger 1 Last Name"
             onChangeText={this.p1LastNameChanged.bind(this)}
             value={this.props.passenger1LastName}
           />
        	</CardSection>
-        <CardSection>
-          <Input
-            label="Passenger 2 First Name"
-            placeholder="Passenger 2 First Name"
-            onChangeText={this.p2FirstNameChanged.bind(this)}
-            value={this.props.passenger2FirstName}
-          />
-        </CardSection>
-        <CardSection>
-          <Input
-            label="Passenger 2 Last Name"
-            placeholder="Passenger 2 Last Name"
-            onChangeText={this.p2LastNameChanged.bind(this)}
-            value={this.props.passenger2LastName}
-          />
-        </CardSection>
+        {this.renderSecondPassengerInput()}
        	<CardSection>
           <Input
             label="Flight Number"
@@ -89,13 +99,13 @@ class AlternateBoardingPassInput extends Component {
         		selectedValue={this.props.airline}
         		onValueChange={this.onAirlineChange.bind(this)}
         	>
-        		<Picker.Item label="Alaska" value="Alaska" />
-        		<Picker.Item label="American" value="American" />
-        		<Picker.Item label="Delta" value="Delta" />
-        		<Picker.Item label="Frontier" value="Frontier" />
-        		<Picker.Item label="Southwest" value="Southwest" />
-        		<Picker.Item label="United" value="United" />
-        		<Picker.Item label="WestJet" value="WestJet" /> 
+        		<Picker.Item label="Alaska" value="alaska" />
+        		<Picker.Item label="American" value="american" />
+        		<Picker.Item label="Delta" value="delta" />
+        		<Picker.Item label="Frontier" value="frontier" />
+        		<Picker.Item label="Southwest" value="southwest" />
+        		<Picker.Item label="United" value="united" />
+        		<Picker.Item label="WestJet" value="westJet" /> 
         	</Picker>
         </View>
         <CardSection>
@@ -115,10 +125,10 @@ class AlternateBoardingPassInput extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { passenger1Wheelchair, passenger1FirstName, passenger1LastName, airline, flightNumber } = departure;
+  const { passenger1Wheelchair, passenger1FirstName, passenger1LastName, airline, flightNumber, numPassengers } = departure;
 
 
-  return { passenger1Wheelchair, passenger1FirstName, passenger1LastName, airline, flightNumber };
+  return { passenger1Wheelchair, passenger1FirstName, passenger1LastName, airline, flightNumber, numPassengers };
 };
 
 export default connect(mapStateToProps, {

@@ -4,7 +4,6 @@ SELECT_WHEELCHAIR_1,
 SELECT_WHEELCHAIR_2,
 SCAN_BOARDING_PASS_1,
 SCAN_BOARDING_PASS_2,
-ALTERNATE_BOARDING_PASS_INPUT,
 PASSENGER_1_FIRST_NAME_CHANGED,
 PASSENGER_1_LAST_NAME_CHANGED,
 PASSENGER_2_FIRST_NAME_CHANGED,
@@ -70,10 +69,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, passenger2Wheelchair: action.payload };
     case SCAN_BOARDING_PASS_1:
       return { ...state, passenger1FirstName: action.payload.firstName, passenger1LastName: action.payload.lastName, airline: action.payload.airline, flightNumber: action.payload.flightNumber };
-      case SCAN_BOARDING_PASS_2:
+    case SCAN_BOARDING_PASS_2:
       return { ...state, passenger2FirstName: action.payload.firstName, passenger2LastName: action.payload.lastName };
-    case ALTERNATE_BOARDING_PASS_INPUT:
-    	return { ...state, passenger1FirstName: action.payload };
     case PASSENGER_1_FIRST_NAME_CHANGED:
       return { ...state, passenger1FirstName: action.payload };
     case PASSENGER_1_LAST_NAME_CHANGED:

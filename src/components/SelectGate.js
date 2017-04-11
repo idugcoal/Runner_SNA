@@ -27,7 +27,7 @@ class SelectGate extends Component {
     if(this.state.final) {
       this.props.setFinalGateNumber(gateNumber);
     } else {
-      this.props.selectGateNumber(gateNumber);
+      this.props.selectGateNumber(this.props.runType, gateNumber);
     }
   }
 
@@ -61,9 +61,9 @@ class SelectGate extends Component {
 
 
 const mapStateToProps = ({ departure }) => {
-  const { destinationGate } = departure;
+  const { destinationGate, runType } = departure;
 
-  return { destinationGate };
+  return { destinationGate, runType };
 };
 
 export default connect(mapStateToProps, {

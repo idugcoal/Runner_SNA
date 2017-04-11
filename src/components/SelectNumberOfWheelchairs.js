@@ -15,7 +15,7 @@ class SelectNumberOfWheelchairs extends Component {
 	}
 
 	onButtonPress(numWheelchairs) {
-		this.props.setNumberOfPassengers(numWheelchairs);
+		this.props.setNumberOfPassengers(this.props.runType, numWheelchairs);
 	}
 
 	render() {
@@ -43,9 +43,9 @@ class SelectNumberOfWheelchairs extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { destinationGate, finalGate } = departure;
+  const { destinationGate, finalGate, runType } = departure;
 
-  return { destinationGate, finalGate };
+  return { destinationGate, finalGate, runType };
 };
 
 export default connect(mapStateToProps, {

@@ -44,17 +44,19 @@ export const setRunType = (runType) => {
 	
 }
 
-export const setNumberOfPassengers = (number) => {
-	Actions.selectWheelchair({title: "Select Wheelchair"});
-	return(dispatch) => {
-		dispatch({
-			type: SET_NUMBER_OF_PASSENGERS,
-			payload: number
-		})
+export const setNumberOfPassengers = (runType, number) => {
+	if(runType === 'departure') {	
+		Actions.selectWheelchair({title: "Select Wheelchair"});
+		return(dispatch) => {
+			dispatch({
+				type: SET_NUMBER_OF_PASSENGERS,
+				payload: number
+			})
+		}
 	}
 }
 
-export const addStartingPoint = (buttonLocation, position) => {
+export const addStartingPoint = (runType, buttonLocation, position) => {
 
 	const { coords, timestamp } = position;
 	const { latitude, longitude } = coords;
@@ -67,70 +69,77 @@ export const addStartingPoint = (buttonLocation, position) => {
 		gps: gps,
 		buttonValue: buttonLocation
 	}
-	Actions.selectNumberOfWheelchairs();
-	return(dispatch) => {
-		dispatch({ 
-			type: ADD_STARTING_POINT,
-			payload: payload
-		});
+	
+	if(runType === 'departure') {
+		Actions.selectNumberOfWheelchairs();
+		return(dispatch) => {
+			dispatch({ 
+				type: ADD_STARTING_POINT,
+				payload: payload
+			});
+		}
 	}
 }
 
-export const selectWheelchair = (wheelchairNumber, passenger1Wheelchair) => {
+export const selectWheelchair = (runType, wheelchairNumber, passenger1Wheelchair) => {
 
-  //if there's one passenger, set wheelchair1 to wheelchairNumber, route to scan boarding pass
-  Actions.scanBoardingPass({title: "Scan Boarding Pass"});
-  //if there are two passengers, 
-  //if wheelchair1 is empty, set wheelchair1 to wheelchairNumber, route to select wheelchair
-  if(passenger1Wheelchair === '') {
-  	return(dispatch) => {
-  		dispatch({
-  			type: SELECT_WHEELCHAIR_1,
-  			payload: wheelchairNumber
-  		})
-  	}
-  //if wheelchair1 is not empty, set wheelchair2 to wheelchairNumber, route to scan boarding pass
-  } else {
-  	return(dispatch) => {
-  		dispatch({
-  			type: SELECT_WHEELCHAIR_2,
-  			payload: wheelchairNumber
-  		})
-  	}
-  }
+	if(runType === 'departure') {
+	  //if there's one passenger, set wheelchair1 to wheelchairNumber, route to scan boarding pass
+	  Actions.scanBoardingPass({title: "Scan Boarding Pass"});
+	  //if there are two passengers, 
+	  //if wheelchair1 is empty, set wheelchair1 to wheelchairNumber, route to select wheelchair
+	  if(passenger1Wheelchair === '') {
+	  	return(dispatch) => {
+	  		dispatch({
+	  			type: SELECT_WHEELCHAIR_1,
+	  			payload: wheelchairNumber
+	  		})
+	  	}
+	  //if wheelchair1 is not empty, set wheelchair2 to wheelchairNumber, route to scan boarding pass
+	  } else {
+	  	return(dispatch) => {
+	  		dispatch({
+	  			type: SELECT_WHEELCHAIR_2,
+	  			payload: wheelchairNumber
+	  		})
+	  	}
+	  }
+	}
 };
 
-export const scanBoardingPass = (boardingPassData, numPassengers, passenger1FirstName) => {
+export const scanBoardingPass = (runType, boardingPassData, numPassengers, passenger1FirstName) => {
 
-	//if there's one passenger, set boardingPass1 to boardingPassData, route to selectGate
-	if(numPassengers === 1) {
-		Actions.selectGate();
-		return(dispatch) => {
-			dispatch({
-				type: SCAN_BOARDING_PASS_1,
-				payload: boardingPassData
-			})
+	if(runType === 'departure') {
+		//if there's one passenger, set boardingPass1 to boardingPassData, route to selectGate
+		if(numPassengers === 1) {
+			Actions.selectGate();
+			return(dispatch) => {
+				dispatch({
+					type: SCAN_BOARDING_PASS_1,
+					payload: boardingPassData
+				})
+			}
 		}
-	}
-	//if there are two passengers, 
-	//if passenger1FirstName is empty, set boardingPass1 to boardingPassData, route to selectWheelchair
-	else if(passenger1FirstName === '') {
-		Actions.selectWheelchair({type: 'reset'});
-		return(dispatch) => {
-			dispatch({
-				type: SCAN_BOARDING_PASS_1,
-				payload: boardingPassData
-			})
+		//if there are two passengers, 
+		//if passenger1FirstName is empty, set boardingPass1 to boardingPassData, route to selectWheelchair
+		else if(passenger1FirstName === '') {
+			Actions.selectWheelchair({type: 'reset'});
+			return(dispatch) => {
+				dispatch({
+					type: SCAN_BOARDING_PASS_1,
+					payload: boardingPassData
+				})
+			}
+		//if passenger1FirstName is not empty, set boardingPass2 to boardingPassData, route to selectGate
+		}	else {
+			Actions.selectGate();
+			return(dispatch) => {
+				dispatch({
+					type: SCAN_BOARDING_PASS_2,
+					payload: boardingPassData
+				})
+			}	
 		}
-	//if passenger1FirstName is not empty, set boardingPass2 to boardingPassData, route to selectGate
-	}	else {
-		Actions.selectGate();
-		return(dispatch) => {
-			dispatch({
-				type: SCAN_BOARDING_PASS_2,
-				payload: boardingPassData
-			})
-		}	
 	}
 };
 
@@ -188,15 +197,17 @@ export const flightNumberChanged = (text) => {
 
 
 
-export const selectGateNumber = (text) => {
+export const selectGateNumber = (runType, text) => {
 	
-	Actions.selectStopsNonSterile();
-	return(dispatch) => {
-		dispatch({
-			type: SELECT_GATE_NUMBER,
-			payload: text
-		});
-	};
+	if(runType === 'departure') {
+		Actions.selectStopsNonSterile();
+		return(dispatch) => {
+			dispatch({
+				type: SELECT_GATE_NUMBER,
+				payload: text
+			});
+		};
+	}
 };
 
 export const startTSA = () => {

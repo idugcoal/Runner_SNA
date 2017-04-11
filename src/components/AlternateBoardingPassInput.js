@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, Picker } from 'react-native';
 import { connect } from 'react-redux'
-import { scanBoardingPass, firstNameChanged, lastNameChanged, airlineChanged, flightNumberChanged } from '../actions';
+import { scanBoardingPass, passenger1FirstNameChanged, passenger1LastNameChanged, passenger2FirstNameChanged, passenger2LastNameChanged, airlineChanged, flightNumberChanged } from '../actions';
 import Footer from './Footer';
 
 import { CardSection, Input, Button } from './common'
@@ -14,13 +14,21 @@ class AlternateBoardingPassInput extends Component {
 		super(props);
 	}
 
-	onFirstNameChange(text) {
-	   this.props.firstNameChanged(text);
+	p1FirstNameChanged(text) {
+	 this.props.passenger1FirstNameChanged(text);
 	}
 
-	onLastNameChange(text) {
-		this.props.lastNameChanged(text);
+	p1LastNameChanged(text) {
+		this.props.passenger1LastNameChanged(text);
 	}
+  
+  p2FirstNameChanged(text) {
+   this.props.passenger2FirstNameChanged(text);
+  }
+
+  p2LastNameChanged(text) {
+    this.props.passenger2LastNameChanged(text);
+  }
 
 	onFlightNumberChange(text) {
 		this.props.flightNumberChanged(text);
@@ -36,20 +44,36 @@ class AlternateBoardingPassInput extends Component {
 				<View style={Style.content}>
 				<CardSection>
           <Input
-            label="First Name"
-            placeholder="First Name"
-            onChangeText={this.onFirstNameChange.bind(this)}
+            label="Passenger 1 First Name"
+            placeholder="Passenger 1 First Name"
+            onChangeText={this.p1FirstNameChanged.bind(this)}
             value={this.props.passenger1FirstName}
           />
         </CardSection>
         <CardSection>
           <Input
-            label="Last Name"
-            placeholder="Last Name"
-            onChangeText={this.onLastNameChange.bind(this)}
+            label="Passenger 1 Last Name"
+            placeholder="Passenger 1 Last Name"
+            onChangeText={this.p1LastNameChanged.bind(this)}
             value={this.props.passenger1LastName}
           />
        	</CardSection>
+        <CardSection>
+          <Input
+            label="Passenger 2 First Name"
+            placeholder="Passenger 2 First Name"
+            onChangeText={this.p2FirstNameChanged.bind(this)}
+            value={this.props.passenger2FirstName}
+          />
+        </CardSection>
+        <CardSection>
+          <Input
+            label="Passenger 2 Last Name"
+            placeholder="Passenger 2 Last Name"
+            onChangeText={this.p2LastNameChanged.bind(this)}
+            value={this.props.passenger1LastName}
+          />
+        </CardSection>
        	<CardSection>
           <Input
             label="Flight Number"
@@ -90,7 +114,6 @@ class AlternateBoardingPassInput extends Component {
 	}
 }
 
-// export default AlternateBoardingPassInput;
 const mapStateToProps = ({ departure }) => {
   const { passenger1Wheelchair, passenger1FirstName, passenger1LastName, airline, flightNumber } = departure;
 
@@ -99,5 +122,5 @@ const mapStateToProps = ({ departure }) => {
 };
 
 export default connect(mapStateToProps, {
-  scanBoardingPass, firstNameChanged, lastNameChanged, airlineChanged, flightNumberChanged
+  scanBoardingPass, passenger1FirstNameChanged, passenger1LastNameChanged, passenger2FirstNameChanged, passenger2LastNameChanged, airlineChanged, flightNumberChanged
 })(AlternateBoardingPassInput);

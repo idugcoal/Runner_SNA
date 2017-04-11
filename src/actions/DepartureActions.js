@@ -7,8 +7,10 @@ import {
   SCAN_BOARDING_PASS_1,
   SCAN_BOARDING_PASS_2,
   ALTERNATE_BOARDING_PASS_INPUT,
-  FIRST_NAME_CHANGED,
-	LAST_NAME_CHANGED,
+  PASSENGER_1_FIRST_NAME_CHANGED,
+	PASSENGER_1_LAST_NAME_CHANGED,
+	PASSENGER_2_FIRST_NAME_CHANGED,
+	PASSENGER_2_LAST_NAME_CHANGED,
 	AIRLINE_CHANGED,
 	FLIGHT_NUMBER_CHANGED,
 	ADD_STARTING_POINT,
@@ -119,16 +121,29 @@ export const alternateBoardingPassInput = () => {
 	Actions.alternateBoardingPassInput();
 }
 
-export const firstNameChanged = (text) => {
+export const passenger1FirstNameChanged = (text) => {
   return {
-    type: FIRST_NAME_CHANGED,
+    type: PASSENGER_1_FIRST_NAME_CHANGED,
     payload: text
   };
 };
 
-export const lastNameChanged = (text) => {
+export const passenger1LastNameChanged = (text) => {
   return {
-    type: LAST_NAME_CHANGED,
+    type: PASSENGER_1_LAST_NAME_CHANGED,
+    payload: text
+  };
+};
+export const passenger2FirstNameChanged = (text) => {
+  return {
+    type: PASSENGER_2_FIRST_NAME_CHANGED,
+    payload: text
+  };
+};
+
+export const passenger2LastNameChanged = (text) => {
+  return {
+    type: PASSENGER_2_LAST_NAME_CHANGED,
     payload: text
   };
 };

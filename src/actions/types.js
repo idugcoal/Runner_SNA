@@ -29,5 +29,6 @@ export const ADD_STARTING_POINT = 'add_starting_point';
 export const UPDATE_CURRENT_POSITION = 'update_current_position';
 export const SET_TIME_START = 'set_time_start';
 export const SET_TIME_END = 'set_time_end';
+export const SET_RUN_TYPE = 'set_run_type';
 
 

@@ -20,10 +20,12 @@ SET_FINAL_GATE_NUMBER,
 ADD_STOP, 
 UPDATE_CURRENT_POSITION,
 SET_TIME_START,
-SET_TIME_END
+SET_TIME_END,
+SET_RUN_TYPE
 } from '../actions/types';
 
 const INITIAL_STATE = {
+  runType: '',
   passenger1Wheelchair: '',
   passenger1FirstName: '',
   passenger1LastName: '',
@@ -62,6 +64,8 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case SET_RUN_TYPE:
+      return { ...state, runType: action.payload };
     case SET_NUMBER_OF_PASSENGERS:
       return { ...state, numPassengers: action.payload };
     case SELECT_WHEELCHAIR_1:

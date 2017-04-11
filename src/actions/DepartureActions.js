@@ -21,8 +21,28 @@ import {
 	ADD_STOP,
 	UPDATE_CURRENT_POSITION,
 	SET_TIME_START,
-	SET_TIME_END
+	SET_TIME_END,
+	SET_RUN_TYPE
 } from './types';
+
+export const setRunType = (runType) => {
+
+	if(runType === 'departure') {
+		Actions.selectStartingPoint();
+		return(dispatch) => {
+			dispatch({
+				type: SET_RUN_TYPE,
+				payload: runType
+			})
+		}
+	} else if (runType === 'arrival') {
+		//do arrival stuff
+	} else if (runType == 'checkin') {
+		//do checkin stuff
+	}
+
+	
+}
 
 export const setNumberOfPassengers = (number) => {
 	Actions.selectWheelchair({title: "Select Wheelchair"});

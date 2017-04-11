@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { updateCurrentPosition } from '../actions';
+import { updateCurrentPosition, setRunType } from '../actions';
 import { Card, CardSection, Button } from './common';
 
 class Main extends Component {
@@ -21,11 +21,11 @@ class Main extends Component {
 	}
 
 	onDeparture() {
-    Actions.selectStartingPoint({runType: 'departure'});
+    this.props.setRunType('departure');
   }
 
   onArrival() {
-  	Actions.arrival({runType: 'arrival'});
+  	this.props.setRunType('arrival');
   }
 
   onCheckIn() {
@@ -55,4 +55,4 @@ const mapStateToProps = ({ departure }) => {
   return { currentGPS };
 };
 
-export default connect(mapStateToProps, { updateCurrentPosition })(Main);
+export default connect(mapStateToProps, { updateCurrentPosition, setRunType })(Main);

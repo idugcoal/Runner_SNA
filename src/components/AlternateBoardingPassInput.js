@@ -71,7 +71,7 @@ class AlternateBoardingPassInput extends Component {
             label="Passenger 2 Last Name"
             placeholder="Passenger 2 Last Name"
             onChangeText={this.p2LastNameChanged.bind(this)}
-            value={this.props.passenger1LastName}
+            value={this.props.passenger2LastName}
           />
         </CardSection>
        	<CardSection>

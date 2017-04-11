@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, Picker } from 'react-native';
 import { connect } from 'react-redux'
-import { scanBoardingPass, passenger1FirstNameChanged, passenger1LastNameChanged, passenger2FirstNameChanged, passenger2LastNameChanged, airlineChanged, flightNumberChanged } from '../actions';
+import { scanBoardingPass, passenger1FirstNameChanged, passenger1LastNameChanged, passenger2FirstNameChanged, passenger2LastNameChanged, airlineChanged, flightNumberChanged, alternateBoardingPassInput } from '../actions';
 import Footer from './Footer';
 import { CardSection, Input, Button } from './common'
 import { Actions } from 'react-native-router-flux';
@@ -63,6 +63,16 @@ class AlternateBoardingPassInput extends Component {
     }
   }
 
+  navigateToNext() {
+    if(this.props.numPassengers === 1 && this.props.passenger1FirstName != '' && this.props.passenger1LastName != '' && this.props.passenger1Wheelchair != '' ) {
+      Actions.selectGate();
+    } else if (this.props.numPassengers === 2 && this.props.passenger2FirstName != '' && this.props.passenger2LastName != '' && this.props.passenger2Wheelchair != '') {
+      Actions.selectGate();
+    } else {
+      Actions.selectWheelchair();
+    }
+  }
+
 	render() {
 		return(
 			<View style={Style.container}>
@@ -110,9 +120,7 @@ class AlternateBoardingPassInput extends Component {
         </View>
         <CardSection>
         	<Button 
-        		onPress={() => Actions.selectGate({
-        			type: 'reset' 
-        		})}>
+        		onPress={() => this.navigateToNext()}>
         		Next
         	</Button>
         </CardSection>
@@ -125,12 +133,11 @@ class AlternateBoardingPassInput extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { passenger1Wheelchair, passenger1FirstName, passenger1LastName, airline, flightNumber, numPassengers } = departure;
+  const { passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, airline, flightNumber, numPassengers } = departure;
 
-
-  return { passenger1Wheelchair, passenger1FirstName, passenger1LastName, airline, flightNumber, numPassengers };
+  return { passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, airline, flightNumber, numPassengers };
 };
 
 export default connect(mapStateToProps, {
-  scanBoardingPass, passenger1FirstNameChanged, passenger1LastNameChanged, passenger2FirstNameChanged, passenger2LastNameChanged, airlineChanged, flightNumberChanged
+  scanBoardingPass, passenger1FirstNameChanged, passenger1LastNameChanged, passenger2FirstNameChanged, passenger2LastNameChanged, airlineChanged, flightNumberChanged, alternateBoardingPassInput
 })(AlternateBoardingPassInput);

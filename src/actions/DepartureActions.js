@@ -6,6 +6,7 @@ import {
   SELECT_WHEELCHAIR_2,
   SCAN_BOARDING_PASS_1,
   SCAN_BOARDING_PASS_2,
+  ALTERNATE_BOARDING_PASS_INPUT,
   PASSENGER_1_FIRST_NAME_CHANGED,
 	PASSENGER_1_LAST_NAME_CHANGED,
 	PASSENGER_2_FIRST_NAME_CHANGED,
@@ -113,6 +114,16 @@ export const scanBoardingPass = (boardingPassData, numPassengers, passenger1Firs
 	}
 };
 
+export const alternateBoardingPassInput = (numPassengers) => {
+	//if there's one passenger, go to selectGate
+	if(numPassengers === 1) {
+		Actions.selectGate({type: 'reset'});
+	} else {
+	//if there are two passengers, go to selectWheelchair
+		Actions.selectWheelchair();
+	}
+};
+
 export const passenger1FirstNameChanged = (text) => {
   return {
     type: PASSENGER_1_FIRST_NAME_CHANGED,
@@ -154,6 +165,8 @@ export const flightNumberChanged = (text) => {
     payload: text
   };
 };
+
+
 
 export const selectGateNumber = (text) => {
 	

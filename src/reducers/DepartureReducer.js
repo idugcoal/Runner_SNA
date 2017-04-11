@@ -1,6 +1,9 @@
 import {
-SELECT_WHEELCHAIR,
-SCAN_BOARDING_PASS,
+SET_NUMBER_OF_PASSENGERS,
+SELECT_WHEELCHAIR_1,
+SELECT_WHEELCHAIR_2,
+SCAN_BOARDING_PASS_1,
+SCAN_BOARDING_PASS_2,
 ALTERNATE_BOARDING_PASS_INPUT,
 FIRST_NAME_CHANGED,
 LAST_NAME_CHANGED,
@@ -19,9 +22,13 @@ SET_TIME_END
 } from '../actions/types';
 
 const INITIAL_STATE = {
-  wheelchairNumber: '',
-  firstName: '',
-  lastName: '',
+  passenger1Wheelchair: '',
+  passenger1FirstName: '',
+  passenger1LastName: '',
+  passenger2Wheelchair: '',
+  passenger2FirstName: '',
+  passenger2LastName: '',
+  numPassengers: 1,
   airline: '',
   flightNumber: '',
   destinationGate: '',
@@ -53,16 +60,22 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SELECT_WHEELCHAIR:
-      return { ...state, wheelchairNumber: action.payload };
-    case SCAN_BOARDING_PASS:
-      return { ...state, firstName: action.payload.firstName, lastName: action.payload.lastName, airline: action.payload.airline, flightNumber: action.payload.flightNumber };
+    case SET_NUMBER_OF_PASSENGERS:
+      return { ...state, numPassengers: action.payload };
+    case SELECT_WHEELCHAIR_1:
+      return { ...state, passenger1Wheelchair: action.payload };
+    case SELECT_WHEELCHAIR_2:
+      return { ...state, passenger2Wheelchair: action.payload };
+    case SCAN_BOARDING_PASS_1:
+      return { ...state, passenger1FirstName: action.payload.firstName, passenger1LastName: action.payload.lastName, airline: action.payload.airline, flightNumber: action.payload.flightNumber };
+      case SCAN_BOARDING_PASS_2:
+      return { ...state, passenger2FirstName: action.payload.firstName, passenger2LastName: action.payload.lastName };
     case ALTERNATE_BOARDING_PASS_INPUT:
-    	return { ...state, firstName: action.payload };
+    	return { ...state, passenger1FirstName: action.payload };
     case FIRST_NAME_CHANGED:
-      return { ...state, firstName: action.payload };
+      return { ...state, passenger1FirstName: action.payload };
     case LAST_NAME_CHANGED:
-      return { ...state, lastName: action.payload };
+      return { ...state, passenger1LastName: action.payload };
     case AIRLINE_CHANGED: 
       return { ...state, airline: action.payload };
     case FLIGHT_NUMBER_CHANGED:

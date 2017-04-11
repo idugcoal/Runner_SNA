@@ -39,7 +39,7 @@ class AlternateBoardingPassInput extends Component {
             label="First Name"
             placeholder="First Name"
             onChangeText={this.onFirstNameChange.bind(this)}
-            value={this.props.firstName}
+            value={this.props.passenger1FirstName}
           />
         </CardSection>
         <CardSection>
@@ -47,7 +47,7 @@ class AlternateBoardingPassInput extends Component {
             label="Last Name"
             placeholder="Last Name"
             onChangeText={this.onLastNameChange.bind(this)}
-            value={this.props.lastName}
+            value={this.props.passenger1LastName}
           />
        	</CardSection>
        	<CardSection>
@@ -92,10 +92,10 @@ class AlternateBoardingPassInput extends Component {
 
 // export default AlternateBoardingPassInput;
 const mapStateToProps = ({ departure }) => {
-  const { wheelchairNumber, firstName, lastName, airline, flightNumber } = departure;
+  const { passenger1Wheelchair, passenger1FirstName, passenger1LastName, airline, flightNumber } = departure;
 
 
-  return { wheelchairNumber, firstName, lastName, airline, flightNumber };
+  return { passenger1Wheelchair, passenger1FirstName, passenger1LastName, airline, flightNumber };
 };
 
 export default connect(mapStateToProps, {

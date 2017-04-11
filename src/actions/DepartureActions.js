@@ -1,8 +1,11 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import {
-  SELECT_WHEELCHAIR,
-  SCAN_BOARDING_PASS,
+  SET_NUMBER_OF_PASSENGERS,
+  SELECT_WHEELCHAIR_1,
+  SELECT_WHEELCHAIR_2,
+  SCAN_BOARDING_PASS_1,
+  SCAN_BOARDING_PASS_2,
   ALTERNATE_BOARDING_PASS_INPUT,
   FIRST_NAME_CHANGED,
 	LAST_NAME_CHANGED,
@@ -19,26 +22,97 @@ import {
 	SET_TIME_END
 } from './types';
 
-export const selectWheelchair = ({ wheelchairNumber }) => {
-  
-  Actions.scanBoardingPass();
-  return(dispatch) => {
-  	dispatch({
-	    type: SELECT_WHEELCHAIR,
-	    payload: wheelchairNumber
-  	})
-  };
-};
-
-export const scanBoardingPass = (boardingPass) => {
-
-	Actions.selectGate({ type: 'reset' });
+export const setNumberOfPassengers = (number) => {
+	Actions.selectWheelchair({title: "Select Wheelchair"});
 	return(dispatch) => {
 		dispatch({
-			type: SCAN_BOARDING_PASS,
-			payload: boardingPass
+			type: SET_NUMBER_OF_PASSENGERS,
+			payload: number
 		})
-	};
+	}
+}
+
+export const addStartingPoint = (buttonLocation, position) => {
+
+	const { coords, timestamp } = position;
+	const { latitude, longitude } = coords;
+	const gps = {
+		latitude: latitude,
+		longitude: longitude,
+		timestamp: timestamp,
+	}
+
+	const payload = {
+		gps: gps,
+		buttonValue: buttonLocation
+	}
+
+	Actions.selectNumberOfWheelchairs();
+	return(dispatch) => {
+		dispatch({ 
+			type: ADD_STARTING_POINT,
+			payload: payload
+		});
+	}
+}
+
+export const selectWheelchair = (wheelchairNumber, passenger1Wheelchair) => {
+
+  //if there's one passenger, set wheelchair1 to wheelchairNumber, route to scan boarding pass
+  Actions.scanBoardingPass({title: "Scan Boarding Pass"});
+ 
+  //if there are two passengers, 
+  //if wheelchair1 is empty, set wheelchair1 to wheelchairNumber, route to select wheelchair
+  if(passenger1Wheelchair === '') {
+  	return(dispatch) => {
+  		dispatch({
+  			type: SELECT_WHEELCHAIR_1,
+  			payload: wheelchairNumber
+  		})
+  	}
+  //if wheelchair1 is not empty, set wheelchair2 to wheelchairNumber, route to scan boarding pass
+  } else {
+  	return(dispatch) => {
+  		dispatch({
+  			type: SELECT_WHEELCHAIR_2,
+  			payload: wheelchairNumber
+  		})
+  	}
+  }
+};
+
+export const scanBoardingPass = (boardingPassData, numPassengers, passenger1FirstName) => {
+
+	//if there's one passenger, set boardingPass1 to boardingPassData, route to selectGate
+	if(numPassengers === 1) {
+		Actions.selectGate();
+		return(dispatch) => {
+			dispatch({
+				type: SCAN_BOARDING_PASS_1,
+				payload: boardingPassData
+			})
+		}
+	}
+	//if there are two passengers, 
+	//if passenger1FirstName is empty, set boardingPass1 to boardingPassData, route to selectWheelchair
+	else if(passenger1FirstName === '') {
+		Actions.selectWheelchair({type: 'reset'});
+		return(dispatch) => {
+			dispatch({
+				type: SCAN_BOARDING_PASS_1,
+				payload: boardingPassData
+			})
+		}
+	//if passenger1FirstName is not empty, set boardingPass2 to boardingPassData, route to selectGate
+	}	else {
+		Actions.selectGate();
+		return(dispatch) => {
+			dispatch({
+				type: SCAN_BOARDING_PASS_2,
+				payload: boardingPassData
+			})
+		}	
+	}
 };
 
 export const alternateBoardingPassInput = () => {
@@ -127,29 +201,7 @@ export const setFinalGateNumber = (text) => {
 	}
 }
 
-export const addStartingPoint = (buttonLocation, position) => {
-	
-	const { coords, timestamp } = position;
-	const { latitude, longitude } = coords;
-	const gps = {
-		latitude: latitude,
-		longitude: longitude,
-		timestamp: timestamp,
-	}
 
-	const payload = {
-		gps: gps,
-		buttonValue: buttonLocation
-	}
-
-	Actions.selectWheelchair();
-	return(dispatch) => {
-		dispatch({ 
-			type: ADD_STARTING_POINT,
-			payload: payload
-		});
-	}
-}
 
 export const addStop = (text) => {
 	return(dispatch) => {

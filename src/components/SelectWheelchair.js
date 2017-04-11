@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { selectWheelchair } from '../actions';
+import { CardSection, Button } from './common';
 import NumberButton from './common/NumberButton';
 import Footer from './Footer';
 import Style from './Style';
@@ -24,14 +25,14 @@ class SelectWheelchair extends Component {
 
   constructor(props) {
     super(props);
-
+    this.state = {
+      open: true,
+    }
   }
 
   onButtonPress(buttonValue) {
-
-    const { wheelchairNumber } = this.props;
-
-    this.props.selectWheelchair({ wheelchairNumber: buttonValue });
+      this.setState({open: true})
+      this.props.selectWheelchair(buttonValue, this.props.passenger1Wheelchair)
   }
 
   renderButtons() {
@@ -61,9 +62,9 @@ class SelectWheelchair extends Component {
 };
 
 const mapStateToProps = ({ departure }) => {
-  const { wheelchairNumber } = departure;
+  const { passenger1Wheelchair, passenger2Wheelchair } = departure;
 
-  return { wheelchairNumber };
+  return { passenger1Wheelchair, passenger2Wheelchair };
 };
 
 export default connect(mapStateToProps, { selectWheelchair })(SelectWheelchair);

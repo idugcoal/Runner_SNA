@@ -83,9 +83,9 @@ class SelectStopsNonSterile extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { wheelchairNumber, flightNumber, airline, firstName, lastName, stops } = departure;
+  const { wheelchairNumber, flightNumber, airline, passenger1FirstName, passenger1LastName, stops } = departure;
 
-  return { wheelchairNumber, flightNumber, airline, firstName, lastName, stops };
+  return { wheelchairNumber, flightNumber, airline, passenger1FirstName, passenger1LastName, stops };
 };
 
 export default connect(mapStateToProps, { 

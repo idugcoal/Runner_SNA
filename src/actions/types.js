@@ -6,8 +6,11 @@ export const LOGIN_USER_FAIL = 'login_user_fail';
 export const LOGIN_USER = 'login_user';
 
 //departure actions
-export const SELECT_WHEELCHAIR = 'select_wheelchair';
-export const SCAN_BOARDING_PASS = 'scan_boarding_pass';
+export const SELECT_WHEELCHAIR_1 = 'select_wheelchair_1';
+export const SELECT_WHEELCHAIR_2 = 'select_wheelchair_2';
+export const SET_NUMBER_OF_PASSENGERS = 'set_number_of_passengers';
+export const SCAN_BOARDING_PASS_1 = 'scan_boarding_pass_1';
+export const SCAN_BOARDING_PASS_2 = 'scan_boarding_pass_2';
 export const ALTERNATE_BOARDING_PASS_INPUT = 'alternate_boaring_pass_input';
 export const FIRST_NAME_CHANGED = 'first_name_changed';
 export const LAST_NAME_CHANGED = 'last_name_changed';

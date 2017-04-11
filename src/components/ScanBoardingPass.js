@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { scanBoardingPass, firstNameChanged, lastNameChanged, airlineChanged, flightNumberChanged, alternateBoardingPassInput, setTimeStart } from '../actions';
 import Camera from 'react-native-camera';
 import { Actions } from 'react-native-router-flux';
+import _ from 'lodash';
 import { Button, CardSection } from './common'
 import Footer from './Footer';
 import Style from './Style';
@@ -13,23 +14,24 @@ class ScanBoardingPass extends Component {
 	constructor(props) {
 		super(props);
 		this.props.setTimeStart();
+		this.state = {
+			callCount: 0
+		}
 	} 
-
-	parseBoardingPass(boardingPassData) {
-		// return boardingPass;
-	}
 
 	onReadSuccess(boardingPassString) {
 		
 		const slash = boardingPassString.data.indexOf('/');
 
-		const boardingPass = {
+		const boardingPassData = {
 			firstName: boardingPassString.data.substring(slash + 1, 21).trim(),
 			lastName: boardingPassString.data.substring(2, slash),
 			airline: boardingPassString.data.substring(36, 38),
 			flightNumber: boardingPassString.data.substring(36, 43)
 		}
-		this.props.scanBoardingPass(boardingPass)
+		this.props.scanBoardingPass(boardingPassData, this.props.numPassengers, this.props.passenger1FirstName);
+		// this.setState({callCount: 1});
+	
 	}
 
 	render() {
@@ -52,9 +54,9 @@ class ScanBoardingPass extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { boardingPass } = departure;
+  const { passenger1FirstName, numPassengers } = departure;
 
-  return { boardingPass };
+  return { passenger1FirstName, numPassengers };
 };
 
 export default connect(mapStateToProps, {

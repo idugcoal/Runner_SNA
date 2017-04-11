@@ -12,8 +12,8 @@ class Footer extends Component {
 	render() {
 		return(
 			<View style={Style.footer}>
-        	<Text>Wheelchair #: {this.props.wheelchairNumber}</Text>
-        	<Text>Name: {this.props.firstName + ' ' + this.props.lastName}</Text>
+        	<Text>Wheelchair #: {this.props.passenger1Wheelchair}</Text>
+        	<Text>Name: {this.props.passenger1FirstName + ' ' + this.props.passenger1LastName}</Text>
         	<Text>Airline: {this.props.airline}</Text>
         	<Text>Flight #: {this.props.flightNumber}</Text>
         	<Text>Destination Gate #: {this.props.destinationGate}</Text>
@@ -24,9 +24,9 @@ class Footer extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { firstName, lastName, airline, flightNumber, wheelchairNumber, destinationGate, currentGPS } = departure;
+  const { passenger1FirstName, passenger1LastName, airline, flightNumber, passenger1Wheelchair, destinationGate, currentGPS } = departure;
 
-  return { firstName, lastName, airline, flightNumber, wheelchairNumber, destinationGate, currentGPS };
+  return { passenger1FirstName, passenger1LastName, airline, flightNumber, passenger1Wheelchair, destinationGate, currentGPS };
 };
 
 export default connect(mapStateToProps, {})(Footer);

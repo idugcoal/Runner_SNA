@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import { connect } from 'react-redux'
 import { addStop, startTSA } from '../actions';
+import { Actions } from 'react-native-router-flux'
 import { Button, CardSection, ImageButton } from './common';
 import Footer from './Footer';
 import Style from './Style';
@@ -27,7 +28,7 @@ class SelectStopsNonSterile extends Component {
 			);
 		} else if(this.props.runType === 'arrival') {
 			return (
-				<Button onPress={() => alert('baggage claim')}>
+				<Button onPress={() => Actions.baggageClaim()}>
 					Go to Baggage Claim
 				</Button>
 			);

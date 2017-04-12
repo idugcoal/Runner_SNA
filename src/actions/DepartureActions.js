@@ -43,7 +43,6 @@ export const setRunType = (runType) => {
 				payload: runType
 			})
 		}
-		//do arrival stuff
 	} else if (runType == 'checkin') {
 		//do checkin stuff
 	}
@@ -53,7 +52,7 @@ export const setRunType = (runType) => {
 
 export const setNumberOfPassengers = (runType, number) => {
 	if(runType === 'departure') {	
-		Actions.selectWheelchair({title: "Select Wheelchair"});
+		Actions.selectWheelchair({title: "Select Wheelchair #1"});
 		return(dispatch) => {
 			dispatch({
 				type: SET_NUMBER_OF_PASSENGERS,
@@ -61,7 +60,7 @@ export const setNumberOfPassengers = (runType, number) => {
 			})
 		}
 	} else if(runType === 'arrival') {
-		Actions.selectWheelchair();
+		Actions.selectWheelchair({title: "Select Wheelchair #1"});
 		return(dispatch) => {
 			dispatch({
 				type: SET_NUMBER_OF_PASSENGERS,
@@ -104,6 +103,7 @@ export const selectWheelchair = (runType, wheelchairNumber, passenger1Wheelchair
 	  //if there are two passengers, 
 	  //if wheelchair1 is empty, set wheelchair1 to wheelchairNumber, route to select wheelchair
 	  if(passenger1Wheelchair === '') {
+	  	alert('inpassenger1 wheelchair')
 	  	return(dispatch) => {
 	  		dispatch({
 	  			type: SELECT_WHEELCHAIR_1,
@@ -112,6 +112,7 @@ export const selectWheelchair = (runType, wheelchairNumber, passenger1Wheelchair
 	  	}
 	  //if wheelchair1 is not empty, set wheelchair2 to wheelchairNumber, route to scan boarding pass
 	  } else {
+	  	alert('inpassenger2 wheelchair')
 	  	return(dispatch) => {
 	  		dispatch({
 	  			type: SELECT_WHEELCHAIR_2,
@@ -130,6 +131,7 @@ export const scanBoardingPass = (runType, boardingPassData, numPassengers, passe
 	// if(runType === 'departure') {
 		//if there's one passenger, set boardingPass1 to boardingPassData, route to selectGate
 		if(numPassengers === 1) {
+			alert('numPassengers===1')
 			Actions.selectGate();
 			return(dispatch) => {
 				dispatch({
@@ -141,6 +143,7 @@ export const scanBoardingPass = (runType, boardingPassData, numPassengers, passe
 		//if there are two passengers, 
 		//if passenger1FirstName is empty, set boardingPass1 to boardingPassData, route to selectWheelchair
 		else if(passenger1FirstName === '') {
+			alert('else if')
 			Actions.selectWheelchair({type: 'reset'});
 			return(dispatch) => {
 				dispatch({
@@ -150,6 +153,7 @@ export const scanBoardingPass = (runType, boardingPassData, numPassengers, passe
 			}
 		//if passenger1FirstName is not empty, set boardingPass2 to boardingPassData, route to selectGate
 		}	else {
+			alert('else')
 			Actions.selectGate();
 			return(dispatch) => {
 				dispatch({

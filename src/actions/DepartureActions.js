@@ -36,6 +36,13 @@ export const setRunType = (runType) => {
 			})
 		}
 	} else if (runType === 'arrival') {
+		Actions.selectNumberOfWheelchairs();
+		return(dispatch) => {
+			dispatch({
+				type: SET_RUN_TYPE,
+				payload: runType
+			})
+		}
 		//do arrival stuff
 	} else if (runType == 'checkin') {
 		//do checkin stuff
@@ -47,6 +54,14 @@ export const setRunType = (runType) => {
 export const setNumberOfPassengers = (runType, number) => {
 	if(runType === 'departure') {	
 		Actions.selectWheelchair({title: "Select Wheelchair"});
+		return(dispatch) => {
+			dispatch({
+				type: SET_NUMBER_OF_PASSENGERS,
+				payload: number
+			})
+		}
+	} else if(runType === 'arrival') {
+		Actions.selectWheelchair();
 		return(dispatch) => {
 			dispatch({
 				type: SET_NUMBER_OF_PASSENGERS,
@@ -83,7 +98,7 @@ export const addStartingPoint = (runType, buttonLocation, position) => {
 
 export const selectWheelchair = (runType, wheelchairNumber, passenger1Wheelchair) => {
 
-	if(runType === 'departure') {
+	// if(runType === 'departure') {
 	  //if there's one passenger, set wheelchair1 to wheelchairNumber, route to scan boarding pass
 	  Actions.scanBoardingPass({title: "Scan Boarding Pass"});
 	  //if there are two passengers, 
@@ -104,12 +119,15 @@ export const selectWheelchair = (runType, wheelchairNumber, passenger1Wheelchair
 	  		})
 	  	}
 	  }
-	}
+	// } else if(runType === 'arrival') {
+	// 	alert('selectWheelchair arrival')
+	// }
+
 };
 
 export const scanBoardingPass = (runType, boardingPassData, numPassengers, passenger1FirstName) => {
 
-	if(runType === 'departure') {
+	// if(runType === 'departure') {
 		//if there's one passenger, set boardingPass1 to boardingPassData, route to selectGate
 		if(numPassengers === 1) {
 			Actions.selectGate();
@@ -140,7 +158,9 @@ export const scanBoardingPass = (runType, boardingPassData, numPassengers, passe
 				})
 			}	
 		}
-	}
+	// } else if(runType === 'arrival') {
+	// 	alert('scanBoardingPass arrival')
+	// }
 };
 
 export const alternateBoardingPassInput = (numPassengers) => {
@@ -207,6 +227,14 @@ export const selectGateNumber = (runType, text) => {
 				payload: text
 			});
 		};
+	} else if (runType === 'arrival') {
+		Actions.selectStopsSterile();
+		return(dispatch) => {
+			dispatch({
+				type: SELECT_GATE_NUMBER,
+				payload: text
+			})
+		}
 	}
 };
 

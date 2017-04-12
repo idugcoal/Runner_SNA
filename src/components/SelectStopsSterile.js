@@ -48,6 +48,22 @@ class SelectStopsSterile extends Component {
 				))
 	}
 
+	renderEndingButton() {
+		if(this.props.runType === 'departure') {
+			return (
+				<Button onPress={this.onGateArrival.bind(this)}>
+						Gate Arrival
+					</Button>
+			);
+		} else if(this.props.runType === 'arrival') {
+			return (
+				<Button onPress={() => Actions.selectStopsNonSterile()}>
+						Go Downstairs
+				</Button>
+			);
+		}
+	}
+
 	render() {
 		return (
 			<View style={Style.container}>
@@ -62,9 +78,7 @@ class SelectStopsSterile extends Component {
 					{this.renderButtons()}
 				</View>
 				<CardSection>
-					<Button onPress={this.onGateArrival.bind(this)}>
-						Gate Arrival
-					</Button>
+					{this.renderEndingButton()}
 				</CardSection>
 				<Footer />
 				<Modal
@@ -92,9 +106,9 @@ class SelectStopsSterile extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { passenger1Wheelchair, flightNumber, airline, passenger1FirstName, passenger1LastName, destinationGate } = departure;
+  const { passenger1Wheelchair, flightNumber, airline, passenger1FirstName, passenger1LastName, destinationGate, runType } = departure;
 
-  return { passenger1Wheelchair, flightNumber, airline, passenger1FirstName, passenger1LastName, destinationGate };
+  return { passenger1Wheelchair, flightNumber, airline, passenger1FirstName, passenger1LastName, destinationGate, runType };
 };
 
 export default connect(mapStateToProps, { setTimeEnd })(SelectStopsSterile);

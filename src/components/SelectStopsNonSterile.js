@@ -18,6 +18,22 @@ class SelectStopsNonSterile extends Component {
 		// this.props.addStop(stopLocation);
 	}
 
+	renderEndingButton() {
+		if(this.props.runType === 'departure') {
+			return (
+				<Button onPress={() => this.props.startTSA()}>
+					TSA Start
+				</Button>
+			);
+		} else if(this.props.runType === 'arrival') {
+			return (
+				<Button onPress={() => alert('baggage claim')}>
+					Go to Baggage Claim
+				</Button>
+			);
+		}
+	}
+
 	render() {
 		return (
 			<View style={Style.container}>
@@ -69,9 +85,7 @@ class SelectStopsNonSterile extends Component {
 						
 					</View>
 					<CardSection>
-						<Button onPress={() => this.props.startTSA()}>
-							TSA Start
-						</Button>
+						{this.renderEndingButton()}
 					</CardSection>
 				</View>
 				<Footer />
@@ -83,9 +97,9 @@ class SelectStopsNonSterile extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { wheelchairNumber, flightNumber, airline, passenger1FirstName, passenger1LastName, stops } = departure;
+  const { wheelchairNumber, flightNumber, airline, passenger1FirstName, passenger1LastName, stops, runType } = departure;
 
-  return { wheelchairNumber, flightNumber, airline, passenger1FirstName, passenger1LastName, stops };
+  return { wheelchairNumber, flightNumber, airline, passenger1FirstName, passenger1LastName, stops, runType };
 };
 
 export default connect(mapStateToProps, { 

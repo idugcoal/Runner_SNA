@@ -14,9 +14,6 @@ class ScanBoardingPass extends Component {
 	constructor(props) {
 		super(props);
 		this.props.setTimeStart();
-		this.state = {
-			callCount: 0
-		}
 	} 
 
 	onReadSuccess(boardingPassString) {
@@ -29,8 +26,19 @@ class ScanBoardingPass extends Component {
 			airline: boardingPassString.data.substring(36, 38),
 			flightNumber: boardingPassString.data.substring(36, 43)
 		}
-		this.props.scanBoardingPass(boardingPassData, this.props.numPassengers, this.props.passenger1FirstName);
-		// this.setState({callCount: 1});
+		this.props.scanBoardingPass(
+			this.props.runType,
+			this.props.numPassengers,
+			this.props.passenger1Wheelchair,
+			this.props.passenger2Wheelchair,
+			this.props.passenger1FirstName,
+			this.props.passenger1LastName,
+			this.props.passenger2FirstName,
+			this.props.passenger2LastName,
+			this.props.airline,
+			this.props.flightNumber,
+			boardingPassData
+			);
 	
 	}
 
@@ -54,9 +62,9 @@ class ScanBoardingPass extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { passenger1FirstName, numPassengers } = departure;
+  const { passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, flightNumber, numPassengers, airline, runType } = departure;
 
-  return { passenger1FirstName, numPassengers };
+  return { passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, flightNumber, numPassengers, airline, runType };
 };
 
 export default connect(mapStateToProps, {

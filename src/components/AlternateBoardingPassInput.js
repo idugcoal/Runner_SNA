@@ -37,8 +37,23 @@ class AlternateBoardingPassInput extends Component {
 		this.props.airlineChanged(text);
 	}
 
+  navigateToNext() {
+    if (this.props.numPassengers === 1 && this.props.passenger1FirstName != '' && this.props.passenger1LastName != '' && this.props.airline != '' && this.props.flightNumber != '') {
+      Actions.selectGate();
+    }
+    else if (this.props.numPassengers === 1) {
+      alert("Please fill out passenger information");
+    }
+    else if (this.props.numPassengers == 2 && this.props.passenger1FirstName != '' && this.props.passenger1LastName != '' && this.props.passenger2FirstName != '' && this.props.passenger2LastName != '' && this.props.airline != '' && this.props.flightNumber != '' && this.props.passenger2Wheelchair != '') {
+      Actions.selectGate();
+    }
+
+    else if (this.props.numPassengers === 2) {
+      Actions.selectWheelchair({ title: "Select Wheelchair #2"});
+    }
+  }
+
   renderSecondPassengerInput() {
-    
     if(this.props.numPassengers === 2) {
       return [
         <CardSection>
@@ -60,16 +75,6 @@ class AlternateBoardingPassInput extends Component {
       ];
     } else {
       return <View></View>;
-    }
-  }
-
-  navigateToNext() {
-    if(this.props.numPassengers === 1 && this.props.passenger1FirstName != '' && this.props.passenger1LastName != '' && this.props.passenger1Wheelchair != '' ) {
-      Actions.selectGate();
-    } else if (this.props.numPassengers === 2 && this.props.passenger2FirstName != '' && this.props.passenger2LastName != '' && this.props.passenger2Wheelchair != '') {
-      Actions.selectGate();
-    } else {
-      Actions.selectWheelchair();
     }
   }
 

@@ -32,7 +32,19 @@ class SelectWheelchair extends Component {
 
   onButtonPress(buttonValue) {
       this.setState({open: true})
-      this.props.selectWheelchair(this.props.runType, buttonValue, this.props.passenger1Wheelchair)
+      this.props.selectWheelchair(
+        this.props.runType,
+        this.props.numPassengers, 
+        this.props.passenger1Wheelchair,
+        this.props.passenger2Wheelchair,
+        this.props.passenger1FirstName,
+        this.props.passenger1LastName,
+        this.props.passenger2FirstName,
+        this.props.passenger2LastName,
+        this.props.airline,
+        this.props.flightNumber,
+        buttonValue
+       )
   }
 
   renderButtons() {
@@ -62,9 +74,9 @@ class SelectWheelchair extends Component {
 };
 
 const mapStateToProps = ({ departure }) => {
-  const { passenger1Wheelchair, passenger2Wheelchair, runType } = departure;
+  const { passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, flightNumber, numPassengers, airline, runType } = departure;
 
-  return { passenger1Wheelchair, passenger2Wheelchair, runType };
+  return { passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, flightNumber, numPassengers, airline, runType };
 };
 
 export default connect(mapStateToProps, { selectWheelchair })(SelectWheelchair);

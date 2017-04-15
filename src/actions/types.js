@@ -31,4 +31,6 @@ export const SET_TIME_START = 'set_time_start';
 export const SET_TIME_END = 'set_time_end';
 export const SET_RUN_TYPE = 'set_run_type';
 
+//checkin actions
+export const UPDATE_WHEELCHAIR_POSITION = 'update_wheelchair_position';
 

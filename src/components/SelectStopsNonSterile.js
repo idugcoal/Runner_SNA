@@ -6,7 +6,9 @@ import { Actions } from 'react-native-router-flux'
 import { Button, CardSection, ImageButton } from './common';
 import Footer from './Footer';
 import Style from './Style';
-import { cnbc, cnn, latapenade, octravelmart, starbucks, zovs, phone, restroom } from '../../assets';
+// import { cnbc, cnn, latapenade, octravelmart, starbucks, zovs, phone, restroom } from '../../assets';
+import { nonSterile } from '../../assets';
+import chunk from 'lodash/chunk';
 
 class SelectStopsNonSterile extends Component {
 
@@ -35,56 +37,19 @@ class SelectStopsNonSterile extends Component {
 		}
 	}
 
+	renderButtons() {
+		return chunk(nonSterile, 4).map(row => (
+					<View style={Style.row}>
+						{row.map(item => <ImageButton source={item.image} onPress={this.onButtonPress.bind(this, item.name)} key={item.name}/>)}
+					</View>
+				))
+	}
+
 	render() {
 		return (
 			<View style={Style.container}>
 				<View style={Style.content}>
-					<View style={Style.row}>
-						
-						<ImageButton 
-							source={cnbc}
-							onPress={this.onButtonPress.bind(this, 'cnbc')}
-						/>
-						<ImageButton 
-							source={cnn}
-							onPress={this.onButtonPress.bind(this, 'cnn')}
-						/>
-						
-
-					</View>
-					<View style={Style.row}>
-							<ImageButton 
-							source={latapenade} 
-							onPress={this.onButtonPress.bind(this, 'laTapenade')}
-						/>
-						<ImageButton 
-							source={octravelmart}
-							onPress={this.onButtonPress.bind(this, 'ocTravelMart')}
-						/>
-						
-					</View>
-					<View style={Style.row}>
-							<ImageButton 
-							source={starbucks} 
-							onPress={this.onButtonPress.bind(this, 'starbucks')}
-						/>
-						<ImageButton 
-							source={zovs}
-							onPress={this.onButtonPress.bind(this, 'zovs')}
-						/>
-						
-					</View>
-						<View style={Style.row}>
-							<ImageButton 
-							source={phone}
-							onPress={this.onButtonPress.bind(this, 'phone')}
-						/>
-						<ImageButton 
-							source={restroom} 
-							onPress={this.onButtonPress.bind(this, 'restroom')}
-						/>
-						
-					</View>
+					{this.renderButtons()}
 					<CardSection>
 						{this.renderEndingButton()}
 					</CardSection>
@@ -98,9 +63,9 @@ class SelectStopsNonSterile extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { wheelchairNumber, flightNumber, airline, passenger1FirstName, passenger1LastName, stops, runType } = departure;
+  const { stops } = departure;
 
-  return { wheelchairNumber, flightNumber, airline, passenger1FirstName, passenger1LastName, stops, runType };
+  return { stops };
 };
 
 export default connect(mapStateToProps, { 

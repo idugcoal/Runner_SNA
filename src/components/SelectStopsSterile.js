@@ -106,9 +106,9 @@ class SelectStopsSterile extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { passenger1Wheelchair, flightNumber, airline, passenger1FirstName, passenger1LastName, destinationGate, runType } = departure;
+  const { stops } = departure;
 
-  return { passenger1Wheelchair, flightNumber, airline, passenger1FirstName, passenger1LastName, destinationGate, runType };
+  return { stops };
 };
 
 export default connect(mapStateToProps, { setTimeEnd })(SelectStopsSterile);

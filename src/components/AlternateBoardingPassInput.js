@@ -54,11 +54,10 @@ class AlternateBoardingPassInput extends Component {
     else if (this.props.passenger2Wheelchair == '') {
       Actions.selectWheelchair({ type: "reset", title: "Select Wheelchair #2" })
     }
-    // if there are two passengers and any passenger/flight info fields are empty
+    // if there are two passengers and fields are empty
     else if (this.props.numPassengers === 2) {
-      console.log('1', this.props.numPassengers, '2', this.props.passenger1FirstName, '3', this.props.passenger1LastName, '4', this.props.passenger2FirstName, '5', this.props.passenger2LastName, '6', this.props.airline, '7', this.props.flightNumber)
-      //Actions.selectWheelchair({ type: 'reset', title: 'Select Wheelchair #2' });
-      alert("Please fill out passenger information poop")
+      // console.log('1', this.props.numPassengers, '2', this.props.passenger1FirstName, '3', this.props.passenger1LastName, '4', this.props.passenger2FirstName, '5', this.props.passenger2LastName, '6', this.props.airline, '7', this.props.flightNumber)
+      alert("Please fill out passenger information")
     }
   }
 

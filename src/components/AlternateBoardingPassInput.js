@@ -38,20 +38,27 @@ class AlternateBoardingPassInput extends Component {
 	}
 
   navigateToNext() {
+    // if there's one passenger and no fields are empty
     if (this.props.numPassengers === 1 && this.props.passenger1FirstName != '' && this.props.passenger1LastName != '' && this.props.airline != '' && this.props.flightNumber != '') {
       Actions.selectGate();
     }
+    // if there's one passenger and any field is emtpy
     else if (this.props.numPassengers === 1) {
       alert("Please fill out passenger information");
     }
-    else if (this.props.numPassengers == 2 && this.props.passenger1FirstName != '' && this.props.passenger1LastName != '' && this.props.passenger2FirstName != '' && this.props.passenger2LastName != '' && this.props.airline != '' && this.props.flightNumber != '' && this.props.passenger2Wheelchair != '') {
+    // if there are two passengers and no fields are empty
+    else if (this.props.numPassengers == 2 && this.props.passenger1FirstName != '' && this.props.passenger1LastName != '' && this.props.passenger2FirstName != '' && this.props.passenger2LastName != '' && this.props.airline != '' && this.props.flightNumber != '') {
       Actions.selectGate();
     }
-    else if (this.props.numPassengers == 2 && (this.props.passenger2FirstName === '' || this.passenger2LastName === '' || this.props.airline === '' || this.props.flightNumber === '')) {
-      alert("Please fill out passenger information");
+    // if there are two passengers and the only empty field is wheelchair #2
+    else if (this.props.passenger2Wheelchair == '') {
+      Actions.selectWheelchair({ type: "reset", title: "Select Wheelchair #2" })
     }
+    // if there are two passengers and any passenger/flight info fields are empty
     else if (this.props.numPassengers === 2) {
-      Actions.selectWheelchair({ type: 'reset', title: 'Select Wheelchair #2' });
+      console.log('1', this.props.numPassengers, '2', this.props.passenger1FirstName, '3', this.props.passenger1LastName, '4', this.props.passenger2FirstName, '5', this.props.passenger2LastName, '6', this.props.airline, '7', this.props.flightNumber)
+      //Actions.selectWheelchair({ type: 'reset', title: 'Select Wheelchair #2' });
+      alert("Please fill out passenger information poop")
     }
   }
 

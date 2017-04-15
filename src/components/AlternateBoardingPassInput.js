@@ -47,6 +47,9 @@ class AlternateBoardingPassInput extends Component {
     else if (this.props.numPassengers == 2 && this.props.passenger1FirstName != '' && this.props.passenger1LastName != '' && this.props.passenger2FirstName != '' && this.props.passenger2LastName != '' && this.props.airline != '' && this.props.flightNumber != '' && this.props.passenger2Wheelchair != '') {
       Actions.selectGate();
     }
+    else if (this.props.numPassengers == 2 && (this.props.passenger2FirstName === '' || this.passenger2LastName === '' || this.props.airline === '' || this.props.flightNumber === '')) {
+      alert("Please fill out passenger information");
+    }
     else if (this.props.numPassengers === 2) {
       Actions.selectWheelchair({ type: 'reset', title: 'Select Wheelchair #2' });
     }
@@ -133,7 +136,6 @@ class AlternateBoardingPassInput extends Component {
     			<Footer />
 			</View>
 		);
-
 	}
 }
 

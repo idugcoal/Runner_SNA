@@ -25,13 +25,9 @@ class SelectWheelchair extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      open: true,
-    }
   }
 
   onButtonPress(buttonValue) {
-      this.setState({open: true})
       this.props.selectWheelchair(
         this.props.runType,
         this.props.numPassengers, 

@@ -13,11 +13,9 @@ class ScanBoardingPass extends Component {
 	
 	constructor(props) {
 		super(props);
-		this.props.setTimeStart();
 	} 
 
 	onReadSuccess(boardingPassString) {
-		
 		switch(boardingPassString.data.substring(36, 38)) {
 			case 'AS':
 				var airline = 'Alaska';
@@ -42,6 +40,7 @@ class ScanBoardingPass extends Component {
 			airline: airline,
 			flightNumber: boardingPassString.data.substring(36, 43)
 		}
+		
 		this.props.scanBoardingPass(
 			this.props.runType,
 			this.props.numPassengers,
@@ -54,7 +53,7 @@ class ScanBoardingPass extends Component {
 			this.props.airline,
 			this.props.flightNumber,
 			boardingPassData
-			);
+		);
 	}
 
 	render() {

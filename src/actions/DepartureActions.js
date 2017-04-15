@@ -46,8 +46,6 @@ export const setRunType = (runType) => {
 	} else if (runType == 'checkin') {
 		//do checkin stuff
 	}
-
-	
 }
 
 export const setNumberOfPassengers = (runType, number) => {
@@ -97,23 +95,6 @@ export const addStartingPoint = (runType, buttonLocation, position) => {
 
 export const selectWheelchair = (runType, numPassengers, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, airline, flightNumber, buttonValue) => {
 
-	  // Actions.scanBoardingPass({title: "Scan Boarding Pass"});
-	  // if(passenger1Wheelchair === '') {
-	  // 	return(dispatch) => {
-	  // 		dispatch({
-	  // 			type: SELECT_WHEELCHAIR_1,
-	  // 			payload: wheelchairNumber
-	  // 		})
-	  // 	}
-	  // } else {
-	  // 	return(dispatch) => {
-	  // 		dispatch({
-	  // 			type: SELECT_WHEELCHAIR_2,
-	  // 			payload: wheelchairNumber
-	  // 		})
-	  // 	}
-	  // }
-
 	if (numPassengers === 1) {
 		Actions.scanBoardingPass({ title: "Scan Boarding Pass" });
 		return(dispatch) => {
@@ -125,7 +106,6 @@ export const selectWheelchair = (runType, numPassengers, passenger1Wheelchair, p
 	}
 
 	if (numPassengers === 2) {
-		console.log('runType', runType, 'numPassengers', numPassengers, 'passenger1Wheelchair', passenger1Wheelchair, "passenger2Wheelchair", passenger2Wheelchair, "passenger1FirstName", passenger1FirstName, "passenger1LastName", passenger1LastName, "passenger2FirstName", passenger2FirstName, "passenger2LastName", passenger2LastName, "airline", airline, "flightNumber", flightNumber, "buttonValue", buttonValue)
 		if (passenger1Wheelchair === '') {
 			Actions.scanBoardingPass({ title: "Scan Boarding Pass #1" });
 			return(dispatch) => {
@@ -153,7 +133,6 @@ export const selectWheelchair = (runType, numPassengers, passenger1Wheelchair, p
 				})
 			}
 		}
-
 	}
 };
 
@@ -189,20 +168,6 @@ export const scanBoardingPass = (runType, numPassengers, passenger1Wheelchair, p
 				})
 			}	
 		}
-
-
-
-};
-
-export const alternateBoardingPassInput = (numPassengers, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, airline, flightNumber) => {
-	// //if there's one passenger, go to selectGate
-	// if(numPassengers === 1) {
-	// 	Actions.selectGate({type: 'reset'});
-	// } else {
-	// //if there are two passengers, go to selectWheelchair
-	// 	Actions.selectWheelchair();
-	// }
-
 };
 
 export const passenger1FirstNameChanged = (text) => {
@@ -247,8 +212,6 @@ export const flightNumberChanged = (text) => {
   };
 };
 
-
-
 export const selectGateNumber = (runType, text) => {
 	
 	if(runType === 'departure') {
@@ -281,7 +244,6 @@ export const startTSA = () => {
 			payload: timeTSAStart
 		})
 	}
-
 }
 
 export const addCommentsTSA = (text) => {

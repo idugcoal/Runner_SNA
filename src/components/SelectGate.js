@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import { selectGateNumber, setFinalGateNumber } from '../actions';
 import NumberButton from './common/NumberButton';
@@ -20,6 +20,10 @@ class SelectGate extends Component {
     this.state = {
       final: this.props.final
     }
+  }
+
+  componentWillMount() {
+    Keyboard.dismiss();
   }
 
   onButtonPress(gateNumber) {

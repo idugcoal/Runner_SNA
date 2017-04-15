@@ -33,7 +33,6 @@ class ScanBoardingPass extends Component {
 				var airline = 'Southwest';
 			case 'WS':
 				var airline = 'WestJet';
-
 		}
 
 		const slash = boardingPassString.data.indexOf('/');
@@ -56,7 +55,6 @@ class ScanBoardingPass extends Component {
 			this.props.flightNumber,
 			boardingPassData
 			);
-	
 	}
 
 	render() {

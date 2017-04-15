@@ -47,9 +47,8 @@ class AlternateBoardingPassInput extends Component {
     else if (this.props.numPassengers == 2 && this.props.passenger1FirstName != '' && this.props.passenger1LastName != '' && this.props.passenger2FirstName != '' && this.props.passenger2LastName != '' && this.props.airline != '' && this.props.flightNumber != '' && this.props.passenger2Wheelchair != '') {
       Actions.selectGate();
     }
-
     else if (this.props.numPassengers === 2) {
-      Actions.selectWheelchair({ title: "Select Wheelchair #2"});
+      Actions.selectWheelchair({ type: 'reset', title: 'Select Wheelchair #2' });
     }
   }
 
@@ -114,6 +113,7 @@ class AlternateBoardingPassInput extends Component {
         		selectedValue={this.props.airline}
         		onValueChange={this.onAirlineChange.bind(this)}
         	>
+            <Picker.Item label="Please select an airline" value="" />
         		<Picker.Item label="Alaska" value="Alaska" />
         		<Picker.Item label="American" value="American" />
         		<Picker.Item label="Delta" value="Delta" />

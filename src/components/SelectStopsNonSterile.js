@@ -63,9 +63,9 @@ class SelectStopsNonSterile extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { stops } = departure;
+  const { stops, runType } = departure;
 
-  return { stops };
+  return { stops, runType };
 };
 
 export default connect(mapStateToProps, { 

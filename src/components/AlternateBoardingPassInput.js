@@ -39,7 +39,10 @@ class AlternateBoardingPassInput extends Component {
 
   navigateToNext() {
     // if there's one passenger and no fields are empty
-    if (this.props.numPassengers === 1 && this.props.passenger1FirstName != '' && this.props.passenger1LastName != '' && this.props.airline != '' && this.props.flightNumber != '') {
+    if(this.props.runType === 'arrival') {
+      Actions.selectStopsSterile();
+    }
+    else if (this.props.numPassengers === 1 && this.props.passenger1FirstName != '' && this.props.passenger1LastName != '' && this.props.airline != '' && this.props.flightNumber != '') {
       Actions.selectGate();
     }
     // if there's one passenger and any field is emtpy
@@ -146,9 +149,9 @@ class AlternateBoardingPassInput extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, airline, flightNumber, numPassengers } = departure;
+  const { runType, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, airline, flightNumber, numPassengers } = departure;
 
-  return { passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, airline, flightNumber, numPassengers };
+  return { runType, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, airline, flightNumber, numPassengers };
 };
 
 export default connect(mapStateToProps, {

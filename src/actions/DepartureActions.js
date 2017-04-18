@@ -29,6 +29,7 @@ export const setRunType = (runType) => {
 
 	if(runType === 'departure') {
 		Actions.selectStartingPoint();
+		//write to database
 		return(dispatch) => {
 			dispatch({
 				type: SET_RUN_TYPE,
@@ -36,7 +37,9 @@ export const setRunType = (runType) => {
 			})
 		}
 	} else if (runType === 'arrival') {
-		Actions.selectNumberOfWheelchairs();
+		// Actions.selectNumberOfWheelchairs();
+		Actions.selectGate();
+		//write to database
 		return(dispatch) => {
 			dispatch({
 				type: SET_RUN_TYPE,
@@ -117,6 +120,7 @@ export const selectWheelchair = (runType, numPassengers, passenger1Wheelchair, p
 		}
 		if (passenger1Wheelchair != '' && passenger1FirstName != '' && passenger1LastName != '' && passenger2FirstName != '' && passenger2LastName != '' && flightNumber != '') {
 			Actions.selectGate();
+			//write to database
 			return(dispatch) => {
 				dispatch({
 					type: SELECT_WHEELCHAIR_2,
@@ -141,6 +145,7 @@ export const scanBoardingPass = (runType, numPassengers, passenger1Wheelchair, p
 		//if there's one passenger, set boardingPass1 to boardingPassData, route to selectGate
 		if(numPassengers === 1) {
 			Actions.selectGate();
+			//write to database
 			return(dispatch) => {
 				dispatch({
 					type: SCAN_BOARDING_PASS_1,
@@ -160,6 +165,7 @@ export const scanBoardingPass = (runType, numPassengers, passenger1Wheelchair, p
 			}
 		//if passenger1FirstName is not empty, set boardingPass2 to boardingPassData, route to selectGate
 		}	else {
+			//write to database
 			Actions.selectGate();
 			return(dispatch) => {
 				dispatch({
@@ -223,7 +229,8 @@ export const selectGateNumber = (runType, text) => {
 			});
 		};
 	} else if (runType === 'arrival') {
-		Actions.selectStopsSterile();
+		// Actions.selectStopsSterile();
+		Actions.selectNumberOfWheelchairs();
 		return(dispatch) => {
 			dispatch({
 				type: SELECT_GATE_NUMBER,
@@ -237,7 +244,7 @@ export const startTSA = () => {
 
 	const timeTSAStart = Date.now();
 	Actions.tsa();
-
+	//write to database
 	return(dispatch) => {
 		dispatch({
 			type: TSA_START,
@@ -257,7 +264,7 @@ export const addCommentsTSA = (text) => {
 	}
 
 	Actions.selectStopsSterile({ type: 'reset' });
-
+	//write to database
 	return(dispatch) => {
 		dispatch({
 			type: TSA_END,
@@ -279,6 +286,7 @@ export const setFinalGateNumber = (text) => {
 }
 
 export const addStop = (text) => {
+	//write to database
 	return(dispatch) => {
 		dispatch({
 			type: ADD_STOP,
@@ -298,7 +306,7 @@ export const updateCurrentPosition = (position) => {
 	}
 
 	console.log('in action creator', payload);
-
+	//write to database
 	return(dispatch) => {
 			dispatch({
 				type: UPDATE_CURRENT_POSITION,
@@ -307,6 +315,7 @@ export const updateCurrentPosition = (position) => {
 		}
 }
 export const setTimeStart = () => {
+	//write to database
 	return(dispatch) => {
 		dispatch({
 			type: SET_TIME_START,
@@ -316,7 +325,7 @@ export const setTimeStart = () => {
 }
 
 export const setTimeEnd = () => {
-	
+	//write to database
 	return(dispatch) => {
 		dispatch({
 			type: SET_TIME_END,

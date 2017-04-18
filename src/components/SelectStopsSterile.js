@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Keyboard } from 'react-native';
 import { connect } from 'react-redux'
 import Modal from 'react-native-simple-modal'
 import { setTimeEnd } from '../actions';
@@ -20,6 +20,11 @@ class SelectStopsSterile extends Component {
 			open: false
 		}
 	}
+
+	componentWillMount() {
+		Keyboard.dismiss();
+	}
+
 
 	onButtonPress(stopLocation) {
 		console.log('stopLocation in SelectStopsSterile:', stopLocation);
@@ -106,9 +111,9 @@ class SelectStopsSterile extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { stops } = departure;
+  const { stops, runType, destinationGate } = departure;
 
-  return { stops };
+  return { stops, runType, destinationGate };
 };
 
 export default connect(mapStateToProps, { setTimeEnd })(SelectStopsSterile);

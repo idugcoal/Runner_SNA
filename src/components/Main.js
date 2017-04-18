@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Keyboard } from 'react-native';
+import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { updateCurrentPosition, setRunType } from '../actions';
@@ -8,6 +9,10 @@ import { Card, CardSection, Button } from './common';
 class Main extends Component {
 	
 	componentWillMount() {
+		// const { currentUser } = firebase.auth();
+		// const uid = currentUser.uid;
+		// console.log(uid, Date.now())
+		// console.log(currentUser);
 
 		Keyboard.dismiss();
 

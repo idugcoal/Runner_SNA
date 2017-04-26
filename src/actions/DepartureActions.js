@@ -118,7 +118,12 @@ export const selectWheelchair = (runType, numPassengers, passenger1Wheelchair, p
 				})
 			}
 		}
-		if (passenger1Wheelchair != '' && passenger1FirstName != '' && passenger1LastName != '' && passenger2FirstName != '' && passenger2LastName != '' && flightNumber != '') {
+		if (passenger1Wheelchair != '' && 
+				passenger1FirstName != '' && 
+				passenger1LastName != '' && 
+				passenger2FirstName != '' && 
+				passenger2LastName != '' && 
+				flightNumber != '') {
 			Actions.selectGate();
 			//write to database
 			return(dispatch) => {
@@ -142,38 +147,52 @@ export const selectWheelchair = (runType, numPassengers, passenger1Wheelchair, p
 
 export const scanBoardingPass = (runType, numPassengers, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, airline, flightNumber, boardingPassData) => {
 
-		//if there's one passenger, set boardingPass1 to boardingPassData, route to selectGate
-		if(numPassengers === 1) {
-			Actions.selectGate();
-			//write to database
-			return(dispatch) => {
-				dispatch({
-					type: SCAN_BOARDING_PASS_1,
-					payload: boardingPassData
+
+	
+	//if there's one passenger, set boardingPass1 to boardingPassData, route to selectGate
+	if(numPassengers === 1) {
+		// Actions.selectGate();
+		//write to database
+		return (dispatch) => {
+			firebase.database().ref(`${runType}`)
+				.push({ passenger1FirstName: passenger1FirstName, 
+								passenger1LastName: passenger1LastName,
+								passenger2FirstName: passenger2FirstName,
+								passenger2LastName: passenger2LastName, 
+								airline: airline, 
+								flightNumber: flightNumber })
+				.then(() => {
+					dispatch({
+						type: SCAN_BOARDING_PASS_1,
+						payload: boardingPassData
+					});
+					Actions.selectGate()
 				})
-			}
 		}
-		//if there are two passengers, 
-		//if passenger1FirstName is empty, set boardingPass1 to boardingPassData, route to selectWheelchair
-		else if(passenger1FirstName === '') {
-			Actions.selectWheelchair({type: 'reset', title: "Select Wheelchair #2"});
-			return(dispatch) => {
-				dispatch({
-					type: SCAN_BOARDING_PASS_1,
-					payload: boardingPassData
-				})
-			}
-		//if passenger1FirstName is not empty, set boardingPass2 to boardingPassData, route to selectGate
-		}	else {
-			//write to database
-			Actions.selectGate();
-			return(dispatch) => {
-				dispatch({
-					type: SCAN_BOARDING_PASS_2,
-					payload: boardingPassData
-				})
-			}	
+		// return(dispatch) => {
+		// }
+	}
+	//if there are two passengers, 
+	//if passenger1FirstName is empty, set boardingPass1 to boardingPassData, route to selectWheelchair
+	else if(passenger1FirstName === '') {
+		Actions.selectWheelchair({type: 'reset', title: "Select Wheelchair #2"});
+		return(dispatch) => {
+			dispatch({
+				type: SCAN_BOARDING_PASS_1,
+				payload: boardingPassData
+			})
 		}
+	//if passenger1FirstName is not empty, set boardingPass2 to boardingPassData, route to selectGate
+	}	else {
+		//write to database
+		Actions.selectGate();
+		return(dispatch) => {
+			dispatch({
+				type: SCAN_BOARDING_PASS_2,
+				payload: boardingPassData
+			})
+		}	
+	}
 };
 
 export const passenger1FirstNameChanged = (text) => {

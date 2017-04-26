@@ -67,7 +67,7 @@ class AlternateBoardingPassInput extends Component {
   renderSecondPassengerInput() {
     if(this.props.numPassengers === 2) {
       return [
-        <CardSection>
+        <CardSection key="1">
             <Input
               label="First Name"
               placeholder="Passenger 2 First Name"
@@ -75,7 +75,7 @@ class AlternateBoardingPassInput extends Component {
               value={this.props.passenger2FirstName}
             />
           </CardSection>,
-          <CardSection>
+          <CardSection key="2">
             <Input
               label="Last Name"
               placeholder="Passenger 2 Last Name"

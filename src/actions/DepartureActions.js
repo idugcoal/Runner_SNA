@@ -190,6 +190,38 @@ export const scanBoardingPass = (runType, numPassengers, passenger1Wheelchair, p
 		}
 	} else if (runType === 'arrival') {
 		// NEARLY IDENTICAL TO ABOVE, JUST WITH DIFFERENT ROUTING (AND NO FIREBASE WRITE)
+		if(numPassengers === 1) {
+			//write to database - PROBABLY DONT DO THIS HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			Actions.selectStopsSterile()
+			return (dispatch) => {
+				dispatch({
+					type: SCAN_BOARDING_PASS_1,
+					payload: boardingPassData
+				});
+			}
+		}
+		
+		//if there are two passengers, 
+		//if passenger1FirstName is empty, set boardingPass1 to boardingPassData, route to selectWheelchair
+		else if(passenger1FirstName === '') {
+			Actions.selectWheelchair({type: 'reset', title: "Select Wheelchair #2"});
+			return(dispatch) => {
+				dispatch({
+					type: SCAN_BOARDING_PASS_1,
+					payload: boardingPassData
+				})
+			}
+		//if passenger1FirstName is not empty, set boardingPass2 to boardingPassData, route to selectGate
+		}	else {
+			//write to database
+			Actions.selectStopsSterile();
+			return(dispatch) => {
+				dispatch({
+					type: SCAN_BOARDING_PASS_2,
+					payload: boardingPassData
+				})
+			}	
+		}
 	}
 };
 

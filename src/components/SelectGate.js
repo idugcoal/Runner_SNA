@@ -16,7 +16,7 @@ class SelectGate extends Component {
 
   constructor(props) {
     super(props);
-
+    alert('hi there')
     this.state = {
       final: this.props.final
     }

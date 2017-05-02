@@ -38,10 +38,12 @@ class AlternateBoardingPassInput extends Component {
 	}
 
   navigateToNext() {
-    // if there's one passenger and no fields are empty
+
+    // always navigate to selectStopsSterile for arrivals
     if(this.props.runType === 'arrival') {
       Actions.selectStopsSterile();
     }
+    // if there's one passenger and no fields are empty
     else if (this.props.numPassengers === 1 && this.props.passenger1FirstName != '' && this.props.passenger1LastName != '' && this.props.airline != '' && this.props.flightNumber != '') {
       Actions.selectGate();
     }

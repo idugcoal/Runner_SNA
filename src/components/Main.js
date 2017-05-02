@@ -26,11 +26,12 @@ class Main extends Component {
 	}
 
 	onDeparture() {
-    this.props.setRunType('departure');
+		console.log(this.props.email)
+    this.props.setRunType('departure', this.props.email);
   }
 
   onArrival() {
-  	this.props.setRunType('arrival');
+  	this.props.setRunType('arrival', this.props.email);
   }
 
   onCheckIn() {
@@ -54,10 +55,12 @@ class Main extends Component {
 	}
 }
 
-const mapStateToProps = ({ departure }) => {
+const mapStateToProps = ({ departure, auth }) => {
   const { currentGPS } = departure;
+  const { email } = auth;
+  console.log(currentGPS, email 	)
 
-  return { currentGPS };
+  return { currentGPS, email };
 };
 
 export default connect(mapStateToProps, { updateCurrentPosition, setRunType })(Main);

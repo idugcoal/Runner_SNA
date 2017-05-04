@@ -47,10 +47,14 @@ export const writeArrivalData = (props) => {
     timeStart,
     startLocation,
     startLocationGPS, 
-    numPassengers, 
+    numPassengers,
+    passenger1FirstName,
+    passenger1LastName,
+    p2FirstName,
+    p2LastName, 
     passenger1Wheelchair, 
     passenger2Wheelchair, 
-    destinationGate, 
+    // destinationGate, 
     user
 	} = props;
 	const path = runType + '/' + timeStart; 
@@ -62,12 +66,28 @@ export const writeArrivalData = (props) => {
 			numPassengers: numPassengers,
 			startLocation: startLocation,
 			startLocationGPS: startLocationGPS,
+			passenger1FirstName: passenger1FirstName,
+			passenger1LastName: passenger1LastName,
+			passenger2FirstName: p2FirstName,
+			passenger2LastName: p2LastName,
 			passenger1Wheelchair: passenger1Wheelchair,
 			passenger2Wheelchair: passenger2Wheelchair,
-			destinationGate: destinationGate,
+			// destinationGate: destinationGate,
 			employeeLogin: user.email
 		});
 }
+
+// export const writePassengerArrivalData = (runType, timeStart, p1FirstName, p1LastName, p2FirstName, p2LastName) => {
+	
+// 	const path = runType + '/' + timeStart; 
+// 	firebase.database().ref(`${path}`)
+// 		.update({
+// 			passenger1FirstName: p1FirstName,
+// 			passenger1LastName: p1LastName
+// 			passenger2FirstName: p2FirstName,
+// 			passenger2LastName: p2LastName
+// 		});
+// }
 
 export const addStop = (runType, timeStart, currentGPS, stopLocation) => {
 	// console.log('firebase services: ', runType, timeStart, numPassengers, p1Wheelchair, p2Wheelchair, p1FirstName, p1LastName, p2FirstName, p2LastName)

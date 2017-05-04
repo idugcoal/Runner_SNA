@@ -43,6 +43,7 @@ class ScanBoardingPass extends Component {
 		
 		this.props.scanBoardingPass(
 			this.props.runType,
+			this.props.timeStart,
 			this.props.numPassengers,
 			this.props.passenger1Wheelchair,
 			this.props.passenger2Wheelchair,
@@ -76,9 +77,9 @@ class ScanBoardingPass extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, flightNumber, numPassengers, airline, runType } = departure;
+  const { timeStart, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, flightNumber, numPassengers, airline, runType } = departure;
 
-  return { passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, flightNumber, numPassengers, airline, runType };
+  return { timeStart, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, flightNumber, numPassengers, airline, runType };
 };
 
 export default connect(mapStateToProps, {

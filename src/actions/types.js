@@ -32,6 +32,7 @@ export const SET_TIME_END = 'set_time_end';
 export const SET_RUN_TYPE = 'set_run_type';
 export const ADD_STARTING_POINT_ARRIVAL = 'add_starting_point_arrival';
 export const ADD_STARTING_LOCATION_ARRIVAL = 'add_starting_location_arrival';
+export const ADD_DESTINATION = 'add_destination';
 
 //checkin actions
 export const UPDATE_WHEELCHAIR_POSITION = 'update_wheelchair_position';

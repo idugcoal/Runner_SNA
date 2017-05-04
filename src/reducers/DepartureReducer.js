@@ -25,7 +25,8 @@ SET_RUN_TYPE,
 ADD_STARTING_POINT_ARRIVAL,
 ADD_STARTING_LOCATION_ARRIVAL,
 // ADD_COMMENTS_TSA,
-ADD_COMMENTS_CLOSING
+ADD_COMMENTS_CLOSING,
+ADD_DESTINATION
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -63,7 +64,8 @@ const INITIAL_STATE = {
   stops: {},
   timeEnd: '',
   commentsTSA: '',
-  commentsEnd: ''
+  commentsEnd: '',
+  destination: '',
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -117,6 +119,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, commentsTSA: action.payload.commentsTSA, timeTSAEnd: action.payload.timeTSAEnd };
     case ADD_STOP:
       return { ...state, stops: action.payload };
+    case ADD_DESTINATION:
+      return { ...state, destination: action.payload };
     case UPDATE_CURRENT_POSITION:
       return { ...state, currentGPS: action.payload };
     case SET_FINAL_GATE_NUMBER: 

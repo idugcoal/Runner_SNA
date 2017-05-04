@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-import { writeBoardingPassData } from '../utils/firebaseService';
+// import { writeBoardingPassData } from '../utils/firebaseService';
 import { Actions } from 'react-native-router-flux';
 import {
   SET_NUMBER_OF_PASSENGERS,
@@ -27,6 +27,7 @@ import {
 	SET_TIME_END,
 	SET_RUN_TYPE,
 	// ADD_COMMENTS_TSA,
+	ADD_DESTINATION,
 	ADD_COMMENTS_CLOSING
 } from './types';
 
@@ -188,8 +189,8 @@ export const selectWheelchair = (runType, numPassengers, passenger1Wheelchair, p
 				airline != '' &&
 				runType === 'arrival'
 				) {
-			console.log('weird place #2')
-			Actions.selectStopsSterile({ type: 'reset' });
+			// writePassengerArrivalData(runType, timeStart, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName);
+			Actions.selectStopsSterile({ runType: runType, timeStart: timeStart, passenger2FirstName: passenger2FirstName, passenger2LastName, passenger2LastName, type: 'reset' });
 			//write to database
 			return(dispatch) => {
 				dispatch({
@@ -215,7 +216,7 @@ export const selectWheelchair = (runType, numPassengers, passenger1Wheelchair, p
 	}
 };
 
-export const scanBoardingPass = (runType, numPassengers, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, airline, flightNumber, boardingPassData) => {
+export const scanBoardingPass = (runType, timeStart, numPassengers, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, airline, flightNumber, boardingPassData) => {
 
 	if(runType === 'departure') {
 	//if there's one passenger, set boardingPass1 to boardingPassData, route to selectGate
@@ -255,7 +256,7 @@ export const scanBoardingPass = (runType, numPassengers, passenger1Wheelchair, p
 	} 
 	else if (runType === 'arrival') {
 		if(numPassengers === 1) {
-			Actions.selectStopsSterile()
+			Actions.selectStopsSterile({ type: 'reset' });
 			return (dispatch) => {
 				dispatch({
 					type: SCAN_BOARDING_PASS_1,
@@ -276,8 +277,8 @@ export const scanBoardingPass = (runType, numPassengers, passenger1Wheelchair, p
 			}
 		//if passenger1FirstName is not empty, set boardingPass2 to boardingPassData, route to selectGate
 		}	else {
-			//write to database
-			Actions.selectStopsSterile();
+			console.log('BPD', boardingPassData)
+			Actions.selectStopsSterile({ runType: runType, timeStart: timeStart, p2FirstName: boardingPassData.firstName, p2LastName: boardingPassData.lastName, type: 'reset' });
 			return(dispatch) => {
 				dispatch({
 					type: SCAN_BOARDING_PASS_2,
@@ -400,6 +401,16 @@ export const addStop = (text) => {
 	return(dispatch) => {
 		dispatch({
 			type: ADD_STOP,
+			payload: text
+		})
+	}
+}
+
+export const addDestination = (text) => {
+	Actions.closing();
+	return(dispatch) => {
+		dispatch({ 
+			type: ADD_DESTINATION,
 			payload: text
 		})
 	}

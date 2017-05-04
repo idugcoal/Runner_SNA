@@ -24,10 +24,10 @@ class SelectStopsSterile extends Component {
 
 	componentWillMount() {
 		Keyboard.dismiss();
+		console.log('SELECT STOPS STERILE', this.props)
 		if(this.props.runType === 'arrival') {
 			writeArrivalData(this.props)
 		}
-		console.log(this.props)
 	}
 
 

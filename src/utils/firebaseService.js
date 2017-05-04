@@ -31,8 +31,8 @@ export const writePassengerData = (props, gateNumber) => {
 			passenger2Wheelchair: passenger2Wheelchair,
 			passenger1FirstName: passenger1FirstName,
 			passenger1LastName: passenger1LastName,
-			passenger2FirstName: passenger2FirstName,
-			passenger2LastName: passenger2LastName,
+			passenger2FirstName: passenger2FirstName || '',
+			passenger2LastName: passenger2LastName || '',
 			airline: airline,
 			flightNumber: flightNumber,
 			destinationGate: gateNumber,
@@ -50,6 +50,8 @@ export const writeArrivalData = (props) => {
     numPassengers,
     passenger1FirstName,
     passenger1LastName,
+    p1FirstName,
+    p1LastName,
     p2FirstName,
     p2LastName, 
     passenger1Wheelchair, 
@@ -58,7 +60,7 @@ export const writeArrivalData = (props) => {
     user
 	} = props;
 	const path = runType + '/' + timeStart; 
-
+	console.log('FUCKING PROPS JESUS', props)
 	firebase.database().ref(`${path}`)
 		// .push({
 		.set({
@@ -66,10 +68,10 @@ export const writeArrivalData = (props) => {
 			numPassengers: numPassengers,
 			startLocation: startLocation,
 			startLocationGPS: startLocationGPS,
-			passenger1FirstName: passenger1FirstName,
-			passenger1LastName: passenger1LastName,
-			passenger2FirstName: p2FirstName,
-			passenger2LastName: p2LastName,
+			passenger1FirstName: passenger1FirstName || p1FirstName,
+			passenger1LastName: passenger1LastName || p1LastName,
+			passenger2FirstName: p2FirstName || '',
+			passenger2LastName: p2LastName || '',
 			passenger1Wheelchair: passenger1Wheelchair,
 			passenger2Wheelchair: passenger2Wheelchair,
 			// destinationGate: destinationGate,

@@ -256,7 +256,8 @@ export const scanBoardingPass = (runType, timeStart, numPassengers, passenger1Wh
 	} 
 	else if (runType === 'arrival') {
 		if(numPassengers === 1) {
-			Actions.selectStopsSterile({ type: 'reset' });
+			console.log('farky', runType, timeStart, boardingPassData.firstName, boardingPassData.lastName)
+			Actions.selectStopsSterile({ runType: runType, timeStart: timeStart, p1FirstName: boardingPassData.firstName, p1LastName: boardingPassData.lastName, type: 'reset' });
 			return (dispatch) => {
 				dispatch({
 					type: SCAN_BOARDING_PASS_1,

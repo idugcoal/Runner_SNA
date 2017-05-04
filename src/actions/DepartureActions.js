@@ -22,7 +22,9 @@ import {
 	UPDATE_CURRENT_POSITION,
 	SET_TIME_START,
 	SET_TIME_END,
-	SET_RUN_TYPE
+	SET_RUN_TYPE,
+	// ADD_COMMENTS_TSA,
+	ADD_COMMENTS_CLOSING
 } from './types';
 
 export const setRunType = (runType) => {
@@ -144,28 +146,18 @@ export const selectWheelchair = (runType, numPassengers, passenger1Wheelchair, p
 
 export const scanBoardingPass = (runType, numPassengers, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, airline, flightNumber, boardingPassData) => {
 
-	// TODO: Account for Arrivals
-	
 	if(runType === 'departure') {
 	//if there's one passenger, set boardingPass1 to boardingPassData, route to selectGate
 		if(numPassengers === 1) {
 			//write to database - PROBABLY DONT DO THIS HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			return (dispatch) => {
-				firebase.database().ref(`${runType}`)
-					.push({ passenger1FirstName: passenger1FirstName, 
-									passenger1LastName: passenger1LastName,
-									passenger2FirstName: passenger2FirstName,
-									passenger2LastName: passenger2LastName, 
-									airline: airline, 
-									flightNumber: flightNumber })
-					.then(() => {
-						dispatch({
-							type: SCAN_BOARDING_PASS_1,
-							payload: boardingPassData
-						});
-						Actions.selectGate()
-					})
+			Actions.selectGate();
+			return(dispatch) => {
+				dispatch({
+					type: SCAN_BOARDING_PASS_1,
+					payload: boardingPassData
+				})
 			}
+
 		}
 		//if there are two passengers, 
 		//if passenger1FirstName is empty, set boardingPass1 to boardingPassData, route to selectWheelchair
@@ -188,10 +180,9 @@ export const scanBoardingPass = (runType, numPassengers, passenger1Wheelchair, p
 				})
 			}	
 		}
-	} else if (runType === 'arrival') {
-		// NEARLY IDENTICAL TO ABOVE, JUST WITH DIFFERENT ROUTING (AND NO FIREBASE WRITE)
+	} 
+	else if (runType === 'arrival') {
 		if(numPassengers === 1) {
-			//write to database - PROBABLY DONT DO THIS HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			Actions.selectStopsSterile()
 			return (dispatch) => {
 				dispatch({
@@ -270,6 +261,8 @@ export const flightNumberChanged = (text) => {
 export const selectGateNumber = (runType, text) => {
 	
 	if(runType === 'departure') {
+		
+
 		Actions.selectStopsNonSterile();
 		return(dispatch) => {
 			dispatch({
@@ -375,5 +368,11 @@ export const setTimeEnd = () => {
 			payload: Date.now()
 		})
 	}	
+}
+
+export const closeDeparture = () => {
+	//write all info to database
+	//initialize state
+	//navigate back to main
 }
  

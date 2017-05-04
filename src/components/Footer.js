@@ -18,15 +18,16 @@ class Footer extends Component {
         	<Text>Flight #: {this.props.flightNumber}</Text>
         	<Text>Destination Gate #: {this.props.destinationGate}</Text>
         	<Text>Current GPS: {this.props.currentGPS.latitude + ' ' + this.props.currentGPS.longitude}</Text>
+          <Text>Time Start: {this.props.timeStart}</Text>
        </View>
 		);
 	}
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { passenger1FirstName, passenger1LastName, airline, flightNumber, passenger1Wheelchair, destinationGate, currentGPS } = departure;
+  const { passenger1FirstName, passenger1LastName, airline, flightNumber, passenger1Wheelchair, destinationGate, currentGPS, timeStart } = departure;
 
-  return { passenger1FirstName, passenger1LastName, airline, flightNumber, passenger1Wheelchair, destinationGate, currentGPS };
+  return { passenger1FirstName, passenger1LastName, airline, flightNumber, passenger1Wheelchair, destinationGate, currentGPS, timeStart };
 };
 
 export default connect(mapStateToProps, {})(Footer);

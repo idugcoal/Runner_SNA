@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import { connect } from 'react-redux'
-import { addStop, startTSA } from '../actions';
+import { startTSA } from '../actions';
+import { addStop } from '../utils/firebaseService';
 import { Actions } from 'react-native-router-flux'
 import { Button, CardSection, ImageButton } from './common';
 import Footer from './Footer';
 import Style from './Style';
-// import { cnbc, cnn, latapenade, octravelmart, starbucks, zovs, phone, restroom } from '../../assets';
 import { nonSterile } from '../../assets';
 import chunk from 'lodash/chunk';
 
@@ -17,8 +17,9 @@ class SelectStopsNonSterile extends Component {
 	}
 
 	onButtonPress(stopLocation) {
-		console.log('e in SelectStopsNonSterile:', stopLocation)
-		// this.props.addStop(stopLocation);
+		console.log('e in SelectStopsNonSterile:', stopLocation, this.props)
+		addStop(this.props.runType, this.props.timeStart, this.props.currentGPS, stopLocation)
+		//write some props to firebase
 	}
 
 	renderEndingButton() {
@@ -58,16 +59,14 @@ class SelectStopsNonSterile extends Component {
 			</View>
 		);
 	}
-
-
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { stops, runType } = departure;
+  const { runType, timeStart, currentGPS } = departure;
 
-  return { stops, runType };
+  return { runType, timeStart, currentGPS };
 };
 
 export default connect(mapStateToProps, { 
-	addStop, startTSA
+	startTSA
 })(SelectStopsNonSterile);

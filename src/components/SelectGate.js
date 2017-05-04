@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import { selectGateNumber, setFinalGateNumber } from '../actions';
+import { writePassengerData } from '../utils/firebaseService';
 import NumberButton from './common/NumberButton';
 import Footer from './Footer';
 import Style from './Style';
@@ -16,7 +17,6 @@ class SelectGate extends Component {
 
   constructor(props) {
     super(props);
-    alert('hi there')
     this.state = {
       final: this.props.final
     }
@@ -31,6 +31,10 @@ class SelectGate extends Component {
     if(this.state.final) {
       this.props.setFinalGateNumber(gateNumber);
     } else {
+      //write to database: numPassengers, wheelchair # (x2), passenger info (x2), airline, flight #, destination gate
+      if(this.props.runType === 'departure') {
+        writePassengerData(this.props, gateNumber);
+      }
       this.props.selectGateNumber(this.props.runType, gateNumber);
     }
   }
@@ -64,10 +68,39 @@ class SelectGate extends Component {
 };
 
 
-const mapStateToProps = ({ departure }) => {
-  const { destinationGate, runType } = departure;
+const mapStateToProps = ({ departure, auth }) => {
+  const { 
+    runType, 
+    timeStart, 
+    numPassengers, 
+    passenger1Wheelchair, 
+    passenger2Wheelchair, 
+    passenger1FirstName, 
+    passenger1LastName, 
+    passenger2FirstName, 
+    passenger2LastName, 
+    airline, 
+    flightNumber,
+    destinationGate
+  } = departure;
 
-  return { destinationGate, runType };
+  const { user } = auth;
+
+  return { 
+    runType, 
+    timeStart, 
+    numPassengers, 
+    passenger1Wheelchair, 
+    passenger2Wheelchair, 
+    passenger1FirstName, 
+    passenger1LastName, 
+    passenger2FirstName, 
+    passenger2LastName, 
+    airline, 
+    flightNumber,
+    destinationGate,
+    user
+  };
 };
 
 export default connect(mapStateToProps, {

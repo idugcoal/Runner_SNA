@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { connect } from 'react-redux';
-import {  } from '../actions';
+import { closeDeparture } from '../actions';
 import { Button, CardSection, ImageButton, NumberButton } from './common';
 import Footer from './Footer';
 import Style from './Style';
@@ -48,5 +48,5 @@ const mapStateToProps = ({ departure }) => {
 };
 
 export default connect(mapStateToProps, {
-	
+	closeDeparture
 })(Closing);

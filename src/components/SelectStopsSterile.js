@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity, Keyboard } from 'react-native';
 import { connect } from 'react-redux'
 import Modal from 'react-native-simple-modal'
 import { setTimeEnd } from '../actions';
+import { addStop } from '../utils/firebaseService';
 import { Button, CardSection, ImageButton, TerminalA, TerminalB, TerminalC } from './common';
 import Footer from './Footer';
 import Style from './Style';
@@ -28,6 +29,7 @@ class SelectStopsSterile extends Component {
 
 	onButtonPress(stopLocation) {
 		console.log('stopLocation in SelectStopsSterile:', stopLocation);
+		addStop(this.props.runType, this.props.timeStart, this.props.currentGPS, stopLocation)
 	}
 
 	onGateArrival() {
@@ -111,9 +113,9 @@ class SelectStopsSterile extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { stops, runType, destinationGate } = departure;
+  const { runType, timeStart, currentGPS } = departure;
 
-  return { stops, runType, destinationGate };
+  return { runType, timeStart, currentGPS };
 };
 
 export default connect(mapStateToProps, { setTimeEnd })(SelectStopsSterile);

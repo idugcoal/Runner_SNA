@@ -17,16 +17,17 @@ class Main extends Component {
 		Keyboard.dismiss();
 
     navigator.geolocation.getCurrentPosition((position) => {
+    	// TODO: replace this with a firebase function?
     	this.props.updateCurrentPosition(position);
     });
 
     navigator.geolocation.watchPosition((position) => {
+    	// TODO: replace this with a firebase function?
     	this.props.updateCurrentPosition(position);
     });
 	}
 
 	onDeparture() {
-		console.log(this.props.email)
     this.props.setRunType('departure', this.props.email);
   }
 
@@ -58,7 +59,7 @@ class Main extends Component {
 const mapStateToProps = ({ departure, auth }) => {
   const { currentGPS } = departure;
   const { email } = auth;
-  console.log(currentGPS, email 	)
+  console.log('MAIN', currentGPS, 'EMAIL:', email)
 
   return { currentGPS, email };
 };

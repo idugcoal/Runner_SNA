@@ -50,12 +50,6 @@ export const writeArrivalData = (props) => {
     numPassengers, 
     passenger1Wheelchair, 
     passenger2Wheelchair, 
-    passenger1FirstName, 
-    passenger1LastName, 
-    passenger2FirstName, 
-    passenger2LastName, 
-    airline, 
-    flightNumber,
     destinationGate, 
     user
 	} = props;
@@ -70,12 +64,6 @@ export const writeArrivalData = (props) => {
 			startLocationGPS: startLocationGPS,
 			passenger1Wheelchair: passenger1Wheelchair,
 			passenger2Wheelchair: passenger2Wheelchair,
-			passenger1FirstName: passenger1FirstName,
-			passenger1LastName: passenger1LastName,
-			passenger2FirstName: passenger2FirstName,
-			passenger2LastName: passenger2LastName,
-			airline: airline,
-			flightNumber: flightNumber,
 			destinationGate: destinationGate,
 			employeeLogin: user.email
 		});

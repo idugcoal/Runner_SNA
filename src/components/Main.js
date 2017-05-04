@@ -59,7 +59,7 @@ class Main extends Component {
 const mapStateToProps = ({ departure, auth }) => {
   const { currentGPS } = departure;
   const { email } = auth;
-  console.log('MAIN', currentGPS, 'EMAIL:', email)
+  // console.log('MAIN', currentGPS, 'EMAIL:', email)
 
   return { currentGPS, email };
 };

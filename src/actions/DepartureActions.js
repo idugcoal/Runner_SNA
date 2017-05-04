@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import { writeBoardingPassData } from '../utils/firebaseService';
 import { Actions } from 'react-native-router-flux';
 import {
   SET_NUMBER_OF_PASSENGERS,
@@ -40,7 +41,6 @@ export const setRunType = (runType) => {
 			})
 		}
 	} else if (runType === 'arrival') {
-		console.log('weird place #4')
 		Actions.selectGate();
 		return(dispatch) => {
 			dispatch({
@@ -151,6 +151,15 @@ export const selectWheelchair = (runType, numPassengers, passenger1Wheelchair, p
 				})
 			}
 		}
+		else {
+			Actions.scanBoardingPass({ title: "Scan Boarding Pass #2" });
+			return(dispatch) => {
+				dispatch({
+					type: SELECT_WHEELCHAIR_2,
+					payload: buttonValue
+				})
+			}
+		}
 		if (passenger1Wheelchair != '' && 
 				passenger1FirstName != '' && 
 				passenger1LastName != '' && 
@@ -170,6 +179,28 @@ export const selectWheelchair = (runType, numPassengers, passenger1Wheelchair, p
 				})
 			}
 		}
+		if (passenger1Wheelchair != '' && 
+				passenger1FirstName != '' && 
+				passenger1LastName != '' && 
+				passenger2FirstName != '' && 
+				passenger2LastName != '' && 
+				flightNumber != '' &&
+				airline != '' &&
+				runType === 'arrival'
+				) {
+			console.log('weird place #2')
+			Actions.selectStopsSterile({ type: 'reset' });
+			//write to database
+			return(dispatch) => {
+				dispatch({
+					type: SELECT_WHEELCHAIR_2,
+					payload: buttonValue
+				})
+			}
+		}
+		// go back to select wheelchair if wheelchair 2 isnt selected
+
+		// 
 		// IF EVERYTHING IS FILLED OUT DURING ARRIVALS:
 		console.log('WHY AM I HERE', passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, flightNumber, airline)
 		if (passenger1Wheelchair != '') {
@@ -384,7 +415,7 @@ export const updateCurrentPosition = (position) => {
 		timestamp: timestamp
 	}
 
-	console.log('in UpdateCurrentPosition', payload);
+	// console.log('in UpdateCurrentPosition', payload);
 	//WRITE TO DATABASE - UPDATE WHEELCHAIR POSITION
 	return(dispatch) => {
 			dispatch({

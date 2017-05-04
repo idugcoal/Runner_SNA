@@ -41,7 +41,6 @@ class SelectGate extends Component {
         writePassengerData(this.props, gateNumber);
       }
       if(this.props.runType === 'arrival') {
-        console.log("GOD DAMMIT", this.props)
         // writePassengerData(this.props, gateNumber);
         this.props.addStartingLocationArrival(gateNumber);
       }

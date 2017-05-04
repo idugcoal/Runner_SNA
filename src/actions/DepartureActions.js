@@ -40,6 +40,7 @@ export const setRunType = (runType) => {
 			})
 		}
 	} else if (runType === 'arrival') {
+		console.log('weird place #4')
 		Actions.selectGate();
 		return(dispatch) => {
 			dispatch({
@@ -155,7 +156,11 @@ export const selectWheelchair = (runType, numPassengers, passenger1Wheelchair, p
 				passenger1LastName != '' && 
 				passenger2FirstName != '' && 
 				passenger2LastName != '' && 
-				flightNumber != '') {
+				flightNumber != '' &&
+				airline != '' &&
+				runType === 'departure'
+				) {
+			console.log('weird place #1')
 			Actions.selectGate();
 			//write to database
 			return(dispatch) => {
@@ -165,8 +170,10 @@ export const selectWheelchair = (runType, numPassengers, passenger1Wheelchair, p
 				})
 			}
 		}
+		// IF EVERYTHING IS FILLED OUT DURING ARRIVALS:
+		console.log('WHY AM I HERE', passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, flightNumber, airline)
 		if (passenger1Wheelchair != '') {
-			Actions.scanBoardingPass({ title: "Scan Boarding Pass #2 "});
+			Actions.selectStopsSterile({ type: 'reset' });
 			return(dispatch) => {
 				dispatch({
 					type: SELECT_WHEELCHAIR_2,
@@ -182,6 +189,7 @@ export const scanBoardingPass = (runType, numPassengers, passenger1Wheelchair, p
 	if(runType === 'departure') {
 	//if there's one passenger, set boardingPass1 to boardingPassData, route to selectGate
 		if(numPassengers === 1) {
+			console.log('weird place #2')
 			Actions.selectGate();
 			return(dispatch) => {
 				dispatch({
@@ -204,6 +212,7 @@ export const scanBoardingPass = (runType, numPassengers, passenger1Wheelchair, p
 		//if passenger1FirstName is not empty, set boardingPass2 to boardingPassData, route to selectGate
 		}	else {
 			//write to database
+			console.log('weird place #3')
 			Actions.selectGate();
 			return(dispatch) => {
 				dispatch({

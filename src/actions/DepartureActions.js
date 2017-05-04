@@ -14,6 +14,8 @@ import {
 	AIRLINE_CHANGED,
 	FLIGHT_NUMBER_CHANGED,
 	ADD_STARTING_POINT,
+	ADD_STARTING_POINT_ARRIVAL,
+	ADD_STARTING_LOCATION_ARRIVAL,
 	SELECT_GATE_NUMBER,
 	TSA_START,
 	TSA_END,
@@ -95,6 +97,37 @@ export const addStartingPoint = (runType, buttonLocation, position) => {
 	}
 }
 
+export const addStartingPointArrival = (runType, position) => {
+
+	const { coords, timestamp } = position;
+	const { latitude, longitude } = coords;
+	const startLocationGPS = {
+		latitude: latitude,
+		longitude: longitude,
+		timestamp: timestamp,
+	}
+	const payload = {
+		startLocationGPS: startLocationGPS,
+	}
+	
+		return(dispatch) => {
+			dispatch({ 
+				type: ADD_STARTING_POINT_ARRIVAL,
+				payload: payload
+			});
+		}
+}
+
+export const addStartingLocationArrival = (text) => {
+	return(dispatch) => {
+		dispatch({
+			type: ADD_STARTING_LOCATION_ARRIVAL,
+			payload: text
+		})
+	}
+
+}
+
 export const selectWheelchair = (runType, numPassengers, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, airline, flightNumber, buttonValue) => {
 
 	if (numPassengers === 1) {
@@ -149,7 +182,6 @@ export const scanBoardingPass = (runType, numPassengers, passenger1Wheelchair, p
 	if(runType === 'departure') {
 	//if there's one passenger, set boardingPass1 to boardingPassData, route to selectGate
 		if(numPassengers === 1) {
-			//write to database - PROBABLY DONT DO THIS HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			Actions.selectGate();
 			return(dispatch) => {
 				dispatch({
@@ -261,8 +293,6 @@ export const flightNumberChanged = (text) => {
 export const selectGateNumber = (runType, text) => {
 	
 	if(runType === 'departure') {
-		
-
 		Actions.selectStopsNonSterile();
 		return(dispatch) => {
 			dispatch({
@@ -270,7 +300,9 @@ export const selectGateNumber = (runType, text) => {
 				payload: text
 			});
 		};
-	} else if (runType === 'arrival') {
+	} 
+
+	else if (runType === 'arrival') {
 		Actions.selectNumberOfWheelchairs();
 		return(dispatch) => {
 			dispatch({

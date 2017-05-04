@@ -22,6 +22,8 @@ UPDATE_CURRENT_POSITION,
 SET_TIME_START,
 SET_TIME_END,
 SET_RUN_TYPE,
+ADD_STARTING_POINT_ARRIVAL,
+ADD_STARTING_LOCATION_ARRIVAL,
 // ADD_COMMENTS_TSA,
 ADD_COMMENTS_CLOSING
 } from '../actions/types';
@@ -96,6 +98,10 @@ export default (state = INITIAL_STATE, action) => {
     	return { ...state, destinationGate: action.payload };
     case ADD_STARTING_POINT:
     	return { ...state, startLocation: action.payload.startLocation, startLocationGPS: action.payload.startLocationGPS };
+    case ADD_STARTING_POINT_ARRIVAL:
+      return { ...state, startLocationGPS: action.payload.startLocationGPS };
+    case ADD_STARTING_LOCATION_ARRIVAL:
+      return { ...state, startLocation: action.payload };
     case SELECT_STOP:
       return { ...state, error: 'Login Failed. Please Try Again.', password: '', loading: false };
     case TSA_START:

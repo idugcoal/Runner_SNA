@@ -40,6 +40,47 @@ export const writePassengerData = (props, gateNumber) => {
 		});
 }
 
+export const writeArrivalData = (props) => {
+	// console.log('firebase services: ', runType, timeStart, numPassengers, p1Wheelchair, p2Wheelchair, p1FirstName, p1LastName, p2FirstName, p2LastName)
+	const {
+		runType, 
+    timeStart,
+    startLocation,
+    startLocationGPS, 
+    numPassengers, 
+    passenger1Wheelchair, 
+    passenger2Wheelchair, 
+    passenger1FirstName, 
+    passenger1LastName, 
+    passenger2FirstName, 
+    passenger2LastName, 
+    airline, 
+    flightNumber,
+    destinationGate, 
+    user
+	} = props;
+	const path = runType + '/' + timeStart; 
+
+	firebase.database().ref(`${path}`)
+		// .push({
+		.set({
+			timeStart: timeStart, 
+			numPassengers: numPassengers,
+			startLocation: startLocation,
+			startLocationGPS: startLocationGPS,
+			passenger1Wheelchair: passenger1Wheelchair,
+			passenger2Wheelchair: passenger2Wheelchair,
+			passenger1FirstName: passenger1FirstName,
+			passenger1LastName: passenger1LastName,
+			passenger2FirstName: passenger2FirstName,
+			passenger2LastName: passenger2LastName,
+			airline: airline,
+			flightNumber: flightNumber,
+			destinationGate: destinationGate,
+			employeeLogin: user.email
+		});
+}
+
 export const addStop = (runType, timeStart, currentGPS, stopLocation) => {
 	// console.log('firebase services: ', runType, timeStart, numPassengers, p1Wheelchair, p2Wheelchair, p1FirstName, p1LastName, p2FirstName, p2LastName)
 	const path = runType + '/' + timeStart + '/stops/'; 

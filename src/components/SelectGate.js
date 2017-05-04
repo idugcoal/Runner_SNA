@@ -71,7 +71,9 @@ class SelectGate extends Component {
 const mapStateToProps = ({ departure, auth }) => {
   const { 
     runType, 
-    timeStart, 
+    timeStart,
+    startLocation,
+    startLocationGPS, 
     numPassengers, 
     passenger1Wheelchair, 
     passenger2Wheelchair, 
@@ -88,7 +90,9 @@ const mapStateToProps = ({ departure, auth }) => {
 
   return { 
     runType, 
-    timeStart, 
+    timeStart,
+    startLocation,
+    startLocationGPS, 
     numPassengers, 
     passenger1Wheelchair, 
     passenger2Wheelchair, 

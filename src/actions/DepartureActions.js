@@ -74,14 +74,14 @@ export const addStartingPoint = (runType, buttonLocation, position) => {
 
 	const { coords, timestamp } = position;
 	const { latitude, longitude } = coords;
-	const gps = {
+	const startLocationGPS = {
 		latitude: latitude,
 		longitude: longitude,
 		timestamp: timestamp,
 	}
 	const payload = {
-		gps: gps,
-		buttonValue: buttonLocation
+		startLocationGPS: startLocationGPS,
+		startLocation: buttonLocation
 	}
 	
 	if(runType === 'departure') {

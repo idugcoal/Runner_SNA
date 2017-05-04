@@ -4,7 +4,9 @@ export const writePassengerData = (props, gateNumber) => {
 	// console.log('firebase services: ', runType, timeStart, numPassengers, p1Wheelchair, p2Wheelchair, p1FirstName, p1LastName, p2FirstName, p2LastName)
 	const {
 		runType, 
-    timeStart, 
+    timeStart,
+    startLocation,
+    startLocationGPS, 
     numPassengers, 
     passenger1Wheelchair, 
     passenger2Wheelchair, 
@@ -23,6 +25,8 @@ export const writePassengerData = (props, gateNumber) => {
 		.set({
 			timeStart: timeStart, 
 			numPassengers: numPassengers,
+			startLocation: startLocation,
+			startLocationGPS: startLocationGPS,
 			passenger1Wheelchair: passenger1Wheelchair,
 			passenger2Wheelchair: passenger2Wheelchair,
 			passenger1FirstName: passenger1FirstName,

@@ -95,7 +95,7 @@ export default (state = INITIAL_STATE, action) => {
     case SELECT_GATE_NUMBER:
     	return { ...state, destinationGate: action.payload };
     case ADD_STARTING_POINT:
-    	return { ...state, locationFirstContact: action.payload };
+    	return { ...state, startLocation: action.payload.startLocation, startLocationGPS: action.payload.startLocationGPS };
     case SELECT_STOP:
       return { ...state, error: 'Login Failed. Please Try Again.', password: '', loading: false };
     case TSA_START:

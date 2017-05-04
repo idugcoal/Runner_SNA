@@ -17,9 +17,7 @@ class SelectStopsNonSterile extends Component {
 	}
 
 	onButtonPress(stopLocation) {
-		console.log('e in SelectStopsNonSterile:', stopLocation, this.props)
 		addStop(this.props.runType, this.props.timeStart, this.props.currentGPS, stopLocation)
-		//write some props to firebase
 	}
 
 	renderEndingButton() {

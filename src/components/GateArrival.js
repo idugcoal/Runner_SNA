@@ -14,7 +14,7 @@ class GateArrival extends Component {
 		super(props);
 		this.state = {
 			gateChanged: '',
-			showButtons: ''
+			showButtons: '',
 		}
 	}
 
@@ -27,7 +27,7 @@ class GateArrival extends Component {
 					</CardSection>
 					<CardSection>
 						<View style={Style.row}>
-							<Button onPress={() => Actions.closing() }>
+							<Button onPress={() => Actions.closing({ timeGateArrival: Date.now() }) }>
 								Yes
 							</Button>
 							<Button onPress={() => this.setState({ gateChanged: 'yes' })}>

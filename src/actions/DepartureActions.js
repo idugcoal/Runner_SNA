@@ -26,9 +26,11 @@ import {
 	SET_TIME_START,
 	SET_TIME_END,
 	SET_RUN_TYPE,
+	SET_TIME_GATE_ARRIVAL,
 	// ADD_COMMENTS_TSA,
 	ADD_DESTINATION,
-	ADD_COMMENTS_CLOSING
+	ADD_COMMENTS_CLOSING,
+	RETURN_TO_START
 } from './types';
 
 export const setRunType = (runType) => {
@@ -221,7 +223,6 @@ export const scanBoardingPass = (runType, timeStart, numPassengers, passenger1Wh
 	if(runType === 'departure') {
 	//if there's one passenger, set boardingPass1 to boardingPassData, route to selectGate
 		if(numPassengers === 1) {
-			console.log('weird place #2')
 			Actions.selectGate();
 			return(dispatch) => {
 				dispatch({
@@ -367,12 +368,13 @@ export const startTSA = () => {
 	}
 }
 
-export const addCommentsTSA = (text) => {
+export const addCommentsTSA = (text, timeTSAStart) => {
 	
 	const timeTSAEnd = Date.now();
 	const commentsTSA = text;
 
 	payload = {
+		timeTSAStart: timeTSAStart,
 		timeTSAEnd: timeTSAEnd,
 		commentsTSA: commentsTSA
 	}
@@ -458,5 +460,14 @@ export const closeDeparture = () => {
 	//write all info to database
 	//initialize state
 	//navigate back to main
+}
+
+export const returnToStart = () => {
+	Actions.main({ type: 'reset' })
+	return(dispatch) => {
+		dispatch({
+			type: RETURN_TO_START
+		})
+	}
 }
  

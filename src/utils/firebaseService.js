@@ -79,6 +79,38 @@ export const writeArrivalData = (props) => {
 		});
 }
 
+export const writeDepartureData = ({ runType, timeStart, timeTSAStart, timeTSAEnd, commentsTSA }) => {
+	const path = runType + '/' + timeStart; 
+	firebase.database().ref(`${path}`)
+		// .push({
+		.update({
+			timeTSAStart: timeTSAStart,
+			timeTSAEnd: timeTSAEnd,
+			commentsTSA: commentsTSA
+		});
+}
+
+export const writeDepartureEnd = ({runType, timeStart, destinationGate, finalGate}, commentsEnd, timeGateArrival ) => {
+	const path = runType + '/' + timeStart; 
+	firebase.database().ref(`${path}`)
+		// .push({
+		.update({
+			finalGate: finalGate || destinationGate,
+			timeGateArrival: timeGateArrival,
+			commentsEnd: commentsEnd
+		});
+}
+export const writeArrivalEnd = ({runType, timeStart, destination}, commentsEnd, timeGateArrival ) => {
+	const path = runType + '/' + timeStart; 
+	firebase.database().ref(`${path}`)
+		// .push({
+		.update({
+			destination: destination,
+			timeDestinationArrival: timeGateArrival,
+			commentsEnd: commentsEnd
+		});
+}
+
 // export const writePassengerArrivalData = (runType, timeStart, p1FirstName, p1LastName, p2FirstName, p2LastName) => {
 	
 // 	const path = runType + '/' + timeStart; 

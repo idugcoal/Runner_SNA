@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity, Keyboard } from 'react-native';
 import { connect } from 'react-redux'
 import Modal from 'react-native-simple-modal'
 import { setTimeEnd } from '../actions';
-import { addStop, writeArrivalData } from '../utils/firebaseService';
+import { addStop, writeArrivalData, writeDepartureData } from '../utils/firebaseService';
 import { Button, CardSection, ImageButton, TerminalA, TerminalB, TerminalC } from './common';
 import Footer from './Footer';
 import Style from './Style';
@@ -27,6 +27,9 @@ class SelectStopsSterile extends Component {
 		console.log('SELECT STOPS STERILE', this.props)
 		if(this.props.runType === 'arrival') {
 			writeArrivalData(this.props)
+		}
+		if(this.props.runType === 'departure') {
+			writeDepartureData(this.props)
 		}
 	}
 
@@ -132,7 +135,10 @@ const mapStateToProps = ({ departure, auth }) => {
     airline, 
     flightNumber,
     destinationGate,
-    currentGPS 
+    currentGPS,
+    timeTSAStart,
+    timeTSAEnd,
+    commentsTSA, 
   } = departure;
 
   const { user } = auth
@@ -153,6 +159,9 @@ const mapStateToProps = ({ departure, auth }) => {
     flightNumber,
     destinationGate,
     currentGPS,
+    timeTSAStart,
+    timeTSAEnd,
+    commentsTSA,
     user
   };
 };

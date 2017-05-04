@@ -11,13 +11,15 @@ class TSA extends Component {
 
 	constructor(props) {
 		super(props);
+		const timeTSAStart = Date.now();
 		this.state = {
-			text: ''
+			text: '',
+			timeTSAStart: timeTSAStart
 		}
 	}
 
 	onButtonPress() {
-		this.props.addCommentsTSA(this.state.text);
+		this.props.addCommentsTSA(this.state.text, this.state.timeTSAStart);
 	}
 
 	render() {

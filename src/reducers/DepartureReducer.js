@@ -26,7 +26,8 @@ ADD_STARTING_POINT_ARRIVAL,
 ADD_STARTING_LOCATION_ARRIVAL,
 // ADD_COMMENTS_TSA,
 ADD_COMMENTS_CLOSING,
-ADD_DESTINATION
+ADD_DESTINATION,
+RETURN_TO_START
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -50,6 +51,7 @@ const INITIAL_STATE = {
     timestamp: ''
   },
   timeStart: '',
+  timeGateArrival: '',
   locationFirstContact: {
     buttonValue: '',
     gps: {
@@ -116,7 +118,7 @@ export default (state = INITIAL_STATE, action) => {
     case TSA_START:
       return { ...state, timeTSAStart: action.payload };
     case TSA_END:
-      return { ...state, commentsTSA: action.payload.commentsTSA, timeTSAEnd: action.payload.timeTSAEnd };
+      return { ...state, commentsTSA: action.payload.commentsTSA, timeTSAStart: action.payload.timeTSAStart, timeTSAEnd: action.payload.timeTSAEnd };
     case ADD_STOP:
       return { ...state, stops: action.payload };
     case ADD_DESTINATION:
@@ -129,6 +131,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, timeStart: action.payload };
     case SET_TIME_END:
       return { ...state, timeEnd: action.payload };
+    case RETURN_TO_START:
+      return { ...state, ...INITIAL_STATE }
     default:
       return state;
   }

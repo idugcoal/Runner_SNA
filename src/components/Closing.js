@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { connect } from 'react-redux';
-import { closeDeparture } from '../actions';
+import { closeDeparture, returnToStart } from '../actions';
+import { writeDepartureEnd, writeArrivalEnd } from '../utils/firebaseService';
 import { Button, CardSection, ImageButton, NumberButton } from './common';
 import Footer from './Footer';
 import Style from './Style';
@@ -13,8 +14,20 @@ class Closing extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			text: ''
+			text: '',
+			arrivalTime: Date.now(),
 		}
+		console.log('CLOSING', props)
+	}
+
+	onButtonPress() {
+		if(this.props.runType === 'departure') {
+			writeDepartureEnd(this.props, this.state.text, this.state.arrivalTime)
+		}
+		if(this.props.runType === 'arrival') {
+			writeArrivalEnd(this.props, this.state.text, this.state.arrivalTime)
+		}
+		this.props.returnToStart();
 	}
 
 	render() {
@@ -31,7 +44,7 @@ class Closing extends Component {
 		        placeholder={'Add comment...'}
 		      />
 		      <CardSection>
-			      <Button onPress={() => Actions.main({ type: 'reset' }) }>
+			      <Button onPress={this.onButtonPress.bind(this)}>
 			      	Submit Comment and Begin New Task
 			      </Button>
 			    </CardSection>
@@ -42,11 +55,11 @@ class Closing extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { destinationGate, finalGate } = departure;
+  const { runType, timeStart, destinationGate, destination, finalGate, timeGateArrival } = departure;
 
-  return { destinationGate, finalGate };
+  return { runType, timeStart, destinationGate, destination, finalGate, timeGateArrival };
 };
 
 export default connect(mapStateToProps, {
-	closeDeparture
+	closeDeparture, returnToStart
 })(Closing);

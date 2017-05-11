@@ -92,7 +92,8 @@ const mapStateToProps = ({ departure, auth }) => {
     passenger2LastName, 
     airline, 
     flightNumber,
-    destinationGate
+    destinationGate,
+    deviceID
   } = departure;
 
   const { user } = auth;
@@ -112,6 +113,7 @@ const mapStateToProps = ({ departure, auth }) => {
     airline, 
     flightNumber,
     destinationGate,
+    deviceID,
     user
   };
 };

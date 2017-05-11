@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Keyboard } from 'react-native';
 import firebase from 'firebase';
+import { updateWheelchair } from '../utils/firebaseService';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import DeviceInfo from 'react-native-device-info'
@@ -10,13 +11,7 @@ import { Card, CardSection, Button } from './common';
 class Main extends Component {
 	
 	componentWillMount() {
-		// const { currentUser } = firebase.auth();
-		// const uid = currentUser.uid;
-		// console.log(uid, Date.now())
-		// console.log(currentUser);
 
-		console.log('uniqueID', DeviceInfo.getUniqueID());
-		
 		Keyboard.dismiss();
 
     navigator.geolocation.getCurrentPosition((position) => {
@@ -26,16 +21,29 @@ class Main extends Component {
 
     navigator.geolocation.watchPosition((position) => {
     	// TODO: replace this with a firebase function?
+    	if(this.props.numPassengers != '') {
+    		if(this.props.numPassengers === '1') {
+    			if(this.props.passenger1Wheelchair != '') {
+    				updateWheelchair(this.props.passenger1Wheelchair, position);
+    			}
+    		}
+    		else if(this.props.numPassengers === '2') {
+    			if(this.props.passenger1Wheelchair != '' && this.props.passenger2Wheelchair != '') {
+    				updateWheelchair(this.props.passenger1Wheelchair, position);
+    				updateWheelchair(this.props.passenger2Wheelchair, position);
+    			}
+    		}
+    	}
     	this.props.updateCurrentPosition(position);
     });
 	}
 
 	onDeparture() {
-    this.props.setRunType('departure', this.props.email);
+    this.props.setRunType('departure', DeviceInfo.getUniqueID());
   }
 
   onArrival() {
-  	this.props.setRunType('arrival', this.props.email);
+  	this.props.setRunType('arrival', DeviceInfo.getUniqueID());
   }
 
   onCheckIn() {
@@ -60,11 +68,10 @@ class Main extends Component {
 }
 
 const mapStateToProps = ({ departure, auth }) => {
-  const { currentGPS } = departure;
+  const { currentGPS, numPassengers, passenger1Wheelchair, passenger2Wheelchair } = departure;
   const { email } = auth;
-  // console.log('MAIN', currentGPS, 'EMAIL:', email)
 
-  return { currentGPS, email };
+  return { currentGPS, email, numPassengers, passenger1Wheelchair, passenger2Wheelchair };
 };
 
 export default connect(mapStateToProps, { updateCurrentPosition, setRunType })(Main);

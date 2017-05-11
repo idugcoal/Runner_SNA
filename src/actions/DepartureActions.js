@@ -34,11 +34,11 @@ import {
 } from './types';
 
 export const setRunType = (runType, deviceID) => {
-
 	const payload = {
 		runType: runType,
 		deviceID: deviceID
 	}
+	console.log('actions', payload)
 
 	if(runType === 'departure') {
 		Actions.selectStartingPoint();

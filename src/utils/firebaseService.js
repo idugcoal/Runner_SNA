@@ -1,7 +1,6 @@
 import firebase from 'firebase';
 
 export const writePassengerData = (props, gateNumber) => {
-	// console.log('firebase services: ', runType, timeStart, numPassengers, p1Wheelchair, p2Wheelchair, p1FirstName, p1LastName, p2FirstName, p2LastName)
 	const {
 		runType, 
     timeStart,
@@ -16,7 +15,8 @@ export const writePassengerData = (props, gateNumber) => {
     passenger2LastName, 
     airline, 
     flightNumber, 
-    user
+    user,
+    deviceID
 	} = props;
 	const path = runType + '/' + timeStart; 
 
@@ -36,12 +36,12 @@ export const writePassengerData = (props, gateNumber) => {
 			airline: airline,
 			flightNumber: flightNumber,
 			destinationGate: gateNumber,
+			deviceID: deviceID,
 			employeeLogin: user.email
 		});
 }
 
 export const writeArrivalData = (props) => {
-	// console.log('firebase services: ', runType, timeStart, numPassengers, p1Wheelchair, p2Wheelchair, p1FirstName, p1LastName, p2FirstName, p2LastName)
 	const {
 		runType, 
     timeStart,
@@ -55,7 +55,8 @@ export const writeArrivalData = (props) => {
     p2FirstName,
     p2LastName, 
     passenger1Wheelchair, 
-    passenger2Wheelchair, 
+    passenger2Wheelchair,
+    deviceID, 
     // destinationGate, 
     user
 	} = props;
@@ -75,6 +76,7 @@ export const writeArrivalData = (props) => {
 			passenger1Wheelchair: passenger1Wheelchair,
 			passenger2Wheelchair: passenger2Wheelchair,
 			// destinationGate: destinationGate,
+			deviceID: deviceID,
 			employeeLogin: user.email
 		});
 }
@@ -111,18 +113,6 @@ export const writeArrivalEnd = ({runType, timeStart, destination}, commentsEnd, 
 		});
 }
 
-// export const writePassengerArrivalData = (runType, timeStart, p1FirstName, p1LastName, p2FirstName, p2LastName) => {
-	
-// 	const path = runType + '/' + timeStart; 
-// 	firebase.database().ref(`${path}`)
-// 		.update({
-// 			passenger1FirstName: p1FirstName,
-// 			passenger1LastName: p1LastName
-// 			passenger2FirstName: p2FirstName,
-// 			passenger2LastName: p2LastName
-// 		});
-// }
-
 export const addStop = (runType, timeStart, currentGPS, stopLocation) => {
 	// console.log('firebase services: ', runType, timeStart, numPassengers, p1Wheelchair, p2Wheelchair, p1FirstName, p1LastName, p2FirstName, p2LastName)
 	const path = runType + '/' + timeStart + '/stops/'; 
@@ -147,5 +137,6 @@ export const updateWheelchair = (wheelchairNumber, gps) => {
 			gpsTimestamp: gps.timestamp,
 			timestamp: Date.now()
 		})
-
 }
+
+

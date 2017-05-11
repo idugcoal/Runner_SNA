@@ -138,7 +138,8 @@ const mapStateToProps = ({ departure, auth }) => {
     currentGPS,
     timeTSAStart,
     timeTSAEnd,
-    commentsTSA, 
+    commentsTSA,
+    deviceID, 
   } = departure;
 
   const { user } = auth
@@ -162,6 +163,7 @@ const mapStateToProps = ({ departure, auth }) => {
     timeTSAStart,
     timeTSAEnd,
     commentsTSA,
+    deviceID,
     user
   };
 };

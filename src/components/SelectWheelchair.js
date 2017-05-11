@@ -32,19 +32,21 @@ class SelectWheelchair extends Component {
     
     updateWheelchair(buttonValue, this.props.currentGPS);      
 
-    this.props.selectWheelchair(
-      this.props.runType,
-      this.props.numPassengers, 
-      this.props.passenger1Wheelchair,
-      this.props.passenger2Wheelchair,
-      this.props.passenger1FirstName,
-      this.props.passenger1LastName,
-      this.props.passenger2FirstName,
-      this.props.passenger2LastName,
-      this.props.airline,
-      this.props.flightNumber,
-      buttonValue
-    )
+    if(this.props.runType != 'checkin') {
+      this.props.selectWheelchair(
+        this.props.runType,
+        this.props.numPassengers, 
+        this.props.passenger1Wheelchair,
+        this.props.passenger2Wheelchair,
+        this.props.passenger1FirstName,
+        this.props.passenger1LastName,
+        this.props.passenger2FirstName,
+        this.props.passenger2LastName,
+        this.props.airline,
+        this.props.flightNumber,
+        buttonValue
+      )
+    }
   }
 
   renderButtons() {
@@ -61,11 +63,23 @@ class SelectWheelchair extends Component {
     return views;
   }
 
+  renderExit() {
+    console.log('farts', this.props.checkin)
+    if(this.props.runType === 'checkin') {
+      return (
+          <Button onPress={ ()=> Actions.main({type: 'reset'}) }>Finish Wheelchair Check-In</Button>
+      );
+    }
+  }
+
   render() {
     return(
       <View style={Style.container}>
         <View style={Style.content}>
           {this.renderButtons()}
+          <CardSection> 
+            {this.renderExit()}
+          </CardSection>
         </View>
         <Footer />
       </View>

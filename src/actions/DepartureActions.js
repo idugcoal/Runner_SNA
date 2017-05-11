@@ -58,6 +58,13 @@ export const setRunType = (runType, deviceID) => {
 		}
 	} else if (runType == 'checkin') {
 		//do checkin stuff
+		Actions.selectWheelchair();
+		return(dispatch) => {
+			dispatch({
+				type: SET_RUN_TYPE,
+				payload: payload
+			})
+		}
 	}
 }
 

@@ -47,7 +47,7 @@ class Main extends Component {
   }
 
   onCheckIn() {
-  	Actions.checkIn();
+  	this.props.setRunType('checkin', DeviceInfo.getUniqueID());
   }
 
 	render() {

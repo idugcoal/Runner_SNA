@@ -135,3 +135,17 @@ export const addStop = (runType, timeStart, currentGPS, stopLocation) => {
 			stopLocationGPS: currentGPS,
 		});
 }
+
+export const updateWheelchair = (wheelchairNumber, gps) => {
+
+	const path = 'wheelchairs/' + wheelchairNumber;
+	console.log(wheelchairNumber, gps, path);
+	firebase.database().ref(`${path}`)
+		.update({
+			latitude: gps.latitude,
+			longitude: gps.longitude,
+			gpsTimestamp: gps.timestamp,
+			timestamp: Date.now()
+		})
+
+}

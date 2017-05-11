@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { selectWheelchair } from '../actions';
+import { updateWheelchair } from '../utils/firebaseService';
 import { CardSection, Button } from './common';
 import NumberButton from './common/NumberButton';
 import Footer from './Footer';
@@ -28,19 +29,22 @@ class SelectWheelchair extends Component {
   }
 
   onButtonPress(buttonValue) {
-      this.props.selectWheelchair(
-        this.props.runType,
-        this.props.numPassengers, 
-        this.props.passenger1Wheelchair,
-        this.props.passenger2Wheelchair,
-        this.props.passenger1FirstName,
-        this.props.passenger1LastName,
-        this.props.passenger2FirstName,
-        this.props.passenger2LastName,
-        this.props.airline,
-        this.props.flightNumber,
-        buttonValue
-       )
+    
+    updateWheelchair(buttonValue, this.props.currentGPS);      
+
+    this.props.selectWheelchair(
+      this.props.runType,
+      this.props.numPassengers, 
+      this.props.passenger1Wheelchair,
+      this.props.passenger2Wheelchair,
+      this.props.passenger1FirstName,
+      this.props.passenger1LastName,
+      this.props.passenger2FirstName,
+      this.props.passenger2LastName,
+      this.props.airline,
+      this.props.flightNumber,
+      buttonValue
+    )
   }
 
   renderButtons() {
@@ -70,9 +74,9 @@ class SelectWheelchair extends Component {
 };
 
 const mapStateToProps = ({ departure }) => {
-  const { passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, flightNumber, numPassengers, airline, runType } = departure;
+  const { currentGPS, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, flightNumber, numPassengers, airline, runType } = departure;
 
-  return { passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, flightNumber, numPassengers, airline, runType };
+  return { currentGPS, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, flightNumber, numPassengers, airline, runType };
 };
 
 export default connect(mapStateToProps, { selectWheelchair })(SelectWheelchair);

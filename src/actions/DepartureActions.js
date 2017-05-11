@@ -232,6 +232,7 @@ export const selectWheelchair = (runType, numPassengers, passenger1Wheelchair, p
 
 export const scanBoardingPass = (runType, timeStart, numPassengers, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, airline, flightNumber, boardingPassData) => {
 
+	console.log('scanBoardingPassData', airline)
 	if(runType === 'departure') {
 	//if there's one passenger, set boardingPass1 to boardingPassData, route to selectGate
 		if(numPassengers === 1) {
@@ -269,8 +270,8 @@ export const scanBoardingPass = (runType, timeStart, numPassengers, passenger1Wh
 	} 
 	else if (runType === 'arrival') {
 		if(numPassengers === 1) {
-			console.log('farky', runType, timeStart, boardingPassData.firstName, boardingPassData.lastName)
-			Actions.selectStopsSterile({ runType: runType, timeStart: timeStart, p1FirstName: boardingPassData.firstName, p1LastName: boardingPassData.lastName, type: 'reset' });
+			console.log('farky', runType, timeStart, boardingPassData.firstName, boardingPassData.lastName, boardingPassData.airline, boardingPassData.flightNumber)
+			Actions.selectStopsSterile({ runType: runType, timeStart: timeStart, p1FirstName: boardingPassData.firstName, p1LastName: boardingPassData.lastName, al: boardingPassData.airline, fn: boardingPassData.flightNumber, type: 'reset' });
 			return (dispatch) => {
 				dispatch({
 					type: SCAN_BOARDING_PASS_1,
@@ -292,7 +293,7 @@ export const scanBoardingPass = (runType, timeStart, numPassengers, passenger1Wh
 		//if passenger1FirstName is not empty, set boardingPass2 to boardingPassData, route to selectGate
 		}	else {
 			console.log('BPD', boardingPassData)
-			Actions.selectStopsSterile({ runType: runType, timeStart: timeStart, p2FirstName: boardingPassData.firstName, p2LastName: boardingPassData.lastName, type: 'reset' });
+			Actions.selectStopsSterile({ runType: runType, timeStart: timeStart, p2FirstName: boardingPassData.firstName, p2LastName: boardingPassData.lastName, al: boardingPassData.airline, fn: boardingPassData.flightNumber, type: 'reset' });
 			return(dispatch) => {
 				dispatch({
 					type: SCAN_BOARDING_PASS_2,

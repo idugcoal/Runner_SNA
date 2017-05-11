@@ -56,7 +56,11 @@ export const writeArrivalData = (props) => {
     p2LastName, 
     passenger1Wheelchair, 
     passenger2Wheelchair,
-    deviceID, 
+    deviceID,
+    airline,
+    flightNumber,
+    al,
+    fn, 
     // destinationGate, 
     user
 	} = props;
@@ -75,6 +79,8 @@ export const writeArrivalData = (props) => {
 			passenger2LastName: p2LastName || '',
 			passenger1Wheelchair: passenger1Wheelchair,
 			passenger2Wheelchair: passenger2Wheelchair,
+			airline: al,
+			flightNumber: fn,
 			// destinationGate: destinationGate,
 			deviceID: deviceID,
 			employeeLogin: user.email

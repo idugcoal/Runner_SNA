@@ -19,18 +19,28 @@ class ScanBoardingPass extends Component {
 		switch(boardingPassString.data.substring(36, 38)) {
 			case 'AS':
 				var airline = 'Alaska';
+				break;
 			case 'AA':
 				var airline = 'American';
+				break;
 			case 'DL':
 				var airline = 'Delta';
+				break;
 			case 'F9':
 				var airline = 'Frontier';
+				break;
 			case 'UA':
 				var airline = 'United';
+				break;
 			case 'WN':
 				var airline = 'Southwest';
+				break;
 			case 'WS':
 				var airline = 'WestJet';
+				break;
+			default: 
+				var airline = "Scan Failed";
+				break;
 		}
 
 		const slash = boardingPassString.data.indexOf('/');
@@ -40,6 +50,9 @@ class ScanBoardingPass extends Component {
 			airline: airline,
 			flightNumber: boardingPassString.data.substring(36, 43)
 		}
+		console.log('COME ON NOW', boardingPassData);
+
+
 		
 		this.props.scanBoardingPass(
 			this.props.runType,

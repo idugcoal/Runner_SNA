@@ -73,7 +73,6 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_RUN_TYPE:
-      console.log('reducer', action.payload.deviceID)
       return { ...state, runType: action.payload.runType, deviceID: action.payload.deviceID, timeStart: Date.now() };
     case SET_NUMBER_OF_PASSENGERS:
       return { ...state, numPassengers: action.payload };
@@ -82,7 +81,7 @@ export default (state = INITIAL_STATE, action) => {
     case SELECT_WHEELCHAIR_2:
       return { ...state, passenger2Wheelchair: action.payload };
     case SCAN_BOARDING_PASS_1:
-      console.log('SBP 1: ', action.payload)
+      console.log('SBP 1: ', action.payload.airline, action.payload.flightNumber)
       return { ...state, passenger1FirstName: action.payload.firstName, passenger1LastName: action.payload.lastName, airline: action.payload.airline, flightNumber: action.payload.flightNumber };
     case SCAN_BOARDING_PASS_2:
       console.log('SBP 2: ', action.payload)

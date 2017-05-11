@@ -3,6 +3,7 @@ import { View, Text, Keyboard } from 'react-native';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import DeviceInfo from 'react-native-device-info'
 import { updateCurrentPosition, setRunType } from '../actions';
 import { Card, CardSection, Button } from './common';
 
@@ -14,6 +15,8 @@ class Main extends Component {
 		// console.log(uid, Date.now())
 		// console.log(currentUser);
 
+		console.log('uniqueID', DeviceInfo.getUniqueID());
+		
 		Keyboard.dismiss();
 
     navigator.geolocation.getCurrentPosition((position) => {

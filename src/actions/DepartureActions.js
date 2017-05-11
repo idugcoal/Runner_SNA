@@ -33,14 +33,19 @@ import {
 	RETURN_TO_START
 } from './types';
 
-export const setRunType = (runType) => {
+export const setRunType = (runType, deviceID) => {
+
+	const payload = {
+		runType: runType,
+		deviceID: deviceID
+	}
 
 	if(runType === 'departure') {
 		Actions.selectStartingPoint();
 		return(dispatch) => {
 			dispatch({
 				type: SET_RUN_TYPE,
-				payload: runType
+				payload: payload
 			})
 		}
 	} else if (runType === 'arrival') {
@@ -48,7 +53,7 @@ export const setRunType = (runType) => {
 		return(dispatch) => {
 			dispatch({
 				type: SET_RUN_TYPE,
-				payload: runType
+				payload: payload
 			})
 		}
 	} else if (runType == 'checkin') {

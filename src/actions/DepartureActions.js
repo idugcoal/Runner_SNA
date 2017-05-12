@@ -164,82 +164,47 @@ export const selectWheelchair = (props, buttonValue) => {
 			})
 		}
 	}
-
 	if (numPassengers === 2) {
-		if (passenger1Wheelchair === '') {
+		if(passenger1Wheelchair == '') {
 			Actions.scanBoardingPass({ title: "Scan Boarding Pass #1" });
-			return(dispatch) => {
-				dispatch({
-					type: SELECT_WHEELCHAIR_1,
-					payload: buttonValue
-				})
+				return(dispatch) => {
+					dispatch({
+						type: SELECT_WHEELCHAIR_1,
+						payload: buttonValue
+					})
+				}
+		} 
+		else if(passenger1FirstName != '' && passenger1LastName != '' && passenger2FirstName != '' && passenger2LastName != '' && airline != '' && flightNumber != '') {
+			if(runType === 'departure') {
+				Actions.selectGate();
+				return(dispatch) => {
+					dispatch({
+						type: SELECT_WHEELCHAIR_2,
+						payload: buttonValue
+					})
+				}
 			}
-		}
+			if(runType === 'arrival') {
+				Actions.selectStopsSterile();
+				return(dispatch) => {
+					dispatch({
+						type: SELECT_WHEELCHAIR_2,
+						payload: buttonValue
+					})
+				}
+			}
+		} 
 		else {
-			//should be here only when passenger 2 info isnt filled out
-			console.log('WHY AM I HERE??')
 			Actions.scanBoardingPass({ title: "Scan Boarding Pass #2" });
-			return(dispatch) => {
-				dispatch({
-					type: SELECT_WHEELCHAIR_2,
-					payload: buttonValue
-				})
-			}
-		}
-		if (passenger1Wheelchair != '' && 
-				passenger1FirstName != '' && 
-				passenger1LastName != '' && 
-				passenger2FirstName != '' && 
-				passenger2LastName != '' && 
-				flightNumber != '' &&
-				airline != '' &&
-				runType === 'departure'
-				) {
-			console.log('weird place #1')
-			Actions.selectGate();
-			//write to database
-			return(dispatch) => {
-				dispatch({
-					type: SELECT_WHEELCHAIR_2,
-					payload: buttonValue
-				})
-			}
-		}
-		if (passenger1Wheelchair != '' && 
-				passenger1FirstName != '' && 
-				passenger1LastName != '' && 
-				passenger2FirstName != '' && 
-				passenger2LastName != '' && 
-				flightNumber != '' &&
-				airline != '' &&
-				runType === 'arrival'
-				) {
-			// writePassengerArrivalData(runType, timeStart, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName);
-			Actions.selectStopsSterile({ runType: runType, timeStart: timeStart, passenger2FirstName: passenger2FirstName, passenger2LastName, passenger2LastName, type: 'reset' });
-			//write to database
-			return(dispatch) => {
-				dispatch({
-					type: SELECT_WHEELCHAIR_2,
-					payload: buttonValue
-				})
-			}
-		}
-		// go back to select wheelchair if wheelchair 2 isnt selected
-
-		// 
-		// IF EVERYTHING IS FILLED OUT DURING ARRIVALS:
-		console.log('WHY AM I HERE', passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, flightNumber, airline)
-		if (passenger1Wheelchair != '') {
-			Actions.selectStopsSterile({ type: 'reset' });
-			return(dispatch) => {
-				dispatch({
-					type: SELECT_WHEELCHAIR_2,
-					payload: buttonValue
-				})
-			}
+				return(dispatch) => {
+					dispatch({
+						type: SELECT_WHEELCHAIR_2,
+						payload: buttonValue
+					})
+				}
 		}
 	}
-};
+}
 
 export const scanBoardingPass = (props, boardingPassData) => {
 

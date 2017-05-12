@@ -167,6 +167,8 @@ export const selectWheelchair = (runType, numPassengers, passenger1Wheelchair, p
 			}
 		}
 		else {
+			//should be here only when passenger 2 info isnt filled out
+			console.log('WHY AM I HERE??')
 			Actions.scanBoardingPass({ title: "Scan Boarding Pass #2" });
 			return(dispatch) => {
 				dispatch({

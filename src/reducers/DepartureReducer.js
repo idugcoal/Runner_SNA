@@ -4,7 +4,7 @@ SELECT_WHEELCHAIR_1,
 SELECT_WHEELCHAIR_2,
 SCAN_BOARDING_PASS_1,
 SCAN_BOARDING_PASS_2,
-ALTERNATE_BOARDING_PASS_INPUT,
+// ALTERNATE_BOARDING_PASS_INPUT,
 PASSENGER_1_FIRST_NAME_CHANGED,
 PASSENGER_1_LAST_NAME_CHANGED,
 PASSENGER_2_FIRST_NAME_CHANGED,
@@ -86,20 +86,16 @@ export default (state = INITIAL_STATE, action) => {
     case SCAN_BOARDING_PASS_2:
       console.log('SBP 2: ', action.payload)
       return { ...state, passenger2FirstName: action.payload.firstName, passenger2LastName: action.payload.lastName };
-    case ALTERNATE_BOARDING_PASS_INPUT:
-      console.log('ALTERNATEBOARDINGPASSINPUT NEVER HERE')
-    	return { ...state, passenger1FirstName: action.payload };
+    // case ALTERNATE_BOARDING_PASS_INPUT:
+    //   console.log('ALTERNATEBOARDINGPASSINPUT NEVER HERE')
+    // 	return { ...state, passenger1FirstName: action.payload };
     case PASSENGER_1_FIRST_NAME_CHANGED:
-      console.log('p1fnc')
       return { ...state, passenger1FirstName: action.payload };
     case PASSENGER_1_LAST_NAME_CHANGED:
-      console.log('p1lnc')
       return { ...state, passenger1LastName: action.payload };
     case PASSENGER_2_FIRST_NAME_CHANGED:
-      console.log('p2fnc')
       return { ...state, passenger2FirstName: action.payload };
     case PASSENGER_2_LAST_NAME_CHANGED:
-      console.log('p2lnc')
       return { ...state, passenger2LastName: action.payload };
     case AIRLINE_CHANGED: 
       return { ...state, airline: action.payload };

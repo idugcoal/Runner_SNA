@@ -76,7 +76,7 @@ class AlternateBoardingPassInput extends Component {
         alert("Please fill out passenger information");
       }
       // if there are two passengers and no fields are empty
-      else if (this.props.numPassengers == 2 && this.props.passenger1FirstName != '' && this.props.passenger1LastName != '' && this.props.passenger2FirstName != '' && this.props.passenger2LastName != '' && this.props.airline != '' && this.props.flightNumber != '' && this.props.passenger2Wheelchair != '') {
+      else if (this.props.numPassengers == 2 && this.props.passenger1FirstName != '' && this.props.passenger1LastName != '' && this.props.passenger2FirstName != '' && this.props.passenger2LastName != '' && this.props.airline != '' && this.props.flightNumber != '') {
         
         Actions.selectStopsSterile({al: this.props.airline, fn: this.props.flightNumber});
       }

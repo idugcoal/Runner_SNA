@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import { selectWheelchair } from '../actions';
 import { updateWheelchair } from '../utils/firebaseService';
@@ -26,6 +26,7 @@ class SelectWheelchair extends Component {
 
   constructor(props) {
     super(props);
+    Keyboard.dismiss();
   }
 
   onButtonPress(buttonValue) {

@@ -69,10 +69,10 @@ class AlternateBoardingPassInput extends Component {
         } 
         else {
           console.log('ABPI #7')
-          Actions.selectWheelchair({ title: 'Select Wheelchair #2'});
+          Actions.selectWheelchair({ type: 'reset', title: 'Select Wheelchair #2'});
         }
       }
-      if(passenger1FirstName == '' || passenger1LastName == '' || passenger2FirstName == '' || passenger2LastName == '' || airline == '' || flightNumber == '') {
+      else if(passenger1FirstName == '' || passenger1LastName == '' || passenger2FirstName == '' || passenger2LastName == '' || airline == '' || flightNumber == '') {
         console.log('ABPI #8')
         alert('Please fill out all passenger info');
       }
@@ -88,69 +88,6 @@ class AlternateBoardingPassInput extends Component {
         }
       }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // always navigate to selectStopsSterile for arrivals
-    // if(this.props.runType === 'departure') {
-    //   if (this.props.numPassengers === 1 && this.props.passenger1FirstName != '' && this.props.passenger1LastName != '' && this.props.airline != '' && this.props.flightNumber != '') {
-    //     Actions.selectGate();
-    //   }
-    //   // if there's one passenger and any field is emtpy
-    //   else if (this.props.numPassengers === 1) {
-    //     alert("Please fill out passenger information");
-    //   }
-    //   // if there are two passengers and no fields are empty
-    //   else if (this.props.numPassengers == 2 && this.props.passenger1FirstName != '' && this.props.passenger1LastName != '' && this.props.passenger2FirstName != '' && this.props.passenger2LastName != '' && this.props.airline != '' && this.props.flightNumber != '' && this.props.passenger2Wheelchair != '') {
-        
-    //     Actions.selectGate();
-    //   }
-    //   // if there are two passengers and the only empty field is wheelchair #2
-    //   else if (this.props.passenger2Wheelchair == '') {
-        
-    //     Actions.selectWheelchair({ type: "reset", title: "Select Wheelchair #2" })
-    //   }
-    //   // if there are two passengers and fields are empty
-    //   else if (this.props.numPassengers === 2) {
-    //     // console.log('1', this.props.numPassengers, '2', this.props.passenger1FirstName, '3', this.props.passenger1LastName, '4', this.props.passenger2FirstName, '5', this.props.passenger2LastName, '6', this.props.airline, '7', this.props.flightNumber)
-    //     alert("Please fill out passenger information")
-    //   }
-    // } 
-    // else if(this.props.runType === 'arrival') {
-    //   if (this.props.numPassengers === 1 && this.props.passenger1FirstName != '' && this.props.passenger1LastName != '' && this.props.airline != '' && this.props.flightNumber != '') {
-        
-    //     Actions.selectStopsSterile({al: this.props.airline, fn: this.props.flightNumber});
-    //   }
-    //   // if there's one passenger and any field is emtpy
-    //   else if (this.props.numPassengers === 1) {
-    //     alert("Please fill out passenger information");
-    //   }
-    //   // if there are two passengers and no fields are empty
-    //   else if (this.props.numPassengers == 2 && this.props.passenger1FirstName != '' && this.props.passenger1LastName != '' && this.props.passenger2FirstName != '' && this.props.passenger2LastName != '' && this.props.airline != '' && this.props.flightNumber != '') {
-        
-    //     Actions.selectStopsSterile({al: this.props.airline, fn: this.props.flightNumber});
-    //   }
-    //   // if there are two passengers and the only empty field is wheelchair #2
-    //   else if (this.props.passenger2Wheelchair == '') {
-        
-    //     Actions.selectWheelchair({ type: "reset", title: "Select Wheelchair #2" })
-    //   }
-    //   // if there are two passengers and fields are empty
-    //   else if (this.props.numPassengers === 2) {
-    //     // console.log('1', this.props.numPassengers, '2', this.props.passenger1FirstName, '3', this.props.passenger1LastName, '4', this.props.passenger2FirstName, '5', this.props.passenger2LastName, '6', this.props.airline, '7', this.props.flightNumber)
-    //     alert("Please fill out passenger information")
-    //   }
-    // }
   }
 
   renderSecondPassengerInput() {

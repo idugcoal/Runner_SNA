@@ -38,7 +38,6 @@ export const setRunType = (runType, deviceID) => {
 		runType: runType,
 		deviceID: deviceID
 	}
-	console.log('actions', payload)
 
 	if(runType === 'departure') {
 		Actions.selectStartingPoint();
@@ -57,7 +56,6 @@ export const setRunType = (runType, deviceID) => {
 			})
 		}
 	} else if (runType == 'checkin') {
-		//do checkin stuff
 		Actions.selectWheelchair();
 		return(dispatch) => {
 			dispatch({

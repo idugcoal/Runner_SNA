@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Keyboard } from 'react-native';
+import { View, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import { selectWheelchair } from '../actions';
 import { updateWheelchair } from '../utils/firebaseService';

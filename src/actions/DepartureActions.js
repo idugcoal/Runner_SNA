@@ -1,5 +1,3 @@
-import firebase from 'firebase';
-// import { writeBoardingPassData } from '../utils/firebaseService';
 import { Actions } from 'react-native-router-flux';
 import {
   SET_NUMBER_OF_PASSENGERS,
@@ -287,48 +285,6 @@ export const scanBoardingPass = (props, boardingPassData) => {
 	}
 };
 
-export const passenger1FirstNameChanged = (text) => {
-  return {
-    type: PASSENGER_1_FIRST_NAME_CHANGED,
-    payload: text
-  };
-};
-
-export const passenger1LastNameChanged = (text) => {
-  return {
-    type: PASSENGER_1_LAST_NAME_CHANGED,
-    payload: text
-  };
-};
-
-export const passenger2FirstNameChanged = (text) => {
-  return {
-    type: PASSENGER_2_FIRST_NAME_CHANGED,
-    payload: text
-  };
-};
-
-export const passenger2LastNameChanged = (text) => {
-  return {
-    type: PASSENGER_2_LAST_NAME_CHANGED,
-    payload: text
-  };
-};
-
-export const airlineChanged = (text) => {
-  return {
-    type: AIRLINE_CHANGED,
-    payload: text
-  };
-};
-
-export const flightNumberChanged = (text) => {
-  return {
-    type: FLIGHT_NUMBER_CHANGED,
-    payload: text
-  };
-};
-
 export const selectGateNumber = (runType, text) => {
 	
 	if(runType === 'departure') {
@@ -466,4 +422,46 @@ export const returnToStart = () => {
 		})
 	}
 }
+
+export const passenger1FirstNameChanged = (text) => {
+  return {
+    type: PASSENGER_1_FIRST_NAME_CHANGED,
+    payload: text
+  };
+};
+
+export const passenger1LastNameChanged = (text) => {
+  return {
+    type: PASSENGER_1_LAST_NAME_CHANGED,
+    payload: text
+  };
+};
+
+export const passenger2FirstNameChanged = (text) => {
+  return {
+    type: PASSENGER_2_FIRST_NAME_CHANGED,
+    payload: text
+  };
+};
+
+export const passenger2LastNameChanged = (text) => {
+  return {
+    type: PASSENGER_2_LAST_NAME_CHANGED,
+    payload: text
+  };
+};
+
+export const airlineChanged = (text) => {
+  return {
+    type: AIRLINE_CHANGED,
+    payload: text
+  };
+};
+
+export const flightNumberChanged = (text) => {
+  return {
+    type: FLIGHT_NUMBER_CHANGED,
+    payload: text
+  };
+};
  

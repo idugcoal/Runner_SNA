@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Keyboard } from 'react-native';
+import { Keyboard } from 'react-native';
 import firebase from 'firebase';
 import { updateWheelchair } from '../utils/firebaseService';
 import { connect } from 'react-redux';
@@ -15,12 +15,10 @@ class Main extends Component {
 		Keyboard.dismiss();
 
     navigator.geolocation.getCurrentPosition((position) => {
-    	// TODO: replace this with a firebase function?
     	this.props.updateCurrentPosition(position);
     });
 
     navigator.geolocation.watchPosition((position) => {
-    	// TODO: replace this with a firebase function?
     	if(this.props.numPassengers != '') {
     		if(this.props.numPassengers === '1') {
     			if(this.props.passenger1Wheelchair != '') {

@@ -13,36 +13,28 @@ class AlternateBoardingPassInput extends Component {
 	constructor(props) {
 		super(props);
 	}
-
 	p1FirstNameChanged(text) {
 	 this.props.passenger1FirstNameChanged(text);
 	}
-
 	p1LastNameChanged(text) {
 		this.props.passenger1LastNameChanged(text);
 	}
-  
   p2FirstNameChanged(text) {
    this.props.passenger2FirstNameChanged(text);
   }
-
   p2LastNameChanged(text) {
     this.props.passenger2LastNameChanged(text);
   }
-
 	onFlightNumberChange(text) {
 		this.props.flightNumberChanged(text);
 	}
-
 	onAirlineChange(text) {
 		this.props.airlineChanged(text);
 	}
 
   navigateToNext() {
-
     // always navigate to selectStopsSterile for arrivals
     if(this.props.runType === 'departure') {
-      console.log('check me out', this.props.user)
       if (this.props.numPassengers === 1 && this.props.passenger1FirstName != '' && this.props.passenger1LastName != '' && this.props.airline != '' && this.props.flightNumber != '') {
         Actions.selectGate();
       }

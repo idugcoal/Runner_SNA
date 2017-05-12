@@ -66,6 +66,29 @@ export const setRunType = (runType, deviceID) => {
 	}
 }
 
+export const addStartingPoint = (props, buttonLocation) => {
+
+	const { runType, currentGPS } = props
+	const { latitude, longitude, timestamp } = currentGPS;
+	const startLocationGPS = {
+		latitude: latitude,
+		longitude: longitude,
+		timestamp: timestamp,
+	}
+	const payload = {
+		startLocationGPS: startLocationGPS,
+		startLocation: buttonLocation
+	}
+	
+	Actions.selectNumberOfWheelchairs();
+	return(dispatch) => {
+		dispatch({ 
+			type: ADD_STARTING_POINT,
+			payload: payload
+		});
+	}
+}
+
 export const setNumberOfPassengers = (runType, number) => {
 	if(runType === 'departure') {	
 		Actions.selectWheelchair({title: "Select Wheelchair #1"});
@@ -86,30 +109,7 @@ export const setNumberOfPassengers = (runType, number) => {
 	}
 }
 
-export const addStartingPoint = (runType, buttonLocation, position) => {
 
-	const { coords, timestamp } = position;
-	const { latitude, longitude } = coords;
-	const startLocationGPS = {
-		latitude: latitude,
-		longitude: longitude,
-		timestamp: timestamp,
-	}
-	const payload = {
-		startLocationGPS: startLocationGPS,
-		startLocation: buttonLocation
-	}
-	
-	if(runType === 'departure') {
-		Actions.selectNumberOfWheelchairs();
-		return(dispatch) => {
-			dispatch({ 
-				type: ADD_STARTING_POINT,
-				payload: payload
-			});
-		}
-	}
-}
 
 export const addStartingPointArrival = (runType, position) => {
 

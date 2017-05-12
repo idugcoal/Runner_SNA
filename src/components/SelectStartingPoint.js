@@ -13,9 +13,9 @@ class SelectStartingPoint extends Component {
 	}
 
 	onButtonPress(startLocation) {
-		const locationFirstContactGPS = navigator.geolocation.getCurrentPosition((position) => {
-			this.props.addStartingPoint(this.props.runType, startLocation, position);
-		});
+		// const locationFirstContactGPS = navigator.geolocation.getCurrentPosition((position) => {
+			this.props.addStartingPoint(this.props, startLocation);
+		// });
 	}
 
 	render() {
@@ -48,9 +48,9 @@ class SelectStartingPoint extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { wheelchairNumber, runType } = departure;
+  const { wheelchairNumber, runType, currentGPS } = departure;
 
-  return { wheelchairNumber, runType };
+  return { wheelchairNumber, runType, currentGPS };
 };
 
 export default connect(mapStateToProps, { 

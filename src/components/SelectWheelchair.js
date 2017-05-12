@@ -64,7 +64,6 @@ class SelectWheelchair extends Component {
   }
 
   renderExit() {
-    console.log('farts', this.props.checkin)
     if(this.props.runType === 'checkin') {
       return (
           <Button onPress={ ()=> Actions.main({type: 'reset'}) }>Finish Wheelchair Check-In</Button>

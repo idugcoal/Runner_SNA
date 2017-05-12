@@ -140,7 +140,20 @@ export const addStartingLocationArrival = (text) => {
 
 }
 
-export const selectWheelchair = (runType, numPassengers, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, airline, flightNumber, buttonValue) => {
+export const selectWheelchair = (props, buttonValue) => {
+
+	const {
+		runType, 
+		numPassengers, 
+		passenger1Wheelchair, 
+		passenger2Wheelchair, 
+		passenger1FirstName, 
+		passenger1LastName, 
+		passenger2FirstName, 
+		passenger2LastName, 
+		airline, 
+		flightNumber
+	} = props;
 
 	if (numPassengers === 1) {
 		Actions.scanBoardingPass({ title: "Scan Boarding Pass" });

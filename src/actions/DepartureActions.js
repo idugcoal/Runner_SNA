@@ -241,9 +241,24 @@ export const selectWheelchair = (props, buttonValue) => {
 	}
 };
 
-export const scanBoardingPass = (runType, timeStart, numPassengers, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, airline, flightNumber, boardingPassData) => {
+export const scanBoardingPass = (props, boardingPassData) => {
 
-	console.log('scanBoardingPassData', airline)
+	const {
+		runType, 
+		timeStart, 
+		numPassengers, 
+		passenger1Wheelchair, 
+		passenger2Wheelchair, 
+		passenger1FirstName, 
+		passenger1LastName, 
+		passenger2FirstName, 
+		passenger2LastName, 
+		airline, 
+		flightNumber
+	} = props
+
+
+	console.log('scanBoardingPassData', runType, timeStart, numPassengers, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, airline, flightNumber)
 	if(runType === 'departure') {
 	//if there's one passenger, set boardingPass1 to boardingPassData, route to selectGate
 		if(numPassengers === 1) {

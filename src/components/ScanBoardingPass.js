@@ -50,24 +50,21 @@ class ScanBoardingPass extends Component {
 			airline: airline,
 			flightNumber: boardingPassString.data.substring(36, 43)
 		}
-		console.log('COME ON NOW', boardingPassData);
 
-
-		
-		this.props.scanBoardingPass(
-			this.props.runType,
-			this.props.timeStart,
-			this.props.numPassengers,
-			this.props.passenger1Wheelchair,
-			this.props.passenger2Wheelchair,
-			this.props.passenger1FirstName,
-			this.props.passenger1LastName,
-			this.props.passenger2FirstName,
-			this.props.passenger2LastName,
-			this.props.airline,
-			this.props.flightNumber,
-			boardingPassData
-		);
+		this.props.scanBoardingPass(this.props, boardingPassData);
+		// 	this.props.runType,
+		// 	this.props.timeStart,
+		// 	this.props.numPassengers,
+		// 	this.props.passenger1Wheelchair,
+		// 	this.props.passenger2Wheelchair,
+		// 	this.props.passenger1FirstName,
+		// 	this.props.passenger1LastName,
+		// 	this.props.passenger2FirstName,
+		// 	this.props.passenger2LastName,
+		// 	this.props.airline,
+		// 	this.props.flightNumber,
+		// 	boardingPassData
+		// );
 	}
 
 	render() {

@@ -222,7 +222,9 @@ export const scanBoardingPass = (props, boardingPassData) => {
 
 	console.log('scanBoardingPassData', runType, timeStart, numPassengers, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, airline, flightNumber)
 	if(numPassengers === 1) {
+		console.log('here')
 		if(runType === 'departure') {
+		console.log('sbp 1')
 			Actions.selectGate();
 			return(dispatch) => {
 				dispatch({
@@ -231,7 +233,8 @@ export const scanBoardingPass = (props, boardingPassData) => {
 				})
 			}
 		} 
-		if(runType === 'arrival') {
+		else if(runType === 'arrival') {
+			console.log('sbp 2')
 			Actions.selectStopsSterile({ runType: runType, timeStart: timeStart, p1FirstName: boardingPassData.firstName, p1LastName: boardingPassData.lastName, al: boardingPassData.airline, fn: boardingPassData.flightNumber, type: 'reset' });
 			return (dispatch) => {
 				dispatch({

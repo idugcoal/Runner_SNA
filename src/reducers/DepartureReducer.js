@@ -85,7 +85,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, passenger1FirstName: action.payload.firstName, passenger1LastName: action.payload.lastName, airline: action.payload.airline, flightNumber: action.payload.flightNumber };
     case SCAN_BOARDING_PASS_2:
       console.log('SBP 2: ', action.payload)
-      return { ...state, passenger2FirstName: action.payload.firstName, passenger2LastName: action.payload.lastName };
+      return { ...state, passenger2FirstName: action.payload.firstName, passenger2LastName: action.payload.lastName, airline: action.payload.airline, flightNumber: action.payload.flightNumber };
     // case ALTERNATE_BOARDING_PASS_INPUT:
     //   console.log('ALTERNATEBOARDINGPASSINPUT NEVER HERE')
     // 	return { ...state, passenger1FirstName: action.payload };

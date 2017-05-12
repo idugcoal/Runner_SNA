@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { setNumberOfPassengers } from '../actions';
-import { Button, CardSection, ImageButton, NumberButton } from './common';
+import { Button, CardSection } from './common';
 import Footer from './Footer';
 import Style from './Style';
 import { Actions } from 'react-native-router-flux';
@@ -43,9 +43,9 @@ class SelectNumberOfWheelchairs extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { destinationGate, finalGate, runType } = departure;
+  const { runType } = departure;
 
-  return { destinationGate, finalGate, runType };
+  return { runType };
 };
 
 export default connect(mapStateToProps, {

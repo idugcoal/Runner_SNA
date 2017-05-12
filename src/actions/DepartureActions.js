@@ -109,8 +109,6 @@ export const setNumberOfPassengers = (runType, number) => {
 	}
 }
 
-
-
 export const addStartingPointArrival = (runType, position) => {
 
 	const { coords, timestamp } = position;

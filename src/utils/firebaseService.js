@@ -147,4 +147,16 @@ export const updateWheelchair = (wheelchairNumber, gps) => {
 		})
 }
 
+// export const office = () => {
+// 	const path = runType + '/' + timeStart + '/stops/'; 
+// 	firebase.database().ref(`${path}`)
+// 		.push({
+// 		// .set({ 
+// 		// .update({
+// 			stopTime: Date.now(), 
+// 			stopLocation: stopLocation,
+// 			stopLocationGPS: currentGPS,
+// 		});
+// }
+
 

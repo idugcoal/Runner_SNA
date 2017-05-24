@@ -39,7 +39,7 @@ class ScanBoardingPass extends Component {
 				var airline = 'WestJet';
 				break;
 			default: 
-				var airline = "Scan Failed";
+				var airline = "Unrecognized Airline";
 				break;
 		}
 
@@ -63,6 +63,7 @@ class ScanBoardingPass extends Component {
 						style={{ flex: 1 }}
 						barCodeTypes={[ 'pdf417' ]}
 						onBarCodeRead={this.onReadSuccess.bind(this)}
+						// torchMode={Camera.constants.TorchMode.on}
 					/>
 					<CardSection>
 						<Button style={Style.alternate} onPress={() => Actions.alternateBoardingPassInput()}>Manual Input</Button> 

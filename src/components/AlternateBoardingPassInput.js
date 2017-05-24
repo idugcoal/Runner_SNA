@@ -61,6 +61,7 @@ class AlternateBoardingPassInput extends Component {
     }
     if(numPassengers === 2) {
       console.log('ABPI #4')
+      //if passenger2Wheelchair is blank, we're only checking for passenger 1's info 
       if(passenger2Wheelchair == '') {
         console.log('ABPI #5')
         if(passenger1FirstName == '' || passenger1LastName == '') {
@@ -72,21 +73,27 @@ class AlternateBoardingPassInput extends Component {
           Actions.selectWheelchair({ type: 'reset', title: 'Select Wheelchair #2'});
         }
       }
-      else if(passenger1FirstName == '' || passenger1LastName == '' || passenger2FirstName == '' || passenger2LastName == '' || airline == '' || flightNumber == '') {
+      //if passenger2Wheelchair has been chosen, we're checking info for passengers 1 and 2
+      else if(passenger1FirstName == '' || 
+              passenger1LastName == '' || 
+              passenger2FirstName == '' || 
+              passenger2LastName == '' || 
+              airline == '' || 
+              flightNumber == '') 
+      {
         console.log('ABPI #8')
         alert('Please fill out all passenger info');
       }
-      else {
-        console.log('ABPI #9')
-        if(runType === 'departure') {
-          console.log('ABPI #10')
+      else if(runType === 'departure') {
+          console.log('ABPI #10', runType)
           Actions.selectGate();
         }
-        if(runType === 'arrival'); {
-          console.log('ABPI #11')
+      else if(runType === 'arrival') {
+          console.log('ABPI #11', runType)
           Actions.selectStopsSterile({al: this.props.airline, fn: this.props.flightNumber})
-        }
+        
       }
+      
     }
   }
 

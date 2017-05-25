@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 
+//probably remove
 export const writePassengerData = (props, gateNumber) => {
 	const {
 		runType, 
@@ -41,6 +42,7 @@ export const writePassengerData = (props, gateNumber) => {
 		});
 }
 
+//probably remove
 export const writeArrivalData = (props) => {
 	const {
 		runType, 
@@ -67,7 +69,6 @@ export const writeArrivalData = (props) => {
     user
 	} = props;
 	const path = runType + '/' + timeStart; 
-	console.log('FUCKING PROPS JESUS', props)
 	firebase.database().ref(`${path}`)
 		// .push({
 		.set({
@@ -89,6 +90,7 @@ export const writeArrivalData = (props) => {
 		});
 }
 
+//probably remove
 export const writeDepartureData = ({ runType, timeStart, timeTSAStart, timeTSAEnd, commentsTSA }) => {
 	const path = runType + '/' + timeStart; 
 	firebase.database().ref(`${path}`)
@@ -110,6 +112,7 @@ export const writeDepartureEnd = ({runType, timeStart, destinationGate, finalGat
 			commentsEnd: commentsEnd
 		});
 }
+
 export const writeArrivalEnd = ({runType, timeStart, destination}, commentsEnd, timeGateArrival ) => {
 	const path = runType + '/' + timeStart; 
 	firebase.database().ref(`${path}`)
@@ -120,7 +123,7 @@ export const writeArrivalEnd = ({runType, timeStart, destination}, commentsEnd, 
 			commentsEnd: commentsEnd
 		});
 }
-
+//probably remove
 export const addStop = (runType, timeStart, currentGPS, stopLocation) => {
 	// console.log('firebase services: ', runType, timeStart, numPassengers, p1Wheelchair, p2Wheelchair, p1FirstName, p1LastName, p2FirstName, p2LastName)
 	const path = runType + '/' + timeStart + '/stops/'; 

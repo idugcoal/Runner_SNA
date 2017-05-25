@@ -17,7 +17,6 @@ class Closing extends Component {
 			text: '',
 			arrivalTime: Date.now(),
 		}
-		console.log('CLOSING', props)
 	}
 
 	onButtonPress() {

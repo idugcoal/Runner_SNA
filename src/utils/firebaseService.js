@@ -124,18 +124,18 @@ export const writeArrivalEnd = ({runType, timeStart, destination}, commentsEnd, 
 		});
 }
 //probably remove
-export const addStop = (runType, timeStart, currentGPS, stopLocation) => {
-	// console.log('firebase services: ', runType, timeStart, numPassengers, p1Wheelchair, p2Wheelchair, p1FirstName, p1LastName, p2FirstName, p2LastName)
-	const path = runType + '/' + timeStart + '/stops/'; 
-	firebase.database().ref(`${path}`)
-		.push({
-		// .set({ 
-		// .update({
-			stopTime: Date.now(), 
-			stopLocation: stopLocation,
-			stopLocationGPS: currentGPS,
-		});
-}
+// export const addStop = (runType, timeStart, currentGPS, stopLocation) => {
+// 	// console.log('firebase services: ', runType, timeStart, numPassengers, p1Wheelchair, p2Wheelchair, p1FirstName, p1LastName, p2FirstName, p2LastName)
+// 	const path = runType + '/' + timeStart + '/stops/'; 
+// 	firebase.database().ref(`${path}`)
+// 		.push({
+// 		// .set({ 
+// 		// .update({
+// 			stopTime: Date.now(), 
+// 			stopLocation: stopLocation,
+// 			stopLocationGPS: currentGPS,
+// 		});
+// }
 
 export const updateWheelchair = (wheelchairNumber, gps) => {
 

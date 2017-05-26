@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import { connect } from 'react-redux'
-import { startTSA } from '../actions';
-import { addStop } from '../utils/firebaseService';
+import { startTSA, addStop } from '../actions';
 import { Actions } from 'react-native-router-flux'
 import { Button, CardSection, ImageButton } from './common';
 import Footer from './Footer';
@@ -17,7 +16,7 @@ class SelectStopsNonSterile extends Component {
 	}
 
 	onButtonPress(stopLocation) {
-		addStop(this.props.runType, this.props.timeStart, this.props.currentGPS, stopLocation)
+		this.props.addStop(this.props.currentGPS, stopLocation)
 	}
 
 	renderEndingButton() {
@@ -38,10 +37,10 @@ class SelectStopsNonSterile extends Component {
 
 	renderButtons() {
 		return chunk(nonSterile, 4).map(row => (
-					<View style={Style.row}>
-						{row.map(item => <ImageButton source={item.image} onPress={this.onButtonPress.bind(this, item.name)} key={item.name}/>)}
-					</View>
-				))
+			<View style={Style.row}>
+				{row.map(item => <ImageButton source={item.image} onPress={this.onButtonPress.bind(this, item.name)} key={item.name}/>)}
+			</View>
+		))
 	}
 
 	render() {
@@ -65,6 +64,4 @@ const mapStateToProps = ({ departure }) => {
   return { runType, timeStart, currentGPS };
 };
 
-export default connect(mapStateToProps, { 
-	startTSA
-})(SelectStopsNonSterile);
+export default connect(mapStateToProps, { startTSA })(SelectStopsNonSterile);

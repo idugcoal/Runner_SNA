@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, Keyboard } from 'react-native';
 import { connect } from 'react-redux'
 import Modal from 'react-native-simple-modal'
-import { setTimeEnd } from '../actions';
-import { addStop, writeArrivalData, writeDepartureData } from '../utils/firebaseService';
+import { setTimeEnd, addStop } from '../actions';
+import { writeArrivalData, writeDepartureData } from '../utils/firebaseService';
 import { Button, CardSection, ImageButton, TerminalA, TerminalB, TerminalC } from './common';
 import Footer from './Footer';
 import Style from './Style';
@@ -24,7 +24,6 @@ class SelectStopsSterile extends Component {
 
 	componentWillMount() {
 		Keyboard.dismiss();
-		console.log('SELECT STOPS STERILE', this.props)
 		if(this.props.runType === 'arrival') {
 			writeArrivalData(this.props)
 		}
@@ -35,8 +34,7 @@ class SelectStopsSterile extends Component {
 
 
 	onButtonPress(stopLocation) {
-		console.log('stopLocation in SelectStopsSterile:', stopLocation);
-		addStop(this.props.runType, this.props.timeStart, this.props.currentGPS, stopLocation)
+		this.props.addStop(this.props.currentGPS, stopLocation)
 	}
 
 	onGateArrival() {
@@ -97,7 +95,6 @@ class SelectStopsSterile extends Component {
 				<Footer />
 				<Modal
 	        open={this.state.open}
-	        modalDidOpen={() => console.log('modal did open')}
 	        modalDidClose={() => this.setState({open: false})}
 	        style={{alignItems: 'center'}}>
 	        <View>

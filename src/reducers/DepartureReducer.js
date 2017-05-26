@@ -63,7 +63,7 @@ const INITIAL_STATE = {
   timeTSAStart: '',
   timeTSAEnd: '',
   numStops: 0,
-  stops: {},
+  stops: [],
   timeEnd: '',
   commentsTSA: '',
   commentsEnd: '',
@@ -114,7 +114,8 @@ export default (state = INITIAL_STATE, action) => {
     case TSA_END:
       return { ...state, commentsTSA: action.payload.commentsTSA, timeTSAStart: action.payload.timeTSAStart, timeTSAEnd: action.payload.timeTSAEnd };
     case ADD_STOP:
-      return { ...state, stops: action.payload };
+      console.log('addStop', action.payload)
+      return { ...state, stops: [...state.stops, action.payload] };
     case ADD_DESTINATION:
       return { ...state, destination: action.payload };
     case UPDATE_CURRENT_POSITION:

@@ -310,7 +310,7 @@ export const selectGateNumber = (runType, text) => {
 export const startTSA = () => {
 
 	const timeTSAStart = Date.now();
-	Actions.tsa();
+	Actions.tsa({type: 'reset'});
 	return(dispatch) => {
 		dispatch({
 			type: TSA_START,
@@ -350,11 +350,17 @@ export const setFinalGateNumber = (text) => {
 	}
 }
 
-export const addStop = (text) => {
+export const addStop = (currentGPS, stopLocation) => {
+	
+	const payload = {
+		currentGPS,
+		stopLocation
+	}
+
 	return(dispatch) => {
 		dispatch({
 			type: ADD_STOP,
-			payload: text
+			payload: payload
 		})
 	}
 }

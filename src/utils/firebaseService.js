@@ -101,7 +101,7 @@ export const writeDepartureData = ({ runType, timeStart, timeTSAStart, timeTSAEn
 			commentsTSA: commentsTSA
 		});
 }
-
+//probably remove
 export const writeDepartureEnd = ({runType, timeStart, destinationGate, finalGate}, commentsEnd, timeGateArrival ) => {
 	const path = runType + '/' + timeStart; 
 	firebase.database().ref(`${path}`)
@@ -112,7 +112,7 @@ export const writeDepartureEnd = ({runType, timeStart, destinationGate, finalGat
 			commentsEnd: commentsEnd
 		});
 }
-
+//probably remove
 export const writeArrivalEnd = ({runType, timeStart, destination}, commentsEnd, timeGateArrival ) => {
 	const path = runType + '/' + timeStart; 
 	firebase.database().ref(`${path}`)
@@ -138,7 +138,6 @@ export const writeArrivalEnd = ({runType, timeStart, destination}, commentsEnd, 
 // }
 
 export const updateWheelchair = (wheelchairNumber, gps) => {
-
 	const path = 'wheelchairs/' + wheelchairNumber;
 	console.log(wheelchairNumber, gps, path);
 	firebase.database().ref(`${path}`)

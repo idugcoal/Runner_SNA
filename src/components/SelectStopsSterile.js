@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity, Keyboard } from 'react-native';
 import { connect } from 'react-redux'
 import Modal from 'react-native-simple-modal'
 import { setTimeEnd, addStop } from '../actions';
-import { writeArrivalData, writeDepartureData } from '../utils/firebaseService';
+// import { writeArrivalData, writeDepartureData } from '../utils/firebaseService';
 import { Button, CardSection, ImageButton, TerminalA, TerminalB, TerminalC } from './common';
 import Footer from './Footer';
 import Style from './Style';
@@ -24,12 +24,12 @@ class SelectStopsSterile extends Component {
 
 	componentWillMount() {
 		Keyboard.dismiss();
-		if(this.props.runType === 'arrival') {
-			writeArrivalData(this.props)
-		}
-		if(this.props.runType === 'departure') {
-			writeDepartureData(this.props)
-		}
+		// if(this.props.runType === 'arrival') {
+		// 	writeArrivalData(this.props)
+		// }
+		// if(this.props.runType === 'departure') {
+		// 	writeDepartureData(this.props)
+		// }
 	}
 
 
@@ -119,50 +119,50 @@ class SelectStopsSterile extends Component {
 const mapStateToProps = ({ departure, auth }) => {
   const { 
   	runType, 
-    timeStart,
-    startLocation,
-    startLocationGPS, 
-    numPassengers, 
-    passenger1Wheelchair, 
-    passenger2Wheelchair, 
-    passenger1FirstName, 
-    passenger1LastName, 
-    passenger2FirstName, 
-    passenger2LastName, 
-    airline, 
-    flightNumber,
+   //  timeStart,
+   //  startLocation,
+   //  startLocationGPS, 
+   //  numPassengers, 
+   //  passenger1Wheelchair, 
+   //  passenger2Wheelchair, 
+   //  passenger1FirstName, 
+   //  passenger1LastName, 
+   //  passenger2FirstName, 
+   //  passenger2LastName, 
+   //  airline, 
+   //  flightNumber,
     destinationGate,
     currentGPS,
-    timeTSAStart,
-    timeTSAEnd,
-    commentsTSA,
-    deviceID, 
+   //  timeTSAStart,
+   //  timeTSAEnd,
+   //  commentsTSA,
+   //  deviceID, 
   } = departure;
 
-  const { user } = auth
+  // const { user } = auth
 
   return { 
   	runType, 
-    timeStart,
-    startLocation,
-    startLocationGPS, 
-    numPassengers, 
-    passenger1Wheelchair, 
-    passenger2Wheelchair, 
-    passenger1FirstName, 
-    passenger1LastName, 
-    passenger2FirstName, 
-    passenger2LastName, 
-    airline, 
-    flightNumber,
+   //  timeStart,
+   //  startLocation,
+   //  startLocationGPS, 
+   //  numPassengers, 
+   //  passenger1Wheelchair, 
+   //  passenger2Wheelchair, 
+   //  passenger1FirstName, 
+   //  passenger1LastName, 
+   //  passenger2FirstName, 
+   //  passenger2LastName, 
+   //  airline, 
+   //  flightNumber,
     destinationGate,
     currentGPS,
-    timeTSAStart,
-    timeTSAEnd,
-    commentsTSA,
-    deviceID,
-    user
+   //  timeTSAStart,
+   //  timeTSAEnd,
+   //  commentsTSA,
+   //  deviceID,
+   //  user
   };
 };
 
-export default connect(mapStateToProps, { setTimeEnd })(SelectStopsSterile);
+export default connect(mapStateToProps, { setTimeEnd, addStop })(SelectStopsSterile);

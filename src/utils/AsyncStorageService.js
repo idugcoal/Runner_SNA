@@ -19,6 +19,24 @@ export const clearDeparturesAndArrivalsFromAsyncStorage = () => {
 
 }
 
+export const getDeparturesFromAsyncStorage = () => {
+	var storage = new Storage({
+		size: 1000,
+		storageBackend: AsyncStorage,
+		defaultExpires: 1000 * 3600 * 24,
+		enableCache: true,
+		sync: {
+
+		}
+	});
+
+	storage.getAllDataForKey('departure')
+		.then((data) => {
+			console.log('departure', data)
+			return data;
+		})
+}
+
 export const writeDepartureToAsyncStorage = async (departure, commentsEnd, timeGateArrival) => {
 	
 	var storage = new Storage({
@@ -148,6 +166,6 @@ export const writeArrivalToAsyncStorage = async (arrival, commentsEnd, timeDesti
 		data: JSON.stringify(arrivalData)
 	})
 
-	storage.getAllDataForKey('arrival').then(data => console.log('woooot', data))
+	// storage.getAllDataForKey('arrival').then(data => console.log('woooot', data))
 
 }

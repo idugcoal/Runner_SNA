@@ -114,7 +114,6 @@ export default (state = INITIAL_STATE, action) => {
     case TSA_END:
       return { ...state, commentsTSA: action.payload.commentsTSA, timeTSAStart: action.payload.timeTSAStart, timeTSAEnd: action.payload.timeTSAEnd };
     case ADD_STOP:
-      console.log('addStop', action.payload)
       return { ...state, stops: [...state.stops, action.payload] };
     case ADD_DESTINATION:
       return { ...state, destination: action.payload };

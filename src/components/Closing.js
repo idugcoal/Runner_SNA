@@ -27,6 +27,7 @@ class Closing extends Component {
 		}
 		if(this.props.runType === 'arrival') {
 			// writeArrivalEnd(this.props, this.state.text, this.state.arrivalTime)
+			console.log('in Closing', this.props.deviceID)
 			writeArrivalToAsyncStorage(this.props, this.state.text, this.state.arrivalTime);
 		}
 		this.props.returnToStart();

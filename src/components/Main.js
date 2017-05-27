@@ -49,10 +49,6 @@ class Main extends Component {
   }
 
   onOffice() {
-    var position = {}
-    position.latitude = 0;
-    position.longitude = 0;
-    position.timestamp = 0;
 
     office();
   }

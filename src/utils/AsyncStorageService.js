@@ -12,29 +12,11 @@ export const clearDeparturesAndArrivalsFromAsyncStorage = () => {
 		}
 	});
 
-	storage.clearMapForKey('departure');
-	storage.clearMapForKey('arrival');
-	storage.getAllDataForKey('departure').then(data => console.log('departure', data))
+	storage.clearMapForKey('departures');
+	storage.clearMapForKey('arrivals');
+	storage.getAllDataForKey('departures').then(data => console.log('departures', data))
 	storage.getAllDataForKey('arrival').then(data => console.log('arrival', data))
 
-}
-
-export const getDeparturesFromAsyncStorage = () => {
-	var storage = new Storage({
-		size: 1000,
-		storageBackend: AsyncStorage,
-		defaultExpires: 1000 * 3600 * 24,
-		enableCache: true,
-		sync: {
-
-		}
-	});
-
-	storage.getAllDataForKey('departure')
-		.then((data) => {
-			console.log('departure', data)
-			return data;
-		})
 }
 
 export const writeDepartureToAsyncStorage = async (departure, commentsEnd, timeGateArrival) => {
@@ -100,7 +82,7 @@ export const writeDepartureToAsyncStorage = async (departure, commentsEnd, timeG
 	}
 
 	storage.save({
-		key: 'departure',
+		key: 'departures',
 		id: timeStart.toString(), 
 		data: JSON.stringify(departureData)
 	})
@@ -123,7 +105,7 @@ export const writeArrivalToAsyncStorage = async (arrival, commentsEnd, timeDesti
 	const {
 		airline,
 		destination,
-		deviceId,
+		deviceID,
 		flightNumber,
 		numPassengers,
 		passenger1Wheelchair,
@@ -139,11 +121,12 @@ export const writeArrivalToAsyncStorage = async (arrival, commentsEnd, timeDesti
 		user 
 	} = arrival
 
+	console.log('in writeArrivalToAsyncStorage', deviceID)
 	const arrivalData = {
 		airline,
 		commentsEnd,
 		destination,
-		deviceId,
+		deviceID,
 		employeeLogin: user.email,
 		flightNumber,
 		numPassengers,
@@ -159,9 +142,9 @@ export const writeArrivalToAsyncStorage = async (arrival, commentsEnd, timeDesti
 		timeDestinationArrival,
 		timeStart 
 	}
-
+	console.log('in writeArrivalToAsyncStorage', arrivalData)
 	storage.save({
-		key: 'arrival',
+		key: 'arrivals',
 		id: timeStart.toString(), 
 		data: JSON.stringify(arrivalData)
 	})

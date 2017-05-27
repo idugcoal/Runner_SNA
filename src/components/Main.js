@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Keyboard } from 'react-native';
 import firebase from 'firebase';
-import { updateWheelchair } from '../utils/firebaseService';
+import { updateWheelchair, office } from '../utils/firebaseService';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import DeviceInfo from 'react-native-device-info'
@@ -54,8 +54,7 @@ class Main extends Component {
     position.longitude = 0;
     position.timestamp = 0;
 
-    updateWheelchair(0, position)
-      // .then(()=>alert('updated'));
+    office();
   }
 
 	render() {

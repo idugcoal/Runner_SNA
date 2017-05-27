@@ -3,7 +3,7 @@ import { View, Text, TextInput, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { closeDeparture, returnToStart } from '../actions';
 import { writeDepartureEnd, writeArrivalEnd } from '../utils/firebaseService';
-import { writeDepartureToAsyncStorage } from '../utils/AsyncStorageService';
+import { writeDepartureToAsyncStorage, writeArrivalToAsyncStorage } from '../utils/AsyncStorageService';
 import { Button, CardSection, ImageButton, NumberButton } from './common';
 import Footer from './Footer';
 import Style from './Style';
@@ -18,24 +18,16 @@ class Closing extends Component {
 			text: '',
 			arrivalTime: Date.now(),
 		}
-		console.log('props in closing', this.props)
 	}
 
 	onButtonPress() {
 		if(this.props.runType === 'departure') {
 			// writeDepartureEnd(this.props, this.state.text, this.state.arrivalTime)
 			writeDepartureToAsyncStorage(this.props, this.state.text, this.state.arrivalTime);
-			
-			// this works when it's async onButtonPress()!!
-			// try {
-			// 	await AsyncStorage.setItem("hello", "world");
-			// 	alert('success');
-			// } catch(error) {
-			// 	alert('failure')
-			// }
 		}
 		if(this.props.runType === 'arrival') {
-			writeArrivalEnd(this.props, this.state.text, this.state.arrivalTime)
+			// writeArrivalEnd(this.props, this.state.text, this.state.arrivalTime)
+			writeArrivalToAsyncStorage(this.props, this.state.text, this.state.arrivalTime);
 		}
 		this.props.returnToStart();
 	}

@@ -36,7 +36,6 @@ class SelectStopsNonSterile extends Component {
 	}
 
 	renderButtons() {
-
 		return chunk(nonSterile, 4).map(row => (
 			<View style={Style.row}>
 				{row.map(item => <ImageButton source={item.image} onPress={this.onButtonPress.bind(this, item.name)} key={item.name}/>)}

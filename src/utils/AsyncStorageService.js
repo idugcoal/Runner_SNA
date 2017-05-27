@@ -1,5 +1,24 @@
 import { AsyncStorage } from 'react-native'; 
 import Storage from 'react-native-storage';
+
+export const clearDeparturesAndArrivalsFromAsyncStorage = () => {
+	var storage = new Storage({
+		size: 1000,
+		storageBackend: AsyncStorage,
+		defaultExpires: 1000 * 3600 * 24,
+		enableCache: true,
+		sync: {
+
+		}
+	});
+
+	storage.clearMapForKey('departure');
+	storage.clearMapForKey('arrival');
+	storage.getAllDataForKey('departure').then(data => console.log('departure', data))
+	storage.getAllDataForKey('arrival').then(data => console.log('arrival', data))
+
+}
+
 export const writeDepartureToAsyncStorage = async (departure, commentsEnd, timeGateArrival) => {
 	
 	var storage = new Storage({
@@ -36,75 +55,99 @@ export const writeDepartureToAsyncStorage = async (departure, commentsEnd, timeG
     user
 	} = departure;
 
-	const test = {
-		'airline': airline, 
-    'commentsTSA': commentsTSA,
-    'destinationGate': destinationGate.toString(),
-    'deviceID': deviceID,
-    'finalGate': destinationGate.toString() || finalGate.toString(),
-    'flightNumber': flightNumber,
-    'numPassengers': numPassengers.toString(), 
-  	'runType': runType, 
-    'passenger1Wheelchair': passenger1Wheelchair.toString(), 
-    'passenger2Wheelchair': passenger2Wheelchair.toString(), 
-    'passenger1FirstName': passenger1FirstName, 
-    'passenger1LastName': passenger1LastName, 
-    'passenger2FirstName': passenger2FirstName, 
-    'passenger2LastName': passenger2LastName, 
-    'startLocation': startLocation,
-    // startLocationGPS,
-    // stops,
-    'timeStart': timeStart.toString(), 
-    'timeTSAEnd': timeTSAEnd.toString(),
-    'timeTSAStart': timeTSAStart.toString(),
-    'email': user.email
+	const departureData = {
+		airline,
+		commentsEnd,
+    commentsTSA,
+    destinationGate,
+    deviceID,
+    finalGate: finalGate || destinationGate,
+    flightNumber,
+    numPassengers, 
+  	runType, 
+    passenger1Wheelchair, 
+    passenger2Wheelchair, 
+    passenger1FirstName, 
+    passenger1LastName, 
+    passenger2FirstName, 
+    passenger2LastName, 
+    startLocation,
+    startLocationGPS,
+    stops,
+    timeGateArrival,
+    timeStart, 
+    timeTSAEnd,
+    timeTSAStart,
+    employeeLogin: user.email
 	}
-
-	// try {
-	// 	await AsyncStorage.multiSet([
-	// 		['airline', airline],
-	// 		['commentsEnd', commentsEnd],
-	// 		['commentsTSA', commentsTSA],
-	// 		['destinationGate', destinationGate],
-	// 		['deviceID', deviceID],
-	// 		['finalGate', finalGate],
-	// 		['flightNumber', flightNumber],
-	// 		['numPassengers', numPassengers],
-	// 		['runType', runType]
-	// 		['passenger1Wheelchair', passenger1Wheelchair],
-	// 		['passenger2Wheelchair', passenger2Wheelchair],
-	// 		['passenger1FirstName', passenger1FirstName],
-	// 		['passenger2FirstName', passenger2FirstName],
-	// 		['passenger2LastName', passenger2LastName],
-	// 		['startLocation', startLocation],
-	// 		['startLocationGPS', startLocationGPS],
-	// 		['stops', stops],
-	// 		['timeGateArrival', timeGateArrival],
-	// 		['timeStart', timeStart],
-	// 		['timeTSAEnd', timeTSAEnd],
-	// 		['timeTSAStart', timeTSAStart],
-	// 		['employeeLogin', user.email],
-	// 	]);
-	// 	alert('success'); 
-	// } 
-	// try {
-	// 	await AsyncStorage.setItem(timeStart, JSON.stringify(departure))
-	// 	alert('success')
-	// }
-	// catch (error) {
-	// 	console.log(error.message)
-	// 	alert('failure')
-	// }
-	console.log('inASYNC', test);
 
 	storage.save({
 		key: 'departure',
-		// id: timeStart, 
-		data: test //JSON.stringify(test)
+		id: timeStart.toString(), 
+		data: JSON.stringify(departureData)
 	})
 
-	storage.load({
-		key: timeStart
-	}).then(data => console.log('woooot', data))
+	// storage.getAllDataForKey('departure').then(data => console.log('woooot', data))
+
+}
+
+export const writeArrivalToAsyncStorage = async (arrival, commentsEnd, timeDestinationArrival) => {
+	var storage = new Storage({
+		size: 1000,
+		storageBackend: AsyncStorage,
+		defaultExpires: 1000 * 3600 * 24,
+		enableCache: true,
+		sync: {
+
+		}
+	});
+
+	const {
+		airline,
+		destination,
+		deviceId,
+		flightNumber,
+		numPassengers,
+		passenger1Wheelchair,
+		passenger2Wheelchair,
+		passenger1FirstName,
+		passenger1LastName,
+		passenger2FirstName,
+		passenger2LastName,
+		startLocation,
+		startLocationGPS,
+		stops,
+		timeStart,
+		user 
+	} = arrival
+
+	const arrivalData = {
+		airline,
+		commentsEnd,
+		destination,
+		deviceId,
+		employeeLogin: user.email,
+		flightNumber,
+		numPassengers,
+		passenger1Wheelchair,
+		passenger2Wheelchair,
+		passenger1FirstName,
+		passenger1LastName,
+		passenger2FirstName,
+		passenger2LastName,
+		startLocation,
+		startLocationGPS,
+		stops,
+		timeDestinationArrival,
+		timeStart 
+	}
+
+	storage.save({
+		key: 'arrival',
+		id: timeStart.toString(), 
+		data: JSON.stringify(arrivalData)
+	})
+
+	storage.getAllDataForKey('arrival').then(data => console.log('woooot', data))
 
 }

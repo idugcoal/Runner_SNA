@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import { clearDeparturesAndArrivalsFromAsyncStorage } from './AsyncStorageService';
 
 //probably remove
 export const writePassengerData = (props, gateNumber) => {
@@ -43,75 +44,75 @@ export const writePassengerData = (props, gateNumber) => {
 }
 
 //probably remove
-export const writeArrivalData = (props) => {
-	const {
-		runType, 
-    timeStart,
-    startLocation,
-    startLocationGPS, 
-    numPassengers,
-    passenger1FirstName,
-    passenger1LastName,
-    passenger2FirstName,
-    passenger2LastName,
-    p1FirstName,
-    p1LastName,
-    p2FirstName,
-    p2LastName, 
-    passenger1Wheelchair, 
-    passenger2Wheelchair,
-    deviceID,
-    airline,
-    flightNumber,
-    al,
-    fn, 
-    // destinationGate, 
-    user
-	} = props;
-	const path = runType + '/' + timeStart; 
-	firebase.database().ref(`${path}`)
-		// .push({
-		.set({
-			timeStart: timeStart, 
-			numPassengers: numPassengers,
-			startLocation: startLocation,
-			startLocationGPS: startLocationGPS,
-			passenger1FirstName: passenger1FirstName || p1FirstName,
-			passenger1LastName: passenger1LastName || p1LastName,
-			passenger2FirstName: p2FirstName || passenger2FirstName || '',
-			passenger2LastName: p2LastName || passenger2LastName || '',
-			passenger1Wheelchair: passenger1Wheelchair,
-			passenger2Wheelchair: passenger2Wheelchair,
-			airline: al,
-			flightNumber: fn,
-			// destinationGate: destinationGate,
-			deviceID: deviceID,
-			employeeLogin: user.email
-		});
-}
+// export const writeArrivalData = (props) => {
+// 	const {
+// 		runType, 
+//     timeStart,
+//     startLocation,
+//     startLocationGPS, 
+//     numPassengers,
+//     passenger1FirstName,
+//     passenger1LastName,
+//     passenger2FirstName,
+//     passenger2LastName,
+//     p1FirstName,
+//     p1LastName,
+//     p2FirstName,
+//     p2LastName, 
+//     passenger1Wheelchair, 
+//     passenger2Wheelchair,
+//     deviceID,
+//     airline,
+//     flightNumber,
+//     al,
+//     fn, 
+//     // destinationGate, 
+//     user
+// 	} = props;
+// 	const path = runType + '/' + timeStart; 
+// 	firebase.database().ref(`${path}`)
+// 		// .push({
+// 		.set({
+// 			timeStart: timeStart, 
+// 			numPassengers: numPassengers,
+// 			startLocation: startLocation,
+// 			startLocationGPS: startLocationGPS,
+// 			passenger1FirstName: passenger1FirstName || p1FirstName,
+// 			passenger1LastName: passenger1LastName || p1LastName,
+// 			passenger2FirstName: p2FirstName || passenger2FirstName || '',
+// 			passenger2LastName: p2LastName || passenger2LastName || '',
+// 			passenger1Wheelchair: passenger1Wheelchair,
+// 			passenger2Wheelchair: passenger2Wheelchair,
+// 			airline: al,
+// 			flightNumber: fn,
+// 			// destinationGate: destinationGate,
+// 			deviceID: deviceID,
+// 			employeeLogin: user.email
+// 		});
+// }
 
+// //probably remove
+// export const writeDepartureData = ({ runType, timeStart, timeTSAStart, timeTSAEnd, commentsTSA }) => {
+// 	const path = runType + '/' + timeStart; 
+// 	firebase.database().ref(`${path}`)
+// 		// .push({
+// 		.update({
+// 			timeTSAStart: timeTSAStart,
+// 			timeTSAEnd: timeTSAEnd,
+// 			commentsTSA: commentsTSA
+// 		});
+// }
 //probably remove
-export const writeDepartureData = ({ runType, timeStart, timeTSAStart, timeTSAEnd, commentsTSA }) => {
-	const path = runType + '/' + timeStart; 
-	firebase.database().ref(`${path}`)
-		// .push({
-		.update({
-			timeTSAStart: timeTSAStart,
-			timeTSAEnd: timeTSAEnd,
-			commentsTSA: commentsTSA
-		});
-}
-//probably remove
-export const writeDepartureEnd = ({runType, timeStart, destinationGate, finalGate}, commentsEnd, timeGateArrival ) => {
-	const path = runType + '/' + timeStart; 
-	firebase.database().ref(`${path}`)
-		// .push({
-		.update({
-			finalGate: finalGate || destinationGate,
-			timeGateArrival: timeGateArrival,
-			commentsEnd: commentsEnd
-		});
-}
+// export const writeDepartureEnd = ({runType, timeStart, destinationGate, finalGate}, commentsEnd, timeGateArrival ) => {
+// 	const path = runType + '/' + timeStart; 
+// 	firebase.database().ref(`${path}`)
+// 		// .push({
+// 		.update({
+// 			finalGate: finalGate || destinationGate,
+// 			timeGateArrival: timeGateArrival,
+// 			commentsEnd: commentsEnd
+// 		});
+// }
 //probably remove
 export const writeArrivalEnd = ({runType, timeStart, destination}, commentsEnd, timeGateArrival ) => {
 	const path = runType + '/' + timeStart; 
@@ -149,16 +150,18 @@ export const updateWheelchair = (wheelchairNumber, gps) => {
 		})
 }
 
-// export const office = () => {
-// 	const path = runType + '/' + timeStart + '/stops/'; 
-// 	firebase.database().ref(`${path}`)
-// 		.push({
-// 		// .set({ 
-// 		// .update({
-// 			stopTime: Date.now(), 
-// 			stopLocation: stopLocation,
-// 			stopLocationGPS: currentGPS,
-// 		});
-// }
+export const office = () => {
+	// const path = runType + '/' + timeStart + '/stops/'; 
+	clearDeparturesAndArrivalsFromAsyncStorage();
+	console.log('here')
+	// firebase.database().ref(`${path}`)
+	// 	.push({
+	// 	// .set({ 
+	// 	// .update({
+	// 		stopTime: Date.now(), 
+	// 		stopLocation: stopLocation,
+	// 		stopLocationGPS: currentGPS,
+	// 	});
+}
 
 

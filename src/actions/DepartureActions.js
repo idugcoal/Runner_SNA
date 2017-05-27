@@ -46,7 +46,7 @@ export const setRunType = (runType, deviceID) => {
 			})
 		}
 	} else if (runType === 'arrival') {
-		Actions.selectGate();
+		Actions.selectGate({ title: "Select Starting Gate"});
 		return(dispatch) => {
 			dispatch({
 				type: SET_RUN_TYPE,

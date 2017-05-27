@@ -203,7 +203,6 @@ export const scanBoardingPass = (props, boardingPassData) => {
 		flightNumber
 	} = props
 
-	console.log('in SBP', passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName)
 	if(numPassengers === 1) {
 		if(runType === 'departure') {
 			Actions.selectGate();
@@ -257,7 +256,7 @@ export const scanBoardingPass = (props, boardingPassData) => {
 				}
 			}
 			else {
-				Actions.selectStopsSterile({ runType: runType, timeStart: timeStart, p2FirstName: boardingPassData.firstName, p2LastName: boardingPassData.lastName, al: boardingPassData.airline, fn: boardingPassData.flightNumber, type: 'reset' });
+				Actions.selectStopsSterile({ type: 'reset' });
 				return(dispatch) => {
 					dispatch({
 						type: SCAN_BOARDING_PASS_2,

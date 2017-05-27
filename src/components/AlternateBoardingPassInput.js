@@ -56,31 +56,23 @@ class AlternateBoardingPassInput extends Component {
       }
     }
     if(numPassengers === 2) {
-      //if passenger2Wheelchair is blank, we're only checking for passenger 1's info 
-      if(passenger2Wheelchair == '') {
-        if(passenger1FirstName == '' || passenger1LastName == '') {
-          alert('Please fill out passenger 1 info');
-        } 
-        else {
-          Actions.selectWheelchair({ type: 'reset', title: 'Select Wheelchair #2'});
-        }
-      }
-      //if passenger2Wheelchair has been chosen, we're checking info for passengers 1 and 2
-      else if(passenger1FirstName == '' || 
-              passenger1LastName == '' || 
-              passenger2FirstName == '' || 
-              passenger2LastName == '' || 
-              airline == '' || 
-              flightNumber == '') 
-      {
-        alert('Please fill out all passenger info');
-      }
-      else if(runType === 'departure') {
-          Actions.selectGate();
-        }
-      else if(runType === 'arrival') {
-          Actions.selectStopsSterile({al: this.props.airline, fn: this.props.flightNumber})
-      }
+      if (passenger1FirstName != '' && passenger1LastName != '' &&  passenger2FirstName != '' &&  passenger2LastName != '' && airline != '' && flightNumber != '') {
+  if (runType === 'departure') {
+    Actions.selectGate({ type: 'reset' })
+  }
+  else if (runType === 'arrival') {
+    Actions.selectStopsSterile({ type: 'reset' })
+  }
+}
+else if ((passenger1FirstName != '' && passenger1LastName != '') && (passenger2FirstName != '' || passenger2LastName != '' || airline != '' || flightNumber != '')) {
+  Actions.scanBoardingPass({ type: 'reset', title: "Scan Boarding Pass #2"})
+}
+else {
+  alert('Please fill out all passenger info')
+}
+
+      
+      
     }
   }
 

@@ -13,9 +13,14 @@ class ScanBoardingPass extends Component {
 	
 	constructor(props) {
 		super(props);
+		// this.state = {
+		// 	cameraStatus: 'on'
+		// }
 	} 
 
 	onReadSuccess(boardingPassString) {
+		// this.setState({cameraStatus: 'off'})
+		// this.refs.camera.stopCapture()
 		switch(boardingPassString.data.substring(36, 38)) {
 			case 'AS':
 				var airline = 'Alaska';
@@ -55,16 +60,42 @@ class ScanBoardingPass extends Component {
 
 	}
 
+	renderCamera() {
+		
+		// if(this.state.cameraStatus == 'on') {
+		// 	return(
+		// 		<Camera 
+		// 			style={{ flex: 1 }}
+		// 			barCodeTypes={[ 'pdf417' ]}
+		// 			onBarCodeRead={this.onReadSuccess.bind(this)}
+		// 			// torchMode={Camera.constants.TorchMode.on}
+		// 		/>
+		// 	)
+		// } else {
+		// 	return <View />;
+		// }
+
+		return(
+			<Camera
+				ref={(cam) => {
+            this.camera = cam;
+          }} 
+				style={{ flex: 1 }}
+				barCodeTypes={[ 'pdf417' ]}
+				onBarCodeRead={this.onReadSuccess.bind(this)}
+				captureTarget={Camera.constants.CaptureTarget.disk}
+				// torchMode={Camera.constants.TorchMode.on}
+			/>
+		)
+	}
+
 	render() {
 		return(
 			<View style={Style.container}>
 				<View style={Style.content}>
-					<Camera 
-						style={{ flex: 1 }}
-						barCodeTypes={[ 'pdf417' ]}
-						onBarCodeRead={this.onReadSuccess.bind(this)}
-						// torchMode={Camera.constants.TorchMode.on}
-					/>
+					{this.renderCamera()}
+						
+
 					<CardSection>
 						<Button style={Style.alternate} onPress={() => Actions.alternateBoardingPassInput()}>Manual Input</Button> 
 					</CardSection>

@@ -162,38 +162,21 @@ export const selectWheelchair = (props, buttonValue) => {
 			})
 		}
 	}
+
 	if (numPassengers === 2) {
+		//if first wheelchair is empty, set it and navigate to select wheelchair
 		if(passenger1Wheelchair == '') {
-			Actions.scanBoardingPass({ title: "Scan Boarding Pass #1" });
+			Actions.selectWheelchair({ title: "Select Wheelchair #2" });
 				return(dispatch) => {
 					dispatch({
 						type: SELECT_WHEELCHAIR_1,
 						payload: buttonValue
 					})
 				}
-		} 
-		else if(passenger1FirstName != '' && passenger1LastName != '' && passenger2FirstName != '' && passenger2LastName != '' && airline != '' && flightNumber != '') {
-			if(runType === 'departure') {
-				Actions.selectGate();
-				return(dispatch) => {
-					dispatch({
-						type: SELECT_WHEELCHAIR_2,
-						payload: buttonValue
-					})
-				}
-			}
-			if(runType === 'arrival') {
-				Actions.selectStopsSterile();
-				return(dispatch) => {
-					dispatch({
-						type: SELECT_WHEELCHAIR_2,
-						payload: buttonValue
-					})
-				}
-			}
-		} 
+		}
+		//if 2nd wheelchair is empty 
 		else {
-			Actions.scanBoardingPass({ title: "Scan Boarding Pass #2" });
+			Actions.scanBoardingPass({ title: "Scan Boarding Pass #1" });
 				return(dispatch) => {
 					dispatch({
 						type: SELECT_WHEELCHAIR_2,
@@ -220,6 +203,7 @@ export const scanBoardingPass = (props, boardingPassData) => {
 		flightNumber
 	} = props
 
+	console.log('in SBP', passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName)
 	if(numPassengers === 1) {
 		if(runType === 'departure') {
 			Actions.selectGate();
@@ -240,10 +224,11 @@ export const scanBoardingPass = (props, boardingPassData) => {
 			}
 		}
 	}
+
 	if(numPassengers === 2) {
 		if(runType === 'departure') {
-			if(passenger2Wheelchair == '') {
-				Actions.selectWheelchair({type: 'reset', title: "Select Wheelchair #2"});
+			if(passenger1FirstName == '' || passenger1LastName == '') {
+				Actions.move({type: 'reset'});
 				return(dispatch) => {
 					dispatch({
 						type: SCAN_BOARDING_PASS_1,
@@ -262,8 +247,8 @@ export const scanBoardingPass = (props, boardingPassData) => {
 			}
 		}
 		if(runType === 'arrival') {
-			if(passenger2Wheelchair == '') {
-				Actions.selectWheelchair({type: 'reset', title: "Select Wheelchair #2"});
+			if(passenger1FirstName == '' || passenger1LastName == '') {
+				Actions.move({type: 'reset'});
 				return(dispatch) => {
 					dispatch({
 						type: SCAN_BOARDING_PASS_1,

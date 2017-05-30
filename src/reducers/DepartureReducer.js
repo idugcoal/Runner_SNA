@@ -27,7 +27,8 @@ ADD_STARTING_LOCATION_ARRIVAL,
 // ADD_COMMENTS_TSA,
 ADD_COMMENTS_CLOSING,
 ADD_DESTINATION,
-RETURN_TO_START
+RETURN_TO_START,
+SET_PREBOARD_TYPE
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -68,6 +69,7 @@ const INITIAL_STATE = {
   commentsTSA: '',
   commentsEnd: '',
   destination: '',
+  preboardType: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -126,6 +128,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, timeStart: action.payload };
     case SET_TIME_END:
       return { ...state, timeEnd: action.payload };
+    case SET_PREBOARD_TYPE:
+      return { ...state, preboardType: action.payload };
     case RETURN_TO_START:
       return { ...state, ...INITIAL_STATE }
     default:

@@ -15,6 +15,7 @@ import GateArrival from './components/GateArrival';
 import BaggageClaim from './components/BaggageClaim';
 import Closing from './components/Closing';
 import Move from './components/Move';
+import Preboard from './components/Preboard';
 
 
 // const RouterComponent = () => {
@@ -69,6 +70,7 @@ const RouterComponent = () => {
 				<Scene key="baggageClaim" component={BaggageClaim} title={"Select Drop-Off Location"} />
 				<Scene key="closing" component={Closing} title={"Finished!"} />
 				<Scene key="move" component={Move} title={"Prepare Boarding Pass #2"} />
+				<Scene key="preboard" component={Preboard} title={"Select Preboard Type"} />
 			</Scene>
 		</Router>
 	);

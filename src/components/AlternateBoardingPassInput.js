@@ -46,6 +46,11 @@ class AlternateBoardingPassInput extends Component {
       flightNumber
     } = this.props
 
+    if(runType === 'preboard') {
+      Actions.preboard();
+    }
+
+
     if(numPassengers === 1) {
       if(passenger1FirstName == '' || passenger1LastName == '' || airline == '' || flightNumber == '') {
         alert('Please fill out all passenger info');
@@ -57,19 +62,19 @@ class AlternateBoardingPassInput extends Component {
     }
     if(numPassengers === 2) {
       if (passenger1FirstName != '' && passenger1LastName != '' &&  passenger2FirstName != '' &&  passenger2LastName != '' && airline != '' && flightNumber != '') {
-  if (runType === 'departure') {
-    Actions.selectGate({ type: 'reset' })
+    if (runType === 'departure') {
+      Actions.selectGate({ type: 'reset' })
+    }
+    else if (runType === 'arrival') {
+      Actions.selectStopsSterile({ type: 'reset' })
+    }
   }
-  else if (runType === 'arrival') {
-    Actions.selectStopsSterile({ type: 'reset' })
+  else if ((passenger1FirstName != '' && passenger1LastName != '') && (passenger2FirstName != '' || passenger2LastName != '' || airline != '' || flightNumber != '')) {
+    Actions.scanBoardingPass({ type: 'reset', title: "Scan Boarding Pass #2"})
   }
-}
-else if ((passenger1FirstName != '' && passenger1LastName != '') && (passenger2FirstName != '' || passenger2LastName != '' || airline != '' || flightNumber != '')) {
-  Actions.scanBoardingPass({ type: 'reset', title: "Scan Boarding Pass #2"})
-}
-else {
-  alert('Please fill out all passenger info')
-}
+  else {
+    alert('Please fill out all passenger info')
+  }
 
       
       

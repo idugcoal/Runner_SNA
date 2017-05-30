@@ -28,7 +28,8 @@ import {
 	// ADD_COMMENTS_TSA,
 	ADD_DESTINATION,
 	ADD_COMMENTS_CLOSING,
-	RETURN_TO_START
+	RETURN_TO_START,
+	SET_PREBOARD_TYPE
 } from './types';
 
 export const setRunType = (runType, deviceID) => {
@@ -55,6 +56,14 @@ export const setRunType = (runType, deviceID) => {
 		}
 	} else if (runType == 'checkin') {
 		Actions.selectWheelchair();
+		return(dispatch) => {
+			dispatch({
+				type: SET_RUN_TYPE,
+				payload: payload
+			})
+		}
+	} else if (runType === 'preboard') {
+		Actions.selectWheelchair({ title: "Select Wheelchair"});
 		return(dispatch) => {
 			dispatch({
 				type: SET_RUN_TYPE,
@@ -203,6 +212,16 @@ export const scanBoardingPass = (props, boardingPassData) => {
 		flightNumber
 	} = props
 
+	if(runType === 'preboard') {
+		Actions.selectGate();
+		return(dispatch) => {
+			dispatch({
+				type: SCAN_BOARDING_PASS_1,
+				payload: boardingPassData
+			})
+		}
+	}
+
 	if(numPassengers === 1) {
 		if(runType === 'departure') {
 			Actions.selectGate();
@@ -282,6 +301,16 @@ export const selectGateNumber = (runType, text) => {
 
 	else if (runType === 'arrival') {
 		Actions.selectNumberOfWheelchairs();
+		return(dispatch) => {
+			dispatch({
+				type: SELECT_GATE_NUMBER,
+				payload: text
+			})
+		}
+	}
+
+	else if (runType === 'preboard') {
+		Actions.preboard();
 		return(dispatch) => {
 			dispatch({
 				type: SELECT_GATE_NUMBER,
@@ -400,6 +429,16 @@ export const closeDeparture = () => {
 	//write all info to database
 	//initialize state
 	//navigate back to main
+}
+
+export const setPreboardType = (preboardType) => {
+	Actions.closing({ type: 'reset' })
+	return(dispatch) => {
+		dispatch({
+			type: SET_PREBOARD_TYPE,
+			payload: preboardType
+		})
+	}
 }
 
 export const returnToStart = () => {

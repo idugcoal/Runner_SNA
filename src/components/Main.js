@@ -44,6 +44,10 @@ class Main extends Component {
   	this.props.setRunType('arrival', DeviceInfo.getUniqueID());
   }
 
+  onPreboard() {
+    this.props.setRunType('preboard', DeviceInfo.getUniqueID())
+  }
+
   onCheckIn() {
   	this.props.setRunType('checkin', DeviceInfo.getUniqueID());
   }
@@ -62,6 +66,9 @@ class Main extends Component {
 				<CardSection>
 					<Button onPress={this.onArrival.bind(this)}>Arrival</Button>
 				</CardSection>
+          <CardSection>
+          <Button onPress={this.onPreboard.bind(this)}>Preboard</Button>
+        </CardSection>
 				<CardSection>
 					<Button onPress={this.onCheckIn.bind(this)}>Check-In</Button>
 				</CardSection>

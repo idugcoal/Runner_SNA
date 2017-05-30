@@ -75,7 +75,6 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_RUN_TYPE:
-      console.log('YOOOO', action.payload)
       return { ...state, runType: action.payload.runType, deviceID: action.payload.deviceID, timeStart: Date.now() };
     case SET_NUMBER_OF_PASSENGERS:
       return { ...state, numPassengers: action.payload };

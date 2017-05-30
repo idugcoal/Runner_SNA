@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native'; 
 import Storage from 'react-native-storage';
 
-export const clearDeparturesAndArrivalsFromAsyncStorage = () => {
+export const clearAllFromAsyncStorage = () => {
 	var storage = new Storage({
 		size: 1000,
 		storageBackend: AsyncStorage,
@@ -14,8 +14,10 @@ export const clearDeparturesAndArrivalsFromAsyncStorage = () => {
 
 	storage.clearMapForKey('departures');
 	storage.clearMapForKey('arrivals');
+	storage.clearMapForKey('preboards');
 	storage.getAllDataForKey('departures').then(data => console.log('departures', data))
-	storage.getAllDataForKey('arrival').then(data => console.log('arrival', data))
+	storage.getAllDataForKey('arrivals').then(data => console.log('arrivals', data))
+	storage.getAllDataForKey('preboards').then(data => console.log('preboards', data))
 
 }
 
@@ -149,6 +151,56 @@ export const writeArrivalToAsyncStorage = async (arrival, commentsEnd, timeDesti
 		data: JSON.stringify(arrivalData)
 	})
 
-	// storage.getAllDataForKey('arrival').then(data => console.log('woooot', data))
+	storage.getAllDataForKey('arrivals').then(data => console.log('woooot', data))
 
 }
+
+export const writePreboardToAsyncStorage = async (preboard, commentsEnd, timeDestinationArrival) => {
+	var storage = new Storage({
+		size: 1000,
+		storageBackend: AsyncStorage,
+		defaultExpires: 1000 * 3600 * 24,
+		enableCache: true,
+		sync: {
+
+		}
+	});
+
+	const {
+		airline,
+		destinationGate,
+		deviceID,
+		flightNumber,
+		passenger1Wheelchair,
+		passenger1FirstName,
+		passenger1LastName,
+		preboardType,
+		timeStart,
+		user 
+	} = preboard
+
+	const preboardData = {
+		airline,
+		commentsEnd,
+		startingGate: destinationGate,
+		deviceID,
+		employeeLogin: user.email,
+		flightNumber,
+		passenger1Wheelchair,
+		passenger1FirstName,
+		passenger1LastName,
+		preboardType,
+		timeDestinationArrival,
+		timeStart 
+	}
+	console.log('in writePreboardToAsyncStorage', preboardData)
+	storage.save({
+		key: 'preboards',
+		id: timeStart.toString(), 
+		data: JSON.stringify(preboardData)
+	})
+
+	storage.getAllDataForKey('preboards').then(data => console.log('woooot', data))
+
+}
+

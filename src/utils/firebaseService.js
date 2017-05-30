@@ -1,11 +1,10 @@
 import { AsyncStorage } from 'react-native'; 
 import firebase from 'firebase';
 import Storage from 'react-native-storage';
-import { getDeparturesFromAsyncStorage, clearDeparturesAndArrivalsFromAsyncStorage } from './AsyncStorageService';	
+import { getDeparturesFromAsyncStorage, clearAllFromAsyncStorage } from './AsyncStorageService';	
 
 export const updateWheelchair = (wheelchairNumber, gps) => {
 	const path = 'wheelchairs/' + wheelchairNumber;
-	console.log(wheelchairNumber, gps, path);
 	firebase.database().ref(`${path}`)
 		.update({
 			latitude: gps.latitude,
@@ -16,6 +15,8 @@ export const updateWheelchair = (wheelchairNumber, gps) => {
 }
 
 export const office = () => {
+
+	// clearAllFromAsyncStorage();
 	var storage = new Storage({
 		size: 1000,
 		storageBackend: AsyncStorage,
@@ -26,14 +27,9 @@ export const office = () => {
 		}
 	});
 
-	
-	
-
 	storage.getAllDataForKey('departures')
 		.then((departures) => {
-			console.log('departures', departures)
 			departures.forEach((departure, index, array) => {
-				console.log(JSON.parse(departure))
 				d = JSON.parse(departure)
 				const path = 'departures/' + d.timeStart
 				firebase.database().ref(`${path}`)
@@ -66,9 +62,7 @@ export const office = () => {
 
 	storage.getAllDataForKey('arrivals')
 		.then((arrivals) => {
-			console.log('arrivals', arrivals)
 			arrivals.forEach((arrival, index, array) => {
-				console.log('is it here?', JSON.parse(arrival))
 				a = JSON.parse(arrival)
 				const path = 'arrivals/' + a.timeStart
 				firebase.database().ref(`${path}`)
@@ -94,6 +88,32 @@ export const office = () => {
 						.then(() => storage.clearMapForKey('arrivals'))
 			})
 		})
+
+	storage.getAllDataForKey('preboards')
+		.then((preboards) => {
+			preboards.forEach((preboard, index, array) => {
+				p = JSON.parse(preboard)
+				const path = 'preboards/' + p.timeStart
+				firebase.database().ref(`${path}`)
+					.set({
+						airline: p.airline,
+						commentsEnd: p.commentsEnd,
+						deviceID: p.deviceID,
+						employeeLogin: p.employeeLogin,
+						flightNumber: p.flightNumber,
+						passenger1FirstName: p.passenger1FirstName,
+						passenger1LastName: p.passenger1LastName,
+						passenger1Wheelchair: p.passenger1Wheelchair,
+						preboardType: p.preboardType,
+						startingGate: p.startingGate,
+						timeDestinationArrival: p.timeDestinationArrival,
+						timeStart: p.timeStart
+					})
+						.then(() => storage.clearMapForKey('preboards'))
+			})
+		})
+
+
 
 	// storage.getAllDataForKey('departures').then(data => console.log('departures', data))
 	// storage.getAllDataForKey('arrival').then(data => console.log('arrival', data))

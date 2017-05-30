@@ -431,7 +431,7 @@ export const closeDeparture = () => {
 	//navigate back to main
 }
 
-export const setPreboardType = (preboardType) => {
+export const setPreboardType = (runType, preboardType) => {
 	Actions.closing({ type: 'reset' })
 	return(dispatch) => {
 		dispatch({

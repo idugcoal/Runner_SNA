@@ -3,7 +3,7 @@ import { View, Text, TextInput, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { closeDeparture, returnToStart } from '../actions';
 import { writeDepartureEnd, writeArrivalEnd } from '../utils/firebaseService';
-import { writeDepartureToAsyncStorage, writeArrivalToAsyncStorage } from '../utils/AsyncStorageService';
+import { writeDepartureToAsyncStorage, writeArrivalToAsyncStorage, writePreboardToAsyncStorage } from '../utils/AsyncStorageService';
 import { Button, CardSection, ImageButton, NumberButton } from './common';
 import Footer from './Footer';
 import Style from './Style';
@@ -30,6 +30,9 @@ class Closing extends Component {
 			console.log('in Closing', this.props.deviceID)
 			writeArrivalToAsyncStorage(this.props, this.state.text, this.state.arrivalTime);
 		}
+        if(this.props.runType === 'preboard') {
+            writePreboardToAsyncStorage(this.props, this.state.text, this.state.arrivalTime);
+        }
 		this.props.returnToStart();
 	}
 
@@ -73,7 +76,8 @@ const mapStateToProps = ({ auth, departure }) => {
     passenger1FirstName, 
     passenger1LastName, 
     passenger2FirstName, 
-    passenger2LastName, 
+    passenger2LastName,
+    preboardType, 
     startLocation,
     startLocationGPS,
     stops,
@@ -100,6 +104,7 @@ const mapStateToProps = ({ auth, departure }) => {
     passenger1LastName, 
     passenger2FirstName, 
     passenger2LastName, 
+    preboardType,
     startLocation,
     startLocationGPS,
     stops,

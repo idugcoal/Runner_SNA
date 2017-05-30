@@ -45,7 +45,6 @@ class SelectGate extends Component {
       // }
       if(this.props.runType === 'arrival') {
         // writePassengerData(this.props, gateNumber);
-        alert('made it')
         this.props.addStartingLocationArrival(gateNumber);
       }
       // if(this.props.runType === 'preboard') {

@@ -4,7 +4,6 @@ SELECT_WHEELCHAIR_1,
 SELECT_WHEELCHAIR_2,
 SCAN_BOARDING_PASS_1,
 SCAN_BOARDING_PASS_2,
-// ALTERNATE_BOARDING_PASS_INPUT,
 PASSENGER_1_FIRST_NAME_CHANGED,
 PASSENGER_1_LAST_NAME_CHANGED,
 PASSENGER_2_FIRST_NAME_CHANGED,
@@ -24,7 +23,6 @@ SET_TIME_END,
 SET_RUN_TYPE,
 ADD_STARTING_POINT_ARRIVAL,
 ADD_STARTING_LOCATION_ARRIVAL,
-// ADD_COMMENTS_TSA,
 ADD_COMMENTS_CLOSING,
 ADD_DESTINATION,
 RETURN_TO_START,
@@ -86,9 +84,6 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, passenger1FirstName: action.payload.firstName, passenger1LastName: action.payload.lastName, airline: action.payload.airline, flightNumber: action.payload.flightNumber };
     case SCAN_BOARDING_PASS_2:
       return { ...state, passenger2FirstName: action.payload.firstName, passenger2LastName: action.payload.lastName, airline: action.payload.airline, flightNumber: action.payload.flightNumber };
-    // case ALTERNATE_BOARDING_PASS_INPUT:
-    //   console.log('ALTERNATEBOARDINGPASSINPUT NEVER HERE')
-    // 	return { ...state, passenger1FirstName: action.payload };
     case PASSENGER_1_FIRST_NAME_CHANGED:
       return { ...state, passenger1FirstName: action.payload };
     case PASSENGER_1_LAST_NAME_CHANGED:

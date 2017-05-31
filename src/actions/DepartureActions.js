@@ -5,7 +5,6 @@ import {
   SELECT_WHEELCHAIR_2,
   SCAN_BOARDING_PASS_1,
   SCAN_BOARDING_PASS_2,
-  ALTERNATE_BOARDING_PASS_INPUT,
   PASSENGER_1_FIRST_NAME_CHANGED,
 	PASSENGER_1_LAST_NAME_CHANGED,
 	PASSENGER_2_FIRST_NAME_CHANGED,
@@ -25,7 +24,6 @@ import {
 	SET_TIME_END,
 	SET_RUN_TYPE,
 	SET_TIME_GATE_ARRIVAL,
-	// ADD_COMMENTS_TSA,
 	ADD_DESTINATION,
 	ADD_COMMENTS_CLOSING,
 	RETURN_TO_START,
@@ -222,7 +220,7 @@ export const scanBoardingPass = (props, boardingPassData) => {
 		}
 	}
 
-	if(numPassengers === 1) {
+	else if(numPassengers === 1) {
 		if(runType === 'departure') {
 			Actions.selectGate();
 			return(dispatch) => {
@@ -243,7 +241,7 @@ export const scanBoardingPass = (props, boardingPassData) => {
 		}
 	}
 
-	if(numPassengers === 2) {
+	else if(numPassengers === 2) {
 		if(runType === 'departure') {
 			if(passenger1FirstName == '' || passenger1LastName == '') {
 				Actions.move({type: 'reset'});
@@ -423,12 +421,6 @@ export const setTimeEnd = () => {
 			payload: Date.now()
 		})
 	}	
-}
-
-export const closeDeparture = () => {
-	//write all info to database
-	//initialize state
-	//navigate back to main
 }
 
 export const setPreboardType = (runType, preboardType) => {

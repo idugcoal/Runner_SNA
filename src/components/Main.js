@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Keyboard } from 'react-native';
+import { Keyboard, View } from 'react-native';
 import firebase from 'firebase';
 import { updateWheelchair, office } from '../utils/firebaseService';
-import { clearAllFromAsyncStorage } from '../utils/AsyncStorageService';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import DeviceInfo from 'react-native-device-info'
@@ -72,7 +71,7 @@ class Main extends Component {
           <Button onPress={this.onPreboard.bind(this)}>Preboard</Button>
         </CardSection>
 				<CardSection>
-					<Button onPress={this.onCheckIn.bind(this)}>Check-In</Button>
+					<Button onPress={this.onCheckIn.bind(this)}>Wheelchair Check-In</Button>
 				</CardSection>
         <CardSection>
           <Button onPress={this.onOffice.bind(this)}>Office</Button>

@@ -34,22 +34,13 @@ class SelectGate extends Component {
   }
 
   onButtonPress(gateNumber) {
-    // const { destinationGate } = this.props;
     if(this.state.final) {
       this.props.setFinalGateNumber(gateNumber);
     } 
     else {
-      //write to database: numPassengers, wheelchair # (x2), passenger info (x2), airline, flight #, destination gate
-      // if(this.props.runType === 'departure') {
-      //   writePassengerData(this.props, gateNumber);
-      // }
       if(this.props.runType === 'arrival') {
-        // writePassengerData(this.props, gateNumber);
         this.props.addStartingLocationArrival(gateNumber);
       }
-      // if(this.props.runType === 'preboard') {
-      //   alert('made it')
-      // }
       this.props.selectGateNumber(this.props.runType, gateNumber);
     }
   }

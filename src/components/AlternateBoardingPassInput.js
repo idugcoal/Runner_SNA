@@ -46,15 +46,16 @@ class AlternateBoardingPassInput extends Component {
       flightNumber
     } = this.props
 
-    if(runType === 'preboard') {
-      Actions.preboard();
-    }
+    // if(runType === 'preboard') {
+    //   alert('AlternateBoardingPassInput')
+    //   Actions.preboard();
+    // }
 
 
     if(numPassengers === 1) {
       if(passenger1FirstName == '' || passenger1LastName == '' || airline == '' || flightNumber == '') {
         alert('Please fill out all passenger info');
-      } else if(runType === 'departure') {
+      } else if(runType === 'departure' || runType === 'preboard') {
         Actions.selectGate();
       } else if(runType === 'arrival') {
         Actions.selectStopsSterile({al: this.props.airline, fn: this.props.flightNumber})

@@ -111,6 +111,7 @@ export const office = () => {
 						timeStart: p.timeStart
 					})
 						.then(() => storage.clearMapForKey('preboards'))
+						.then(() => alert('Written to database!'));
 			})
 		})
 

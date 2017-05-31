@@ -89,7 +89,7 @@ export const writeDepartureToAsyncStorage = async (departure, commentsEnd, timeG
 		data: JSON.stringify(departureData)
 	})
 
-	// storage.getAllDataForKey('departure').then(data => console.log('woooot', data))
+	// storage.getAllDataForKey('departures').then(data => console.log('all departures', data))
 
 }
 
@@ -123,7 +123,6 @@ export const writeArrivalToAsyncStorage = async (arrival, commentsEnd, timeDesti
 		user 
 	} = arrival
 
-	console.log('in writeArrivalToAsyncStorage', deviceID)
 	const arrivalData = {
 		airline,
 		commentsEnd,
@@ -144,14 +143,13 @@ export const writeArrivalToAsyncStorage = async (arrival, commentsEnd, timeDesti
 		timeDestinationArrival,
 		timeStart 
 	}
-	console.log('in writeArrivalToAsyncStorage', arrivalData)
 	storage.save({
 		key: 'arrivals',
 		id: timeStart.toString(), 
 		data: JSON.stringify(arrivalData)
 	})
 
-	storage.getAllDataForKey('arrivals').then(data => console.log('woooot', data))
+	// storage.getAllDataForKey('arrivals').then(data => console.log('all arrivals', data))
 
 }
 
@@ -193,14 +191,13 @@ export const writePreboardToAsyncStorage = async (preboard, commentsEnd, timeDes
 		timeDestinationArrival,
 		timeStart 
 	}
-	console.log('in writePreboardToAsyncStorage', preboardData)
 	storage.save({
 		key: 'preboards',
 		id: timeStart.toString(), 
 		data: JSON.stringify(preboardData)
 	})
 
-	storage.getAllDataForKey('preboards').then(data => console.log('woooot', data))
+	// storage.getAllDataForKey('preboards').then(data => console.log('all preboards', data))
 
 }
 

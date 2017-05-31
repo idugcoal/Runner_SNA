@@ -71,7 +71,7 @@ class AlternateBoardingPassInput extends Component {
     }
   }
   else if ((passenger1FirstName != '' && passenger1LastName != '') && (passenger2FirstName != '' || passenger2LastName != '' || airline != '' || flightNumber != '')) {
-    Actions.scanBoardingPass({ type: 'reset', title: "Scan Boarding Pass #2"})
+    Actions.move({ type: 'reset', title: "Scan Boarding Pass #2"})
   }
   else {
     alert('Please fill out all passenger info')

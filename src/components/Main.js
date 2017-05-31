@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Keyboard } from 'react-native';
 import firebase from 'firebase';
 import { updateWheelchair, office } from '../utils/firebaseService';
+import { clearAllFromAsyncStorage } from '../utils/AsyncStorageService';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import DeviceInfo from 'react-native-device-info'
@@ -17,6 +18,7 @@ class Main extends Component {
     navigator.geolocation.getCurrentPosition((position) => {
     	this.props.updateCurrentPosition(position);
     });
+
 
     // navigator.geolocation.watchPosition((position) => {
     // 	if(this.props.numPassengers != '') {

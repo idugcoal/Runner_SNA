@@ -62,6 +62,7 @@ export const office = () => {
 
 	storage.getAllDataForKey('arrivals')
 		.then((arrivals) => {
+			console.log('arrivals bitch', arrivals)
 			arrivals.forEach((arrival, index, array) => {
 				a = JSON.parse(arrival)
 				const path = 'arrivals/' + a.timeStart

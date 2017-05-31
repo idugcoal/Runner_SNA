@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, Keyboard } from 'react-native';
 import { connect } from 'react-redux'
 import Modal from 'react-native-simple-modal'
-import { setTimeEnd } from '../actions';
-import { addStop, writeArrivalData, writeDepartureData } from '../utils/firebaseService';
+import { setTimeEnd, addStop } from '../actions';
+// import { writeArrivalData, writeDepartureData } from '../utils/firebaseService';
 import { Button, CardSection, ImageButton, TerminalA, TerminalB, TerminalC } from './common';
 import Footer from './Footer';
 import Style from './Style';
@@ -24,19 +24,17 @@ class SelectStopsSterile extends Component {
 
 	componentWillMount() {
 		Keyboard.dismiss();
-		console.log('SELECT STOPS STERILE', this.props)
-		if(this.props.runType === 'arrival') {
-			writeArrivalData(this.props)
-		}
-		if(this.props.runType === 'departure') {
-			writeDepartureData(this.props)
-		}
+		// if(this.props.runType === 'arrival') {
+		// 	writeArrivalData(this.props)
+		// }
+		// if(this.props.runType === 'departure') {
+		// 	writeDepartureData(this.props)
+		// }
 	}
 
 
 	onButtonPress(stopLocation) {
-		console.log('stopLocation in SelectStopsSterile:', stopLocation);
-		addStop(this.props.runType, this.props.timeStart, this.props.currentGPS, stopLocation)
+		this.props.addStop(this.props.currentGPS, stopLocation)
 	}
 
 	onGateArrival() {
@@ -55,9 +53,11 @@ class SelectStopsSterile extends Component {
 	}
 
 	renderButtons() {
-		return chunk(this.state.terminal, 4).map(row => (
-					<View style={Style.row}>
-						{row.map(item => <ImageButton source={item.image} onPress={this.onButtonPress.bind(this, item.name)} key={item.name}/>)}
+		return chunk(this.state.terminal, 4).map((row, index) => (
+					<View style={Style.row} key={index}>
+						{row.map((item) => (
+							<ImageButton source={item.image} onPress={this.onButtonPress.bind(this, item.name)} key={item.name}/>)
+						)}
 					</View>
 				))
 	}
@@ -97,7 +97,6 @@ class SelectStopsSterile extends Component {
 				<Footer />
 				<Modal
 	        open={this.state.open}
-	        modalDidOpen={() => console.log('modal did open')}
 	        modalDidClose={() => this.setState({open: false})}
 	        style={{alignItems: 'center'}}>
 	        <View>
@@ -122,50 +121,50 @@ class SelectStopsSterile extends Component {
 const mapStateToProps = ({ departure, auth }) => {
   const { 
   	runType, 
-    timeStart,
-    startLocation,
-    startLocationGPS, 
-    numPassengers, 
-    passenger1Wheelchair, 
-    passenger2Wheelchair, 
-    passenger1FirstName, 
-    passenger1LastName, 
-    passenger2FirstName, 
-    passenger2LastName, 
-    airline, 
-    flightNumber,
+   //  timeStart,
+   //  startLocation,
+   //  startLocationGPS, 
+   //  numPassengers, 
+   //  passenger1Wheelchair, 
+   //  passenger2Wheelchair, 
+   //  passenger1FirstName, 
+   //  passenger1LastName, 
+   //  passenger2FirstName, 
+   //  passenger2LastName, 
+   //  airline, 
+   //  flightNumber,
     destinationGate,
     currentGPS,
-    timeTSAStart,
-    timeTSAEnd,
-    commentsTSA,
-    deviceID, 
+   //  timeTSAStart,
+   //  timeTSAEnd,
+   //  commentsTSA,
+   //  deviceID, 
   } = departure;
 
-  const { user } = auth
+  // const { user } = auth
 
   return { 
   	runType, 
-    timeStart,
-    startLocation,
-    startLocationGPS, 
-    numPassengers, 
-    passenger1Wheelchair, 
-    passenger2Wheelchair, 
-    passenger1FirstName, 
-    passenger1LastName, 
-    passenger2FirstName, 
-    passenger2LastName, 
-    airline, 
-    flightNumber,
+   //  timeStart,
+   //  startLocation,
+   //  startLocationGPS, 
+   //  numPassengers, 
+   //  passenger1Wheelchair, 
+   //  passenger2Wheelchair, 
+   //  passenger1FirstName, 
+   //  passenger1LastName, 
+   //  passenger2FirstName, 
+   //  passenger2LastName, 
+   //  airline, 
+   //  flightNumber,
     destinationGate,
     currentGPS,
-    timeTSAStart,
-    timeTSAEnd,
-    commentsTSA,
-    deviceID,
-    user
+   //  timeTSAStart,
+   //  timeTSAEnd,
+   //  commentsTSA,
+   //  deviceID,
+   //  user
   };
 };
 
-export default connect(mapStateToProps, { setTimeEnd })(SelectStopsSterile);
+export default connect(mapStateToProps, { setTimeEnd, addStop })(SelectStopsSterile);

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { closeDeparture, returnToStart } from '../actions';
 import { writeDepartureEnd, writeArrivalEnd } from '../utils/firebaseService';
+import { writeDepartureToAsyncStorage, writeArrivalToAsyncStorage, writePreboardToAsyncStorage } from '../utils/AsyncStorageService';
 import { Button, CardSection, ImageButton, NumberButton } from './common';
 import Footer from './Footer';
 import Style from './Style';
@@ -17,16 +18,21 @@ class Closing extends Component {
 			text: '',
 			arrivalTime: Date.now(),
 		}
-		console.log('CLOSING', props)
 	}
 
 	onButtonPress() {
 		if(this.props.runType === 'departure') {
-			writeDepartureEnd(this.props, this.state.text, this.state.arrivalTime)
+			// writeDepartureEnd(this.props, this.state.text, this.state.arrivalTime)
+			writeDepartureToAsyncStorage(this.props, this.state.text, this.state.arrivalTime);
 		}
 		if(this.props.runType === 'arrival') {
-			writeArrivalEnd(this.props, this.state.text, this.state.arrivalTime)
+			// writeArrivalEnd(this.props, this.state.text, this.state.arrivalTime)
+			console.log('in Closing', this.props.deviceID)
+			writeArrivalToAsyncStorage(this.props, this.state.text, this.state.arrivalTime);
 		}
+        if(this.props.runType === 'preboard') {
+            writePreboardToAsyncStorage(this.props, this.state.text, this.state.arrivalTime);
+        }
 		this.props.returnToStart();
 	}
 
@@ -54,10 +60,59 @@ class Closing extends Component {
 	}
 }
 
-const mapStateToProps = ({ departure }) => {
-  const { runType, timeStart, destinationGate, destination, finalGate, timeGateArrival } = departure;
+const mapStateToProps = ({ auth, departure }) => {
+  const { 
+    airline, 
+    commentsTSA,
+    destination,
+    destinationGate,
+    deviceID, 
+    finalGate,
+    flightNumber,
+    numPassengers, 
+  	runType, 
+    passenger1Wheelchair, 
+    passenger2Wheelchair, 
+    passenger1FirstName, 
+    passenger1LastName, 
+    passenger2FirstName, 
+    passenger2LastName,
+    preboardType, 
+    startLocation,
+    startLocationGPS,
+    stops,
+    timeStart, 
+    timeTSAEnd,
+    timeTSAStart
+  } = departure;
 
-  return { runType, timeStart, destinationGate, destination, finalGate, timeGateArrival };
+  const { user } = auth;
+
+  return { 
+  	airline, 
+    commentsTSA,
+    destination,
+    destinationGate,
+    deviceID,
+    finalGate,
+    flightNumber,
+    numPassengers, 
+  	runType, 
+    passenger1Wheelchair, 
+    passenger2Wheelchair, 
+    passenger1FirstName, 
+    passenger1LastName, 
+    passenger2FirstName, 
+    passenger2LastName, 
+    preboardType,
+    startLocation,
+    startLocationGPS,
+    stops,
+    timeStart, 
+    timeTSAEnd,
+    timeTSAStart,
+    user
+  };
 };
 
 export default connect(mapStateToProps, {

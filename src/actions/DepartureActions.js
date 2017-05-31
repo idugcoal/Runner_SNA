@@ -1,5 +1,3 @@
-import firebase from 'firebase';
-// import { writeBoardingPassData } from '../utils/firebaseService';
 import { Actions } from 'react-native-router-flux';
 import {
   SET_NUMBER_OF_PASSENGERS,
@@ -30,7 +28,8 @@ import {
 	// ADD_COMMENTS_TSA,
 	ADD_DESTINATION,
 	ADD_COMMENTS_CLOSING,
-	RETURN_TO_START
+	RETURN_TO_START,
+	SET_PREBOARD_TYPE
 } from './types';
 
 export const setRunType = (runType, deviceID) => {
@@ -38,7 +37,6 @@ export const setRunType = (runType, deviceID) => {
 		runType: runType,
 		deviceID: deviceID
 	}
-	console.log('actions', payload)
 
 	if(runType === 'departure') {
 		Actions.selectStartingPoint();
@@ -49,7 +47,7 @@ export const setRunType = (runType, deviceID) => {
 			})
 		}
 	} else if (runType === 'arrival') {
-		Actions.selectGate();
+		Actions.selectGate({ title: "Select Starting Gate"});
 		return(dispatch) => {
 			dispatch({
 				type: SET_RUN_TYPE,
@@ -57,7 +55,6 @@ export const setRunType = (runType, deviceID) => {
 			})
 		}
 	} else if (runType == 'checkin') {
-		//do checkin stuff
 		Actions.selectWheelchair();
 		return(dispatch) => {
 			dispatch({
@@ -65,6 +62,37 @@ export const setRunType = (runType, deviceID) => {
 				payload: payload
 			})
 		}
+	} else if (runType === 'preboard') {
+		Actions.selectWheelchair({ title: "Select Wheelchair"});
+		return(dispatch) => {
+			dispatch({
+				type: SET_RUN_TYPE,
+				payload: payload
+			})
+		}
+	}
+}
+
+export const addStartingPoint = (props, buttonLocation) => {
+
+	const { runType, currentGPS } = props
+	const { latitude, longitude, timestamp } = currentGPS;
+	const startLocationGPS = {
+		latitude: latitude,
+		longitude: longitude,
+		timestamp: timestamp,
+	}
+	const payload = {
+		startLocationGPS: startLocationGPS,
+		startLocation: buttonLocation
+	}
+	
+	Actions.selectNumberOfWheelchairs();
+	return(dispatch) => {
+		dispatch({ 
+			type: ADD_STARTING_POINT,
+			payload: payload
+		});
 	}
 }
 
@@ -84,31 +112,6 @@ export const setNumberOfPassengers = (runType, number) => {
 				type: SET_NUMBER_OF_PASSENGERS,
 				payload: number
 			})
-		}
-	}
-}
-
-export const addStartingPoint = (runType, buttonLocation, position) => {
-
-	const { coords, timestamp } = position;
-	const { latitude, longitude } = coords;
-	const startLocationGPS = {
-		latitude: latitude,
-		longitude: longitude,
-		timestamp: timestamp,
-	}
-	const payload = {
-		startLocationGPS: startLocationGPS,
-		startLocation: buttonLocation
-	}
-	
-	if(runType === 'departure') {
-		Actions.selectNumberOfWheelchairs();
-		return(dispatch) => {
-			dispatch({ 
-				type: ADD_STARTING_POINT,
-				payload: payload
-			});
 		}
 	}
 }
@@ -144,7 +147,20 @@ export const addStartingLocationArrival = (text) => {
 
 }
 
-export const selectWheelchair = (runType, numPassengers, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, airline, flightNumber, buttonValue) => {
+export const selectWheelchair = (props, buttonValue) => {
+
+	const {
+		runType, 
+		numPassengers, 
+		passenger1Wheelchair, 
+		passenger2Wheelchair, 
+		passenger1FirstName, 
+		passenger1LastName, 
+		passenger2FirstName, 
+		passenger2LastName, 
+		airline, 
+		flightNumber
+	} = props;
 
 	if (numPassengers === 1) {
 		Actions.scanBoardingPass({ title: "Scan Boarding Pass" });
@@ -157,87 +173,57 @@ export const selectWheelchair = (runType, numPassengers, passenger1Wheelchair, p
 	}
 
 	if (numPassengers === 2) {
-		if (passenger1Wheelchair === '') {
-			Actions.scanBoardingPass({ title: "Scan Boarding Pass #1" });
-			return(dispatch) => {
-				dispatch({
-					type: SELECT_WHEELCHAIR_1,
-					payload: buttonValue
-				})
-			}
+		//if first wheelchair is empty, set it and navigate to select wheelchair
+		if(passenger1Wheelchair == '') {
+			Actions.selectWheelchair({ title: "Select Wheelchair #2" });
+				return(dispatch) => {
+					dispatch({
+						type: SELECT_WHEELCHAIR_1,
+						payload: buttonValue
+					})
+				}
 		}
+		//if 2nd wheelchair is empty 
 		else {
-			//should be here only when passenger 2 info isnt filled out
-			console.log('WHY AM I HERE??')
-			Actions.scanBoardingPass({ title: "Scan Boarding Pass #2" });
-			return(dispatch) => {
-				dispatch({
-					type: SELECT_WHEELCHAIR_2,
-					payload: buttonValue
-				})
-			}
-		}
-		if (passenger1Wheelchair != '' && 
-				passenger1FirstName != '' && 
-				passenger1LastName != '' && 
-				passenger2FirstName != '' && 
-				passenger2LastName != '' && 
-				flightNumber != '' &&
-				airline != '' &&
-				runType === 'departure'
-				) {
-			console.log('weird place #1')
-			Actions.selectGate();
-			//write to database
-			return(dispatch) => {
-				dispatch({
-					type: SELECT_WHEELCHAIR_2,
-					payload: buttonValue
-				})
-			}
-		}
-		if (passenger1Wheelchair != '' && 
-				passenger1FirstName != '' && 
-				passenger1LastName != '' && 
-				passenger2FirstName != '' && 
-				passenger2LastName != '' && 
-				flightNumber != '' &&
-				airline != '' &&
-				runType === 'arrival'
-				) {
-			// writePassengerArrivalData(runType, timeStart, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName);
-			Actions.selectStopsSterile({ runType: runType, timeStart: timeStart, passenger2FirstName: passenger2FirstName, passenger2LastName, passenger2LastName, type: 'reset' });
-			//write to database
-			return(dispatch) => {
-				dispatch({
-					type: SELECT_WHEELCHAIR_2,
-					payload: buttonValue
-				})
-			}
-		}
-		// go back to select wheelchair if wheelchair 2 isnt selected
-
-		// 
-		// IF EVERYTHING IS FILLED OUT DURING ARRIVALS:
-		console.log('WHY AM I HERE', passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, flightNumber, airline)
-		if (passenger1Wheelchair != '') {
-			Actions.selectStopsSterile({ type: 'reset' });
-			return(dispatch) => {
-				dispatch({
-					type: SELECT_WHEELCHAIR_2,
-					payload: buttonValue
-				})
-			}
+			Actions.scanBoardingPass({ title: "Scan Boarding Pass #1" });
+				return(dispatch) => {
+					dispatch({
+						type: SELECT_WHEELCHAIR_2,
+						payload: buttonValue
+					})
+				}
 		}
 	}
-};
+}
 
-export const scanBoardingPass = (runType, timeStart, numPassengers, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, airline, flightNumber, boardingPassData) => {
+export const scanBoardingPass = (props, boardingPassData) => {
 
-	console.log('scanBoardingPassData', airline)
-	if(runType === 'departure') {
-	//if there's one passenger, set boardingPass1 to boardingPassData, route to selectGate
-		if(numPassengers === 1) {
+	const {
+		runType, 
+		timeStart, 
+		numPassengers, 
+		passenger1Wheelchair, 
+		passenger2Wheelchair, 
+		passenger1FirstName, 
+		passenger1LastName, 
+		passenger2FirstName, 
+		passenger2LastName, 
+		airline, 
+		flightNumber
+	} = props
+
+	if(runType === 'preboard') {
+		Actions.selectGate();
+		return(dispatch) => {
+			dispatch({
+				type: SCAN_BOARDING_PASS_1,
+				payload: boardingPassData
+			})
+		}
+	}
+
+	if(numPassengers === 1) {
+		if(runType === 'departure') {
 			Actions.selectGate();
 			return(dispatch) => {
 				dispatch({
@@ -245,34 +231,8 @@ export const scanBoardingPass = (runType, timeStart, numPassengers, passenger1Wh
 					payload: boardingPassData
 				})
 			}
-
-		}
-		//if there are two passengers, 
-		//if passenger1FirstName is empty, set boardingPass1 to boardingPassData, route to selectWheelchair
-		else if(passenger1FirstName === '') {
-			Actions.selectWheelchair({type: 'reset', title: "Select Wheelchair #2"});
-			return(dispatch) => {
-				dispatch({
-					type: SCAN_BOARDING_PASS_1,
-					payload: boardingPassData
-				})
-			}
-		//if passenger1FirstName is not empty, set boardingPass2 to boardingPassData, route to selectGate
-		}	else {
-			//write to database
-			console.log('weird place #3')
-			Actions.selectGate();
-			return(dispatch) => {
-				dispatch({
-					type: SCAN_BOARDING_PASS_2,
-					payload: boardingPassData
-				})
-			}	
-		}
-	} 
-	else if (runType === 'arrival') {
-		if(numPassengers === 1) {
-			console.log('farky', runType, timeStart, boardingPassData.firstName, boardingPassData.lastName, boardingPassData.airline, boardingPassData.flightNumber)
+		} 
+		else if(runType === 'arrival') {
 			Actions.selectStopsSterile({ runType: runType, timeStart: timeStart, p1FirstName: boardingPassData.firstName, p1LastName: boardingPassData.lastName, al: boardingPassData.airline, fn: boardingPassData.flightNumber, type: 'reset' });
 			return (dispatch) => {
 				dispatch({
@@ -281,71 +241,50 @@ export const scanBoardingPass = (runType, timeStart, numPassengers, passenger1Wh
 				});
 			}
 		}
-		
-		//if there are two passengers, 
-		//if passenger1FirstName is empty, set boardingPass1 to boardingPassData, route to selectWheelchair
-		else if(passenger1FirstName === '') {
-			Actions.selectWheelchair({type: 'reset', title: "Select Wheelchair #2"});
-			return(dispatch) => {
-				dispatch({
-					type: SCAN_BOARDING_PASS_1,
-					payload: boardingPassData
-				})
+	}
+
+	if(numPassengers === 2) {
+		if(runType === 'departure') {
+			if(passenger1FirstName == '' || passenger1LastName == '') {
+				Actions.move({type: 'reset'});
+				return(dispatch) => {
+					dispatch({
+						type: SCAN_BOARDING_PASS_1,
+						payload: boardingPassData
+					})
+				}
 			}
-		//if passenger1FirstName is not empty, set boardingPass2 to boardingPassData, route to selectGate
-		}	else {
-			console.log('BPD', boardingPassData)
-			Actions.selectStopsSterile({ runType: runType, timeStart: timeStart, p2FirstName: boardingPassData.firstName, p2LastName: boardingPassData.lastName, al: boardingPassData.airline, fn: boardingPassData.flightNumber, type: 'reset' });
-			return(dispatch) => {
-				dispatch({
-					type: SCAN_BOARDING_PASS_2,
-					payload: boardingPassData
-				})
-			}	
+			else {
+				Actions.selectGate();
+				return(dispatch) => {
+					dispatch({
+						type: SCAN_BOARDING_PASS_2,
+						payload: boardingPassData
+					})
+				}
+			}
+		}
+		if(runType === 'arrival') {
+			if(passenger1FirstName == '' || passenger1LastName == '') {
+				Actions.move({type: 'reset'});
+				return(dispatch) => {
+					dispatch({
+						type: SCAN_BOARDING_PASS_1,
+						payload: boardingPassData
+					})
+				}
+			}
+			else {
+				Actions.selectStopsSterile({ type: 'reset' });
+				return(dispatch) => {
+					dispatch({
+						type: SCAN_BOARDING_PASS_2,
+						payload: boardingPassData
+					})
+				}
+			}
 		}
 	}
-};
-
-export const passenger1FirstNameChanged = (text) => {
-  return {
-    type: PASSENGER_1_FIRST_NAME_CHANGED,
-    payload: text
-  };
-};
-
-export const passenger1LastNameChanged = (text) => {
-  return {
-    type: PASSENGER_1_LAST_NAME_CHANGED,
-    payload: text
-  };
-};
-
-export const passenger2FirstNameChanged = (text) => {
-  return {
-    type: PASSENGER_2_FIRST_NAME_CHANGED,
-    payload: text
-  };
-};
-
-export const passenger2LastNameChanged = (text) => {
-  return {
-    type: PASSENGER_2_LAST_NAME_CHANGED,
-    payload: text
-  };
-};
-
-export const airlineChanged = (text) => {
-  return {
-    type: AIRLINE_CHANGED,
-    payload: text
-  };
-};
-
-export const flightNumberChanged = (text) => {
-  return {
-    type: FLIGHT_NUMBER_CHANGED,
-    payload: text
-  };
 };
 
 export const selectGateNumber = (runType, text) => {
@@ -369,12 +308,22 @@ export const selectGateNumber = (runType, text) => {
 			})
 		}
 	}
+
+	else if (runType === 'preboard') {
+		Actions.preboard();
+		return(dispatch) => {
+			dispatch({
+				type: SELECT_GATE_NUMBER,
+				payload: text
+			})
+		}
+	}
 };
 
 export const startTSA = () => {
 
 	const timeTSAStart = Date.now();
-	Actions.tsa();
+	Actions.tsa({type: 'reset'});
 	return(dispatch) => {
 		dispatch({
 			type: TSA_START,
@@ -406,7 +355,6 @@ export const addCommentsTSA = (text, timeTSAStart) => {
 export const setFinalGateNumber = (text) => {
 	
 	Actions.closing({reset: true});
-	console.log(text)
 	return(dispatch) => {
 		dispatch({
 			type:SET_FINAL_GATE_NUMBER,
@@ -415,11 +363,17 @@ export const setFinalGateNumber = (text) => {
 	}
 }
 
-export const addStop = (text) => {
+export const addStop = (currentGPS, stopLocation) => {
+	
+	const payload = {
+		currentGPS,
+		stopLocation
+	}
+
 	return(dispatch) => {
 		dispatch({
 			type: ADD_STOP,
-			payload: text
+			payload: payload
 		})
 	}
 }
@@ -477,6 +431,16 @@ export const closeDeparture = () => {
 	//navigate back to main
 }
 
+export const setPreboardType = (runType, preboardType) => {
+	Actions.closing({ type: 'reset' })
+	return(dispatch) => {
+		dispatch({
+			type: SET_PREBOARD_TYPE,
+			payload: preboardType
+		})
+	}
+}
+
 export const returnToStart = () => {
 	Actions.main({ type: 'reset' })
 	return(dispatch) => {
@@ -485,4 +449,46 @@ export const returnToStart = () => {
 		})
 	}
 }
+
+export const passenger1FirstNameChanged = (text) => {
+  return {
+    type: PASSENGER_1_FIRST_NAME_CHANGED,
+    payload: text
+  };
+};
+
+export const passenger1LastNameChanged = (text) => {
+  return {
+    type: PASSENGER_1_LAST_NAME_CHANGED,
+    payload: text
+  };
+};
+
+export const passenger2FirstNameChanged = (text) => {
+  return {
+    type: PASSENGER_2_FIRST_NAME_CHANGED,
+    payload: text
+  };
+};
+
+export const passenger2LastNameChanged = (text) => {
+  return {
+    type: PASSENGER_2_LAST_NAME_CHANGED,
+    payload: text
+  };
+};
+
+export const airlineChanged = (text) => {
+  return {
+    type: AIRLINE_CHANGED,
+    payload: text
+  };
+};
+
+export const flightNumberChanged = (text) => {
+  return {
+    type: FLIGHT_NUMBER_CHANGED,
+    payload: text
+  };
+};
  

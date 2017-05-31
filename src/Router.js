@@ -14,6 +14,8 @@ import SelectStopsSterile from './components/SelectStopsSterile';
 import GateArrival from './components/GateArrival';
 import BaggageClaim from './components/BaggageClaim';
 import Closing from './components/Closing';
+import Move from './components/Move';
+import Preboard from './components/Preboard';
 
 
 // const RouterComponent = () => {
@@ -58,7 +60,7 @@ const RouterComponent = () => {
 				<Scene key="selectStartingPoint" component={SelectStartingPoint} title={"Select Staring Point"} />
 				<Scene key="selectNumberOfWheelchairs" component={SelectNumberOfWheelchairs} title={"Select Number of Wheelchairs"} />
 				<Scene key="selectWheelchair" component={SelectWheelchair} />
-				<Scene key="scanBoardingPass" component={ScanBoardingPass} />
+				<Scene key="scanBoardingPass" component={ScanBoardingPass} type={'reset'}/>
 				<Scene key="alternateBoardingPassInput" component={AlternateBoardingPassInput} title={"Enter Customer Info"} />
 				<Scene key="selectGate" component={SelectGate} title={"Select Gate Number"} />
 				<Scene key="selectStopsNonSterile" component={SelectStopsNonSterile} title={"Select Stops | Non-Sterile"} />
@@ -67,6 +69,8 @@ const RouterComponent = () => {
 				<Scene key="gateArrival" component={GateArrival} title={"Gate Arrival"} />
 				<Scene key="baggageClaim" component={BaggageClaim} title={"Select Drop-Off Location"} />
 				<Scene key="closing" component={Closing} title={"Finished!"} />
+				<Scene key="move" component={Move} title={"Prepare Boarding Pass #2"} />
+				<Scene key="preboard" component={Preboard} title={"Select Preboard Type"} />
 			</Scene>
 		</Router>
 	);

@@ -1,143 +1,10 @@
+import { AsyncStorage } from 'react-native'; 
 import firebase from 'firebase';
-
-export const writePassengerData = (props, gateNumber) => {
-	const {
-		runType, 
-    timeStart,
-    startLocation,
-    startLocationGPS, 
-    numPassengers, 
-    passenger1Wheelchair, 
-    passenger2Wheelchair, 
-    passenger1FirstName, 
-    passenger1LastName, 
-    passenger2FirstName, 
-    passenger2LastName, 
-    airline, 
-    flightNumber, 
-    user,
-    deviceID
-	} = props;
-	const path = runType + '/' + timeStart; 
-
-	firebase.database().ref(`${path}`)
-		// .push({
-		.set({
-			timeStart: timeStart, 
-			numPassengers: numPassengers,
-			startLocation: startLocation,
-			startLocationGPS: startLocationGPS,
-			passenger1Wheelchair: passenger1Wheelchair,
-			passenger2Wheelchair: passenger2Wheelchair,
-			passenger1FirstName: passenger1FirstName,
-			passenger1LastName: passenger1LastName,
-			passenger2FirstName: passenger2FirstName || '',
-			passenger2LastName: passenger2LastName || '',
-			airline: airline,
-			flightNumber: flightNumber,
-			destinationGate: gateNumber,
-			deviceID: deviceID,
-			employeeLogin: user.email
-		});
-}
-
-export const writeArrivalData = (props) => {
-	const {
-		runType, 
-    timeStart,
-    startLocation,
-    startLocationGPS, 
-    numPassengers,
-    passenger1FirstName,
-    passenger1LastName,
-    passenger2FirstName,
-    passenger2LastName,
-    p1FirstName,
-    p1LastName,
-    p2FirstName,
-    p2LastName, 
-    passenger1Wheelchair, 
-    passenger2Wheelchair,
-    deviceID,
-    airline,
-    flightNumber,
-    al,
-    fn, 
-    // destinationGate, 
-    user
-	} = props;
-	const path = runType + '/' + timeStart; 
-	console.log('FUCKING PROPS JESUS', props)
-	firebase.database().ref(`${path}`)
-		// .push({
-		.set({
-			timeStart: timeStart, 
-			numPassengers: numPassengers,
-			startLocation: startLocation,
-			startLocationGPS: startLocationGPS,
-			passenger1FirstName: passenger1FirstName || p1FirstName,
-			passenger1LastName: passenger1LastName || p1LastName,
-			passenger2FirstName: p2FirstName || passenger2FirstName || '',
-			passenger2LastName: p2LastName || passenger2LastName || '',
-			passenger1Wheelchair: passenger1Wheelchair,
-			passenger2Wheelchair: passenger2Wheelchair,
-			airline: al,
-			flightNumber: fn,
-			// destinationGate: destinationGate,
-			deviceID: deviceID,
-			employeeLogin: user.email
-		});
-}
-
-export const writeDepartureData = ({ runType, timeStart, timeTSAStart, timeTSAEnd, commentsTSA }) => {
-	const path = runType + '/' + timeStart; 
-	firebase.database().ref(`${path}`)
-		// .push({
-		.update({
-			timeTSAStart: timeTSAStart,
-			timeTSAEnd: timeTSAEnd,
-			commentsTSA: commentsTSA
-		});
-}
-
-export const writeDepartureEnd = ({runType, timeStart, destinationGate, finalGate}, commentsEnd, timeGateArrival ) => {
-	const path = runType + '/' + timeStart; 
-	firebase.database().ref(`${path}`)
-		// .push({
-		.update({
-			finalGate: finalGate || destinationGate,
-			timeGateArrival: timeGateArrival,
-			commentsEnd: commentsEnd
-		});
-}
-export const writeArrivalEnd = ({runType, timeStart, destination}, commentsEnd, timeGateArrival ) => {
-	const path = runType + '/' + timeStart; 
-	firebase.database().ref(`${path}`)
-		// .push({
-		.update({
-			destination: destination,
-			timeDestinationArrival: timeGateArrival,
-			commentsEnd: commentsEnd
-		});
-}
-
-export const addStop = (runType, timeStart, currentGPS, stopLocation) => {
-	// console.log('firebase services: ', runType, timeStart, numPassengers, p1Wheelchair, p2Wheelchair, p1FirstName, p1LastName, p2FirstName, p2LastName)
-	const path = runType + '/' + timeStart + '/stops/'; 
-	firebase.database().ref(`${path}`)
-		.push({
-		// .set({ 
-		// .update({
-			stopTime: Date.now(), 
-			stopLocation: stopLocation,
-			stopLocationGPS: currentGPS,
-		});
-}
+import Storage from 'react-native-storage';
+import { getDeparturesFromAsyncStorage, clearAllFromAsyncStorage } from './AsyncStorageService';	
 
 export const updateWheelchair = (wheelchairNumber, gps) => {
-
 	const path = 'wheelchairs/' + wheelchairNumber;
-	console.log(wheelchairNumber, gps, path);
 	firebase.database().ref(`${path}`)
 		.update({
 			latitude: gps.latitude,
@@ -145,6 +12,114 @@ export const updateWheelchair = (wheelchairNumber, gps) => {
 			gpsTimestamp: gps.timestamp,
 			timestamp: Date.now()
 		})
+}
+
+export const office = () => {
+
+	// clearAllFromAsyncStorage();
+	var storage = new Storage({
+		size: 1000,
+		storageBackend: AsyncStorage,
+		defaultExpires: 1000 * 3600 * 24,
+		enableCache: true,
+		sync: {
+
+		}
+	});
+
+	storage.getAllDataForKey('departures')
+		.then((departures) => {
+			departures.forEach((departure, index, array) => {
+				d = JSON.parse(departure)
+				const path = 'departures/' + d.timeStart
+				firebase.database().ref(`${path}`)
+					.set({
+						airline: d.airline,
+						commentsEnd: d.commentsEnd,
+						commentsTSA: d.commentsTSA,
+						destinationGate: d.destinationGate,
+						deviceID: d.deviceID,
+						employeeLogin: d.employeeLogin,
+						finalGate: d.finalGate,
+						flightNumber: d.flightNumber,
+						passenger1FirstName: d.passenger1FirstName,
+						passenger1LastName: d.passenger1LastName,
+						passenger2FirstName: d.passenger2FirstName,
+						passenger2LastName: d.passenger2LastName,
+						passenger1Wheelchair: d.passenger1Wheelchair,
+						passenger2Wheelchair: d.passenger2Wheelchair,
+						startLocation: d.startLocation,
+						startLocationGPS: d.startLocationGPS,
+						stops: d.stops,
+						timeGateArrival: d.timeGateArrival,
+						timeStart: d.timeStart,
+						timeTSAEnd: d.timeTSAEnd,
+						timeTSAStart: d.timeTSAStart
+					})
+						.then(() => storage.clearMapForKey('departures'))
+			})
+		})
+
+	storage.getAllDataForKey('arrivals')
+		.then((arrivals) => {
+			console.log('arrivals bitch', arrivals)
+			arrivals.forEach((arrival, index, array) => {
+				a = JSON.parse(arrival)
+				const path = 'arrivals/' + a.timeStart
+				firebase.database().ref(`${path}`)
+					.set({
+						airline: a.airline,
+						commentsEnd: a.commentsEnd,
+						destination: a.destination,
+						deviceID: a.deviceID,
+						employeeLogin: a.employeeLogin,
+						flightNumber: a.flightNumber,
+						passenger1FirstName: a.passenger1FirstName,
+						passenger1LastName: a.passenger1LastName,
+						passenger2FirstName: a.passenger2FirstName,
+						passenger2LastName: a.passenger2LastName,
+						passenger1Wheelchair: a.passenger1Wheelchair,
+						passenger2Wheelchair: a.passenger2Wheelchair,
+						startLocation: a.startLocation,
+						startLocationGPS: a.startLocationGPS,
+						stops: a.stops,
+						timeDestinationArrival: a.timeDestinationArrival,
+						timeStart: a.timeStart
+					})
+						.then(() => storage.clearMapForKey('arrivals'))
+			})
+		})
+
+	storage.getAllDataForKey('preboards')
+		.then((preboards) => {
+			preboards.forEach((preboard, index, array) => {
+				p = JSON.parse(preboard)
+				const path = 'preboards/' + p.timeStart
+				firebase.database().ref(`${path}`)
+					.set({
+						airline: p.airline,
+						commentsEnd: p.commentsEnd,
+						deviceID: p.deviceID,
+						employeeLogin: p.employeeLogin,
+						flightNumber: p.flightNumber,
+						passenger1FirstName: p.passenger1FirstName,
+						passenger1LastName: p.passenger1LastName,
+						passenger1Wheelchair: p.passenger1Wheelchair,
+						preboardType: p.preboardType,
+						startingGate: p.startingGate,
+						timeDestinationArrival: p.timeDestinationArrival,
+						timeStart: p.timeStart
+					})
+						.then(() => storage.clearMapForKey('preboards'))
+						.then(() => alert('Written to database!'));
+			})
+		})
+
+
+
+	// storage.getAllDataForKey('departures').then(data => console.log('departures', data))
+	// storage.getAllDataForKey('arrival').then(data => console.log('arrival', data))
+	
 }
 
 

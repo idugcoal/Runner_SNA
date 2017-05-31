@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { connect } from 'react-redux'
-import { scanBoardingPass, firstNameChanged, lastNameChanged, airlineChanged, flightNumberChanged, alternateBoardingPassInput, setTimeStart } from '../actions';
+import { scanBoardingPass, alternateBoardingPassInput } from '../actions';
 import Camera from 'react-native-camera';
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash';
@@ -13,9 +13,14 @@ class ScanBoardingPass extends Component {
 	
 	constructor(props) {
 		super(props);
+		// this.state = {
+		// 	cameraStatus: 'on'
+		// }
 	} 
 
 	onReadSuccess(boardingPassString) {
+		// this.setState({cameraStatus: 'off'})
+		// this.refs.camera.stopCapture()
 		switch(boardingPassString.data.substring(36, 38)) {
 			case 'AS':
 				var airline = 'Alaska';
@@ -39,7 +44,7 @@ class ScanBoardingPass extends Component {
 				var airline = 'WestJet';
 				break;
 			default: 
-				var airline = "Scan Failed";
+				var airline = "Unrecognized Airline";
 				break;
 		}
 
@@ -50,35 +55,47 @@ class ScanBoardingPass extends Component {
 			airline: airline,
 			flightNumber: boardingPassString.data.substring(36, 43)
 		}
-		console.log('COME ON NOW', boardingPassData);
 
+		this.props.scanBoardingPass(this.props, boardingPassData);
 
+	}
+
+	renderCamera() {
 		
-		this.props.scanBoardingPass(
-			this.props.runType,
-			this.props.timeStart,
-			this.props.numPassengers,
-			this.props.passenger1Wheelchair,
-			this.props.passenger2Wheelchair,
-			this.props.passenger1FirstName,
-			this.props.passenger1LastName,
-			this.props.passenger2FirstName,
-			this.props.passenger2LastName,
-			this.props.airline,
-			this.props.flightNumber,
-			boardingPassData
-		);
+		// if(this.state.cameraStatus == 'on') {
+		// 	return(
+		// 		<Camera 
+		// 			style={{ flex: 1 }}
+		// 			barCodeTypes={[ 'pdf417' ]}
+		// 			onBarCodeRead={this.onReadSuccess.bind(this)}
+		// 			// torchMode={Camera.constants.TorchMode.on}
+		// 		/>
+		// 	)
+		// } else {
+		// 	return <View />;
+		// }
+
+		return(
+			<Camera
+				ref={(cam) => {
+            this.camera = cam;
+          }} 
+				style={{ flex: 1 }}
+				barCodeTypes={[ 'pdf417' ]}
+				onBarCodeRead={this.onReadSuccess.bind(this)}
+				captureTarget={Camera.constants.CaptureTarget.disk}
+				// torchMode={Camera.constants.TorchMode.on}
+			/>
+		)
 	}
 
 	render() {
 		return(
 			<View style={Style.container}>
 				<View style={Style.content}>
-					<Camera 
-						style={{ flex: 1}}
-						barCodeTypes={[ 'pdf417' ]}
-						onBarCodeRead={this.onReadSuccess.bind(this)}
-					/>
+					{this.renderCamera()}
+						
+
 					<CardSection>
 						<Button style={Style.alternate} onPress={() => Actions.alternateBoardingPassInput()}>Manual Input</Button> 
 					</CardSection>
@@ -90,11 +107,35 @@ class ScanBoardingPass extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { timeStart, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, flightNumber, numPassengers, airline, runType } = departure;
+  const { 
+  	runType, 
+		timeStart, 
+		numPassengers, 
+		passenger1Wheelchair, 
+		passenger2Wheelchair, 
+		passenger1FirstName, 
+		passenger1LastName, 
+		passenger2FirstName, 
+		passenger2LastName, 
+		airline, 
+		flightNumber
+	 } = departure;
 
-  return { timeStart, passenger1Wheelchair, passenger2Wheelchair, passenger1FirstName, passenger1LastName, passenger2FirstName, passenger2LastName, flightNumber, numPassengers, airline, runType };
+  return { 
+  	runType, 
+		timeStart, 
+		numPassengers, 
+		passenger1Wheelchair, 
+		passenger2Wheelchair, 
+		passenger1FirstName, 
+		passenger1LastName, 
+		passenger2FirstName, 
+		passenger2LastName, 
+		airline, 
+		flightNumber
+	 };
 };
 
 export default connect(mapStateToProps, {
-  scanBoardingPass, alternateBoardingPassInput, setTimeStart
+  scanBoardingPass, alternateBoardingPassInput
 })(ScanBoardingPass);

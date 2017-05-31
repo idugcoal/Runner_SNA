@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { setNumberOfPassengers } from '../actions';
+import { setPreboardType } from '../actions';
 import { Button, CardSection } from './common';
 import Footer from './Footer';
 import Style from './Style';
 import { Actions } from 'react-native-router-flux';
 
 
-class SelectNumberOfWheelchairs extends Component {
+class Preboard extends Component {
 
 	constructor(props) {
 		super(props);
 	}
 
-	onButtonPress(numWheelchairs) {
-		this.props.setNumberOfPassengers(this.props.runType, numWheelchairs);
+	onButtonPress(preboardType) {
+		this.props.setPreboardType(this.props.runType, preboardType);
 	}
 
 	render() {
@@ -23,15 +23,15 @@ class SelectNumberOfWheelchairs extends Component {
 			<View style={Style.container}>
 				<View style={Style.content}>
 					<CardSection>
-						<Text> Do you need one or two wheelchairs?	</Text>
+						<Text> Did you use an aisle or wheelchair?	</Text>
 					</CardSection>
 					<CardSection>
 						<View style={Style.row}>
-							<Button onPress={() => this.onButtonPress(1) }>
-								One
+							<Button onPress={() => this.onButtonPress('aisle') }>
+								Aisle
 							</Button>
-							<Button onPress={() => this.onButtonPress(2) }>
-								Two
+							<Button onPress={() => this.onButtonPress('wheelchair') }>
+								Wheelchair
 							</Button>
 						</View>
 					</CardSection>
@@ -49,5 +49,5 @@ const mapStateToProps = ({ departure }) => {
 };
 
 export default connect(mapStateToProps, {
-	setNumberOfPassengers
-})(SelectNumberOfWheelchairs);
+	setPreboardType
+})(Preboard);

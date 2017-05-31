@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from './common';
 import { addStartingPoint } from '../actions';
@@ -13,9 +13,7 @@ class SelectStartingPoint extends Component {
 	}
 
 	onButtonPress(startLocation) {
-		const locationFirstContactGPS = navigator.geolocation.getCurrentPosition((position) => {
-			this.props.addStartingPoint(this.props.runType, startLocation, position);
-		});
+		this.props.addStartingPoint(this.props, startLocation);
 	}
 
 	render() {
@@ -23,20 +21,20 @@ class SelectStartingPoint extends Component {
 			<View style={Style.container}>
 				<View style={Style.content}>
 					<View style={Style.row}>
-						<Button onPress={this.onButtonPress.bind(this, 'aCurb')}>A Curb</Button>
-						<Button onPress={this.onButtonPress.bind(this, 'bCurb')}>B Curb</Button>
-						<Button onPress={this.onButtonPress.bind(this, 'cCurb')}>C Curb</Button>
+						<Button onPress={this.onButtonPress.bind(this, 'A Curb')}>A Curb</Button>
+						<Button onPress={this.onButtonPress.bind(this, 'B Curb')}>B Curb</Button>
+						<Button onPress={this.onButtonPress.bind(this, 'C Curb')}>C Curb</Button>
 					</View>
 					<View style={Style.row}>
-						<Button onPress={this.onButtonPress.bind(this, 'alaska')}>Alaska</Button>
-						<Button onPress={this.onButtonPress.bind(this, 'american')}>American</Button>
-						<Button onPress={this.onButtonPress.bind(this, 'delta')}>Delta</Button>
-						<Button onPress={this.onButtonPress.bind(this, 'frontier')}>Frontier</Button>
+						<Button onPress={this.onButtonPress.bind(this, 'Alaska')}>Alaska</Button>
+						<Button onPress={this.onButtonPress.bind(this, 'American')}>American</Button>
+						<Button onPress={this.onButtonPress.bind(this, 'Delta')}>Delta</Button>
+						<Button onPress={this.onButtonPress.bind(this, 'Frontier')}>Frontier</Button>
 					</View>
 					<View style={Style.row}>
-						<Button onPress={this.onButtonPress.bind(this, 'southwest')}>Southwest</Button>
-						<Button onPress={this.onButtonPress.bind(this, 'united')}>United</Button>
-						<Button onPress={this.onButtonPress.bind(this, 'westjet')}>WestJet</Button>
+						<Button onPress={this.onButtonPress.bind(this, 'Southwest')}>Southwest</Button>
+						<Button onPress={this.onButtonPress.bind(this, 'United')}>United</Button>
+						<Button onPress={this.onButtonPress.bind(this, 'WestJet')}>WestJet</Button>
 					</View>
 				</View>
 				<View style={Style.footer}>
@@ -48,9 +46,9 @@ class SelectStartingPoint extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { wheelchairNumber, runType } = departure;
+  const { wheelchairNumber, runType, currentGPS } = departure;
 
-  return { wheelchairNumber, runType };
+  return { wheelchairNumber, runType, currentGPS };
 };
 
 export default connect(mapStateToProps, { 

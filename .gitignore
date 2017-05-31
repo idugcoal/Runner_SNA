@@ -54,3 +54,5 @@ fastlane/screenshots
 
 config.js
 /assets
+
+Runner_SNA-buildtest-key.keystore

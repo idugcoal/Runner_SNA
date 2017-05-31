@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, Keyboard } from 'react-native';
+import { Keyboard, View } from 'react-native';
 import firebase from 'firebase';
-import { updateWheelchair } from '../utils/firebaseService';
+import { updateWheelchair, office } from '../utils/firebaseService';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import DeviceInfo from 'react-native-device-info'
@@ -15,12 +15,11 @@ class Main extends Component {
 		Keyboard.dismiss();
 
     navigator.geolocation.getCurrentPosition((position) => {
-    	// TODO: replace this with a firebase function?
     	this.props.updateCurrentPosition(position);
     });
 
+
     navigator.geolocation.watchPosition((position) => {
-    	// TODO: replace this with a firebase function?
     	if(this.props.numPassengers != '') {
     		if(this.props.numPassengers === '1') {
     			if(this.props.passenger1Wheelchair != '') {
@@ -46,8 +45,17 @@ class Main extends Component {
   	this.props.setRunType('arrival', DeviceInfo.getUniqueID());
   }
 
+  onPreboard() {
+    this.props.setRunType('preboard', DeviceInfo.getUniqueID())
+  }
+
   onCheckIn() {
   	this.props.setRunType('checkin', DeviceInfo.getUniqueID());
+  }
+
+  onOffice() {
+
+    office();
   }
 
 	render() {
@@ -59,9 +67,15 @@ class Main extends Component {
 				<CardSection>
 					<Button onPress={this.onArrival.bind(this)}>Arrival</Button>
 				</CardSection>
+          <CardSection>
+          <Button onPress={this.onPreboard.bind(this)}>Preboard</Button>
+        </CardSection>
 				<CardSection>
-					<Button onPress={this.onCheckIn.bind(this)}>Check-In</Button>
+					<Button onPress={this.onCheckIn.bind(this)}>Wheelchair Check-In</Button>
 				</CardSection>
+        <CardSection>
+          <Button onPress={this.onOffice.bind(this)}>Office</Button>
+        </CardSection>
 			</Card>
 		);
 	}

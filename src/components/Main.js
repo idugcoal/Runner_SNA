@@ -19,22 +19,22 @@ class Main extends Component {
     });
 
 
-    // navigator.geolocation.watchPosition((position) => {
-    // 	if(this.props.numPassengers != '') {
-    // 		if(this.props.numPassengers === '1') {
-    // 			if(this.props.passenger1Wheelchair != '') {
-    // 				updateWheelchair(this.props.passenger1Wheelchair, position);
-    // 			}
-    // 		}
-    // 		else if(this.props.numPassengers === '2') {
-    // 			if(this.props.passenger1Wheelchair != '' && this.props.passenger2Wheelchair != '') {
-    // 				updateWheelchair(this.props.passenger1Wheelchair, position);
-    // 				updateWheelchair(this.props.passenger2Wheelchair, position);
-    // 			}
-    // 		}
-    // 	}
-    // 	this.props.updateCurrentPosition(position);
-    // });
+    navigator.geolocation.watchPosition((position) => {
+    	if(this.props.numPassengers != '') {
+    		if(this.props.numPassengers === '1') {
+    			if(this.props.passenger1Wheelchair != '') {
+    				updateWheelchair(this.props.passenger1Wheelchair, position);
+    			}
+    		}
+    		else if(this.props.numPassengers === '2') {
+    			if(this.props.passenger1Wheelchair != '' && this.props.passenger2Wheelchair != '') {
+    				updateWheelchair(this.props.passenger1Wheelchair, position);
+    				updateWheelchair(this.props.passenger2Wheelchair, position);
+    			}
+    		}
+    	}
+    	this.props.updateCurrentPosition(position);
+    });
 	}
 
 	onDeparture() {

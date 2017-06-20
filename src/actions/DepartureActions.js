@@ -161,35 +161,69 @@ export const selectWheelchair = (props, buttonValue) => {
 	} = props;
 
 	if (numPassengers === 1) {
-		Actions.scanBoardingPass({ title: "Scan Boarding Pass" });
-		return(dispatch) => {
-			dispatch({
-				type: SELECT_WHEELCHAIR_1,
-				payload: buttonValue
-			})
+		if(runType === 'departure') {
+			Actions.scanBoardingPass({ title: "Scan Boarding Pass" });
+			return(dispatch) => {
+				dispatch({
+					type: SELECT_WHEELCHAIR_1,
+					payload: buttonValue
+				})
+			}
+		}
+		else if(runType === 'arrival') {
+			Actions.selectStopsSterile();
+			return(dispatch) => {
+				dispatch({
+					type: SELECT_WHEELCHAIR_1,
+					payload: buttonValue
+				})
+			}
 		}
 	}
 
 	if (numPassengers === 2) {
-		//if first wheelchair is empty, set it and navigate to select wheelchair
-		if(passenger1Wheelchair == '') {
-			Actions.selectWheelchair({ title: "Select Wheelchair #2" });
-				return(dispatch) => {
-					dispatch({
-						type: SELECT_WHEELCHAIR_1,
-						payload: buttonValue
-					})
-				}
+		if(runType === 'departure') {
+			//if first wheelchair is empty, set it and navigate to select wheelchair
+			if(passenger1Wheelchair == '') {
+				Actions.selectWheelchair({ title: "Select Wheelchair #2" });
+					return(dispatch) => {
+						dispatch({
+							type: SELECT_WHEELCHAIR_1,
+							payload: buttonValue
+						})
+					}
+			}
+			//if 2nd wheelchair is empty 
+			else {
+				Actions.scanBoardingPass({ title: "Scan Boarding Pass #1" });
+					return(dispatch) => {
+						dispatch({
+							type: SELECT_WHEELCHAIR_2,
+							payload: buttonValue
+						})
+					}
+			}
 		}
-		//if 2nd wheelchair is empty 
-		else {
-			Actions.scanBoardingPass({ title: "Scan Boarding Pass #1" });
-				return(dispatch) => {
-					dispatch({
-						type: SELECT_WHEELCHAIR_2,
-						payload: buttonValue
-					})
-				}
+		else if(runType === 'arrival') {
+			if(passenger1Wheelchair == '') {
+				Actions.selectWheelchair({ title: "Select Wheelchair #2" });
+					return(dispatch) => {
+						dispatch({
+							type: SELECT_WHEELCHAIR_1,
+							payload: buttonValue
+						})
+					}
+			}
+			//if 2nd wheelchair is empty 
+			else {
+				Actions.selectStopsSterile();
+					return(dispatch) => {
+						dispatch({
+							type: SELECT_WHEELCHAIR_2,
+							payload: buttonValue
+						})
+					}
+			}
 		}
 	}
 }

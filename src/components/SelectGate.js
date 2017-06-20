@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
-import { selectGateNumber, setFinalGateNumber, addStartingPointArrival, addStartingLocationArrival } from '../actions';
+import { selectGateNumber, setFinalGateNumber, addStartingPointArrival } from '../actions';
 import { writePassengerData } from '../utils/firebaseService';
 import NumberButton from './common/NumberButton';
 import Footer from './Footer';
@@ -26,11 +26,11 @@ class SelectGate extends Component {
 
   componentWillMount() {
     Keyboard.dismiss();
-    if(this.props.runType === 'arrival') {
-      const locationFirstContactGPS = navigator.geolocation.getCurrentPosition((position) => {
-        this.props.addStartingPointArrival(this.props.runType, position);
-      });
-    }
+    // if(this.props.runType === 'arrival') {
+    //   const locationFirstContactGPS = navigator.geolocation.getCurrentPosition((position) => {
+    //     this.props.addStartingPointArrival(this.props.runType, position);
+    //   });
+    // }
   }
 
   onButtonPress(gateNumber) {
@@ -38,9 +38,9 @@ class SelectGate extends Component {
       this.props.setFinalGateNumber(gateNumber);
     } 
     else {
-      if(this.props.runType === 'arrival') {
-        this.props.addStartingLocationArrival(gateNumber);
-      }
+      // if(this.props.runType === 'arrival') {
+      //   this.props.addStartingLocationArrival(gateNumber);
+      // }
       this.props.selectGateNumber(this.props.runType, gateNumber);
     }
   }
@@ -116,5 +116,5 @@ const mapStateToProps = ({ departure, auth }) => {
 };
 
 export default connect(mapStateToProps, {
-  selectGateNumber, setFinalGateNumber, addStartingPointArrival, addStartingLocationArrival
+  selectGateNumber, setFinalGateNumber, addStartingPointArrival
 })(SelectGate);

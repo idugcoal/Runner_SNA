@@ -135,15 +135,15 @@ export const addStartingPointArrival = (runType, position) => {
 		}
 }
 
-export const addStartingLocationArrival = (text) => {
-	return(dispatch) => {
-		dispatch({
-			type: ADD_STARTING_LOCATION_ARRIVAL,
-			payload: text
-		})
-	}
+// export const addStartingLocationArrival = (text) => {
+// 	return(dispatch) => {
+// 		dispatch({
+// 			type: ADD_STARTING_LOCATION_ARRIVAL,
+// 			payload: text
+// 		})
+// 	}
 
-}
+// }
 
 export const selectWheelchair = (props, buttonValue) => {
 

@@ -60,7 +60,7 @@ const RouterComponent = () => {
 				<Scene key="selectStartingPoint" component={SelectStartingPoint} title={"Select Staring Point"} />
 				<Scene key="selectNumberOfWheelchairs" component={SelectNumberOfWheelchairs} title={"Select Number of Wheelchairs"} />
 				<Scene key="selectWheelchair" component={SelectWheelchair} />
-				<Scene key="scanBoardingPass" component={ScanBoardingPass} type={'reset'}/>
+				<Scene key="scanBoardingPass" component={ScanBoardingPass} />
 				<Scene key="alternateBoardingPassInput" component={AlternateBoardingPassInput} title={"Enter Customer Info"} />
 				<Scene key="selectGate" component={SelectGate} title={"Select Gate Number"} />
 				<Scene key="selectStopsNonSterile" component={SelectStopsNonSterile} title={"Select Stops | Non-Sterile"} />

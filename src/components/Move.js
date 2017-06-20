@@ -10,7 +10,7 @@ class Move extends Component {
 			<View style={Style.container}>
 				<View style={Style.content}>
 		      <CardSection>
-			      <Button onPress={() => Actions.scanBoardingPass({type: "reset", title: "Scan Boarding Pass #2"})}>
+			      <Button onPress={() => Actions.scanBoardingPass({title: "Scan Boarding Pass #2"})}>
 			      	Scan Boarding Pass #2
 			      </Button>
 			    </CardSection>

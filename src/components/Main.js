@@ -14,27 +14,27 @@ class Main extends Component {
 
 		Keyboard.dismiss();
 
-    navigator.geolocation.getCurrentPosition((position) => {
-    	this.props.updateCurrentPosition(position);
-    });
+    // navigator.geolocation.getCurrentPosition((position) => {
+    // 	this.props.updateCurrentPosition(position);
+    // });
 
 
-    navigator.geolocation.watchPosition((position) => {
-    	if(this.props.numPassengers != '') {
-    		if(this.props.numPassengers === '1') {
-    			if(this.props.passenger1Wheelchair != '') {
-    				updateWheelchair(this.props.passenger1Wheelchair, position);
-    			}
-    		}
-    		else if(this.props.numPassengers === '2') {
-    			if(this.props.passenger1Wheelchair != '' && this.props.passenger2Wheelchair != '') {
-    				updateWheelchair(this.props.passenger1Wheelchair, position);
-    				updateWheelchair(this.props.passenger2Wheelchair, position);
-    			}
-    		}
-    	}
-    	this.props.updateCurrentPosition(position);
-    });
+    // navigator.geolocation.watchPosition((position) => {
+    // 	if(this.props.numPassengers != '') {
+    // 		if(this.props.numPassengers === '1') {
+    // 			if(this.props.passenger1Wheelchair != '') {
+    // 				updateWheelchair(this.props.passenger1Wheelchair, position);
+    // 			}
+    // 		}
+    // 		else if(this.props.numPassengers === '2') {
+    // 			if(this.props.passenger1Wheelchair != '' && this.props.passenger2Wheelchair != '') {
+    // 				updateWheelchair(this.props.passenger1Wheelchair, position);
+    // 				updateWheelchair(this.props.passenger2Wheelchair, position);
+    // 			}
+    // 		}
+    // 	}
+    // 	this.props.updateCurrentPosition(position);
+    // });
 	}
 
 	onDeparture() {
@@ -49,9 +49,9 @@ class Main extends Component {
     this.props.setRunType('preboard', DeviceInfo.getUniqueID())
   }
 
-  onCheckIn() {
-  	this.props.setRunType('checkin', DeviceInfo.getUniqueID());
-  }
+  // onCheckIn() {
+  // 	this.props.setRunType('checkin', DeviceInfo.getUniqueID());
+  // }
 
   onOffice() {
 
@@ -70,9 +70,6 @@ class Main extends Component {
           <CardSection>
           <Button onPress={this.onPreboard.bind(this)}>Preboard</Button>
         </CardSection>
-				<CardSection>
-					<Button onPress={this.onCheckIn.bind(this)}>Wheelchair Check-In</Button>
-				</CardSection>
         <CardSection>
           <Button onPress={this.onOffice.bind(this)}>Office</Button>
         </CardSection>

@@ -48,16 +48,6 @@ class Main extends Component {
   	this.props.setRunType('checkin', DeviceInfo.getUniqueID());
   }
 
-  onOffice() {
-    var position = {}
-    position.latitude = 0;
-    position.longitude = 0;
-    position.timestamp = 0;
-
-    updateWheelchair(0, position)
-      // .then(()=>alert('updated'));
-  }
-
 	render() {
 		return (
 			<Card>
@@ -70,9 +60,6 @@ class Main extends Component {
 				<CardSection>
 					<Button onPress={this.onCheckIn.bind(this)}>Check-In</Button>
 				</CardSection>
-        <CardSection>
-          <Button onPress={this.onOffice.bind(this)}>Office</Button>
-        </CardSection>
 			</Card>
 		);
 	}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Keyboard, View } from 'react-native';
 import firebase from 'firebase';
-import { updateWheelchair, office } from '../utils/firebaseService';
+import { updateWheelchair } from '../utils/firebaseService';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import DeviceInfo from 'react-native-device-info'
@@ -53,11 +53,6 @@ class Main extends Component {
   	this.props.setRunType('checkin', DeviceInfo.getUniqueID());
   }
 
-  onOffice() {
-
-    office();
-  }
-
 	render() {
 		return (
 			<Card>
@@ -73,9 +68,6 @@ class Main extends Component {
 				<CardSection>
 					<Button onPress={this.onCheckIn.bind(this)}>Wheelchair Check-In</Button>
 				</CardSection>
-        <CardSection>
-          <Button onPress={this.onOffice.bind(this)}>Office</Button>
-        </CardSection>
 			</Card>
 		);
 	}

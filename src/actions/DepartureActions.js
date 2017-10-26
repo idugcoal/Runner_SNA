@@ -363,8 +363,12 @@ export const setFinalGateNumber = (text) => {
 
 export const addStop = (currentGPS, stopLocation) => {
 	
+	const { latitude, longitude, timestamp } = currentGPS
+
 	const payload = {
-		currentGPS,
+		latitude,
+		longitude,
+		timestamp,
 		stopLocation
 	}
 

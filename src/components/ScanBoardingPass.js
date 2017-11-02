@@ -13,10 +13,16 @@ class ScanBoardingPass extends Component {
 	
 	constructor(props) {
 		super(props);
-		// this.state = {
-		// 	cameraStatus: 'on'
-		// }
+		this.state = {
+			torchStatus: Camera.constants.TorchMode.off
+		}
 	} 
+
+	componentDidMount() {
+		this.setState({
+			torchStatus: Camera.constants.TorchMode.on
+		})
+	}
 
 	onReadSuccess(boardingPassString) {
 		// this.setState({cameraStatus: 'off'})
@@ -75,16 +81,18 @@ class ScanBoardingPass extends Component {
 		// 	return <View />;
 		// }
 
+
 		return(
 			<Camera
 				ref={(cam) => {
             this.camera = cam;
           }} 
 				style={{ flex: 1 }}
-				barCodeTypes={[ 'pdf417' ]}
+				// barCodeTypes={[ 'pdf417' ]}  //android
+				barCodeTypes={[Camera.constants.BarCodeType.pdf417]}			//ios
 				onBarCodeRead={this.onReadSuccess.bind(this)}
 				captureTarget={Camera.constants.CaptureTarget.disk}
-				// torchMode={Camera.constants.TorchMode.on}
+				torchMode={this.state.torchStatus}
 			/>
 		)
 	}

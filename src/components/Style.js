@@ -10,7 +10,7 @@ const Style = {
   container: {
     flex: 1,
     flexWrap: 'wrap',
-    marginTop: 3
+    marginTop: 14
   },
   row: {
     flex: 1,

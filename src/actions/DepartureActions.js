@@ -211,7 +211,7 @@ export const scanBoardingPass = (props, boardingPassData) => {
 	} = props
 
 	if(runType === 'preboard') {
-		Actions.selectGate();
+		Actions.selectGate({type: 'reset'});
 		return(dispatch) => {
 			dispatch({
 				type: SCAN_BOARDING_PASS_1,
@@ -222,7 +222,7 @@ export const scanBoardingPass = (props, boardingPassData) => {
 
 	else if(numPassengers === 1) {
 		if(runType === 'departure') {
-			Actions.selectGate();
+			Actions.selectGate({type: 'reset'});
 			return(dispatch) => {
 				dispatch({
 					type: SCAN_BOARDING_PASS_1,
@@ -253,7 +253,7 @@ export const scanBoardingPass = (props, boardingPassData) => {
 				}
 			}
 			else {
-				Actions.selectGate();
+				Actions.selectGate({type: 'reset'});
 				return(dispatch) => {
 					dispatch({
 						type: SCAN_BOARDING_PASS_2,

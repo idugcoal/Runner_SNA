@@ -91,6 +91,11 @@ class ScanBoardingPass extends Component {
 				// barCodeTypes={[ 'pdf417' ]}  //android
 				barCodeTypes={[Camera.constants.BarCodeType.pdf417]}			//ios
 				onBarCodeRead={this.onReadSuccess.bind(this)}
+				barcodeFinderVisible={true}
+				// barcodeFinderWidth={280}
+				// barcodeFinderHeight={200}
+				// barcodeFinderBorderColor="red"
+				// barcodeFinderBorderWidth={2}
 				captureTarget={Camera.constants.CaptureTarget.disk}
 				torchMode={this.state.torchStatus}
 			/>

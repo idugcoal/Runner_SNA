@@ -10,10 +10,9 @@ class LoginForm extends Component {
     super(props);
   }
 
-  componentWillMount() {
-    clearAllFromAsyncStorage();
-
-  }
+  // componentWillMount() {
+  //   clearAllFromAsyncStorage();
+  // }
 
   onEmailChange(text) {
     this.props.emailChanged(text);

@@ -34,7 +34,7 @@ export const writeDepartureEnd = (props, commentsEnd, arrivalTime) => {
 			passenger2Wheelchair: props.passenger2Wheelchair,
 			startLocation: props.startLocation,
 			startLocationGPS: props.startLocationGPS,
-			stops: props.stops,
+			stops: props.stops | {},
 			timeGateArrival: arrivalTime,
 			timeStart: props.timeStart,
 			timeTSAEnd: props.timeTSAEnd,
@@ -61,7 +61,7 @@ export const writeArrivalEnd = (props, commentsEnd, arrivalTime) => {
 			passenger2Wheelchair: props.passenger2Wheelchair,
 			startLocation: props.startLocation,
 			startLocationGPS: props.startLocationGPS,
-			stops: props.stops,
+			stops: props.stops | {},
 			timeDestinationArrival: arrivalTime,
 			timeStart: props.timeStart
 

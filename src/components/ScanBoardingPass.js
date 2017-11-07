@@ -110,7 +110,7 @@ class ScanBoardingPass extends Component {
 						
 
 					<CardSection>
-						<Button style={Style.alternate} onPress={() => Actions.alternateBoardingPassInput()}>Manual Input</Button> 
+						<Button style={Style.alternate} onPress={() => Actions.alternateBoardingPassInput({type: 'reset'})}>Manual Input</Button> 
 					</CardSection>
 				</View>
 				<Footer />

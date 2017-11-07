@@ -48,6 +48,7 @@ class LoginForm extends Component {
             placeholder="email@gmail.com"
             onChangeText={this.onEmailChange.bind(this)}
             value={this.props.email}
+            keyboardType={'email-address'}
           />
         </CardSection>
 

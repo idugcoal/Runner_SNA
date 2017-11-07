@@ -5,7 +5,7 @@ import { updateWheelchair } from '../utils/firebaseService';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import DeviceInfo from 'react-native-device-info'
-import { updateCurrentPosition, setRunType } from '../actions';
+import { updateCurrentPosition, setRunType, logoutUser } from '../actions';
 import { Card, CardSection, Button } from './common';
 
 class Main extends Component {
@@ -52,6 +52,9 @@ class Main extends Component {
   onCheckIn() {
   	this.props.setRunType('checkin', DeviceInfo.getUniqueID());
   }
+  onLogout() {
+    logoutUser();
+  }
 
 	render() {
 		return (
@@ -68,6 +71,9 @@ class Main extends Component {
 				<CardSection>
 					<Button onPress={this.onCheckIn.bind(this)}>Wheelchair Check-In</Button>
 				</CardSection>
+        <CardSection>
+          <Button onPress={this.onLogout.bind(this)}>Log Out</Button>
+        </CardSection>
 			</Card>
 		);
 	}

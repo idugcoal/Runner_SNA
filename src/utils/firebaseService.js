@@ -34,7 +34,7 @@ export const writeDepartureEnd = (props, commentsEnd, arrivalTime) => {
 			passenger2Wheelchair: props.passenger2Wheelchair,
 			startLocation: props.startLocation,
 			startLocationGPS: props.startLocationGPS,
-			stops: props.stops,
+			stops: props.stops || 'None',
 			timeGateArrival: arrivalTime,
 			timeStart: props.timeStart,
 			timeTSAEnd: props.timeTSAEnd,
@@ -45,6 +45,14 @@ export const writeDepartureEnd = (props, commentsEnd, arrivalTime) => {
 
 export const writeArrivalEnd = (props, commentsEnd, arrivalTime) => {
 	const path = 'arrivals/' + props.timeStart
+	console.log(props.stops || 'None')
+	let stops = []
+	if (props.stops.length === 0) {
+		stops.push('No Stops')
+	} else {
+		stops = props.stops
+	}
+
 	firebase.database().ref(`${path}`)
 		.set({
 			airline: props.airline,
@@ -61,7 +69,7 @@ export const writeArrivalEnd = (props, commentsEnd, arrivalTime) => {
 			passenger2Wheelchair: props.passenger2Wheelchair,
 			startLocation: props.startLocation,
 			startLocationGPS: props.startLocationGPS,
-			stops: props.stops,
+			stops: stops,
 			timeDestinationArrival: arrivalTime,
 			timeStart: props.timeStart
 

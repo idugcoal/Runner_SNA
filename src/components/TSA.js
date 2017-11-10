@@ -29,8 +29,9 @@ class TSA extends Component {
 					<TextInput
 		        {...this.props} // Inherit any props passed to it; e.g., multiline, numberOfLines below
 		        editable = {true}
-		        multiline = {true}
-		        numberOfLines = {10}
+		        // multiline = {true}
+		        // numberOfLines = {10}
+		        height={290}
 		        value={this.state.text}
 		        onChangeText={(text) => this.setState({text})}
 		        placeholder={'Add comment...'}

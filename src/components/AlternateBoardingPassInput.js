@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Picker } from 'react-native';
+import { Text, View, Picker, Keyboard } from 'react-native';
 import { connect } from 'react-redux'
 import { scanBoardingPass, passenger1FirstNameChanged, passenger1LastNameChanged, passenger2FirstNameChanged, passenger2LastNameChanged, airlineChanged, flightNumberChanged, alternateBoardingPassInput } from '../actions';
 import { writePassengerData, writeFlightData } from '../utils/firebaseService';
@@ -29,6 +29,7 @@ class AlternateBoardingPassInput extends Component {
 		this.props.flightNumberChanged(text);
 	}
 	onAirlineChange(text) {
+    Keyboard.dismiss()
 		this.props.airlineChanged(text);
 	}
 
@@ -136,7 +137,7 @@ class AlternateBoardingPassInput extends Component {
             value={this.props.flightNumber}
           />
        </CardSection>
-        <View style={{ flexDirection: 'column', height: 70}}>
+        <View style={{ flexDirection: 'column', height: 270}}>
         	<Text style={{ fontSize: 18, paddingLeft: 25 }}>Airline</Text>
         	<Picker
         		style={{flex: 1}}

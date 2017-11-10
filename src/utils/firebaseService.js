@@ -45,10 +45,10 @@ export const writeDepartureEnd = (props, commentsEnd, arrivalTime) => {
 
 export const writeArrivalEnd = (props, commentsEnd, arrivalTime) => {
 	const path = 'arrivals/' + props.timeStart
-	console.log(props.stops || 'None')
+
 	let stops = []
 	if (props.stops.length === 0) {
-		stops.push('No Stops')
+		stops.push('0')
 	} else {
 		stops = props.stops
 	}

@@ -41,19 +41,20 @@ class Closing extends Component {
 			<View style={Style.container}>
 				<View style={Style.content}>
 					<TextInput
-		        {...this.props} // Inherit any props passed to it; e.g., multiline, numberOfLines below
-		        editable = {true}
-		        multiline = {true}
-		        numberOfLines = {10}
-		        value={this.state.text}
-		        onChangeText={(text) => this.setState({text})}
-		        placeholder={'Add comment...'}
-		      />
-		      <CardSection>
-			      <Button onPress={this.onButtonPress.bind(this)}>
-			      	Submit Comment and Begin New Task
-			      </Button>
-			    </CardSection>
+        		        {...this.props} // Inherit any props passed to it; e.g., multiline, numberOfLines below
+        		        editable = {true}
+        		        // multiline = {true}
+                        // numberOfLines =  {10}
+                        height = {290}
+        		        value={this.state.text}
+        		        onChangeText={(text) => this.setState({text})}
+        		        placeholder={'Add comment...'}
+        		      />
+                    <CardSection>
+    			      <Button onPress={this.onButtonPress.bind(this)}>
+    			      	Submit Comment and Begin New Task
+    			      </Button>
+    			    </CardSection>
 				</View>
 		   </View>
 		);

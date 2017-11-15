@@ -18,8 +18,8 @@ const ImageButton = ({ onPress, source }) => {
 const style = {
   imageButton: {
     flex: 1,
-    height: 100,
-    width: 150
+    height: 175,
+    width: 175
     // backgroundColor: 'blue'
   }
 };

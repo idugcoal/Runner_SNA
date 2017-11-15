@@ -59,7 +59,8 @@ class AlternateBoardingPassInput extends Component {
       } else if(runType === 'departure' || runType === 'preboard') {
         Actions.selectGate();
       } else if(runType === 'arrival') {
-        Actions.selectStopsSterile({al: this.props.airline, fn: this.props.flightNumber})
+        // Actions.selectStopsSterile({al: this.props.airline, fn: this.props.flightNumber})
+        Actions.closing({ type: 'reset' })
       }
     }
     if(numPassengers === 2) {
@@ -68,7 +69,8 @@ class AlternateBoardingPassInput extends Component {
       Actions.selectGate({ type: 'reset' })
     }
     else if (runType === 'arrival') {
-      Actions.selectStopsSterile({ type: 'reset' })
+      // Actions.selectStopsSterile({ type: 'reset' })
+      Actions.closing({ type: 'reset' })
     }
   }
   else if ((passenger1FirstName != '' && passenger1LastName != '') && (passenger2FirstName != '' || passenger2LastName != '' || airline != '' || flightNumber != '')) {

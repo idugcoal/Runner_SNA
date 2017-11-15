@@ -16,6 +16,14 @@ export const updateWheelchair = (wheelchairNumber, gps) => {
 
 export const writeDepartureEnd = (props, commentsEnd, arrivalTime) => {
 	const path = 'departures/' + props.timeStart
+	
+	let stops = []
+	if (props.stops.length === 0) {
+		stops.push('0')
+	} else {
+		stops = props.stops
+	}
+
 	firebase.database().ref(`${path}`)
 		.set({
 			airline: props.airline,
@@ -34,7 +42,7 @@ export const writeDepartureEnd = (props, commentsEnd, arrivalTime) => {
 			passenger2Wheelchair: props.passenger2Wheelchair,
 			startLocation: props.startLocation,
 			startLocationGPS: props.startLocationGPS,
-			stops: props.stops || 'None',
+			stops: stops,
 			timeGateArrival: arrivalTime,
 			timeStart: props.timeStart,
 			timeTSAEnd: props.timeTSAEnd,
@@ -78,7 +86,7 @@ export const writeArrivalEnd = (props, commentsEnd, arrivalTime) => {
 
 export const writePreboardEnd = (props, commentsEnd, arrivalTime) => {
 	const path = 'preboards/' + props.timeStart
-	// console.log(props)
+	console.log(props)
 	firebase.database().ref(`${path}`)
 		.set({
 			airline: props.airline,
@@ -90,7 +98,7 @@ export const writePreboardEnd = (props, commentsEnd, arrivalTime) => {
 			passenger1LastName: props.passenger1LastName,
 			passenger1Wheelchair: props.passenger1Wheelchair,
 			preboardType: props.preboardType,
-			// startingGate: props.startingGate,
+			startingGate: props.destinationGate,
 			timeDestinationArrival: arrivalTime,
 			timeStart: props.timeStart
 

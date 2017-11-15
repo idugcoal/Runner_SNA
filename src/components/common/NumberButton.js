@@ -26,7 +26,7 @@ const styles = {
     flex: 1,
     alignSelf: 'stretch',
     backgroundColor: '#fff',
-    borderRadius: 0,
+    borderRadius: 5,
     borderWidth: 1,
     borderColor: '#000',
     margin: 1

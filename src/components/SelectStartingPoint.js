@@ -35,6 +35,7 @@ class SelectStartingPoint extends Component {
 						<Button onPress={this.onButtonPress.bind(this, 'Southwest')}>Southwest</Button>
 						<Button onPress={this.onButtonPress.bind(this, 'United')}>United</Button>
 						<Button onPress={this.onButtonPress.bind(this, 'WestJet')}>WestJet</Button>
+						<Button onPress={this.onButtonPress.bind(this, 'other')}>Other</Button>
 					</View>
 				</View>
 				<View style={Style.footer}>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from './common';
-import { addStartingPoint } from '../actions';
+import { setStartingPoint } from '../actions';
 import Footer from './Footer';
 import Style from './Style';
 
@@ -13,7 +13,7 @@ class SelectStartingPoint extends Component {
 	}
 
 	onButtonPress(startLocation) {
-		this.props.addStartingPoint(this.props, startLocation);
+		this.props.setStartingPoint(this.props, startLocation)
 	}
 
 	render() {
@@ -24,18 +24,18 @@ class SelectStartingPoint extends Component {
 						<Button onPress={this.onButtonPress.bind(this, 'A Curb')}>A Curb</Button>
 						<Button onPress={this.onButtonPress.bind(this, 'B Curb')}>B Curb</Button>
 						<Button onPress={this.onButtonPress.bind(this, 'C Curb')}>C Curb</Button>
+						<Button onPress={this.onButtonPress.bind(this, 'other')}>Other</Button>
 					</View>
 					<View style={Style.row}>
 						<Button onPress={this.onButtonPress.bind(this, 'Alaska')}>Alaska</Button>
 						<Button onPress={this.onButtonPress.bind(this, 'American')}>American</Button>
 						<Button onPress={this.onButtonPress.bind(this, 'Delta')}>Delta</Button>
-						<Button onPress={this.onButtonPress.bind(this, 'Frontier')}>Frontier</Button>
 					</View>
 					<View style={Style.row}>
+						<Button onPress={this.onButtonPress.bind(this, 'Frontier')}>Frontier</Button>
 						<Button onPress={this.onButtonPress.bind(this, 'Southwest')}>Southwest</Button>
 						<Button onPress={this.onButtonPress.bind(this, 'United')}>United</Button>
 						<Button onPress={this.onButtonPress.bind(this, 'WestJet')}>WestJet</Button>
-						<Button onPress={this.onButtonPress.bind(this, 'other')}>Other</Button>
 					</View>
 				</View>
 				<View style={Style.footer}>
@@ -46,12 +46,12 @@ class SelectStartingPoint extends Component {
 	}
 }
 
-const mapStateToProps = ({ departure }) => {
-  const { wheelchairNumber, runType, currentGPS } = departure;
+const mapStateToProps = ({ departure, arrival }) => {
+  const { wheelchairNumber, currentGPS, runType } = departure;
 
   return { wheelchairNumber, runType, currentGPS };
 };
 
 export default connect(mapStateToProps, { 
-	addStartingPoint
+	setStartingPoint
 })(SelectStartingPoint);

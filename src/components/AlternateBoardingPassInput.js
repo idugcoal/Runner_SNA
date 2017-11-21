@@ -12,7 +12,12 @@ class AlternateBoardingPassInput extends Component {
 
 	constructor(props) {
 		super(props);
+    this.state = {
+      clearPax: this.props.clearPax,
+      returnTo: this.props.returnTo
+    }
 	}
+
 	p1FirstNameChanged(text) {
 	 this.props.passenger1FirstNameChanged(text);
 	}
@@ -47,13 +52,16 @@ class AlternateBoardingPassInput extends Component {
       flightNumber
     } = this.props
 
-    // if(runType === 'preboard') {
-    //   alert('AlternateBoardingPassInput')
-    //   Actions.preboard();
-    // }
+    if(this.state.clearPax) {
+      if(this.state.returnTo === 'SSS') {
+        Actions.selectStopsSterile();
+      } else {
+        Actions.selectStopsNonSterile();
+      }
+      console.log('here')
+    }
 
-
-    if(numPassengers === 1) {
+    else if(numPassengers === 1) {
       if(passenger1FirstName == '' || passenger1LastName == '' || airline == '' || flightNumber == '') {
         alert('Please fill out all passenger info');
       } else if(runType === 'departure' || runType === 'preboard') {
@@ -61,24 +69,26 @@ class AlternateBoardingPassInput extends Component {
       } else if(runType === 'arrival') {
         // Actions.selectStopsSterile({al: this.props.airline, fn: this.props.flightNumber})
         Actions.closing({ type: 'reset' })
+      } else if(runType === 'transfer') {
+        Actions.selectGate({ title: "Select Starting Gate"})
       }
     }
-    if(numPassengers === 2) {
+    else if(numPassengers === 2) {
       if (passenger1FirstName != '' && passenger1LastName != '' &&  passenger2FirstName != '' &&  passenger2LastName != '' && airline != '' && flightNumber != '') {
-    if (runType === 'departure') {
-      Actions.selectGate({ type: 'reset' })
+        if (runType === 'departure') {
+          Actions.selectGate({ type: 'reset' })
+        }
+        else if (runType === 'arrival') {
+          // Actions.selectStopsSterile({ type: 'reset' })
+          Actions.closing({ type: 'reset' })
+      }
     }
-    else if (runType === 'arrival') {
-      // Actions.selectStopsSterile({ type: 'reset' })
-      Actions.closing({ type: 'reset' })
+    else if ((passenger1FirstName != '' && passenger1LastName != '') && (passenger2FirstName != '' || passenger2LastName != '' || airline != '' || flightNumber != '')) {
+      Actions.move({ type: 'reset', title: "Scan Boarding Pass #2"})
     }
-  }
-  else if ((passenger1FirstName != '' && passenger1LastName != '') && (passenger2FirstName != '' || passenger2LastName != '' || airline != '' || flightNumber != '')) {
-    Actions.move({ type: 'reset', title: "Scan Boarding Pass #2"})
-  }
-  else {
-    alert('Please fill out all passenger info')
-  }
+    else {
+      alert('Please fill out all passenger info')
+    }
 
       
       
@@ -86,6 +96,7 @@ class AlternateBoardingPassInput extends Component {
   }
 
   renderSecondPassengerInput() {
+
     if(this.props.numPassengers === 2) {
       return [
         <CardSection key="1">
@@ -111,6 +122,7 @@ class AlternateBoardingPassInput extends Component {
   }
 
 	render() {
+
 		return(
 			<View style={Style.container}>
 				<View style={Style.content}>

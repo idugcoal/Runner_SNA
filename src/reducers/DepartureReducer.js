@@ -21,16 +21,24 @@ UPDATE_CURRENT_POSITION,
 SET_TIME_START,
 SET_TIME_END,
 SET_RUN_TYPE,
+SET_DEPARTURE,
 ADD_STARTING_POINT_ARRIVAL,
 ADD_STARTING_LOCATION_ARRIVAL,
 ADD_COMMENTS_CLOSING,
 ADD_DESTINATION,
 RETURN_TO_START,
-SET_PREBOARD_TYPE
+SET_PREBOARD_TYPE,
+CLEAR_PASSENGER
 } from '../actions/types';
 
 const INITIAL_STATE = {
   runType: '',
+  arrival: false,
+  departure: true,
+  preboard: false,
+  transfer: false,
+  assistance: false,
+  checkin: false,
   passenger1Wheelchair: '',
   passenger1FirstName: '',
   passenger1LastName: '',
@@ -67,7 +75,8 @@ const INITIAL_STATE = {
   commentsTSA: '',
   commentsEnd: '',
   destination: '',
-  preboardType: ''
+  preboardType: '',
+  clearPax: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -124,6 +133,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, timeEnd: action.payload };
     case SET_PREBOARD_TYPE:
       return { ...state, preboardType: action.payload };
+    case CLEAR_PASSENGER:
+      return { ...state, clearPax: true };
     case RETURN_TO_START:
       return { ...state, ...INITIAL_STATE }
     default:

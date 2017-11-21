@@ -1,36 +1,38 @@
 import React, { Component } from 'react';
 import { View, Text, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
-import { selectGateNumber, setFinalGateNumber, addStartingPointArrival, addStartingLocationArrival } from '../actions';
+import { selectGateNumber, setFinalGateNumber, addStartingPointArrival, addStartingLocationArrival, setGateNumber } from '../actions';
 import { writePassengerData } from '../utils/firebaseService';
 import NumberButton from './common/NumberButton';
 import Footer from './Footer';
 import Style from './Style';
-
-const gates = [
-  // [1, 2, 3, 4, 5],
-  // [6, 7, 8, 9, 10],
-  // [11, 12, 13, 14, 15],
-  // [16, 17, 18, 19, 20],
-  // [21, 22]
-  [1, 2, 3, 4],
-  [5, 6, 7, 8], 
-  [9, 10, 11, 12], 
-  [13, 14, 15, 16],
-  [17, 18, 19, 20],
-  [21, 22]
-];
 
 class SelectGate extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      final: this.props.final
+      final: this.props.final,
+      gates: [
+        ['Baggage Claim 1', 'Baggage Claim 2', 'Baggage Claim 3', 'Baggage Claim 4'],
+        ['Baggage Claim 5', 'Baggage Claim 6', 'Baggage Claim 7', 'Information Booth'],
+        ['Gate 1', 'Gate 2', 'Gate 3', 'Gate 4'],
+        ['Gate 5', 'Gate 6', 'Gate 7', 'Gate 8'],
+        ['Gate 9', 'Gate 10', 'Gate 11','Gate 12'],
+        ['Gate 13', 'Gate 14', 'Gate 15','Gate 16'],
+        ['Gate 17', 'Gate 18', 'Gate 19','Gate 20'],
+        ['Gate 21', 'Gate 22']
+      ]
+    }
+    if(this.props.runType === 'departure' || this.props.runType === 'transfer') {
+      this.state = {
+        gates: this.state.gates.splice(2, 6)
+      }
     }
   }
 
   componentWillMount() {
+
     Keyboard.dismiss();
     if(this.props.runType === 'arrival') {
       const locationFirstContactGPS = navigator.geolocation.getCurrentPosition((position) => {
@@ -47,12 +49,12 @@ class SelectGate extends Component {
       if(this.props.runType === 'arrival') {
         this.props.addStartingLocationArrival(gateNumber);
       }
-      this.props.selectGateNumber(this.props.runType, gateNumber);
+      this.props.setGateNumber(this.props, gateNumber);
     }
   }
 
   renderButtons() {
-    let views = gates.map((row, index) => {
+    let views = this.state.gates.map((row, index) => {
       let inputRow = row.map((buttonValue, columnIndex) => {
         return <NumberButton
                   value={buttonValue}
@@ -122,5 +124,5 @@ const mapStateToProps = ({ departure, auth }) => {
 };
 
 export default connect(mapStateToProps, {
-  selectGateNumber, setFinalGateNumber, addStartingPointArrival, addStartingLocationArrival
+  selectGateNumber, setFinalGateNumber, addStartingPointArrival, addStartingLocationArrival, setGateNumber
 })(SelectGate);

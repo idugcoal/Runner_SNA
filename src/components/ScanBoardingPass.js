@@ -14,7 +14,9 @@ class ScanBoardingPass extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			torchStatus: Camera.constants.TorchMode.off
+			torchStatus: Camera.constants.TorchMode.off,
+			clearPax: this.props.clearPax, 
+			returnTo: this.props.returnTo
 		}
 	} 
 
@@ -61,27 +63,12 @@ class ScanBoardingPass extends Component {
 			airline: airline,
 			flightNumber: boardingPassString.data.substring(36, 43)
 		}
-
-		this.props.scanBoardingPass(this.props, boardingPassData);
+		
+		this.props.scanBoardingPass(this.props, boardingPassData, this.state.returnTo);
 
 	}
 
 	renderCamera() {
-		
-		// if(this.state.cameraStatus == 'on') {
-		// 	return(
-		// 		<Camera 
-		// 			style={{ flex: 1 }}
-		// 			barCodeTypes={[ 'pdf417' ]}
-		// 			onBarCodeRead={this.onReadSuccess.bind(this)}
-		// 			// torchMode={Camera.constants.TorchMode.on}
-		// 		/>
-		// 	)
-		// } else {
-		// 	return <View />;
-		// }
-
-
 		return(
 			<Camera
 				ref={(cam) => {
@@ -110,7 +97,7 @@ class ScanBoardingPass extends Component {
 						
 
 					<CardSection>
-						<Button style={Style.alternate} onPress={() => Actions.alternateBoardingPassInput({type: 'reset'})}>Manual Input</Button> 
+						<Button style={Style.alternate} onPress={() => Actions.alternateBoardingPassInput({type: 'reset', clearPax: this.state.clearPax, returnTo: this.state.returnTo})}>Manual Input</Button> 
 					</CardSection>
 				</View>
 				<Footer />

@@ -1,9 +1,9 @@
 const Style = {
   content: {
-    flex: 8
+    flex: 9.25
   },
   footer: {
-    flex: 2,
+    flex: .75,
     backgroundColor: '#fff',
     borderTopWidth: 1
   },

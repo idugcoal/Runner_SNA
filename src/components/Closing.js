@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { closeDeparture, returnToStart } from '../actions';
-import { writeDepartureEnd, writeArrivalEnd, writePreboardEnd } from '../utils/firebaseService';
+import { writeDepartureEnd, writeArrivalEnd, writePreboardEnd, writeTransferEnd } from '../utils/firebaseService';
 // import { writeDepartureToAsyncStorage, writeArrivalToAsyncStorage, writePreboardToAsyncStorage } from '../utils/AsyncStorageService';
 import { Button, CardSection, ImageButton, NumberButton } from './common';
 import Footer from './Footer';
@@ -32,6 +32,9 @@ class Closing extends Component {
         if(this.props.runType === 'preboard') {
             writePreboardEnd(this.props, this.state.text, this.state.arrivalTime)
             // writePreboardToAsyncStorage(this.props, this.state.text, this.state.arrivalTime);
+        }
+        if(this.props.runType === 'transfer') {
+            writeTransferEnd(this.props, this.state.text, this.state.arrivalTime)
         }
 		this.props.returnToStart();
 	}

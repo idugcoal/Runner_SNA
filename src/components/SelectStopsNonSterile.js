@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import { connect } from 'react-redux'
-import { startTSA, addStop } from '../actions';
+import { startTSA, addStop, clearPassenger } from '../actions';
 import { Actions } from 'react-native-router-flux'
 import { Button, CardSection, ImageButton } from './common';
 import Footer from './Footer';
@@ -19,21 +19,53 @@ class SelectStopsNonSterile extends Component {
 		this.props.addStop(this.props.currentGPS, stopLocation)
 	}
 
-	renderEndingButton() {
-		if(this.props.runType === 'departure') {
-			return (
-				<Button onPress={() => this.props.startTSA()}>
-					TSA Start
-				</Button>
-			);
-		} else if(this.props.runType === 'arrival') {
-			return (
-				<Button onPress={() => Actions.baggageClaim()}>
-					Go to Baggage Claim
-				</Button>
-			);
+	clearPassenger() {
+		this.props.clearPassenger(this.props.runType, 'SSN')
+	}
+
+	renderEndingButtons() {
+		if(this.props.numPassengers == 1 || this.props.clearPax ) {
+			if(this.props.runType === 'departure') {
+				return (
+						<Button onPress={() => this.props.startTSA()}>
+							TSA Start
+						</Button>
+				);
+			} 
+			else if(this.props.runType === 'arrival') {
+				return (
+					<Button onPress={() => Actions.baggageClaim()}>
+						Go to Baggage Claim
+					</Button>
+				);
+			}
+		}
+		else if(this.props.numPassengers == 2) {
+			if(this.props.runType === 'departure') {
+				return (
+					<View style={Style.row}>
+						<Button onPress={this.clearPassenger.bind(this)}>Clear Passenger 1</Button>
+						<Button onPress={() => this.props.startTSA()}>
+							TSA Start
+						</Button>
+						<Button onPress={this.clearPassenger.bind(this)}>Clear Passenger 2</Button>
+					</View>
+				);
+			} 
+			else if(this.props.runType === 'arrival') {
+				return (
+					<View style={Style.row}>
+						<Button onPress={this.clearPassenger.bind(this)}>Clear Passenger 1</Button>
+						<Button onPress={() => this.props.startTSA()}>
+							Go to Baggage Claim
+						</Button>
+						<Button onPress={this.clearPassenger.bind(this)}>Clear Passenger 2</Button>
+					</View>
+				);
+			}
 		}
 	}
+
 
 	renderButtons() {
 		return chunk(nonSterile, 4).map((row, index) => (
@@ -46,10 +78,11 @@ class SelectStopsNonSterile extends Component {
 	render() {
 		return (
 			<View style={Style.container}>
+				
 				<View style={Style.content}>
 					{this.renderButtons()}
 					<CardSection>
-						{this.renderEndingButton()}
+						{this.renderEndingButtons()}
 					</CardSection>
 				</View>
 				<Footer />
@@ -59,9 +92,9 @@ class SelectStopsNonSterile extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { runType, timeStart, currentGPS } = departure;
+  const { runType, timeStart, currentGPS, numPassengers, clearPax } = departure;
 
-  return { runType, timeStart, currentGPS };
+  return { runType, timeStart, currentGPS, numPassengers, clearPax };
 };
 
-export default connect(mapStateToProps, { startTSA, addStop })(SelectStopsNonSterile);
+export default connect(mapStateToProps, { startTSA, addStop, clearPassenger })(SelectStopsNonSterile);

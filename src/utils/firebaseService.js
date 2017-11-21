@@ -31,7 +31,7 @@ export const writeDepartureEnd = (props, commentsEnd, arrivalTime) => {
 			commentsTSA: props.commentsTSA,
 			destinationGate: props.destinationGate,
 			deviceID: props.deviceID,
-			employeeLogin: props.user.email,
+			employeeLogin: 'boobies@boobies.com', //props.user.email,
 			finalGate: props.finalGate || props.destinationGate,
 			flightNumber: props.flightNumber,
 			passenger1FirstName: props.passenger1FirstName,
@@ -67,7 +67,7 @@ export const writeArrivalEnd = (props, commentsEnd, arrivalTime) => {
 			commentsEnd: commentsEnd,
 			destination: props.destination,
 			deviceID: props.deviceID,
-			employeeLogin: props.user.email,
+			employeeLogin: 'boobies@boobies.com', //props.user.email,
 			flightNumber: props.flightNumber,
 			passenger1FirstName: props.passenger1FirstName,
 			passenger1LastName: props.passenger1LastName,
@@ -86,19 +86,38 @@ export const writeArrivalEnd = (props, commentsEnd, arrivalTime) => {
 
 export const writePreboardEnd = (props, commentsEnd, arrivalTime) => {
 	const path = 'preboards/' + props.timeStart
-	console.log(props)
 	firebase.database().ref(`${path}`)
 		.set({
 			airline: props.airline,
 			commentsEnd: commentsEnd,
 			deviceID: props.deviceID,
-			employeeLogin: props.user.email,
+			employeeLogin: 'boobies@boobies.com', //props.user.email,
 			flightNumber: props.flightNumber,
 			passenger1FirstName: props.passenger1FirstName,
 			passenger1LastName: props.passenger1LastName,
 			passenger1Wheelchair: props.passenger1Wheelchair,
 			preboardType: props.preboardType,
 			startingGate: props.destinationGate,
+			timeDestinationArrival: arrivalTime,
+			timeStart: props.timeStart
+
+		})
+}
+
+export const writeTransferEnd = (props, commentsEnd, arrivalTime) => {
+	const path = 'transfers/' + props.timeStart
+	firebase.database().ref(`${path}`)
+		.set({
+			airline: props.airline,
+			commentsEnd: commentsEnd,
+			deviceID: props.deviceID,
+			employeeLogin: 'boobies@boobies.com', //props.user.email,
+			flightNumber: props.flightNumber,
+			passenger1FirstName: props.passenger1FirstName,
+			passenger1LastName: props.passenger1LastName,
+			passenger1Wheelchair: props.passenger1Wheelchair,
+			startingGate: props.destinationGate,
+			endingGate: props.finalGate,
 			timeDestinationArrival: arrivalTime,
 			timeStart: props.timeStart
 

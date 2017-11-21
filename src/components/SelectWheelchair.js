@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
-import { selectWheelchair } from '../actions';
+import { setWheelchair } from '../actions';
 import { updateWheelchair } from '../utils/firebaseService';
 import { CardSection, Button } from './common';
 import NumberButton from './common/NumberButton';
@@ -30,10 +30,9 @@ class SelectWheelchair extends Component {
   }
 
   onButtonPress(buttonValue) {
-    
     updateWheelchair(buttonValue, this.props.currentGPS);      
     if(this.props.runType != 'checkin') {
-      this.props.selectWheelchair(this.props, buttonValue);
+      this.props.setWheelchair(this.props, buttonValue);
     }
   }
 
@@ -104,4 +103,4 @@ const mapStateToProps = ({ departure }) => {
   };
 };
 
-export default connect(mapStateToProps, { selectWheelchair })(SelectWheelchair);
+export default connect(mapStateToProps, { setWheelchair })(SelectWheelchair);

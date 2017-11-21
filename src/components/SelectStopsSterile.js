@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, Keyboard } from 'react-native';
 import { connect } from 'react-redux'
 import Modal from 'react-native-simple-modal'
-import { setTimeEnd, addStop } from '../actions';
+import { setTimeEnd, addStop, clearPassenger } from '../actions';
 // import { writeArrivalData, writeDepartureData } from '../utils/firebaseService';
 import { Button, CardSection, ImageButton, TerminalA, TerminalB, TerminalC } from './common';
 import Footer from './Footer';
@@ -20,6 +20,8 @@ class SelectStopsSterile extends Component {
 			terminal: terminalA,
 			open: false
 		}
+
+		this.onGateArrival = this.onGateArrival.bind(this)
 	}
 
 	componentWillMount() {
@@ -52,6 +54,10 @@ class SelectStopsSterile extends Component {
 		Actions.selectGate({final: true});
 	}
 
+	clearPassenger() {
+		this.props.clearPassenger(this.props.runType, 'SSS')
+	}
+
 	renderButtons() {
 		return chunk(this.state.terminal, 4).map((row, index) => (
 					<View style={Style.row} key={index}>
@@ -62,21 +68,48 @@ class SelectStopsSterile extends Component {
 				))
 	}
 
-	renderEndingButton() {
-		if(this.props.runType === 'departure') {
-			return (
-				<Button onPress={this.onGateArrival.bind(this)}>
-						Gate Arrival
-					</Button>
-			);
-		} else if(this.props.runType === 'arrival') {
-			return (
-				<Button onPress={() => Actions.selectStopsNonSterile()}>
-						Go Downstairs
-				</Button>
-			);
+	renderEndingButtons() {
+			if(this.props.numPassengers == 1 || this.props.clearPax ) {
+				if(this.props.runType === 'departure') {
+					return (
+							<Button onPress={() => this.onGateArrival()}>
+								Gate Arrival
+							</Button>
+					);
+				} 
+				else if(this.props.runType === 'arrival') {
+					return (
+						<Button onPress={() => Actions.selectStopsNonSterile()}>
+							Go Downstairs
+						</Button>
+					);
+				}
+			}
+			else if(this.props.numPassengers == 2) {
+				if(this.props.runType === 'departure') {
+					return (
+						<View style={Style.row}>
+							<Button onPress={this.clearPassenger.bind(this)}>Clear Passenger 1</Button>
+							<Button onPress={() => this.onGateArrival()}>
+								Gate Arrival
+							</Button>
+							<Button onPress={this.clearPassenger.bind(this)}>Clear Passenger 2</Button>
+						</View>
+					);
+				} 
+				else if(this.props.runType === 'arrival') {
+					return (
+						<View style={Style.row}>
+							<Button onPress={this.clearPassenger.bind(this)}>Clear Passenger 1</Button>
+							<Button onPress={() => Actions.selectStopsNonSterile()}>
+								Go Downstairs
+							</Button>
+							<Button onPress={this.clearPassenger.bind(this)}>Clear Passenger 2</Button>
+						</View>
+					);
+				}
+			}
 		}
-	}
 
 	render() {
 		return (
@@ -92,7 +125,7 @@ class SelectStopsSterile extends Component {
 					{this.renderButtons()}
 				</View>
 				<CardSection>
-					{this.renderEndingButton()}
+					{this.renderEndingButtons()}
 				</CardSection>
 				<Footer />
 				<Modal
@@ -100,7 +133,7 @@ class SelectStopsSterile extends Component {
 	        modalDidClose={() => this.setState({open: false})}
 	        style={{alignItems: 'center'}}>
 	        <View>
-	          <Text style={{fontSize: 20, marginBottom: 10}}>Are you at Gate #{this.props.destinationGate}?</Text>
+	          <Text style={{fontSize: 20, marginBottom: 10}}>Are you at {this.props.destinationGate}?</Text>
 	          <CardSection>
 							<View style={Style.row}>
 								<Button onPress={ this.onGateSuccess.bind(this) }>
@@ -124,7 +157,7 @@ const mapStateToProps = ({ departure, auth }) => {
    //  timeStart,
    //  startLocation,
    //  startLocationGPS, 
-   //  numPassengers, 
+    numPassengers, 
    //  passenger1Wheelchair, 
    //  passenger2Wheelchair, 
    //  passenger1FirstName, 
@@ -139,6 +172,7 @@ const mapStateToProps = ({ departure, auth }) => {
    //  timeTSAEnd,
    //  commentsTSA,
    //  deviceID, 
+   clearPax
   } = departure;
 
   // const { user } = auth
@@ -148,7 +182,7 @@ const mapStateToProps = ({ departure, auth }) => {
    //  timeStart,
    //  startLocation,
    //  startLocationGPS, 
-   //  numPassengers, 
+    numPassengers, 
    //  passenger1Wheelchair, 
    //  passenger2Wheelchair, 
    //  passenger1FirstName, 
@@ -163,8 +197,9 @@ const mapStateToProps = ({ departure, auth }) => {
    //  timeTSAEnd,
    //  commentsTSA,
    //  deviceID,
-   //  user
+   //  user,
+   clearPax
   };
 };
 
-export default connect(mapStateToProps, { setTimeEnd, addStop })(SelectStopsSterile);
+export default connect(mapStateToProps, { setTimeEnd, addStop, clearPassenger })(SelectStopsSterile);

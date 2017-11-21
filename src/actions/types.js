@@ -31,11 +31,16 @@ export const UPDATE_CURRENT_POSITION = 'update_current_position';
 export const SET_TIME_START = 'set_time_start';
 export const SET_TIME_END = 'set_time_end';
 export const SET_RUN_TYPE = 'set_run_type';
-export const ADD_STARTING_POINT_ARRIVAL = 'add_starting_point_arrival';
+// export const SET_DEPARTURE = 'set_departure';
 export const ADD_STARTING_LOCATION_ARRIVAL = 'add_starting_location_arrival';
+export const ADD_STARTING_POINT_ARRIVAL = 'add_starting_point_arrival';
 export const ADD_DESTINATION = 'add_destination';
 export const RETURN_TO_START = 'return_to_start';
 export const SET_PREBOARD_TYPE = 'set_preboard_type';
+export const CLEAR_PASSENGER = 'clear_passenger';
+
+//arrival actions
+// export const SET_ARRIVAL = 'set_arrival';
 
 //checkin actions
 export const UPDATE_WHEELCHAIR_POSITION = 'update_wheelchair_position';

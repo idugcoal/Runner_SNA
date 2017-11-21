@@ -10,17 +10,25 @@ class Footer extends Component {
 	}
 
 	render() {
-		return(
-			<View style={Style.footer}>
-        	<Text>Wheelchair #: {this.props.passenger1Wheelchair}</Text>
-        	<Text>Name: {this.props.passenger1FirstName + ' ' + this.props.passenger1LastName}</Text>
-        	<Text>Airline: {this.props.airline}</Text>
-        	<Text>Flight #: {this.props.flightNumber}</Text>
-        	<Text>Destination Gate #: {this.props.destinationGate}</Text>
-        	<Text>Current GPS: {this.props.currentGPS.latitude + ' ' + this.props.currentGPS.longitude}</Text>
-          <Text>Time Start: {this.props.timeStart}</Text>
+		// return(
+		// 	<View style={Style.footer}>
+  //       	<Text>Wheelchair #: {this.props.passenger1Wheelchair}</Text>
+  //       	<Text>Name: {this.props.passenger1FirstName + ' ' + this.props.passenger1LastName}</Text>
+  //       	<Text>Airline: {this.props.airline}</Text>
+  //       	<Text>Flight #: {this.props.flightNumber}</Text>
+  //         <Text>Destination Gate #: {this.props.destinationGate}</Text>
+  //       	<Text>Current GPS: {this.props.currentGPS.latitude + ' ' + this.props.currentGPS.longitude}</Text>
+  //         <Text>Time Start: {this.props.timeStart}</Text>
+  //      </View>
+		// );
+    return(
+      <View style={Style.footer}>
+          <Text>Wheelchair #: {this.props.passenger1Wheelchair}</Text>
+          <Text>Name: {this.props.passenger1FirstName + ' ' + this.props.passenger1LastName}</Text>
+          <Text>Airline: {this.props.airline}</Text>
+          <Text>Flight #: {this.props.flightNumber}</Text>
        </View>
-		);
+    )
 	}
 }
 

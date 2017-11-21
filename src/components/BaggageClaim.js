@@ -25,13 +25,15 @@ class BaggageClaim extends Component {
 			<View style={Style.container}>
 				<View style={Style.content}>
 					<View style={Style.row}>
-						<Button onPress={this.onButtonPress.bind(this, 'Baggage Claim 1')}>1</Button>
-						<Button onPress={this.onButtonPress.bind(this, 'Baggage Claim 2')}>2</Button>
-						<Button onPress={this.onButtonPress.bind(this, 'Baggage Claim 3')}>3</Button>
-						<Button onPress={this.onButtonPress.bind(this, 'Baggage Claim 4')}>4</Button>
-						<Button onPress={this.onButtonPress.bind(this, 'Baggage Claim 5')}>5</Button>
-						<Button onPress={this.onButtonPress.bind(this, 'Baggage Claim 6')}>6</Button>
-						<Button onPress={this.onButtonPress.bind(this, 'Baggage Claim 7')}>7</Button>
+						<Button onPress={this.onButtonPress.bind(this, 'Baggage Claim 1')}>Baggage Claim 1</Button>
+						<Button onPress={this.onButtonPress.bind(this, 'Baggage Claim 2')}>Baggage Claim 2</Button>
+						<Button onPress={this.onButtonPress.bind(this, 'Baggage Claim 3')}>Baggage Claim 3</Button>
+						<Button onPress={this.onButtonPress.bind(this, 'Baggage Claim 4')}>Baggage Claim 4</Button>
+					</View>
+					<View style={Style.row}>
+						<Button onPress={this.onButtonPress.bind(this, 'Baggage Claim 5')}>Baggage Claim 5</Button>
+						<Button onPress={this.onButtonPress.bind(this, 'Baggage Claim 6')}>Baggage Claim 6</Button>
+						<Button onPress={this.onButtonPress.bind(this, 'Baggage Claim 7')}>Baggage Claim 7</Button>
 					</View>
 					<View style={Style.row}>
 						<Button onPress={this.onButtonPress.bind(this, 'Curb')}>Curb</Button>

@@ -15,7 +15,8 @@ class SelectNumberOfWheelchairs extends Component {
 	}
 
 	onButtonPress(numWheelchairs) {
-		this.props.setNumberOfPassengers(this.props.runType, numWheelchairs);
+		
+		this.props.setNumberOfPassengers(numWheelchairs);
 	}
 
 	render() {

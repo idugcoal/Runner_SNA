@@ -89,22 +89,22 @@ class SelectStopsSterile extends Component {
 				if(this.props.runType === 'departure') {
 					return (
 						<View style={Style.row}>
-							<Button onPress={this.clearPassenger.bind(this)}>Clear Passenger 1</Button>
+							<Button onPress={this.clearPassenger.bind(this)}>Clear Wheelchair #{this.props.passenger1Wheelchair}</Button>
 							<Button onPress={() => this.onGateArrival()}>
 								Gate Arrival
 							</Button>
-							<Button onPress={this.clearPassenger.bind(this)}>Clear Passenger 2</Button>
+							<Button onPress={this.clearPassenger.bind(this)}>Clear Wheelchair #{this.props.passenger2Wheelchair}</Button>
 						</View>
 					);
 				} 
 				else if(this.props.runType === 'arrival') {
 					return (
 						<View style={Style.row}>
-							<Button onPress={this.clearPassenger.bind(this)}>Clear Passenger 1</Button>
+							<Button onPress={this.clearPassenger.bind(this)}>Clear Wheelchair #{this.props.passenger1Wheelchair}</Button>
 							<Button onPress={() => Actions.selectStopsNonSterile()}>
 								Go Downstairs
 							</Button>
-							<Button onPress={this.clearPassenger.bind(this)}>Clear Passenger 2</Button>
+							<Button onPress={this.clearPassenger.bind(this)}>Clear Wheelchair #{this.props.passenger2Wheelchair}</Button>
 						</View>
 					);
 				}
@@ -158,8 +158,8 @@ const mapStateToProps = ({ departure, auth }) => {
    //  startLocation,
    //  startLocationGPS, 
     numPassengers, 
-   //  passenger1Wheelchair, 
-   //  passenger2Wheelchair, 
+    passenger1Wheelchair, 
+    passenger2Wheelchair, 
    //  passenger1FirstName, 
    //  passenger1LastName, 
    //  passenger2FirstName, 
@@ -183,8 +183,8 @@ const mapStateToProps = ({ departure, auth }) => {
    //  startLocation,
    //  startLocationGPS, 
     numPassengers, 
-   //  passenger1Wheelchair, 
-   //  passenger2Wheelchair, 
+    passenger1Wheelchair, 
+    passenger2Wheelchair, 
    //  passenger1FirstName, 
    //  passenger1LastName, 
    //  passenger2FirstName, 

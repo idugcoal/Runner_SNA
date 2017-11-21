@@ -44,22 +44,22 @@ class SelectStopsNonSterile extends Component {
 			if(this.props.runType === 'departure') {
 				return (
 					<View style={Style.row}>
-						<Button onPress={this.clearPassenger.bind(this)}>Clear Passenger 1</Button>
+						<Button onPress={this.clearPassenger.bind(this)}>Clear Wheelchair #{this.props.passenger1Wheelchair}</Button>
 						<Button onPress={() => this.props.startTSA()}>
 							TSA Start
 						</Button>
-						<Button onPress={this.clearPassenger.bind(this)}>Clear Passenger 2</Button>
+						<Button onPress={this.clearPassenger.bind(this)}>Clear Wheelchair #{this.props.passenger2Wheelchair}</Button>
 					</View>
 				);
 			} 
 			else if(this.props.runType === 'arrival') {
 				return (
 					<View style={Style.row}>
-						<Button onPress={this.clearPassenger.bind(this)}>Clear Passenger 1</Button>
-						<Button onPress={() => this.props.startTSA()}>
+						<Button onPress={this.clearPassenger.bind(this)}>Clear Wheelchair #{this.props.passenger1Wheelchair}</Button>
+						<Button onPress={() => Actions.baggageClaim()}>
 							Go to Baggage Claim
 						</Button>
-						<Button onPress={this.clearPassenger.bind(this)}>Clear Passenger 2</Button>
+						<Button onPress={this.clearPassenger.bind(this)}>Clear Wheelchair #{this.props.passenger2Wheelchair}</Button>
 					</View>
 				);
 			}
@@ -78,7 +78,6 @@ class SelectStopsNonSterile extends Component {
 	render() {
 		return (
 			<View style={Style.container}>
-				
 				<View style={Style.content}>
 					{this.renderButtons()}
 					<CardSection>
@@ -92,9 +91,9 @@ class SelectStopsNonSterile extends Component {
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { runType, timeStart, currentGPS, numPassengers, clearPax } = departure;
+  const { runType, timeStart, currentGPS, numPassengers, clearPax, passenger1Wheelchair, passenger2Wheelchair } = departure;
 
-  return { runType, timeStart, currentGPS, numPassengers, clearPax };
+  return { runType, timeStart, currentGPS, numPassengers, clearPax, passenger1Wheelchair, passenger2Wheelchair };
 };
 
 export default connect(mapStateToProps, { startTSA, addStop, clearPassenger })(SelectStopsNonSterile);

@@ -58,7 +58,6 @@ class AlternateBoardingPassInput extends Component {
       } else {
         Actions.selectStopsNonSterile();
       }
-      console.log('here')
     }
 
     else if(numPassengers === 1) {

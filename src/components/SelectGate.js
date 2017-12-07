@@ -21,12 +21,17 @@ class SelectGate extends Component {
         ['Gate 9', 'Gate 10', 'Gate 11','Gate 12'],
         ['Gate 13', 'Gate 14', 'Gate 15','Gate 16'],
         ['Gate 17', 'Gate 18', 'Gate 19','Gate 20'],
-        ['Gate 21', 'Gate 22']
+        ['Gate 21', 'Gate 22'],
+        ['Other']
       ]
     }
-    if(this.props.runType === 'departure' || this.props.runType === 'transfer') {
+    if(this.props.runType === 'departure') {
       this.state = {
         gates: this.state.gates.splice(2, 6)
+      }
+    } else if(this.props.runType === 'transfer') {
+      this.state = {
+        gates: this.state.gates.splice(2, 7)
       }
     }
   }

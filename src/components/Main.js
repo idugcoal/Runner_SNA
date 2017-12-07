@@ -60,9 +60,7 @@ class Main extends Component {
         <CardSection>
           <Button onPress={this.onButtonPress.bind(this, 'transfer')}>Transfer</Button>
         </CardSection>
-        <CardSection>
-          <Button onPress={this.onButtonPress.bind(this, 'assistance')}>Passenger Assistance</Button>
-        </CardSection>
+       
 				<CardSection>
 					<Button onPress={this.onButtonPress.bind(this, 'checkin')}>Wheelchair Check-In</Button>
 				</CardSection>

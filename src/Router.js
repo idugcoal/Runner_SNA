@@ -53,9 +53,9 @@ const RouterComponent = () => {
 	return (
 		<Router sceneStyle={{ paddingTop: 50 }}>
 			<Scene key="auth"   >
-				<Scene key="login" component={LoginForm} title={"Please Log In"}/>
+				<Scene key="login" component={LoginForm} title={"Please Log In"} initial/>
 			</Scene>
-			<Scene key="home" initial >
+			<Scene key="home" >
 				<Scene key="main" component={Main} title={"Select Task"} />
 				<Scene key="selectStartingPoint" component={SelectStartingPoint} title={"Select Staring Point"} />
 				<Scene key="selectNumberOfWheelchairs" component={SelectNumberOfWheelchairs} title={"Select Number of Wheelchairs"} />

@@ -1,0 +1,36 @@
+{
+  "name": "Runner_SNA",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "postinstall": "rndebugger-open"
+  },
+  "dependencies": {
+    "firebase": "^4.6.1",
+    "lodash": "^4.17.4",
+    "react": "~16.0.0",
+    "react-native": "0.49.5",
+    "react-native-camera": "^0.10.0",
+    "react-native-device-info": "^0.12.1",
+    "react-native-router-flux": "^4.0.0-beta.22",
+    "react-native-simple-modal": "^7.0.0",
+    "react-native-storage": "^0.2.1",
+    "react-redux": "^5.0.3",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-jest": "21.2.0",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "21.2.1",
+    "react-native-debugger-open": "^0.3.3",
+    "react-test-renderer": "~16.0.0",
+    "remote-redux-devtools": "^0.5.7",
+    "remote-redux-devtools-on-debugger": "^0.8.3"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}

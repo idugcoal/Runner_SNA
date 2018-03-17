@@ -191,7 +191,6 @@ export const startTSA = () => {
 }
 
 export const addCommentsTSA = (text, timeTSAStart) => {
-	
 	const timeTSAEnd = Date.now();
 	const commentsTSA = text;
 
@@ -201,7 +200,7 @@ export const addCommentsTSA = (text, timeTSAStart) => {
 		commentsTSA: commentsTSA
 	}
 
-	Actions.selectStopsSterile({ type: 'reset' });
+	// Actions.selectStopsSterile({ type: 'reset' });
 	return(dispatch) => {
 		dispatch({
 			type: TSA_END,
@@ -224,7 +223,8 @@ export const setGateNumber = (props, gateNumber) => {
 				})
 		}
 	} else if (runType === 'departure') {
-		Actions.selectStopsNonSterile();
+		// Actions.selectStopsNonSterile();
+		startTSA()
 	} else if (runType === 'preboard') {
 		Actions.preboard();
 	} else if (runType === 'transfer') {

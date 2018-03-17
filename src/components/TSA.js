@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { connect } from 'react-redux';
-import { addCommentsTSA } from '../actions';
+import Modal from 'react-native-simple-modal'
+import { addCommentsTSA, setTimeEnd } from '../actions';
 import { Button, CardSection, ImageButton } from './common';
 import Footer from './Footer';
 import Style from './Style';
@@ -14,12 +15,28 @@ class TSA extends Component {
 		const timeTSAStart = Date.now();
 		this.state = {
 			text: '',
-			timeTSAStart: timeTSAStart
+			timeTSAStart: timeTSAStart,
+			open: false
 		}
 	}
 
 	onButtonPress() {
 		this.props.addCommentsTSA(this.state.text, this.state.timeTSAStart);
+		this.setState({ open: true });
+		this.props.setTimeEnd();
+	}
+
+	onGateArrival() {
+	}
+
+	onGateSuccess() {
+		this.setState({open: false})
+		Actions.closing({reset: true});
+	}
+
+	onGateFail() {
+		this.setState({open: false})
+		Actions.selectGate({final: true});
 	}
 
 	render() {
@@ -27,7 +44,7 @@ class TSA extends Component {
 			<View style={Style.container}>
 				<View style={Style.content}>
 					<TextInput
-		        {...this.props} // Inherit any props passed to it; e.g., multiline, numberOfLines below
+		        {...this.props} 
 		        editable = {true}
 		        // multiline = {true}
 		        // numberOfLines = {10}
@@ -43,17 +60,35 @@ class TSA extends Component {
 			    </CardSection>
 		    </View>
 		    <Footer />
+				<Modal
+	        open={this.state.open}
+	        modalDidClose={() => this.setState({open: false})}
+	        style={{alignItems: 'center'}}>
+	        <View>
+	          <Text style={{fontSize: 20, marginBottom: 10}}>Are you at {this.props.destinationGate}?</Text>
+	          <CardSection>
+							<View style={Style.row}>
+								<Button onPress={ this.onGateSuccess.bind(this) }>
+									Yes
+								</Button>
+								<Button onPress={ this.onGateFail.bind(this) }>
+									No
+								</Button>
+							</View>
+						</CardSection>
+	        </View>
+	      </Modal>
       </View>
 		);
 	}
 }
 
 const mapStateToProps = ({ departure }) => {
-  const { commentsTSA } = departure;
+  const { commentsTSA, destinationGate  } = departure;
 
-  return { commentsTSA };
+  return { commentsTSA, destinationGate };
 };
 
 export default connect(mapStateToProps, {
-  addCommentsTSA
+  addCommentsTSA, setTimeEnd
 })(TSA);

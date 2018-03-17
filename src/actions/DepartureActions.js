@@ -120,7 +120,7 @@ export const setWheelchair = (props, buttonValue) => {
 		if(runType === 'departure' || runType == 'preboard' || runType == 'transfer') {
 			Actions.scanBoardingPass({ title: "Scan Boarding Pass" });
 		} else if (runType === 'arrival') {
-			Actions.selectStopsSterile({ type: 'reset'});
+			Actions.baggageClaim({ type: 'reset'});
 		} 
 		return(dispatch) => {
 			dispatch({
@@ -145,7 +145,7 @@ export const setWheelchair = (props, buttonValue) => {
 		else if(runType === 'departure') {
 			Actions.scanBoardingPass({ title: "Scan Boarding Pass #1" });
 		} else if(runType === 'arrival') {
-			Actions.selectStopsSterile({ type: 'reset' })
+			Actions.baggageClaim({ type: 'reset' })
 		}
 		
 		return(dispatch) => {

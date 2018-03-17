@@ -17,45 +17,13 @@ import Closing from './components/Closing';
 import Move from './components/Move';
 import Preboard from './components/Preboard';
 
-
-// const RouterComponent = () => {
-// 	return (
-// 		<Router sceneStyle={{ paddingTop: 50 }}>
-// 			<Scene key="auth" >
-// 				<Scene key="login" component={LoginForm} title="Please Log In" />
-// 			</Scene>
-// 			<Scene key="home" initial>
-// 				<Scene key="main" component={Main} title="Select Task"  />
-// 				<Scene key="departure" component={SelectWheelchair} title="Departure - Select Wheelchair" />
-// 					<Scene key="scanBoardingPass"	component={ScanBoardingPass} title="Scan Boarding Pass" />
-// 					<Scene key="alternateBoardingPassInput" component={AlternateBoardingPassInput} title="Boarding Pass Input" />
-// 					<Scene key="selectGate" component={SelectGate} title="Input Gate Number" />
-// 					<Scene key="selectStartingPoint" component={SelectStartingPoint} input="Starting Point" />
-// 					<Scene key="selectStopsNonSterile" component={SelectStopsNonSterile} input="Select Stops" />
-
-					
-// 				<Scene key="arrival" component={SelectWheelchair} title="Arrival - Select Wheelchair" />
-// 					<Scene
-// 						onRight={() => Actions.alternateBoardingPassInput()}
-// 						rightTitle="Keyboard" 
-// 						key="scanBoardingPass" 
-// 						component={ScanBoardingPass} 
-// 						title="Scan Boarding Pass" 
-// 						/>	
-// 				<Scene key="checkIn" component={SelectWheelchair} title="Check-In" />					
-// 			</Scene>
-// 		</Router>
-// 	);
-// };
-
 const RouterComponent = () => {
-
 	return (
 		<Router sceneStyle={{ paddingTop: 50 }}>
 			<Scene key="auth"   >
-				<Scene key="login" component={LoginForm} title={"Please Log In"} initial/>
+				<Scene key="login" component={LoginForm} title={"Please Log In"} />
 			</Scene>
-			<Scene key="home" >
+			<Scene key="home" initial >
 				<Scene key="main" component={Main} title={"Select Task"} />
 				<Scene key="selectStartingPoint" component={SelectStartingPoint} title={"Select Staring Point"} />
 				<Scene key="selectNumberOfWheelchairs" component={SelectNumberOfWheelchairs} title={"Select Number of Wheelchairs"} />

@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from './common';
 import { setStartingPoint } from '../actions';
+import { locations } from '../../config'
 import Footer from './Footer';
 import Style from './Style';
 
@@ -10,6 +11,9 @@ class SelectStartingPoint extends Component {
 
 	constructor(props) {
 		super(props);
+		this.state = {
+			locations: locations.arrivals
+		}
 	}
 
 	onButtonPress(startLocation) {

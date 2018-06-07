@@ -223,8 +223,8 @@ export const setGateNumber = (props, gateNumber) => {
 				})
 		}
 	} else if (runType === 'departure') {
-		// Actions.selectStopsNonSterile();
-		startTSA()
+		Actions.selectStopsNonSterile();
+		// startTSA()
 	} else if (runType === 'preboard') {
 		Actions.preboard();
 	} else if (runType === 'transfer') {

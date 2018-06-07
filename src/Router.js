@@ -31,7 +31,7 @@ const RouterComponent = () => {
 				<Scene key="scanBoardingPass" component={ScanBoardingPass} type={'reset'}/>
 				<Scene key="alternateBoardingPassInput" component={AlternateBoardingPassInput} title={"Enter Customer Info"} />
 				<Scene key="selectGate" component={SelectGate} title={"Select Gate Number"} />
-				<Scene key="selectStopsNonSterile" component={SelectStopsNonSterile} title={"Select Stops | Non-Sterile"} />
+				<Scene key="selectStopsNonSterile" component={SelectStopsNonSterile} title={"TSA Start"} />
 				<Scene key="tsa" component={TSA} title="TSA" />
 				<Scene key="selectStopsSterile" component={SelectStopsSterile} title={"Select Stops | Sterile "} />
 				<Scene key="gateArrival" component={GateArrival} title={"Gate Arrival"} />

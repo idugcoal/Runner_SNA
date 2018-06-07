@@ -79,7 +79,7 @@ class SelectStopsNonSterile extends Component {
 		return (
 			<View style={Style.container}>
 				<View style={Style.content}>
-					{this.renderButtons()}
+					
 					<CardSection>
 						{this.renderEndingButtons()}
 					</CardSection>

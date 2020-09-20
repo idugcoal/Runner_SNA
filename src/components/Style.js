@@ -1,11 +1,11 @@
 const Style = {
   content: {
-    flex: 8,
+    flex: 8.4,
   },
   footer: {
-    flex: 2,
+    flex: 1.6,
     backgroundColor: '#fff',
-    borderTopWidth: 1,
+    marginLeft: 1,
   },
   container: {
     flex: 1,

@@ -10,6 +10,7 @@ import Style from './Style'
 class BaggageClaim extends Component {
   constructor(props) {
     super(props)
+    this.onButtonPress = this.onButtonPress.bind(this)
   }
 
   onButtonPress(destination) {
@@ -31,22 +32,13 @@ class BaggageClaim extends Component {
 						<Button onPress={this.onButtonPress.bind(this, 'Baggage Claim 5')}>5</Button>
 						<Button onPress={this.onButtonPress.bind(this, 'Baggage Claim 6')}>6</Button>
 						<Button onPress={this.onButtonPress.bind(this, 'Baggage Claim 7')}>7</Button> */}
-            <Button onPress={this.onButtonPress.bind(this, 'Curb')}>
-              Curb
-            </Button>
-            <Button onPress={this.onButtonPress.bind(this, 'Taxi')}>
-              Taxi
-            </Button>
+            <Button onPress={() => this.onButtonPress('Curb')}>Curb</Button>
+            <Button onPress={() => this.onButtonPress('Taxi')}>Taxi</Button>
           </View>
           <View style={Style.row}>
-            <Button onPress={this.onButtonPress.bind(this, 'Rental Cars')}>
-              Avis
-            </Button>
-            <Button onPress={this.onButtonPress.bind(this, 'Rental Cars')}>
-              Budget
-            </Button>
-            <Button
-              onPress={this.onButtonPress.bind(this, 'Ground Transportation')}>
+            <Button onPress={() => this.onButtonPress('Avis')}>Avis</Button>
+            <Button onPress={() => this.onButtonPress('Budget')}>Budget</Button>
+            <Button onPress={() => this.onButtonPress('Ground Transportation')}>
               Ground Transportation
             </Button>
           </View>

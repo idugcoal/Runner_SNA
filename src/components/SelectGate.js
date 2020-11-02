@@ -1,120 +1,132 @@
-import React, { Component } from 'react';
-import { View, Text, Keyboard } from 'react-native';
-import { connect } from 'react-redux';
-import { selectGateNumber, setFinalGateNumber, addStartingPointArrival, addStartingLocationArrival } from '../actions';
-import { writePassengerData } from '../utils/firebaseService';
-import NumberButton from './common/NumberButton';
-import Footer from './Footer';
-import Style from './Style';
+import React, { Component } from 'react'
+import { View, Text, Keyboard } from 'react-native'
+import { connect } from 'react-redux'
+import {
+  selectGateNumber,
+  setFinalGateNumber,
+  addStartingPointArrival,
+  addStartingLocationArrival,
+} from '../actions'
+import { writePassengerData } from '../utils/firebaseService'
+import Camera from 'react-native-camera'
+import NumberButton from './common/NumberButton'
+import Footer from './Footer'
+import Style from './Style'
 
 const gates = [
   [1, 2, 3, 4, 5],
   [6, 7, 8, 9, 10],
   [11, 12, 13, 14, 15],
   [16, 17, 18, 19, 20],
-  [21, 22]
-];
+  [21, 22],
+]
 
 class SelectGate extends Component {
-
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      final: this.props.final
+      final: this.props.final,
     }
   }
 
   componentWillMount() {
-    Keyboard.dismiss();
-    if(this.props.runType === 'arrival') {
-      const locationFirstContactGPS = navigator.geolocation.getCurrentPosition((position) => {
-        this.props.addStartingPointArrival(this.props.runType, position);
-      });
+    Keyboard.dismiss()
+    if (this.props.runType === 'arrival') {
+      const locationFirstContactGPS = navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.props.addStartingPointArrival(this.props.runType, position)
+        },
+      )
     }
   }
 
   onButtonPress(gateNumber) {
-    if(this.state.final) {
-      this.props.setFinalGateNumber(gateNumber);
-    } 
-    else {
-      if(this.props.runType === 'arrival') {
-        this.props.addStartingLocationArrival(gateNumber);
+    if (this.state.final) {
+      this.props.setFinalGateNumber(gateNumber)
+    } else {
+      if (this.props.runType === 'arrival') {
+        this.props.addStartingLocationArrival(gateNumber)
       }
-      this.props.selectGateNumber(this.props.runType, gateNumber);
+      this.props.selectGateNumber(this.props.runType, gateNumber)
     }
   }
 
   renderButtons() {
     let views = gates.map((row, index) => {
       let inputRow = row.map((buttonValue, columnIndex) => {
-        return <NumberButton
-                  value={buttonValue}
-                  onPress={this.onButtonPress.bind(this, buttonValue)}
-                  key={'button-' + columnIndex}
-                />
-      });
-      return <View style={Style.row} key={'row-' + index}>{inputRow}</View>
-    });
-    return views;
+        return (
+          <NumberButton
+            value={buttonValue}
+            onPress={this.onButtonPress.bind(this, buttonValue)}
+            key={'button-' + columnIndex}
+          />
+        )
+      })
+      return (
+        <View style={Style.row} key={'row-' + index}>
+          {inputRow}
+        </View>
+      )
+    })
+    return views
   }
 
   render() {
-    return(
+    return (
       <View style={Style.container}>
-        <View style={Style.content}>
-          {this.renderButtons()}
-        </View>
+        <View style={Style.content}>{this.renderButtons()}</View>
         <View style={Style.footer}>
-        <Footer />
+          <Footer />
         </View>
       </View>
-    );
+    )
   }
-};
-
+}
 
 const mapStateToProps = ({ departure, auth }) => {
-  const { 
-    runType, 
+  const {
+    runType,
     timeStart,
     startLocation,
-    startLocationGPS, 
-    numPassengers, 
-    passenger1Wheelchair, 
-    passenger2Wheelchair, 
-    passenger1FirstName, 
-    passenger1LastName, 
-    passenger2FirstName, 
-    passenger2LastName, 
-    airline, 
-    flightNumber,
-    destinationGate,
-    deviceID
-  } = departure;
-
-  const { user } = auth;
-
-  return { 
-    runType, 
-    timeStart,
-    startLocation,
-    startLocationGPS, 
-    numPassengers, 
-    passenger1Wheelchair, 
-    passenger2Wheelchair, 
-    passenger1FirstName, 
-    passenger1LastName, 
-    passenger2FirstName, 
-    passenger2LastName, 
-    airline, 
+    startLocationGPS,
+    numPassengers,
+    passenger1Wheelchair,
+    passenger2Wheelchair,
+    passenger1FirstName,
+    passenger1LastName,
+    passenger2FirstName,
+    passenger2LastName,
+    airline,
     flightNumber,
     destinationGate,
     deviceID,
-    user
-  };
-};
+  } = departure
+
+  const { user } = auth
+
+  return {
+    runType,
+    timeStart,
+    startLocation,
+    startLocationGPS,
+    numPassengers,
+    passenger1Wheelchair,
+    passenger2Wheelchair,
+    passenger1FirstName,
+    passenger1LastName,
+    passenger2FirstName,
+    passenger2LastName,
+    airline,
+    flightNumber,
+    destinationGate,
+    deviceID,
+    user,
+  }
+}
 
 export default connect(mapStateToProps, {
-  selectGateNumber, setFinalGateNumber, addStartingPointArrival, addStartingLocationArrival
-})(SelectGate);
+  selectGateNumber,
+  setFinalGateNumber,
+  addStartingPointArrival,
+  addStartingLocationArrival,
+})(SelectGate)

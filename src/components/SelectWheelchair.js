@@ -1,107 +1,97 @@
-import React, { Component } from 'react';
-import { View, Keyboard } from 'react-native';
-import { connect } from 'react-redux';
-import { selectWheelchair } from '../actions';
-import { updateWheelchair } from '../utils/firebaseService';
-import { CardSection, Button } from './common';
-import NumberButton from './common/NumberButton';
-import Footer from './Footer';
-import Style from './Style';
-import { Actions } from 'react-native-router-flux';
-
-const wheelchairs = [
-  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-  [11, 12, 13, 14, 15, 16, 17, 18, 19, 20],                                                                                                                                                         
-  [21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
-  [31, 32, 33, 34, 35, 36, 37, 38, 39, 40],
-  [41, 42, 43, 44, 45, 46, 47, 48, 49, 50],
-  [51, 52, 53, 54, 55, 56, 57, 58, 59, 60],
-  [61, 62, 63, 64, 65, 66, 67, 68, 69, 70],
-  [71, 72, 73, 74, 75, 76, 77, 78, 79, 80],
-  [81, 82, 83, 84, 85, 86, 87, 88, 89, 90],
-  [91, 92, 93, 94, 95, 96, 97, 98, 99, 100]
-];
+import React, { Component } from 'react'
+import { View, Keyboard, TextInput, Button as RNButton } from 'react-native'
+import { connect } from 'react-redux'
+import { selectWheelchair } from '../actions'
+import { updateWheelchair } from '../utils/firebaseService'
+import { CardSection, Button } from './common'
+import NumberButton from './common/NumberButton'
+import Footer from './Footer'
+import Style from './Style'
+import { Actions } from 'react-native-router-flux'
 
 class SelectWheelchair extends Component {
-
   constructor(props) {
-    super(props);
-    Keyboard.dismiss();
-  }
-
-  onButtonPress(buttonValue) {
-    
-    updateWheelchair(buttonValue, this.props.currentGPS);      
-    if(this.props.runType != 'checkin') {
-      this.props.selectWheelchair(this.props, buttonValue);
+    super(props)
+    Keyboard.dismiss()
+    this.onButtonPress = this.onButtonPress.bind(this)
+    this.setText = this.setText.bind(this)
+    this.renderExit = this.renderExit.bind(this)
+    this.state = {
+      text: '',
     }
   }
 
-  renderButtons() {
-    let views = wheelchairs.map((row, index) => {
-      let inputRow = row.map((buttonValue, columnIndex) => {
-        return <NumberButton
-                  value={buttonValue}
-                  onPress={this.onButtonPress.bind(this, buttonValue)}
-                  key={'button-' + columnIndex}
-                />
-      });
-      return <View style={Style.row} key={'row-' + index}>{inputRow}</View>
-    });
-    return views;
+  onButtonPress(buttonValue) {
+    updateWheelchair(buttonValue, this.props.currentGPS)
+    if (this.props.runType != 'checkin') {
+      this.props.selectWheelchair(this.props, buttonValue)
+    }
+  }
+
+  setText(text) {
+    this.setState({ text: text })
   }
 
   renderExit() {
-    if(this.props.runType === 'checkin') {
+    if (this.props.runType === 'checkin') {
       return (
-          <Button onPress={ ()=> Actions.main({type: 'reset'}) }>Finish Wheelchair Check-In</Button>
-      );
+        <Button onPress={() => Actions.main({ type: 'reset' })}>
+          Finish Wheelchair Check-In
+        </Button>
+      )
     }
   }
 
   render() {
-    return(
+    return (
       <View style={Style.container}>
         <View style={Style.content}>
-          {this.renderButtons()}
-          <CardSection> 
-            {this.renderExit()}
-          </CardSection>
+          <TextInput
+            style={{ fontSize: 32 }}
+            keyboardType={'phone-pad'}
+            onChangeText={(text) => this.setText(text)}
+            onEndEditing={(text) => this.onButtonPress(this.state.text)}
+          />
+          <RNButton
+            onPress={() => this.onButtonPress(this.state.text)}
+            title={'Enter wheelchair number'}
+          />
+          {/* <CardSection>{this.renderExit()}</CardSection> */}
         </View>
         <Footer />
       </View>
-    );
+    )
   }
-};
+}
 
 const mapStateToProps = ({ departure }) => {
-  const { 
-    currentGPS, 
-    passenger1Wheelchair, 
-    passenger2Wheelchair, 
-    passenger1FirstName, 
-    passenger1LastName, 
-    passenger2FirstName, 
-    passenger2LastName, 
-    flightNumber, 
-    numPassengers, 
-    airline, 
-    runType 
-  } = departure;
+  const {
+    currentGPS,
+    passenger1Wheelchair,
+    passenger2Wheelchair,
+    passenger1FirstName,
+    passenger1LastName,
+    passenger2FirstName,
+    passenger2LastName,
+    flightNumber,
+    numPassengers,
+    airline,
+    runType,
+  } = departure
 
-  return { 
-    currentGPS, 
-    passenger1Wheelchair, 
-    passenger2Wheelchair, 
-    passenger1FirstName, 
-    passenger1LastName, 
-    passenger2FirstName, 
-    passenger2LastName, 
-    flightNumber, 
-    numPassengers, 
-    airline, 
-    runType 
-  };
-};
+  return {
+    currentGPS,
+    passenger1Wheelchair,
+    passenger2Wheelchair,
+    passenger1FirstName,
+    passenger1LastName,
+    passenger2FirstName,
+    passenger2LastName,
+    flightNumber,
+    numPassengers,
+    airline,
+    runType,
+  }
+}
 
-export default connect(mapStateToProps, { selectWheelchair })(SelectWheelchair);
+export default connect(mapStateToProps, { selectWheelchair })(SelectWheelchair)

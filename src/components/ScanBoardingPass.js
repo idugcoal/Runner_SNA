@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { scanBoardingPass, alternateBoardingPassInput } from '../actions'
 import Camera from 'react-native-camera'
 import { Actions } from 'react-native-router-flux'
-import _ from 'lodash'
 import { Button, CardSection } from './common'
 import Footer from './Footer'
 import Style from './Style'
@@ -12,14 +11,25 @@ import Style from './Style'
 class ScanBoardingPass extends Component {
   constructor(props) {
     super(props)
+
+    // this.toggleTorch = this.toggleTorch.bind(this)
+    this.onReadSuccess = this.onReadSuccess.bind(this)
     // this.state = {
-    // 	cameraStatus: 'on'
+    //   torchStatus: Camera.constants.TorchMode.on,
     // }
   }
 
+  // toggleTorch() {
+  //   if (this.state.torchStatus === Camera.constants.TorchMode.on) {
+  //     this.setState({ torchStatus: Camera.constants.TorchMode.off })
+  //   } else {
+  //     this.setState({ torchStatus: Camera.constants.TorchMode.on })
+  //   }
+  // }
+
   onReadSuccess(boardingPassString) {
-    // this.setState({cameraStatus: 'off'})
-    // this.refs.camera.stopCapture()
+    // this.toggleTorch()
+
     switch (boardingPassString.data.substring(36, 38)) {
       case 'AS':
         var airline = 'Alaska'
@@ -59,19 +69,6 @@ class ScanBoardingPass extends Component {
   }
 
   renderCamera() {
-    // if(this.state.cameraStatus == 'on') {
-    // 	return(
-    // 		<Camera
-    // 			style={{ flex: 1 }}
-    // 			barCodeTypes={[ 'pdf417' ]}
-    // 			onBarCodeRead={this.onReadSuccess.bind(this)}
-    // 			// torchMode={Camera.constants.TorchMode.on}
-    // 		/>
-    // 	)
-    // } else {
-    // 	return <View />;
-    // }
-
     return (
       <Camera
         ref={(cam) => {
@@ -79,9 +76,10 @@ class ScanBoardingPass extends Component {
         }}
         style={{ flex: 1 }}
         barCodeTypes={['pdf417']}
-        onBarCodeRead={this.onReadSuccess.bind(this)}
+        onBarCodeRead={this.onReadSuccess}
         captureTarget={Camera.constants.CaptureTarget.disk}
-        torchMode={Camera.constants.TorchMode.on}
+        // torchMode={this.state.torchStatus}
+        torchMode={'on'}
       />
     )
   }
@@ -91,7 +89,6 @@ class ScanBoardingPass extends Component {
       <View style={Style.container}>
         <View style={Style.content}>
           {this.renderCamera()}
-
           <CardSection>
             <Button
               style={Style.alternate}

@@ -34,6 +34,9 @@ class ScanBoardingPass extends Component {
       case 'AS':
         var airline = 'Alaska'
         break
+      case 'AL':
+        var airline = 'Allegiant'
+        break
       case 'AA':
         var airline = 'American'
         break
@@ -45,6 +48,12 @@ class ScanBoardingPass extends Component {
         break
       case 'UA':
         var airline = 'United'
+        break
+      case 'SC':
+        var airline = 'Sun Country'
+        break
+      case 'SP':
+        var airline = 'Spirit'
         break
       case 'WN':
         var airline = 'Southwest'

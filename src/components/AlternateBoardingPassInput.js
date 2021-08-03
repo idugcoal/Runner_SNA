@@ -167,11 +167,14 @@ class AlternateBoardingPassInput extends Component {
               selectedValue={this.props.airline}
               onValueChange={this.onAirlineChange.bind(this)}>
               <Picker.Item label='Please select an airline' value='' />
+              <Picker.Item label='Allegiant' value='Allegiant' />
               <Picker.Item label='Alaska' value='Alaska' />
               <Picker.Item label='American' value='American' />
               <Picker.Item label='Delta' value='Delta' />
               <Picker.Item label='Frontier' value='Frontier' />
               <Picker.Item label='Southwest' value='Southwest' />
+              <Picker.Item label='Spirit' value='Spirit' />
+              <Picker.Item label='Sun Country' value='Sun Country' />
               <Picker.Item label='United' value='United' />
               <Picker.Item label='WestJet' value='WestJet' />
             </Picker>
